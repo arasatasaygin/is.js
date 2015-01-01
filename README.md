@@ -79,25 +79,25 @@ is.js
 - nextMonth
 - nextYear
 
-**Array element checks**
+**Array element checks:**
 - minimumOf
 - maximumOf
 - firstOf
 - lastOf
 - memberOf
 
-**DOM checks**
+**DOM checks:**
 - visible
 - hidden
 - nodelist
 - $element
 
-**Syntax checks**
+**Syntax checks:**
 - xml
 - json
 - html
 
-**String checks**
+**String checks:**
 - upper
 - lower
 - camelCase
@@ -105,4 +105,5 @@ is.js
 - capitalized
 - alpha
 - alphaNumeric
+- safeWord
 
