@@ -4,6 +4,7 @@ is.js
 **Type checks:**
 - array
 - object
+- plainObject
 - function
 - string
 - number
@@ -84,4 +85,9 @@ is.js
 - hidden
 - nodelist
 - $element
+
+**Syntax checks**
+- xml
+- json
+- html
 
