@@ -1,9 +1,9 @@
 is.js
 =====
 
-Simple data checks
+##Simple data checks
 
-** Type checks: **
+**Type checks:**
 - array
 - object
 - function
@@ -16,19 +16,20 @@ Simple data checks
 - undefined
 - date
 - sameType    // will work with NaN too
+- error
 
-** Value checks: **
+**Value checks:**
 - existy
 - truthy
 - falsy
 
-** Regexp checks: **
+**Regexp checks:**
 - email
 - url
 - date
 - creditCard
 
-** Environment checks: **
+**Environment checks:**
 - browser
   - chrome
   - firefox
@@ -43,4 +44,14 @@ Simple data checks
   - linux
   - mac
   - windows
-  
+
+**Arithmetic checks:**
+- equal
+- odd
+- even
+- zero
+- finite
+- least
+- above
+- within
+
