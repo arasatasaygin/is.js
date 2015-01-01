@@ -1,8 +1,6 @@
 is.js
 =====
 
-##Simple data checks
-
 **Type checks:**
 - array
 - object
@@ -22,12 +20,15 @@ is.js
 - existy
 - truthy
 - falsy
+- empty
 
 **Regexp checks:**
 - email
 - url
 - date
 - creditCard
+- phone
+- zip
 
 **Environment checks:**
 - browser
@@ -54,4 +55,18 @@ is.js
 - least
 - above
 - within
+- decimal
+- pi
+
+**Time checks:**
+- future
+- past
+- today
+- yesterday
+- tomorrow
+- month
+  - january
+  - ..
+  - december
+- year
 
