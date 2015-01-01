@@ -72,6 +72,12 @@ is.js
   - ..
   - december
 - year
+- lastWeek
+- lastMonth
+- lastYear
+- nextWeek
+- nextMonth
+- nextYear
 
 **Array element checks**
 - minimumOf
@@ -90,4 +96,13 @@ is.js
 - xml
 - json
 - html
+
+**String checks**
+- upper
+- lower
+- camelCase
+- hyphenated
+- capitalized
+- alpha
+- alphaNumeric
 
