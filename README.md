@@ -1,4 +1,4 @@
 is.js
 =====
 
-Simple data check
+Simple data checks
