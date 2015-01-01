@@ -15,12 +15,15 @@ is.js
 - date
 - sameType    // will work with NaN too
 - error
+- arrayLike
 
 **Value checks:**
 - existy
 - truthy
 - falsy
 - empty
+- space
+- zero
 
 **Regexp checks:**
 - email
@@ -50,7 +53,6 @@ is.js
 - equal
 - odd
 - even
-- zero
 - finite
 - least
 - above
@@ -69,4 +71,17 @@ is.js
   - ..
   - december
 - year
+
+**Array element checks**
+- minimumOf
+- maximumOf
+- firstOf
+- lastOf
+- memberOf
+
+**DOM checks**
+- visible
+- hidden
+- nodelist
+- $element
 
