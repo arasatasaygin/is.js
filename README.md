@@ -16,9 +16,9 @@ is.js
 - date
 - sameType    // will work with NaN too
 - error
-- arrayLike
+- arguments
 
-**Value checks:**
+**Presence checks:**
 - existy
 - truthy
 - falsy
@@ -33,14 +33,28 @@ is.js
 - creditCard
 - phone
 - zip
+- longtitude
+- latitude
 
 **Environment checks:**
+- core
+  - defined
+  - typeOf
+  - instanceOf
+  - prototypeOf
+  - global
 - browser
   - chrome
   - firefox
   - ie
   - opera
   - safari
+- browserEngine
+  - trident
+  - gecko
+  - webkit
+  - presto
+  - blink
 - device
   - mobile
   - tablet
@@ -60,6 +74,10 @@ is.js
 - within
 - decimal
 - pi
+- decreasing
+- increasing
+- negative
+- positive
 
 **Time checks:**
 - future
@@ -86,11 +104,23 @@ is.js
 - lastOf
 - memberOf
 
+**Object checks:**
+- extensible
+- frozen
+- sealed
+
 **DOM checks:**
+- collection    // HTML elements collection, such as childNodes
+- nodelist
+- domReady
 - visible
 - hidden
-- nodelist
-- $element
+- checked
+- enabled
+- disabled
+- firstChild
+- lastChild
+- onlyChlid
 
 **Syntax checks:**
 - xml
@@ -106,4 +136,11 @@ is.js
 - alpha
 - alphaNumeric
 - safeWord
+
+**ES6 checks:**
+- generator
+- symbol
+- weakMap
+- map
+- set
 
