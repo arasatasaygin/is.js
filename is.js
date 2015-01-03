@@ -1,62 +1,62 @@
-//	is.js 0.0.1
-//	Author Aras Atasaygin
+// is.js 0.0.1
+// Author Aras Atasaygin
 
 ;(function() {
 
-	//	Baseline
-	//	--------
+    // Baseline
+    // --------
 
-	//	root object is window in the browser
-	var root = this;
+    // root object is window in the browser
+    var root = this;
 
-	//	define is object, current version and configs
-	var is = {};
-	is.version = '0.0.1';
-	is.config = {};
+    // define is object, current version and configs
+    var is = {};
+    is.version = '0.0.1';
+    is.config = {};
 
-	//	TODO: Add AMD and CommonJS support
-	//	is object set global to the browser window
-	root.is = is;
+    // TODO: Add AMD and CommonJS support
+    // is object set global to the browser window
+    root.is = is;
 
-	//	Type checks
-	//	-----------
+    // Type checks
+    // -----------
 
-	//	Test check
-	is.testCheck = function(a) {
-		console.log('test check ' + a);
-	}
+    // is a given value array
+    is.array = Array.isArray || function(value) {    // check native isArray first
+        return Object.prototype.toString.call(value) === '[object Array]';
+    }
 
-	//	Presence checks
-	//	---------------
+    // Presence checks
+    // ---------------
 
-	//	Regexp checks
-	//	-------------
+    // Regexp checks
+    // -------------
 
-	//	Environment checks
-	//	------------------
+    // Environment checks
+    // ------------------
 
-	//	Arithmetic checks
-	//	-----------------
+    // Arithmetic checks
+    // -----------------
 
-	//	Time checks
-	//	-----------
+    // Time checks
+    // -----------
 
-	//	Array checks
-	//	------------
+    // Array checks
+    // ------------
 
-	//	Object checks
-	//	-------------
+    // Object checks
+    // -------------
 
-	//	DOM checks
-	//	----------
+    // DOM checks
+    // ----------
 
-	//	Syntax checks
-	//	----------
+    // Syntax checks
+    // ----------
 
-	//	String checks
-	//	----------
+    // String checks
+    // ----------
 
-	//	ES6 checks
-	//	----------
+    // ES6 checks
+    // ----------
 
 }.call(this));
