@@ -2,21 +2,20 @@ is.js
 =====
 
 **Type checks:**
+- arguments
 - array
-- object
-- plainObject
-- function
-- string
-- number
 - boolean
-- regexp
+- date
+- error
+- function
 - nan
 - null
+- number
+- object
+- regexp
+- sameType
+- string
 - undefined
-- date
-- sameType    // will work with NaN too
-- error
-- arguments
 
 **Presence checks:**
 - existy
