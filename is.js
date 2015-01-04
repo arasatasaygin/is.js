@@ -214,7 +214,7 @@
         return value !== Infinity && value !== -Infinity && is.not.nan(value);
     };
 
-    is.infinite = not(is.infinite);
+    is.infinite = not(is.finite);
 
     // Regexp checks
     /* -------------------------------------------------------------------------- */
