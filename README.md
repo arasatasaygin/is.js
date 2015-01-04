@@ -24,6 +24,19 @@ is.js
 - falsy
 - space
 
+**Arithmetic checks:**
+- equal
+- even
+- odd
+- positive
+- negative
+- least
+- above
+- within
+- decimal
+- finite
+- infinite
+
 **Regexp checks:**
 - email
 - url
@@ -62,21 +75,6 @@ is.js
   - mac
   - windows
 
-**Arithmetic checks:**
-- equal
-- odd
-- even
-- finite
-- least
-- above
-- within
-- decimal
-- pi
-- decreasing
-- increasing
-- negative
-- positive
-
 **Time checks:**
 - future
 - past
@@ -102,6 +100,8 @@ is.js
 - firstOf
 - lastOf
 - memberOf
+- decreasing
+- increasing
 
 **Object checks:**
 - extensible
