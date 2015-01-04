@@ -11,6 +11,7 @@
     // define 'is' object and current version
     var is = {};
     is.not = {};
+    is.all = {};
     is.VERSION = '0.0.1';
 
     // TODO: Add AMD and CommonJS support
@@ -26,6 +27,22 @@
         return function() {
             return !func.apply(null, arraySlice.call(arguments));
         };
+    }
+
+    // helper function which call predicate function per parameter
+    function all(func) {
+        return function() {
+            var parameters = arraySlice.call(arguments);
+            var length = parameters.length;
+            var results = [];
+            for (var i = 0; i < length; i++) {
+                results.push(func.call(null, parameters[i]));
+            };
+            for (var i = 0; i < results.length; i++) {
+                if(results[i] === false) return false;
+            };
+            return true;
+        }
     }
 
     // Type checks
@@ -175,5 +192,10 @@
 
     // ES6 checks
     // ----------
+
+    // 'not' and 'all' interfaces
+    // --------------------------
+    is.not.number = not(is.number);
+    is.all.number = all(is.number);
 
 }.call(this));
