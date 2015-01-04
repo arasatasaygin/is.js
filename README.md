@@ -18,12 +18,11 @@ is.js
 - undefined
 
 **Presence checks:**
+- empty
 - existy
 - truthy
 - falsy
-- empty
 - space
-- zero
 
 **Regexp checks:**
 - email
@@ -97,6 +96,7 @@ is.js
 - nextYear
 
 **Array element checks:**
+- allSame
 - minimumOf
 - maximumOf
 - firstOf
@@ -143,3 +143,5 @@ is.js
 - map
 - set
 
+**Provide escape hatch for possible name collisions**
+**Provide RegExp set methods to library user**
