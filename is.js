@@ -37,12 +37,12 @@
             var results = [];
             for (var i = 0; i < length; i++) {
                 results.push(func.call(null, parameters[i]));
-            };
-            for (var i = 0; i < results.length; i++) {
+            }
+            for (i = 0; i < results.length; i++) {
                 if(results[i] === false) return false;
-            };
+            }
             return true;
-        }
+        };
     }
 
     // Type checks
@@ -161,7 +161,7 @@
             var characterCode = value.charCodeAt(0);
             return (characterCode >  8 && characterCode < 14) || characterCode === 32;
         }
-    }
+    };
 
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
@@ -211,7 +211,7 @@
     };
 
     is.finite = isFinite || function(value) {
-        return value !== Infinity && value !== -Infinity && value !== NaN;
+        return value !== Infinity && value !== -Infinity && is.not.nan(value);
     };
 
     is.infinite = not(is.infinite);
@@ -253,5 +253,7 @@
     is.all.regexp = all(is.regexp);
     is.not.boolean = not(is.boolean);
     is.all.boolean = all(is.boolean);
+    is.not.nan = not(is.nan);
+    is.all.nan = all(is.nan);
 
 }.call(this));
