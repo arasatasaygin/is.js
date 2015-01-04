@@ -163,13 +163,63 @@
         }
     }
 
+    // Arithmetic checks
+    /* -------------------------------------------------------------------------- */
+    
+    // are given values equal? supports numbers, strings, regexps, booleans
+    // TODO: Add object and array support
+    is.equal = function(value1, value2) {
+        // check 0 and -0 equity with Infinity and -Infinity
+        if(is.all.number(value1, value2)) return value1 === value2 && 1 / value1 === 1 / value2;
+        // check regexps as strings too
+        if(is.all.string(value1, value2) || is.all.regexp(value1, value2)) return '' + value1 === '' + value2;
+        if(is.all.boolean(value1, value2)) return value1 === value2;
+        return false;
+    };
+
+    // is a given value even?
+    is.even = function(value) {
+        return is.number(value) && value % 2 === 0;
+    };
+
+    // is a given value odd?
+    is.odd = not(is.even);
+
+    // is a given value positive?
+    is.positive = function(value) {
+        return is.number(value) && value > 0;
+    };
+
+    // is a given value positive?
+    is.negative = not(is.positive);
+
+    // is a given value above minimum parameter?
+    is.above = function(value, min) {
+        return is.all.number(value, min) && value > min;
+    };
+
+    // is a given value equal or higher than a minimum parameter?
+    is.least = not(is.above);
+
+    // is a given value within minimum and maximum parameters?
+    is.within = function(value, min, max) {
+        return is.all.number(value, min) && value > min && value < max;
+    };
+
+    is.decimal = function(value) {
+        return is.number(value) && value % 1 === 0;
+    };
+
+    is.finite = isFinite || function(value) {
+        return value !== Infinity && value !== -Infinity && value !== NaN;
+    };
+
+    is.infinite = not(is.infinite);
+
     // Regexp checks
     /* -------------------------------------------------------------------------- */
 
     // Environment checks
-    // ------------------
-
-    // Arithmetic checks
     // -----------------
 
     // Time checks
@@ -197,5 +247,11 @@
     // --------------------------
     is.not.number = not(is.number);
     is.all.number = all(is.number);
+    is.not.string = not(is.string);
+    is.all.string = all(is.string);
+    is.not.regexp = not(is.regexp);
+    is.all.regexp = all(is.regexp);
+    is.not.boolean = not(is.boolean);
+    is.all.boolean = all(is.boolean);
 
 }.call(this));
