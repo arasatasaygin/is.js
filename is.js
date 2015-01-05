@@ -241,7 +241,7 @@
         affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/
     };
 
-    // regex method generator
+    // regex check method generator
     for(var regexp in regexps) {
         (function() {
             var r = regexp;
