@@ -38,14 +38,19 @@ is.js
 - infinite
 
 **Regexp checks:**
-- email
 - url
-- date
+- email
 - creditCard
-- phone
-- zip
-- longtitude
-- latitude
+- alphaNumeric
+- time
+- date
+- usZipCode
+- caPostalCode
+- ukPostCode
+- nanpPhone
+- eppPhone
+- socialSecurityNumber
+- affirmative
 
 **Environment checks:**
 - core
