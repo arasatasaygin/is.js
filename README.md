@@ -52,6 +52,17 @@ is.js
 - socialSecurityNumber
 - affirmative
 
+**String checks:**
+- upperCase
+- lowerCase
+- startWith
+- endWith
+- camelCase
+- capitalized
+- hyphenated
+- underscored
+- safeWord
+
 **Environment checks:**
 - core
   - defined
@@ -130,16 +141,6 @@ is.js
 - xml
 - json
 - html
-
-**String checks:**
-- upper
-- lower
-- camelCase
-- hyphenated
-- capitalized
-- alpha
-- alphaNumeric
-- safeWord
 
 **ES6 checks:**
 - generator
