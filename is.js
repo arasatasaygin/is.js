@@ -241,16 +241,16 @@
         affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/
     };
 
-    // regex check method generator
+    // regexp check method generator
     for(var regexp in regexps) {
-        (function() {
-            var r = regexp;
-            if(regexps.hasOwnProperty(r)) {
-                is[r] = function(value) {
-                    return regexps[r].test(value);
-                }
-            }
-        })();
+        if(regexps.hasOwnProperty(regexp)) {
+            (function() {
+                var r = regexp;
+                    is[r] = function(value) {
+                        return regexps[r].test(value);
+                    };
+            })();
+        }
     }
 
     // String checks
