@@ -2,8 +2,8 @@ is.js
 =====
 
 **Type checks:**
-- arguments
-- array
+- [ ] arguments
+- [x] array
 - boolean
 - date
 - error
