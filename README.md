@@ -57,10 +57,7 @@ is.js
 - lowerCase
 - startWith
 - endWith
-- camelCase
 - capitalized
-- hyphenated
-- underscored
 - safeWord
 
 **Environment checks:**
