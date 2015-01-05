@@ -2,149 +2,149 @@ is.js
 =====
 
 **Type checks:**
-- [ ] arguments
+- [x] arguments
 - [x] array
-- boolean
-- date
-- error
-- function
-- nan
-- null
-- number
-- object
-- regexp
-- sameType
-- string
-- undefined
+- [x] boolean
+- [x] date
+- [x] error
+- [x] function
+- [x] nan
+- [x] null
+- [x] number
+- [x] object
+- [x] regexp
+- [x] sameType
+- [x] string
+- [x] undefined
 
 **Presence checks:**
-- empty
-- existy
-- truthy
-- falsy
-- space
+- [x] empty
+- [x] existy
+- [x] truthy
+- [x] falsy
+- [x] space
 
 **Arithmetic checks:**
-- equal
-- even
-- odd
-- positive
-- negative
-- least
-- above
-- within
-- decimal
-- finite
-- infinite
+- [x] equal
+- [x] even
+- [x] odd
+- [x] positive
+- [x] negative
+- [x] least
+- [x] above
+- [x] within
+- [x] decimal
+- [x] finite
+- [x] infinite
 
 **Regexp checks:**
-- url
-- email
-- creditCard
-- alphaNumeric
-- time
-- date
-- usZipCode
-- caPostalCode
-- ukPostCode
-- nanpPhone
-- eppPhone
-- socialSecurityNumber
-- affirmative
+- [x] url
+- [x] email
+- [x] creditCard
+- [x] alphaNumeric
+- [x] time
+- [x] date
+- [x] usZipCode
+- [x] caPostalCode
+- [x] ukPostCode
+- [x] nanpPhone
+- [x] eppPhone
+- [x] socialSecurityNumber
+- [x] affirmative
 
 **String checks:**
-- upperCase
-- lowerCase
-- startWith
-- endWith
-- capitalized
-- safeWord
+- [x] upperCase
+- [x] lowerCase
+- [x] startWith
+- [x] endWith
+- [x] capitalized
+- [x] safeWord
 
 **Environment checks:**
 - core
-  - defined
-  - typeOf
-  - instanceOf
-  - prototypeOf
-  - global
+  - [ ] defined
+  - [ ] typeOf
+  - [ ] instanceOf
+  - [ ] prototypeOf
+  - [ ] global
 - browser
-  - chrome
-  - firefox
-  - ie
-  - opera
-  - safari
+  - [ ] chrome
+  - [ ] firefox
+  - [ ] ie
+  - [ ] opera
+  - [ ] safari
 - browserEngine
-  - trident
-  - gecko
-  - webkit
-  - presto
-  - blink
+  - [ ] trident
+  - [ ] gecko
+  - [ ] webkit
+  - [ ] presto
+  - [ ] blink
 - device
-  - mobile
-  - tablet
-  - desktop
+  - [ ] mobile
+  - [ ] tablet
+  - [ ] desktop
 - os
-  - linux
-  - mac
-  - windows
+  - [ ] linux
+  - [ ] mac
+  - [ ] windows
 
 **Time checks:**
-- future
-- past
-- today
-- yesterday
-- tomorrow
-- month
+- [ ] future
+- [ ] past
+- [ ] today
+- [ ] yesterday
+- [ ] tomorrow
+- [ ] month
   - january
   - ..
   - december
-- year
-- lastWeek
-- lastMonth
-- lastYear
-- nextWeek
-- nextMonth
-- nextYear
+- [ ] year
+- [ ] lastWeek
+- [ ] lastMonth
+- [ ] lastYear
+- [ ] nextWeek
+- [ ] nextMonth
+- [ ] nextYear
 
 **Array element checks:**
-- allSame
-- minimumOf
-- maximumOf
-- firstOf
-- lastOf
-- memberOf
-- decreasing
-- increasing
+- [ ] allSame
+- [ ] minimumOf
+- [ ] maximumOf
+- [ ] firstOf
+- [ ] lastOf
+- [ ] memberOf
+- [ ] decreasing
+- [ ] increasing
 
 **Object checks:**
-- extensible
-- frozen
-- sealed
+- [ ] extensible
+- [ ] frozen
+- [ ] sealed
 
 **DOM checks:**
-- collection    // HTML elements collection, such as childNodes
-- nodelist
-- domReady
-- visible
-- hidden
-- checked
-- enabled
-- disabled
-- firstChild
-- lastChild
-- onlyChlid
+- [ ] collection    // HTML elements collection, such as childNodes
+- [ ] nodelist
+- [ ] domReady
+- [ ] visible
+- [ ] hidden
+- [ ] checked
+- [ ] enabled
+- [ ] disabled
+- [ ] firstChild
+- [ ] lastChild
+- [ ] onlyChlid
 
 **Syntax checks:**
-- xml
-- json
-- html
+- [ ] xml
+- [ ] json
+- [ ] html
 
 **ES6 checks:**
-- generator
-- symbol
-- weakMap
-- map
-- set
+- [ ] generator
+- [ ] symbol
+- [ ] weakMap
+- [ ] map
+- [ ] set
 
-**Provide escape hatch for possible name collisions**
-**Provide RegExp set methods to library user**
+[ ] **Provide escape hatch for possible name collisions**
+[ ] **Provide RegExp set methods to library user**
