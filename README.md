@@ -53,6 +53,7 @@ is.js
 - [x] affirmative
 
 **String checks:**
+- [x] include
 - [x] upperCase
 - [x] lowerCase
 - [x] startWith
