@@ -190,7 +190,7 @@
         return is.number(numb) && numb > 0;
     };
 
-    // is a given number positive?
+    // is a given number negative?
     is.negative = not(is.positive);
 
     // is a given number above minimum parameter?
