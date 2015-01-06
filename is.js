@@ -300,10 +300,40 @@
         return true;
     };
 
-    // Environment checks
-    /* -------------------------------------------------------------------------- */
-
     // Time checks
+    /* -------------------------------------------------------------------------- */
+    
+    // is a given date object indicate today?
+    is.today = function(value) {
+        var now = new Date();
+        var todayString = now.toDateString();
+        return is.date(value) && value.toDateString() === todayString;
+    };
+
+    // is a given date object indicate yesterday?
+    is.yesterday = function(value) {
+        var now = new Date();
+        var yesterdayString = new Date(now.setDate(now.getDate() - 1)).toDateString();
+        return is.date(value) && value.toDateString() === yesterdayString;
+    };
+
+    // is a given date object indicate tomorrow?
+    is.tomorrow = function(value) {
+        var now = new Date();
+        var tomorrowString = new Date(now.setDate(now.getDate() + 1)).toDateString();
+        return is.date(value) && value.toDateString() === tomorrowString;
+    };
+
+    // is a given date object past?
+    is.past = function(value) {
+        var now = new Date();
+        return is.date(value) && value.getTime() < now.getTime();
+    };
+
+    // is a given date object future?
+    is.future = not(is.past);
+
+    // Environment checks
     // -----------
 
     // Array checks
