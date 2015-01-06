@@ -259,6 +259,11 @@
     // String checks
     /* -------------------------------------------------------------------------- */
     
+    // is a given string inculde parameter substring?
+    is.include = String.prototype.includes || function(str, substr) {
+        return str.indexOf(substr) > -1;
+    };
+
     // is a given string all uppercase?
     is.upperCase = function(str) {
         return is.string(str) && str === str.toUpperCase();
