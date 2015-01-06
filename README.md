@@ -43,7 +43,7 @@ is.js
 - [x] creditCard
 - [x] alphaNumeric
 - [x] time
-- [x] date
+- [x] dateString
 - [x] usZipCode
 - [x] caPostalCode
 - [x] ukPostCode
@@ -146,5 +146,5 @@ is.js
 - [ ] map
 - [ ] set
 
-[ ] **Provide escape hatch for possible name collisions**
-[ ] **Provide RegExp set methods to library user**
+- [ ] **Provide escape hatch for possible name collisions**
+- [ ] **Provide RegExp set methods to library user**
