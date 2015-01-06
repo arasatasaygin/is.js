@@ -177,46 +177,46 @@
         return false;
     };
 
-    // is a given value even?
-    is.even = function(value) {
-        return is.number(value) && value % 2 === 0;
+    // is a given number even?
+    is.even = function(numb) {
+        return is.number(numb) && numb % 2 === 0;
     };
 
-    // is a given value odd?
+    // is a given number odd?
     is.odd = not(is.even);
 
-    // is a given value positive?
-    is.positive = function(value) {
-        return is.number(value) && value > 0;
+    // is a given number positive?
+    is.positive = function(numb) {
+        return is.number(numb) && numb > 0;
     };
 
-    // is a given value positive?
+    // is a given number positive?
     is.negative = not(is.positive);
 
-    // is a given value above minimum parameter?
-    is.above = function(value, min) {
-        return is.all.number(value, min) && value > min;
+    // is a given number above minimum parameter?
+    is.above = function(numb, min) {
+        return is.all.number(numb, min) && numb > min;
     };
 
-    // is a given value equal or higher than a minimum parameter?
+    // is a given number equal or higher than a minimum parameter?
     is.least = not(is.above);
 
-    // is a given value within minimum and maximum parameters?
-    is.within = function(value, min, max) {
-        return is.all.number(value, min) && value > min && value < max;
+    // is a given number within minimum and maximum parameters?
+    is.within = function(numb, min, max) {
+        return is.all.number(numb, min) && numb > min && numb < max;
     };
 
-    // is a given value decimal?
-    is.decimal = function(value) {
-        return is.number(value) && value % 1 === 0;
+    // is a given number decimal?
+    is.decimal = function(numb) {
+        return is.number(numb) && numb % 1 === 0;
     };
 
-    // is a given value finite?
-    is.finite = isFinite || function(value) {
-        return value !== Infinity && value !== -Infinity && is.not.nan(value);
+    // is a given number finite?
+    is.finite = isFinite || function(numb) {
+        return numb !== Infinity && numb !== -Infinity && is.not.nan(numb);
     };
 
-    // is a given value infinite?
+    // is a given number infinite?
     is.infinite = not(is.finite);
 
     // Regexp checks
