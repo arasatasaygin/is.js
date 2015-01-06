@@ -60,6 +60,30 @@ is.js
 - [x] capitalized
 - [x] safeWord
 
+**Time checks:**
+- [x] today
+- [x] yesterday
+- [x] tomorrow
+- [x] past
+- [x] future
+- [ ] day
+- [ ] month
+- [ ] year
+- [ ] weekDay
+- [ ] weekEnd
+- [ ] inLastWeek
+- [ ] inLastMonth
+- [ ] inLastYear
+- [ ] inNextWeek
+- [ ] inNextMonth
+- [ ] inNextYear
+- [ ] quarterOfYear
+- [ ] weekOfYear
+- [ ] dayOfMonth
+- [ ] dayOfWeek
+- [ ] dayOfYear
+- [ ] daylightSavingTime
+
 **Environment checks:**
 - core
   - [ ] defined
@@ -87,24 +111,6 @@ is.js
   - [ ] linux
   - [ ] mac
   - [ ] windows
-
-**Time checks:**
-- [ ] future
-- [ ] past
-- [ ] today
-- [ ] yesterday
-- [ ] tomorrow
-- [ ] month
-  - january
-  - ..
-  - december
-- [ ] year
-- [ ] lastWeek
-- [ ] lastMonth
-- [ ] lastYear
-- [ ] nextWeek
-- [ ] nextMonth
-- [ ] nextYear
 
 **Array element checks:**
 - [ ] allSame
