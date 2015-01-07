@@ -73,6 +73,7 @@ is.js
 - [x] year
 - [x] weekDay
 - [x] weekEnd
+- [x] inDateRange
 - [x] inLastWeek
 - [x] inLastMonth
 - [x] inLastYear
