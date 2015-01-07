@@ -67,18 +67,18 @@ is.js
 - [x] tomorrow
 - [x] past
 - [x] future
-- [ ] day
-- [ ] month
-- [ ] year
-- [ ] weekDay
-- [ ] weekEnd
-- [ ] inLastWeek
-- [ ] inLastMonth
-- [ ] inLastYear
-- [ ] inNextWeek
-- [ ] inNextMonth
-- [ ] inNextYear
-- [ ] quarterOfYear
+- [x] day
+- [x] month
+- [x] year
+- [x] weekDay
+- [x] weekEnd
+- [x] inLastWeek
+- [x] inLastMonth
+- [x] inLastYear
+- [x] inNextWeek
+- [x] inNextMonth
+- [x] inNextYear
+- [x] quarterOfYear
 - [ ] weekOfYear
 - [ ] dayOfMonth
 - [ ] dayOfWeek
