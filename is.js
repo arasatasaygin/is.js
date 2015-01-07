@@ -368,53 +368,43 @@
     // is a given date weekday?
     is.weekday = not(is.weekend);
 
-    // TODO: Generate range check methods with one function
+    // is date within given range?
+    is.inDateRange = function(obj, startObj, endObj) {
+        if(is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) return false;
+        var givenDate = obj.getTime();
+        var start = startObj.getTime();
+        var end = endObj.getTime();
+        return givenDate > start && givenDate < end;
+    };
+
     // is a given date in last week range?
     is.inLastWeek = function(obj) {
-        var date = new Date();
-        var oneWeekAgo = new Date(date.setDate(date.getDate() - 7)).getTime();
-        var givenDate = obj.getTime();
-        return is.date(obj) && givenDate > oneWeekAgo && givenDate < new Date().getTime();
+        return is.inDateRange(obj, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
     };
 
     // is a given date in last month range?
     is.inLastMonth = function(obj) {
-        var date = new Date();
-        var oneMonthAgo = new Date(date.setMonth(date.getMonth() - 1)).getTime();
-        var givenDate = obj.getTime();
-        return is.date(obj) && givenDate > oneMonthAgo && givenDate < new Date().getTime();
+        return is.inDateRange(obj, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
     };
 
     // is a given date in last year range?
     is.inLastYear = function(obj) {
-        var date = new Date();
-        var oneYearAgo = new Date(date.setFullYear(date.getFullYear() - 1)).getTime();
-        var givenDate = obj.getTime();
-        return is.date(obj) && givenDate > oneYearAgo && givenDate < new Date().getTime();
+        return is.inDateRange(obj, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
     };
 
     // is a given date in next week range?
     is.inNextWeek = function(obj) {
-        var date = new Date();
-        var oneWeekLater = new Date(date.setDate(date.getDate() + 7)).getTime();
-        var givenDate = obj.getTime();
-        return is.date(obj) && givenDate < oneWeekLater && givenDate > new Date().getTime();
+        return is.inDateRange(obj, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
     };
 
     // is a given date in next month range?
     is.inNextMonth = function(obj) {
-        var date = new Date();
-        var oneMonthLater = new Date(date.setMonth(date.getMonth() + 1)).getTime();
-        var givenDate = obj.getTime();
-        return is.date(obj) && givenDate < oneMonthLater && givenDate > new Date().getTime();
+        return is.inDateRange(obj, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
     };
 
     // is a given date in next year range?
     is.inNextYear = function(obj) {
-        var date = new Date();
-        var oneYearLater = new Date(date.setFullYear(date.getFullYear() + 1)).getTime();
-        var givenDate = obj.getTime();
-        return is.date(obj) && givenDate < oneYearLater && givenDate > new Date().getTime();
+        return is.inDateRange(obj, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
     };
 
     // is a given date in the parameter quarter?
@@ -454,5 +444,7 @@
     is.all.nan = all(is.nan);
     is.not.truthy = not(is.truthy);
     is.all.truthy = all(is.truthy);
+    is.not.date = not(is.date);
+    is.all.date = all(is.date);
 
 }.call(this));
