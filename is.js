@@ -368,6 +368,7 @@
     // is a given date weekday?
     is.weekday = not(is.weekend);
 
+    // TODO: Generate range check methods with one function
     // is a given date in last week range?
     is.inLastWeek = function(obj) {
         var date = new Date();
