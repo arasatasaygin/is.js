@@ -307,6 +307,9 @@
 
     // Time checks
     /* -------------------------------------------------------------------------- */
+
+    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     
     // is a given date indicate today?
     is.today = function(obj) {
@@ -337,6 +340,86 @@
 
     // is a given date future?
     is.future = not(is.past);
+
+    // is a given dates day equal given dayString parameter?
+    is.day = function(obj, dayString) {
+        var now = new Date();
+        return is.date(obj) && dayString.toLowerCase() === days[now.getDay()];
+    };
+
+    // is a given dates month equal given monthString parameter?
+    is.month = function(obj, monthString) {
+        var now = new Date();
+        return is.date(obj) && monthString.toLowerCase() === months[now.getMonth()];
+    };
+
+    // is a given dates year equal given year parameter?
+    is.year = function(obj, year) {
+        var now = new Date();
+        return is.date(obj) && is.number(year) && year === now.getFullYear();
+    };
+
+    // is a given date weekend?
+    // 6: Saturday, 0: Sunday
+    is.weekend = function(obj) {
+        return is.date(obj) && (obj.getDay() === 6 || obj.getDay() === 0);
+    };
+
+    // is a given date weekday?
+    is.weekday = not(is.weekend);
+
+    // is a given date in last week range?
+    is.inLastWeek = function(obj) {
+        var date = new Date();
+        var oneWeekAgo = new Date(date.setDate(date.getDate() - 7)).getTime();
+        var givenDate = obj.getTime();
+        return is.date(obj) && givenDate > oneWeekAgo && givenDate < new Date().getTime();
+    };
+
+    // is a given date in last month range?
+    is.inLastMonth = function(obj) {
+        var date = new Date();
+        var oneMonthAgo = new Date(date.setMonth(date.getMonth() - 1)).getTime();
+        var givenDate = obj.getTime();
+        return is.date(obj) && givenDate > oneMonthAgo && givenDate < new Date().getTime();
+    };
+
+    // is a given date in last year range?
+    is.inLastYear = function(obj) {
+        var date = new Date();
+        var oneYearAgo = new Date(date.setFullYear(date.getFullYear() - 1)).getTime();
+        var givenDate = obj.getTime();
+        return is.date(obj) && givenDate > oneYearAgo && givenDate < new Date().getTime();
+    };
+
+    // is a given date in next week range?
+    is.inNextWeek = function(obj) {
+        var date = new Date();
+        var oneWeekLater = new Date(date.setDate(date.getDate() + 7)).getTime();
+        var givenDate = obj.getTime();
+        return is.date(obj) && givenDate < oneWeekLater && givenDate > new Date().getTime();
+    };
+
+    // is a given date in next month range?
+    is.inNextMonth = function(obj) {
+        var date = new Date();
+        var oneMonthLater = new Date(date.setMonth(date.getMonth() + 1)).getTime();
+        var givenDate = obj.getTime();
+        return is.date(obj) && givenDate < oneMonthLater && givenDate > new Date().getTime();
+    };
+
+    // is a given date in next year range?
+    is.inNextYear = function(obj) {
+        var date = new Date();
+        var oneYearLater = new Date(date.setFullYear(date.getFullYear() + 1)).getTime();
+        var givenDate = obj.getTime();
+        return is.date(obj) && givenDate < oneYearLater && givenDate > new Date().getTime();
+    };
+
+    // is a given date in the parameter quarter?
+    is.quarterOfYear = function(obj, quarterNumber) {
+        return is.date(obj) && is.number(quarterNumber) && quarterNumber === Math.floor((obj.getMonth() + 3) / 3);
+    };
 
     // Environment checks
     // -----------
