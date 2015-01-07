@@ -62,6 +62,7 @@ is.js
 - [x] safeWord
 
 **Time checks:**
+- [ ] validDate
 - [x] today
 - [x] yesterday
 - [x] tomorrow
