@@ -62,7 +62,6 @@ is.js
 - [x] safeWord
 
 **Time checks:**
-- [ ] validDate
 - [x] today
 - [x] yesterday
 - [x] tomorrow
@@ -81,39 +80,25 @@ is.js
 - [x] inNextMonth
 - [x] inNextYear
 - [x] quarterOfYear
-- [ ] weekOfYear
-- [ ] dayOfMonth
-- [ ] dayOfWeek
-- [ ] dayOfYear
-- [ ] daylightSavingTime
+- [x] daylightSavingTime
 
 **Environment checks:**
-- core
-  - [ ] defined
-  - [ ] typeOf
-  - [ ] instanceOf
-  - [ ] prototypeOf
-  - [ ] global
-- browser
-  - [ ] chrome
-  - [ ] firefox
-  - [ ] ie
-  - [ ] opera
-  - [ ] safari
-- browserEngine
-  - [ ] trident
-  - [ ] gecko
-  - [ ] webkit
-  - [ ] presto
-  - [ ] blink
-- device
-  - [ ] mobile
-  - [ ] tablet
-  - [ ] desktop
-- os
-  - [ ] linux
-  - [ ] mac
-  - [ ] windows
+- [x] chrome
+- [x] firefox
+- [x] ie
+- [x] opera
+- [x] safari
+- [x] mobile
+- [ ] tablet
+- [ ] desktop
+- [ ] kindle
+- [ ] linux
+- [ ] mac
+- [ ] windows
+- [ ] ios
+- [ ] android
+- [ ] online
+- [ ] offline
 
 **Array element checks:**
 - [ ] allSame
