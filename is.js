@@ -412,8 +412,43 @@
         return is.date(obj) && is.number(quarterNumber) && quarterNumber === Math.floor((obj.getMonth() + 3) / 3);
     };
 
+    // is a given date in daylight saving time?
+    is.dayLightSavingTime = function(obj) {        
+        var january = new Date(obj.getFullYear(), 0, 1);
+        var july = new Date(obj.getFullYear(), 6, 1);
+        var stdTimezoneOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
+        return obj.getTimezoneOffset() < stdTimezoneOffset;
+    };
+
     // Environment checks
-    // -----------
+    /* -------------------------------------------------------------------------- */
+
+    var userAgent = 'navigator' in window && navigator.userAgent.toLowerCase() || '';
+    var vendor = 'navigator' in window && navigator.vendor.toLowerCase() || '';
+
+    is.chrome = function() {
+        return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
+    };
+
+    is.firefox = function() {
+        return /firefox/i.test(userAgent);
+    };
+
+    is.ie = function() {
+        return /msie/i.test(userAgent);
+    };
+
+    is.opera = function() {
+        return /opr/i.test(userAgent);
+    };
+
+    is.safari = function() {
+        return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
+    };
+
+    is.mobile = function() {
+        return /android|blackberry|iphone|ipad|ipod|iemobile|opera mini|nokia|webos/i.test(userAgent);
+    };
 
     // Array checks
     // ------------
