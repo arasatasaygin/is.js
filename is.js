@@ -425,30 +425,107 @@
 
     var userAgent = 'navigator' in window && navigator.userAgent.toLowerCase() || '';
     var vendor = 'navigator' in window && navigator.vendor.toLowerCase() || '';
+    var appVersion = 'navigator' in window && navigator.appVersion.toLowerCase() || '';
 
+    // is current browser chrome?
     is.chrome = function() {
         return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
     };
 
+    // is current browser firefox?
     is.firefox = function() {
         return /firefox/i.test(userAgent);
     };
 
-    is.ie = function() {
-        return /msie/i.test(userAgent);
+    // is current browser internet explorer?
+    // parameter is optional
+    is.ie = function(version) {
+        if(!version) return /msie/i.test(userAgent);
+        return new RegExp('msie ' + version).test(userAgent);
     };
 
+    // is current browser opera?
     is.opera = function() {
         return /opr/i.test(userAgent);
     };
 
+    // is current browser safari?
     is.safari = function() {
         return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
     };
 
-    is.mobile = function() {
-        return /android|blackberry|iphone|ipad|ipod|iemobile|opera mini|nokia|webos/i.test(userAgent);
+    // is current device ios?
+    is.ios = function() {
+        return is.iphone() || is.pad() || is.ipod();
     };
+
+    // is current device iphone?
+    is.iphone = function() {
+        return /iphone/i.test(userAgent);
+    };
+
+    // is current device ipad?
+    is.ipad = function() {
+        return /ipad/i.test(userAgent);
+    };
+
+    // is current device ipod?
+    is.ipod = function() {
+        return /ipod/i.test(userAgent);
+    };
+
+    // is current device android?
+    is.android = function() {
+        return /android/i.test(userAgent);
+    };
+
+    // is current device android tablet?
+    is.androidPhone = function() {
+        return /android/i.test(userAgent) && /mobile/i.test(userAgent);
+    };
+
+    // is current device android tablet?
+    is.androidTablet = function() {
+        return /android/i.test(userAgent) && !/mobile/i.test(userAgent);
+    };
+
+    // is current device mobile?
+    is.mobile = function() {
+        return is.iphone() || is.ipod() || is.androidPhone();
+    };
+
+    // is current device tablet?
+    is.tablet = function() {
+        return is.ipad() || is.androidTablet();
+    };
+
+    // is current device desktop?
+    is.desktop = function() {
+        return is.not.mobile() && is.not.tablet();
+    };
+
+    // is current operating system linux?
+    is.linux = function() {
+        return /linux/i.test(appVersion);
+    };
+
+    // is current operating system mac?
+    is.mac = function() {
+        return /mac/i.test(appVersion);
+    };
+
+    // is current operating system windows?
+    is.windows = function() {
+        return /win/i.test(appVersion);
+    };
+
+    // is current state online?
+    is.online = function() {
+        return navigator.online;
+    };
+
+    // is current state offline?
+    is.offline = not(is.online);
 
     // Array checks
     // ------------
@@ -481,5 +558,7 @@
     is.all.truthy = all(is.truthy);
     is.not.date = not(is.date);
     is.all.date = all(is.date);
+    is.not.mobile = not(is.mobile);
+    is.not.tablet = not(is.tablet);
 
 }.call(this));
