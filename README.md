@@ -23,6 +23,8 @@ is.js
 - [x] truthy
 - [x] falsy
 - [x] space
+- [ ] defined
+- [ ] global
 
 **Arithmetic checks:**
 - [x] equal
@@ -104,45 +106,10 @@ is.js
 - [x] online
 - [x] offline
 
-**Array element checks:**
-- [ ] allSame
-- [ ] minimumOf
-- [ ] maximumOf
-- [ ] firstOf
-- [ ] lastOf
-- [ ] memberOf
-- [ ] decreasing
-- [ ] increasing
-
 **Object checks:**
 - [ ] extensible
 - [ ] frozen
 - [ ] sealed
-
-**DOM checks:**
-- [ ] collection    // HTML elements collection, such as childNodes
-- [ ] nodelist
-- [ ] domReady
-- [ ] visible
-- [ ] hidden
-- [ ] checked
-- [ ] enabled
-- [ ] disabled
-- [ ] firstChild
-- [ ] lastChild
-- [ ] onlyChlid
-
-**Syntax checks:**
-- [ ] xml
-- [ ] json
-- [ ] html
-
-**ES6 checks:**
-- [ ] generator
-- [ ] symbol
-- [ ] weakMap
-- [ ] map
-- [ ] set
 
 - [ ] **Provide escape hatch for possible name collisions**
 - [ ] **Provide RegExp set methods to library user**
