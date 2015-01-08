@@ -88,17 +88,21 @@ is.js
 - [x] ie
 - [x] opera
 - [x] safari
+- [x] ios
+- [x] iphone
+- [x] ipad
+- [x] ipod
+- [x] android
+- [x] androidPhone
+- [x] androidTablet
 - [x] mobile
-- [ ] tablet
-- [ ] desktop
-- [ ] kindle
-- [ ] linux
-- [ ] mac
-- [ ] windows
-- [ ] ios
-- [ ] android
-- [ ] online
-- [ ] offline
+- [x] tablet
+- [x] desktop
+- [x] linux
+- [x] mac
+- [x] windows
+- [x] online
+- [x] offline
 
 **Array element checks:**
 - [ ] allSame
