@@ -61,7 +61,6 @@ is.js
 - [x] startWith
 - [x] endWith
 - [x] capitalized
-- [x] safeWord
 
 **Time checks:**
 - [x] today
