@@ -7,6 +7,7 @@
     /* -------------------------------------------------------------------------- */
 
     var root = this;
+    var previousIs = root.is;
 
     // define 'is' object and current version
     var is = {};
@@ -557,7 +558,7 @@
         return true;
     };
 
-    // Configurations
+    // Configuration methods
     /* -------------------------------------------------------------------------- */
 
     // set optional regexps to methods if you think they suck
@@ -567,6 +568,15 @@
                 if(regexpName === r) regexps[r] = regexp;
             }
         }
+    };
+
+    // change namespace of library to prevent name collisions
+    // var preferredName = is.setEscapeHatch();
+    // preferredName.odd(3);
+    // => true
+    is.setEscapeHatch = function() {
+       root.is = previousIs;
+       return this;
     };
 
     // 'not' and 'all' interfaces
