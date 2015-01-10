@@ -109,6 +109,11 @@ is.js
 - [ ] extensible
 - [ ] frozen
 - [ ] sealed
+- [x] propertyCount
+- [x] propertyDefined
+- [x] window
 
-- [ ] **Provide escape hatch for possible name collisions**
-- [ ] **Provide RegExp set methods to library user**
+**Array checks:**
+- [x] sorted
+- [ ] all
+- [ ] any
