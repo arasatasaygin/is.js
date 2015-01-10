@@ -531,6 +531,17 @@
 
     // ES6 checks
     // ----------
+    // Configurations
+    /* -------------------------------------------------------------------------- */
+
+    // set optional regexps to methods if you think they suck
+    is.setRegexp = function(regexp, regexpName) {
+        for(r in regexps) {
+            if (hasOwnProperty.call(regexps, r)) {
+                if(regexpName === r) regexps[r] = regexp;
+            }
+        }
+    };
 
     // 'not' and 'all' interfaces
     // --------------------------
