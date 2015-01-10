@@ -563,7 +563,7 @@
 
     // set optional regexps to methods if you think they suck
     is.setRegexp = function(regexp, regexpName) {
-        for(r in regexps) {
+        for(var r in regexps) {
             if (hasOwnProperty.call(regexps, r)) {
                 if(regexpName === r) regexps[r] = regexp;
             }
@@ -571,12 +571,391 @@
     };
 
     // change namespace of library to prevent name collisions
-    // var preferredName = is.setEscapeHatch();
+    // var preferredName = is.setNamespace();
     // preferredName.odd(3);
     // => true
-    is.setEscapeHatch = function() {
+    is.setNamespace = function() {
        root.is = previousIs;
        return this;
+    };
+
+    // 'not' and 'all' interface options
+    var methodInterfaces = {
+        arguments : {
+            not: true,
+            all: true
+        },
+        array : {
+            not: true,
+            all: true
+        },
+        boolean : {
+            not: true,
+            all: true
+        },
+        date : {
+            not: true,
+            all: true
+        },
+        error : {
+            not: true,
+            all: true
+        },
+        function : {
+            not: true,
+            all: true
+        },
+        nan : {
+            not: true,
+            all: true
+        },
+        null : {
+            not: true,
+            all: true
+        },
+        number : {
+            not: true,
+            all: true
+        },
+        object : {
+            not: true,
+            all: true
+        },
+        regexp : {
+            not: true,
+            all: true
+        },
+        sameType : {
+            not: true,
+            all: true
+        },
+        string : {
+            not: true,
+            all: true
+        },
+        undefined : {
+            not: true,
+            all: true
+        },
+        empty: {
+            not: true,
+            all: true
+        },
+        existy: {
+            not: true,
+            all: true
+        },
+        truthy: {
+            not: true,
+            all: true
+        },
+        falsy: {
+            not: true,
+            all: true
+        },
+        space: {
+            not: true,
+            all: true
+        },
+        // defined
+        // global
+        equal: {
+            not: true,
+            all: false
+        },
+        even: {
+            not: true,
+            all: true
+        },
+        odd: {
+            not: true,
+            all: true
+        },
+        positive: {
+            not: true,
+            all: true
+        },
+        negative: {
+            not: true,
+            all: true
+        },
+        least: {
+            not: true,
+            all: false
+        },
+        above: {
+            not: true,
+            all: false
+        },
+        within: {
+            not: true,
+            all: false
+        },
+        decimal: {
+            not: true,
+            all: true
+        },
+        finite: {
+            not: true,
+            all: true
+        },
+        infinite: {
+            not: true,
+            all: true
+        },
+        url: {
+            not: true,
+            all: true
+        },
+        email: {
+            not: true,
+            all: true
+        },
+        creditCard: {
+            not: true,
+            all: true
+        },
+        alphaNumeric: {
+            not: true,
+            all: true
+        },
+        time: {
+            not: true,
+            all: true
+        },
+        dateString: {
+            not: true,
+            all: true
+        },
+        usZipCode: {
+            not: true,
+            all: true
+        },
+        caPostalCode: {
+            not: true,
+            all: true
+        },
+        ukPostCode: {
+            not: true,
+            all: true
+        },
+        nanpPhone: {
+            not: true,
+            all: true
+        },
+        eppPhone: {
+            not: true,
+            all: true
+        },
+        socialSecurityNumber: {
+            not: true,
+            all: true
+        },
+        affirmative: {
+            not: true,
+            all: true
+        },
+        include: {
+            not: true,
+            all: false
+        },
+        upperCase: {
+            not: true,
+            all: true
+        },
+        lowerCase: {
+            not: true,
+            all: true
+        },
+        startWith: {
+            not: true,
+            all: false
+        },
+        endWith: {
+            not: true,
+            all: false
+        },
+        capitalized: {
+            not: true,
+            all: true
+        },
+        today: {
+            not: true,
+            all: true
+        },
+        yesterday: {
+            not: true,
+            all: true
+        },
+        tomorrow: {
+            not: true,
+            all: true
+        },
+        past: {
+            not: true,
+            all: true
+        },
+        future: {
+            not: true,
+            all: true
+        },
+        day: {
+            not: true,
+            all: false
+        },
+        month: {
+            not: true,
+            all: false
+        },
+        year: {
+            not: true,
+            all: false
+        },
+        weekDay: {
+            not: true,
+            all: true
+        },
+        weekEnd: {
+            not: true,
+            all: true
+        },
+        inDateRange: {
+            not: true,
+            all: false
+        },
+        inLastWeek: {
+            not: true,
+            all: true
+        },
+        inLastMonth: {
+            not: true,
+            all: true
+        },
+        inLastYear: {
+            not: true,
+            all: true
+        },
+        inNextWeek: {
+            not: true,
+            all: true
+        },
+        inNextMonth: {
+            not: true,
+            all: true
+        },
+        inNextYear: {
+            not: true,
+            all: true
+        },
+        quarterOfYear: {
+            not: true,
+            all: false
+        },
+        daylightSavingTime: {
+            not: true,
+            all: true
+        },
+        chrome: {
+            not: true,
+            all: false
+        },
+        firefox: {
+            not: true,
+            all: false
+        },
+        ie: {
+            not: true,
+            all: false
+        },
+        opera: {
+            not: true,
+            all: false
+        },
+        safari: {
+            not: true,
+            all: false
+        },
+        ios: {
+            not: true,
+            all: false
+        },
+        iphone: {
+            not: true,
+            all: false
+        },
+        ipad: {
+            not: true,
+            all: false
+        },
+        ipod: {
+            not: true,
+            all: false
+        },
+        android: {
+            not: true,
+            all: false
+        },
+        androidPhone: {
+            not: true,
+            all: false
+        },
+        androidTablet: {
+            not: true,
+            all: false
+        },
+        mobile: {
+            not: true,
+            all: false
+        },
+        tablet: {
+            not: true,
+            all: false
+        },
+        desktop: {
+            not: true,
+            all: false
+        },
+        linux: {
+            not: true,
+            all: false
+        },
+        mac: {
+            not: true,
+            all: false
+        },
+        windows: {
+            not: true,
+            all: false
+        },
+        online: {
+            not: true,
+            all: false
+        },
+        offline: {
+            not: true,
+            all: false
+        },
+        // extensible
+        // frozen
+        // sealed
+        propertyCount: {
+            not: true,
+            all: false
+        },
+        propertyDefined: {
+            not: true,
+            all: false
+        },
+        window: {
+            not: true,
+            all: false
+        },
+        sorted: {
+            not: true,
+            all: false
+        }
+        // all
+        // any
     };
 
     // 'not' and 'all' interfaces
@@ -599,5 +978,6 @@
     is.not.mobile = not(is.mobile);
     is.not.tablet = not(is.tablet);
     is.not.array = not(is.array);
+    is.not.undefined = not(is.undefined);
 
 }.call(this));
