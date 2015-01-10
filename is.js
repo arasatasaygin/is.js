@@ -520,18 +520,6 @@
     // Object checks
     /* -------------------------------------------------------------------------- */
 
-    is.extensible = function() {
-
-    };
-
-    is.frozen = function() {
-
-    };
-
-    is.sealed = function() {
-
-    };
-
     // has a given object got parameterized count property?
     is.propertyCount = function(obj, count) {
         if(!is.object(obj) || !is.number(count)) return false;
@@ -567,14 +555,6 @@
             if(arr[i] > arr[i+1]) return false;
         }
         return true;
-    };
-
-    is.all = function(arr) {
-
-    };
-
-    is.any = function(arr) {
-
     };
 
     // Configurations
