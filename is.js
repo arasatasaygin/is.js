@@ -1,5 +1,5 @@
 // is.js 0.0.1
-// Author Aras Atasaygin
+// Author: Aras Atasaygin
 
 ;(function() {
 
@@ -21,6 +21,7 @@
     // cache some methods to call later on
     var toString = Object.prototype.toString;
     var arraySlice = Array.prototype.slice;
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
 
     // helper function which reverses the sense of predicate result
     function not(func) {
@@ -104,10 +105,9 @@
     };
 
     // are given values same type?
+    // prevent NaN, Number same type check
     is.sameType = function(value1, value2) {
-        if(is.nan(value1) || is.nan(value2)) {    // prevent NaN, Number same type check
-            return is.nan(value1) === is.nan(value2);
-        }
+        if(is.nan(value1) || is.nan(value2)) return is.nan(value1) === is.nan(value2);
         return toString.call(value1) === toString.call(value2);
     };
 
@@ -284,7 +284,7 @@
         return is.string(str) && str.indexOf(endWith) === str.length -  endWith.length;
     };
 
-    // is a given string string or sentence capitalized?
+    // is a given string or sentence capitalized?
     is.capitalized = function(str) {
         if(is.not.string(str)) return false;
         var words = str.split(' ');
@@ -517,20 +517,66 @@
     // is current state offline?
     is.offline = not(is.online);
 
-    // Array checks
-    // ------------
-
     // Object checks
-    // -------------
+    /* -------------------------------------------------------------------------- */
 
-    // DOM checks
-    // ----------
+    is.extensible = function() {
 
-    // Syntax checks
-    // ----------
+    };
 
-    // ES6 checks
-    // ----------
+    is.frozen = function() {
+
+    };
+
+    is.sealed = function() {
+
+    };
+
+    // has a given object got parameterized count property?
+    is.propertyCount = function(obj, count) {
+        if(!is.object(obj) || !is.number(count)) return false;
+        if(Object.keys) return Object.keys(obj).length === count;
+        var properties = [],
+            property;
+        for(property in obj) {
+            if (hasOwnProperty.call(obj, property)) {
+                properties.push(property);
+            }
+        }
+        return properties.length === count;
+    };
+
+    // is given object has parameterized property?
+    is.propertyDefined = function(obj, property) {
+        return is.object(obj) && is.string(property) && property in obj;
+    };
+
+    // is a given object window?
+    // setInterval method is only available for window object
+    is.window = function(obj) {
+        return typeof obj === 'object' && 'setInterval' in obj;
+    };
+
+    // Array checks
+    /* -------------------------------------------------------------------------- */
+
+    // is a given array sorted?
+    is.sorted = function(arr) {
+        if(is.not.array(arr)) return false;
+        for(var i = 0; i < arr.length; i++) {
+            if(arr[i] > arr[i+1]) return false;
+        }
+        return true;
+    };
+
+    is.all = function(arr) {
+
+    };
+
+    is.any = function(arr) {
+
+    };
+
     // Configurations
     /* -------------------------------------------------------------------------- */
 
@@ -544,6 +590,7 @@
     };
 
     // 'not' and 'all' interfaces
+    // TODO: Make these available for all proper methods
     // --------------------------
     is.not.number = not(is.number);
     is.all.number = all(is.number);
@@ -561,5 +608,6 @@
     is.all.date = all(is.date);
     is.not.mobile = not(is.mobile);
     is.not.tablet = not(is.tablet);
+    is.not.array = not(is.array);
 
 }.call(this));
