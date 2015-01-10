@@ -117,3 +117,7 @@ is.js
 - [x] sorted
 - [ ] all
 - [ ] any
+
+**Configuration methods:**
+- [x] setRegexp
+- [x] setEscapeHatch
