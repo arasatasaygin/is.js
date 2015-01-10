@@ -11,9 +11,11 @@
 
     // define 'is' object and current version
     var is = {};
+    is.VERSION = '0.0.1';
+
+    // define interfaces
     is.not = {};
     is.all = {};
-    is.VERSION = '0.0.1';
 
     // TODO: Add AMD and CommonJS support
     // 'is' object set global to the browser window
@@ -71,7 +73,7 @@
     };
 
     // is a given value Error object?
-    is.error = function(value) {    // TODO: check error types
+    is.error = function(value) {
         return toString.call(value) === '[object Error]';
     };
 
@@ -143,8 +145,8 @@
     };
 
     // is a given value existy?
-    is.existy = function(value) {    // check null and undefined with loose =!
-        return value != null;
+    is.existy = function(value) {
+        return value !== null && value !== undefined;
     };
 
     // is a given value truthy?
