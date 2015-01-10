@@ -18,7 +18,6 @@
         module.exports = factory(require('is'));
     } else {
         // Browser globals (root is window)
-        debugger;
         root.is = factory(root.is);
     }
 }(this, function(is) {
@@ -36,10 +35,6 @@
     // define interfaces
     is.not = {};
     is.all = {};
-
-    // TODO: Add AMD and CommonJS support
-    // 'is' object set global to the browser window
-    root.is = is;
 
     // cache some methods to call later on
     var toString = Object.prototype.toString;
