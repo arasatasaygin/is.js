@@ -580,7 +580,7 @@
     };
 
     // 'not' and 'all' interface options
-    var methodInterfaces = {
+    var interfaceOptions = {
         arguments : {
             not: true,
             all: true
@@ -958,26 +958,24 @@
         // any
     };
 
-    // 'not' and 'all' interfaces
-    // TODO: Make these available for all proper methods
-    // --------------------------
-    is.not.number = not(is.number);
-    is.all.number = all(is.number);
-    is.not.string = not(is.string);
-    is.all.string = all(is.string);
-    is.not.regexp = not(is.regexp);
-    is.all.regexp = all(is.regexp);
-    is.not.boolean = not(is.boolean);
-    is.all.boolean = all(is.boolean);
-    is.not.nan = not(is.nan);
-    is.all.nan = all(is.nan);
-    is.not.truthy = not(is.truthy);
-    is.all.truthy = all(is.truthy);
-    is.not.date = not(is.date);
-    is.all.date = all(is.date);
-    is.not.mobile = not(is.mobile);
-    is.not.tablet = not(is.tablet);
-    is.not.array = not(is.array);
-    is.not.undefined = not(is.undefined);
+    // generate method interfaces for 'not' and 'all'
+    // is.not.number('not number');
+    // => true
+    // is.all.number(1, 2, 3);
+    // => true
+    function setMethodInterfaces() {
+        var options = interfaceOptions;
+        for(var option in options) {
+            if (hasOwnProperty.call(options, option)) {
+                if(options[option].not) {
+                    is.not[option] = not(is[option]);
+                }
+                if(options[option].all) {
+                    is.all[option] = all(is[option]);
+                }
+            }
+        }
+    }
+    setMethodInterfaces();
 
 }.call(this));
