@@ -29,7 +29,7 @@
     var previousIs = root.is;
 
     // define 'is' object and current version
-    var is = {};
+    is = {};
     is.VERSION = '0.0.1';
 
     // define interfaces
@@ -262,16 +262,20 @@
         affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/
     };
 
-    // regexp check method generator
+    // create regexp checks methods from 'regexp' object
     for(var regexp in regexps) {
         if(regexps.hasOwnProperty(regexp)) {
             (function() {
                 var r = regexp;
-                    is[r] = function(value) {
-                        return regexps[r].test(value);
-                    };
+                is[r] = regexpCheck(r, regexps);
             })();
         }
+    }
+
+    function regexpCheck(regexp, regexps, value) {
+        return function(value) {
+            return regexps[regexp].test(value);
+        };
     }
 
     // String checks
