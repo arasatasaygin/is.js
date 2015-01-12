@@ -604,7 +604,7 @@
     var interfaceOptions = {
         arguments : {
             not: true,
-            all: true
+            all: false
         },
         array : {
             not: true,
