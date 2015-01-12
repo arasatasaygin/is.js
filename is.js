@@ -98,7 +98,7 @@
     };
 
     // is a given value NaN?
-    is.nan = isNaN || function(value) {    // NaN is number :) Also it is the only value which does not equal itself
+    is.nan = function(value) {    // NaN is number :) Also it is the only value which does not equal itself
         return is.number(value) && value !== value;
     };
 
@@ -648,7 +648,7 @@
         },
         sameType : {
             not: true,
-            all: true
+            all: false
         },
         string : {
             not: true,
