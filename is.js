@@ -54,6 +54,10 @@
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
+            if(length === 1 && is.array(parameters)) {    // support array
+                parameters = parameters[0];
+                length = parameters.length;
+            }
             var results = [];
             for (var i = 0; i < length; i++) {
                 results.push(func.call(null, parameters[i]));
@@ -70,6 +74,10 @@
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
+            if(length === 1 && is.array(parameters)) {    // support array
+                parameters = parameters[0];
+                length = parameters.length;
+            }
             var results = [];
             for (var i = 0; i < length; i++) {
                 results.push(func.call(null, parameters[i]));
