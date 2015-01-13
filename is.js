@@ -178,6 +178,8 @@
         if(is.string(value)) {        
             var characterCode = value.charCodeAt(0);
             return (characterCode >  8 && characterCode < 14) || characterCode === 32;
+        } else {
+            return false;
         }
     };
 
