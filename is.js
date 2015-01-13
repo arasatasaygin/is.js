@@ -94,7 +94,7 @@
 
     // is a given value Arguments?
     is.arguments = function(value) {    // fallback check is for IE
-        return toString.call(value) === '[object Arguments]' || (typeof value === 'object' && 'callee' in value);
+        return is.not.null(value) && (toString.call(value) === '[object Arguments]' || (typeof value === 'object' && 'callee' in value));
     };
 
     // is a given value Array?
