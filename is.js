@@ -35,6 +35,7 @@
     // define interfaces
     is.not = {};
     is.all = {};
+    is.any = {};
 
     // cache some methods to call later on
     var toString = Object.prototype.toString;
@@ -48,7 +49,7 @@
         };
     }
 
-    // helper function which call predicate function per parameter
+    // helper function which call predicate function per parameter and return true if all pass
     function all(func) {
         return function() {
             var parameters = arraySlice.call(arguments);
@@ -61,6 +62,22 @@
                 if(results[i] === false) return false;
             }
             return true;
+        };
+    }
+
+    // helper function which call predicate function per parameter and return true if any pass
+    function any(func) {
+        return function() {
+            var parameters = arraySlice.call(arguments);
+            var length = parameters.length;
+            var results = [];
+            for (var i = 0; i < length; i++) {
+                results.push(func.call(null, parameters[i]));
+            }
+            for (i = 0; i < results.length; i++) {
+                if(results[i] === true) return true;
+            }
+            return false;
         };
     }
 
@@ -128,6 +145,8 @@
         if(is.nan(value1) || is.nan(value2)) return is.nan(value1) === is.nan(value2);
         return toString.call(value1) === toString.call(value2);
     };
+    // sameType method does not support 'all' and 'any' interfaces
+    is.sameType.api = ['not'];
 
     // is a given value String?
     is.string = function(value) {
@@ -196,6 +215,8 @@
         if(is.all.boolean(value1, value2)) return value1 === value2;
         return false;
     };
+    // equal method does not support 'all' and 'any' interfaces
+    is.equal.api = ['not'];
 
     // is a given number even?
     is.even = function(numb) {
@@ -217,14 +238,20 @@
     is.above = function(numb, min) {
         return is.all.number(numb, min) && numb > min;
     };
+    // above method does not support 'all' and 'any' interfaces
+    is.above.api = ['not'];
 
     // is a given number equal or higher than a minimum parameter?
     is.least = not(is.above);
+    // least method does not support 'all' and 'any' interfaces
+    is.least.api = ['not'];
 
     // is a given number within minimum and maximum parameters?
     is.within = function(numb, min, max) {
         return is.all.number(numb, min) && numb > min && numb < max;
     };
+    // within method does not support 'all' and 'any' interfaces
+    is.within.api = ['not'];
 
     // is a given number decimal?
     is.decimal = function(numb) {
@@ -287,6 +314,8 @@
     is.include = String.prototype.includes || function(str, substr) {
         return str.indexOf(substr) > -1;
     };
+    // include method does not support 'all' and 'any' interfaces
+    is.include.api = ['not'];
 
     // is a given string all uppercase?
     is.upperCase = function(str) {
@@ -302,11 +331,15 @@
     is.startWith = function(str, startWith) {
         return is.string(str) && str.indexOf(startWith) === 0;
     };
+    // startWith method does not support 'all' and 'any' interfaces
+    is.startWith.api = ['not'];
 
     // is string end with a given endWith parameter?
     is.endWith = function(str, endWith) {
         return is.string(str) && str.indexOf(endWith) === str.length -  endWith.length;
     };
+    // endWith method does not support 'all' and 'any' interfaces
+    is.endWith.api = ['not'];
 
     // is a given string or sentence capitalized?
     is.capitalized = function(str) {
@@ -360,18 +393,24 @@
         var now = new Date();
         return is.date(obj) && dayString.toLowerCase() === days[now.getDay()];
     };
+    // day method does not support 'all' and 'any' interfaces
+    is.day.api = ['not'];
 
     // is a given dates month equal given monthString parameter?
     is.month = function(obj, monthString) {
         var now = new Date();
         return is.date(obj) && monthString.toLowerCase() === months[now.getMonth()];
     };
+    // month method does not support 'all' and 'any' interfaces
+    is.month.api = ['not'];
 
     // is a given dates year equal given year parameter?
     is.year = function(obj, year) {
         var now = new Date();
         return is.date(obj) && is.number(year) && year === now.getFullYear();
     };
+    // year method does not support 'all' and 'any' interfaces
+    is.year.api = ['not'];
 
     // is a given date weekend?
     // 6: Saturday, 0: Sunday
@@ -390,6 +429,8 @@
         var end = endObj.getTime();
         return givenDate > start && givenDate < end;
     };
+    // inDateRange method does not support 'all' and 'any' interfaces
+    is.inDateRange.api = ['not'];
 
     // is a given date in last week range?
     is.inLastWeek = function(obj) {
@@ -425,6 +466,8 @@
     is.quarterOfYear = function(obj, quarterNumber) {
         return is.date(obj) && is.number(quarterNumber) && quarterNumber === Math.floor((obj.getMonth() + 3) / 3);
     };
+    // quarterOfYear method does not support 'all' and 'any' interfaces
+    is.quarterOfYear.api = ['not'];
 
     // is a given date in daylight saving time?
     is.dayLightSavingTime = function(obj) {        
@@ -445,11 +488,15 @@
     is.chrome = function() {
         return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
     };
+    // chrome method does not support 'all' and 'any' interfaces
+    is.chrome.api = ['not'];
 
     // is current browser firefox?
     is.firefox = function() {
         return /firefox/i.test(userAgent);
     };
+    // firefox method does not support 'all' and 'any' interfaces
+    is.firefox.api = ['not'];
 
     // is current browser internet explorer?
     // parameter is optional
@@ -457,89 +504,125 @@
         if(!version) return /msie/i.test(userAgent);
         return new RegExp('msie ' + version).test(userAgent);
     };
+    // ie method does not support 'all' and 'any' interfaces
+    is.ie.api = ['not'];
 
     // is current browser opera?
     is.opera = function() {
         return /opr/i.test(userAgent);
     };
+    // opera method does not support 'all' and 'any' interfaces
+    is.opera.api = ['not'];
 
     // is current browser safari?
     is.safari = function() {
         return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
     };
+    // safari method does not support 'all' and 'any' interfaces
+    is.safari.api = ['not'];
 
     // is current device ios?
     is.ios = function() {
         return is.iphone() || is.pad() || is.ipod();
     };
+    // ios method does not support 'all' and 'any' interfaces
+    is.ios.api = ['not'];
 
     // is current device iphone?
     is.iphone = function() {
         return /iphone/i.test(userAgent);
     };
+    // iphone method does not support 'all' and 'any' interfaces
+    is.iphone.api = ['not'];
 
     // is current device ipad?
     is.ipad = function() {
         return /ipad/i.test(userAgent);
     };
+    // ipad method does not support 'all' and 'any' interfaces
+    is.ipad.api = ['not'];
 
     // is current device ipod?
     is.ipod = function() {
         return /ipod/i.test(userAgent);
     };
+    // ipod method does not support 'all' and 'any' interfaces
+    is.ipod.api = ['not'];
 
     // is current device android?
     is.android = function() {
         return /android/i.test(userAgent);
     };
+    // android method does not support 'all' and 'any' interfaces
+    is.android.api = ['not'];
 
     // is current device android tablet?
     is.androidPhone = function() {
         return /android/i.test(userAgent) && /mobile/i.test(userAgent);
     };
+    // androidPhone method does not support 'all' and 'any' interfaces
+    is.androidPhone.api = ['not'];
 
     // is current device android tablet?
     is.androidTablet = function() {
         return /android/i.test(userAgent) && !/mobile/i.test(userAgent);
     };
+    // androidTablet method does not support 'all' and 'any' interfaces
+    is.androidTablet.api = ['not'];
 
     // is current device mobile?
     is.mobile = function() {
         return is.iphone() || is.ipod() || is.androidPhone();
     };
+    // mobile method does not support 'all' and 'any' interfaces
+    is.mobile.api = ['not'];
 
     // is current device tablet?
     is.tablet = function() {
         return is.ipad() || is.androidTablet();
     };
+    // tablet method does not support 'all' and 'any' interfaces
+    is.tablet.api = ['not'];
 
     // is current device desktop?
     is.desktop = function() {
         return is.not.mobile() && is.not.tablet();
     };
+    // desktop method does not support 'all' and 'any' interfaces
+    is.desktop.api = ['not'];
 
     // is current operating system linux?
     is.linux = function() {
         return /linux/i.test(appVersion);
     };
+    // linux method does not support 'all' and 'any' interfaces
+    is.linux.api = ['not'];
 
     // is current operating system mac?
     is.mac = function() {
         return /mac/i.test(appVersion);
     };
+    // mac method does not support 'all' and 'any' interfaces
+    is.mac.api = ['not'];
 
     // is current operating system windows?
     is.windows = function() {
         return /win/i.test(appVersion);
     };
+    // windows method does not support 'all' and 'any' interfaces
+    is.windows.api = ['not'];
 
     // is current state online?
     is.online = function() {
         return navigator.online;
     };
+    // online method does not support 'all' and 'any' interfaces
+    is.online.api = ['not'];
 
     // is current state offline?
     is.offline = not(is.online);
+    // offline method does not support 'all' and 'any' interfaces
+    is.offline.api = ['not'];
 
     // Object checks
     /* -------------------------------------------------------------------------- */
@@ -557,11 +640,15 @@
         }
         return properties.length === count;
     };
+    // propertyCount method does not support 'all' and 'any' interfaces
+    is.propertyCount.api = ['not'];
 
     // is given object has parameterized property?
     is.propertyDefined = function(obj, property) {
         return is.object(obj) && is.string(property) && property in obj;
     };
+    // propertyDefined method does not support 'all' and 'any' interfaces
+    is.propertyDefined.api = ['not'];
 
     // is a given object window?
     // setInterval method is only available for window object
@@ -602,404 +689,23 @@
        return this;
     };
 
-    // 'not' and 'all' interface options
-    var interfaceOptions = {
-        arguments : {
-            not: true,
-            all: false
-        },
-        array : {
-            not: true,
-            all: true
-        },
-        boolean : {
-            not: true,
-            all: true
-        },
-        date : {
-            not: true,
-            all: true
-        },
-        error : {
-            not: true,
-            all: true
-        },
-        function : {
-            not: true,
-            all: true
-        },
-        nan : {
-            not: true,
-            all: true
-        },
-        null : {
-            not: true,
-            all: true
-        },
-        number : {
-            not: true,
-            all: true
-        },
-        object : {
-            not: true,
-            all: true
-        },
-        regexp : {
-            not: true,
-            all: true
-        },
-        sameType : {
-            not: true,
-            all: false
-        },
-        string : {
-            not: true,
-            all: true
-        },
-        undefined : {
-            not: true,
-            all: true
-        },
-        empty: {
-            not: true,
-            all: true
-        },
-        existy: {
-            not: true,
-            all: true
-        },
-        truthy: {
-            not: true,
-            all: true
-        },
-        falsy: {
-            not: true,
-            all: true
-        },
-        space: {
-            not: true,
-            all: true
-        },
-        // defined
-        // global
-        equal: {
-            not: true,
-            all: false
-        },
-        even: {
-            not: true,
-            all: true
-        },
-        odd: {
-            not: true,
-            all: true
-        },
-        positive: {
-            not: true,
-            all: true
-        },
-        negative: {
-            not: true,
-            all: true
-        },
-        least: {
-            not: true,
-            all: false
-        },
-        above: {
-            not: true,
-            all: false
-        },
-        within: {
-            not: true,
-            all: false
-        },
-        decimal: {
-            not: true,
-            all: true
-        },
-        finite: {
-            not: true,
-            all: true
-        },
-        infinite: {
-            not: true,
-            all: true
-        },
-        url: {
-            not: true,
-            all: true
-        },
-        email: {
-            not: true,
-            all: true
-        },
-        creditCard: {
-            not: true,
-            all: true
-        },
-        alphaNumeric: {
-            not: true,
-            all: true
-        },
-        time: {
-            not: true,
-            all: true
-        },
-        dateString: {
-            not: true,
-            all: true
-        },
-        usZipCode: {
-            not: true,
-            all: true
-        },
-        caPostalCode: {
-            not: true,
-            all: true
-        },
-        ukPostCode: {
-            not: true,
-            all: true
-        },
-        nanpPhone: {
-            not: true,
-            all: true
-        },
-        eppPhone: {
-            not: true,
-            all: true
-        },
-        socialSecurityNumber: {
-            not: true,
-            all: true
-        },
-        affirmative: {
-            not: true,
-            all: true
-        },
-        include: {
-            not: true,
-            all: false
-        },
-        upperCase: {
-            not: true,
-            all: true
-        },
-        lowerCase: {
-            not: true,
-            all: true
-        },
-        startWith: {
-            not: true,
-            all: false
-        },
-        endWith: {
-            not: true,
-            all: false
-        },
-        capitalized: {
-            not: true,
-            all: true
-        },
-        today: {
-            not: true,
-            all: true
-        },
-        yesterday: {
-            not: true,
-            all: true
-        },
-        tomorrow: {
-            not: true,
-            all: true
-        },
-        past: {
-            not: true,
-            all: true
-        },
-        future: {
-            not: true,
-            all: true
-        },
-        day: {
-            not: true,
-            all: false
-        },
-        month: {
-            not: true,
-            all: false
-        },
-        year: {
-            not: true,
-            all: false
-        },
-        weekDay: {
-            not: true,
-            all: true
-        },
-        weekEnd: {
-            not: true,
-            all: true
-        },
-        inDateRange: {
-            not: true,
-            all: false
-        },
-        inLastWeek: {
-            not: true,
-            all: true
-        },
-        inLastMonth: {
-            not: true,
-            all: true
-        },
-        inLastYear: {
-            not: true,
-            all: true
-        },
-        inNextWeek: {
-            not: true,
-            all: true
-        },
-        inNextMonth: {
-            not: true,
-            all: true
-        },
-        inNextYear: {
-            not: true,
-            all: true
-        },
-        quarterOfYear: {
-            not: true,
-            all: false
-        },
-        daylightSavingTime: {
-            not: true,
-            all: true
-        },
-        chrome: {
-            not: true,
-            all: false
-        },
-        firefox: {
-            not: true,
-            all: false
-        },
-        ie: {
-            not: true,
-            all: false
-        },
-        opera: {
-            not: true,
-            all: false
-        },
-        safari: {
-            not: true,
-            all: false
-        },
-        ios: {
-            not: true,
-            all: false
-        },
-        iphone: {
-            not: true,
-            all: false
-        },
-        ipad: {
-            not: true,
-            all: false
-        },
-        ipod: {
-            not: true,
-            all: false
-        },
-        android: {
-            not: true,
-            all: false
-        },
-        androidPhone: {
-            not: true,
-            all: false
-        },
-        androidTablet: {
-            not: true,
-            all: false
-        },
-        mobile: {
-            not: true,
-            all: false
-        },
-        tablet: {
-            not: true,
-            all: false
-        },
-        desktop: {
-            not: true,
-            all: false
-        },
-        linux: {
-            not: true,
-            all: false
-        },
-        mac: {
-            not: true,
-            all: false
-        },
-        windows: {
-            not: true,
-            all: false
-        },
-        online: {
-            not: true,
-            all: false
-        },
-        offline: {
-            not: true,
-            all: false
-        },
-        // extensible
-        // frozen
-        // sealed
-        propertyCount: {
-            not: true,
-            all: false
-        },
-        propertyDefined: {
-            not: true,
-            all: false
-        },
-        window: {
-            not: true,
-            all: false
-        },
-        sorted: {
-            not: true,
-            all: false
-        }
-        // all
-        // any
-    };
-
-    // generate method interfaces for 'not' and 'all'
-    // is.not.number('not number');
-    // => true
-    // is.all.number(1, 2, 3);
-    // => true
-    function setMethodInterfaces() {
-        var options = interfaceOptions;
+    // helper function which sets 'not', 'all' and 'any' interfaces to methods based on their api property
+    function setInterfaces() {
+        var options = is;
         for(var option in options) {
-            if (hasOwnProperty.call(options, option)) {
-                if(options[option].not) {
-                    is.not[option] = not(is[option]);
-                }
-                if(options[option].all) {
-                    is.all[option] = all(is[option]);
+            if(hasOwnProperty.call(options, option) && is.function(options[option])) {
+                if(option !== 'setRegexp' && option !== 'setNamespace') {    // configuration methods
+                    var interfaces = options[option].api || ['not', 'all', 'any'];
+                    for (var i = 0; i < interfaces.length; i++) {
+                        if(interfaces[i] === 'not') is.not[option] = not(is[option]);
+                        if(interfaces[i] === 'all') is.all[option] = all(is[option]);
+                        if(interfaces[i] === 'any') is.any[option] = any(is[option]);
+                    }
                 }
             }
         }
     }
-    setMethodInterfaces();
+    setInterfaces();
 
     return is;
 }));
