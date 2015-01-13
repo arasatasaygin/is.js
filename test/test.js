@@ -389,3 +389,143 @@ describe("type checks", function() {
         });
     });
 });
+describe("presence checks", function() {
+    describe("is.empty", function() {
+        it("should return true if given array is empty", function() {
+            expect(is.empty([])).to.be.true;
+        });
+        it("should return false if given object is not empty", function() {
+            expect(is.empty({test: 'test'})).to.be.false;
+        });
+    });
+    describe("is.not.empty", function() {
+        it("should return false if given strinf is empty", function() {
+            expect(is.not.empty('')).to.be.false;
+        });
+        it("should return true if given array is not empty", function() {
+            expect(is.not.empty(['test'])).to.be.true;
+        });
+    });
+    describe("is.all.empty", function() {
+        it("should return true if given array, object and srting are empty", function() {
+            expect(is.all.empty([], '', {})).to.be.true;
+        });
+        it("should return false if any given element is not empty", function() {
+            expect(is.all.empty(['test'], {}, '')).to.be.false;
+        });
+    });
+    describe("is.existy", function() {
+        it("should return false if given value is null", function() {
+            expect(is.existy(null)).to.be.false;
+        });
+        it("should return false if given value is undefined", function() {
+            expect(is.existy(undefined)).to.be.false;
+        });
+        it("should return true if given value is not null or undefined", function() {
+            expect(is.existy('test')).to.be.true;
+        });
+    });
+    describe("is.not.existy", function() {
+        it("should return true if given value is null", function() {
+            expect(is.not.existy(null)).to.be.true;
+        });
+        it("should return true if given value is undefined", function() {
+            expect(is.not.existy(undefined)).to.be.true;
+        });
+        it("should return false if given value is not null or undefined", function() {
+            expect(is.not.existy('test')).to.be.false;
+        });
+    });
+    describe("is.all.existy", function() {
+        it("should return true if all given values are existy", function() {
+            expect(is.all.existy([], {}, 'test', true)).to.be.true;
+        });
+        it("should return false if given any value is not existy", function() {
+            expect(is.all.existy([], {}, 'test', true, undefined)).to.be.false;
+        });
+    });
+    describe("is.truthy", function() {
+        it("should return true if given value is existy and not false", function() {
+            expect(is.truthy('test')).to.be.true;
+        });
+        it("should return false if given value is not existy", function() {
+            expect(is.truthy(undefined)).to.be.false;
+        });
+        it("should return false if given value is false", function() {
+            expect(is.truthy(false)).to.be.false;
+        });
+    });
+    describe("is.not.truthy", function() {
+        it("should return false if given value is existy and not false", function() {
+            expect(is.not.truthy(true)).to.be.false;
+        });
+        it("should return true if given value is not existy", function() {
+            expect(is.not.truthy(undefined)).to.be.true;
+        });
+        it("should return true if given value is false", function() {
+            expect(is.not.truthy(false)).to.be.true;
+        });
+    });
+    describe("is.all.truthy", function() {
+        it("should return true if all given values are existy and not false", function() {
+            expect(is.all.truthy('test', [], true)).to.be.true;
+        });
+        it("should return false if any given value is not existy or false", function() {
+            expect(is.all.truthy('test', undefined)).to.be.false;
+        });
+    });
+    describe("is.falsy", function() {
+        it("should return false if given value is existy and not false", function() {
+            expect(is.falsy('test')).to.be.false;
+        });
+        it("should return true if given value is not existy", function() {
+            expect(is.falsy(undefined)).to.be.true;
+        });
+        it("should return true if given value is false", function() {
+            expect(is.falsy(false)).to.be.true;
+        });
+    });
+    describe("is.not.falsy", function() {
+        it("should return true if given value is existy and not false", function() {
+            expect(is.not.falsy(true)).to.be.true;
+        });
+        it("should return false if given value is not existy", function() {
+            expect(is.not.falsy(undefined)).to.be.false;
+        });
+        it("should return false if given value is false", function() {
+            expect(is.not.falsy(false)).to.be.false;
+        });
+    });
+    describe("is.all.falsy", function() {
+        it("should return true if all given values are falsy", function() {
+            expect(is.all.falsy(undefined, false)).to.be.true;
+        });
+        it("should return false if any given value is not falsy", function() {
+            expect(is.all.falsy(undefined, 'test')).to.be.false;
+        });
+    });
+    describe("is.space", function() {
+        it("should return false if given value is not string", function() {
+            expect(is.space(1)).to.be.false;
+        });
+        it("should return true if given value is space", function() {
+            expect(is.space(' ')).to.be.true;
+        });
+    });
+    describe("is.not.space", function() {
+        it("should return true if given value is not string", function() {
+            expect(is.not.space(null)).to.be.true;
+        });
+        it("should return false if given value is space", function() {
+            expect(is.not.space(' ')).to.be.false;
+        });
+    });
+    describe("is.all.space", function() {
+        it("should return false if all given values are not space", function() {
+            expect(is.all.space(' ', 'a')).to.be.false;
+        });
+        it("should return true if given values are space", function() {
+            expect(is.all.space(' ', ' ')).to.be.true;
+        });
+    });
+});
