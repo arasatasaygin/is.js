@@ -54,7 +54,7 @@
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
-            if(length === 1 && is.array(parameters)) {    // support array
+            if(length === 1 && is.array(parameters[0])) {    // support array
                 parameters = parameters[0];
                 length = parameters.length;
             }
@@ -74,7 +74,8 @@
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
-            if(length === 1 && is.array(parameters)) {    // support array
+            debugger;
+            if(length === 1 && is.array(parameters[0])) {    // support array
                 parameters = parameters[0];
                 length = parameters.length;
             }
@@ -676,7 +677,27 @@
         return true;
     };
 
+    // API
+    // Set 'not', 'all' and 'any' interfaces to methods based on their api property
+    /* -------------------------------------------------------------------------- */
+
+    function setInterfaces() {
+        var options = is;
+        for(var option in options) {
+            if(hasOwnProperty.call(options, option) && is.function(options[option])) {
+                var interfaces = options[option].api || ['not', 'all', 'any'];
+                for (var i = 0; i < interfaces.length; i++) {
+                    if(interfaces[i] === 'not') is.not[option] = not(is[option]);
+                    if(interfaces[i] === 'all') is.all[option] = all(is[option]);
+                    if(interfaces[i] === 'any') is.any[option] = any(is[option]);
+                }
+            }
+        }
+    }
+    setInterfaces();
+
     // Configuration methods
+    // Intentionally added after setInterfaces function
     /* -------------------------------------------------------------------------- */
 
     // set optional regexps to methods if you think they suck
@@ -696,24 +717,6 @@
        root.is = previousIs;
        return this;
     };
-
-    // helper function which sets 'not', 'all' and 'any' interfaces to methods based on their api property
-    function setInterfaces() {
-        var options = is;
-        for(var option in options) {
-            if(hasOwnProperty.call(options, option) && is.function(options[option])) {
-                if(option !== 'setRegexp' && option !== 'setNamespace') {    // configuration methods
-                    var interfaces = options[option].api || ['not', 'all', 'any'];
-                    for (var i = 0; i < interfaces.length; i++) {
-                        if(interfaces[i] === 'not') is.not[option] = not(is[option]);
-                        if(interfaces[i] === 'all') is.all[option] = all(is[option]);
-                        if(interfaces[i] === 'any') is.any[option] = any(is[option]);
-                    }
-                }
-            }
-        }
-    }
-    setInterfaces();
 
     return is;
 }));
