@@ -44,7 +44,7 @@ is.js
 - [x] email
 - [x] creditCard
 - [x] alphaNumeric
-- [x] time
+- [x] timeString
 - [x] dateString
 - [x] usZipCode
 - [x] caPostalCode
