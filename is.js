@@ -74,7 +74,6 @@
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
-            debugger;
             if(length === 1 && is.array(parameters[0])) {    // support array
                 parameters = parameters[0];
                 length = parameters.length;
@@ -250,21 +249,23 @@
     // above method does not support 'all' and 'any' interfaces
     is.above.api = ['not'];
 
-    // is a given number equal or higher than a minimum parameter?
-    is.least = not(is.above);
+    // is a given number above maximum parameter?
+    is.under = function(numb, max) {
+        return is.all.number(numb, max) && numb < max;
+    };
     // least method does not support 'all' and 'any' interfaces
-    is.least.api = ['not'];
+    is.under.api = ['not'];
 
     // is a given number within minimum and maximum parameters?
     is.within = function(numb, min, max) {
-        return is.all.number(numb, min) && numb > min && numb < max;
+        return is.all.number(numb, min, max) && numb > min && numb < max;
     };
     // within method does not support 'all' and 'any' interfaces
     is.within.api = ['not'];
 
     // is a given number decimal?
     is.decimal = function(numb) {
-        return is.number(numb) && numb % 1 === 0;
+        return is.number(numb) && numb % 1 !== 0;
     };
 
     // is a given number finite?
