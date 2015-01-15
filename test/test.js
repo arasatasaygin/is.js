@@ -1065,3 +1065,473 @@ describe("arithmetic checks", function() {
         });
     });
 });
+describe("regexp checks", function() {
+    describe("is.url", function() {
+        it("should return true if given value is url", function() {
+            expect(is.url('http://www.test.com')).to.be.true;
+        });
+        it("should return false if given value is not url", function() {
+            expect(is.url(1)).to.be.false;
+        });
+    });
+    describe("is.not.url", function() {
+        it("should return false if given value is url", function() {
+            expect(is.not.url('http://www.test.com')).to.be.false;
+        });
+        it("should return true if given value is not url", function() {
+            expect(is.not.url(1)).to.be.true;
+        });
+    });
+    describe("is.all.url", function() {
+        it("should return true if all given values are url", function() {
+            expect(is.all.url('http://www.test.com', 'http://www.test2.com')).to.be.true;
+            expect(is.all.url(['http://www.test.com', 'http://www.test2.com'])).to.be.true;
+        });
+        it("should return false if any given value is not url", function() {
+            expect(is.all.url('http://www.test.com', 1)).to.be.false;
+            expect(is.all.url(['http://www.test.com', 1])).to.be.false;
+        });
+    });
+    describe("is.any.url", function() {
+        it("should return true if any given value is url", function() {
+            expect(is.any.url('http://www.test.com', 1)).to.be.true;
+            expect(is.any.url(['http://www.test.com', 1])).to.be.true;
+        });
+        it("should return false if all given values are not url", function() {
+            expect(is.any.url(1, 2)).to.be.false;
+            expect(is.any.url([1, 2])).to.be.false;
+        });
+    });
+    describe("is.email", function() {
+        it("should return true if given value is email", function() {
+            expect(is.email('test@test.com')).to.be.true;
+        });
+        it("should return false if given value is not email", function() {
+            expect(is.email('test@test')).to.be.false;
+        });
+    });
+    describe("is.not.email", function() {
+        it("should return false if given value is email", function() {
+            expect(is.not.email('test@test.com')).to.be.false;
+        });
+        it("should return true if given value is not email", function() {
+            expect(is.not.email('test@test')).to.be.true;
+        });
+    });
+    describe("is.all.email", function() {
+        it("should return true if all given values are email", function() {
+            expect(is.all.email('test@test.com', 'test@test2.com')).to.be.true;
+            expect(is.all.email(['test@test.com', 'test@test2.com'])).to.be.true;
+        });
+        it("should return false if any given value is not email", function() {
+            expect(is.all.email('test@test.com', 'test@test')).to.be.false;
+            expect(is.all.email(['test@test.com', 'test@test'])).to.be.false;
+        });
+    });
+    describe("is.any.email", function() {
+        it("should return true if any given value is email", function() {
+            expect(is.any.email('test@test.com', 'test@test')).to.be.true;
+            expect(is.any.email(['test@test.com', 'test@test'])).to.be.true;
+        });
+        it("should return false if all given values are not email", function() {
+            expect(is.any.email('test@test', '.com')).to.be.false;
+            expect(is.any.email(['test@test', '.com'])).to.be.false;
+        });
+    });
+    describe("is.creditCard", function() {
+        it("should return true if given value is credit card", function() {
+            expect(is.creditCard(378282246310005)).to.be.true;
+        });
+        it("should return false if given value is not credit card", function() {
+            expect(is.creditCard(123)).to.be.false;
+        });
+    });
+    describe("is.not.creditCard", function() {
+        it("should return false if given value is credit card", function() {
+            expect(is.not.creditCard(378282246310005)).to.be.false;
+        });
+        it("should return true if given value is not credit card", function() {
+            expect(is.not.creditCard(123)).to.be.true;
+        });
+    });
+    describe("is.all.creditCard", function() {
+        it("should return true if all given values are credit card", function() {
+            expect(is.all.creditCard(378282246310005, 371449635398431)).to.be.true;
+            expect(is.all.creditCard([378282246310005, 371449635398431])).to.be.true;
+        });
+        it("should return false if any given value is not credit card", function() {
+            expect(is.all.creditCard(378282246310005, 123)).to.be.false;
+            expect(is.all.creditCard([378282246310005, 123])).to.be.false;
+        });
+    });
+    describe("is.any.creditCard", function() {
+        it("should return true if any given value is credit card", function() {
+            expect(is.any.creditCard(378282246310005, 123)).to.be.true;
+            expect(is.any.creditCard([378282246310005, 123])).to.be.true;
+        });
+        it("should return false if all given values are not credit card", function() {
+            expect(is.any.creditCard(123, 456)).to.be.false;
+            expect(is.any.creditCard([123, 456])).to.be.false;
+        });
+    });
+    describe("is.alphaNumeric", function() {
+        it("should return true if given value is al sha numeric", function() {
+            expect(is.alphaNumeric(123)).to.be.true;
+        });
+        it("should return false if given value is not al sha numeric", function() {
+            expect(is.alphaNumeric('*?')).to.be.false;
+        });
+    });
+    describe("is.not.alphaNumeric", function() {
+        it("should return false if given value is al sha numeric", function() {
+            expect(is.not.alphaNumeric('test')).to.be.false;
+        });
+        it("should return true if given value is not al sha numeric", function() {
+            expect(is.not.alphaNumeric('&%')).to.be.true;
+        });
+    });
+    describe("is.all.alphaNumeric", function() {
+        it("should return true if all given values are al sha numeric", function() {
+            expect(is.all.alphaNumeric(123, '123a')).to.be.true;
+            expect(is.all.alphaNumeric([123, '123a'])).to.be.true;
+        });
+        it("should return false if any given value is not al sha numeric", function() {
+            expect(is.all.alphaNumeric(123, '/(')).to.be.false;
+            expect(is.all.alphaNumeric([123, '/('])).to.be.false;
+        });
+    });
+    describe("is.any.alphaNumeric", function() {
+        it("should return true if any given value is al sha numeric", function() {
+            expect(is.any.alphaNumeric(123, 123)).to.be.true;
+            expect(is.any.alphaNumeric([123, 123])).to.be.true;
+        });
+        it("should return false if all given values are not al sha numeric", function() {
+            expect(is.any.alphaNumeric('=', '=')).to.be.false;
+            expect(is.any.alphaNumeric(['=', '='])).to.be.false;
+        });
+    });
+    describe("is.timeString", function() {
+        it("should return true if given value is time string", function() {
+            expect(is.timeString('13:45:30')).to.be.true;
+        });
+        it("should return false if given value is not time string", function() {
+            expect(is.timeString('12:12:90')).to.be.false;
+        });
+    });
+    describe("is.not.timeString", function() {
+        it("should return false if given value is time string", function() {
+            expect(is.not.timeString('13:45:30')).to.be.false;
+        });
+        it("should return true if given value is not time string", function() {
+            expect(is.not.timeString('12:12:90')).to.be.true;
+        });
+    });
+    describe("is.all.timeString", function() {
+        it("should return true if all given values are time string", function() {
+            expect(is.all.timeString('13:45:30', '10:15:20')).to.be.true;
+            expect(is.all.timeString(['13:45:30', '10:15:20'])).to.be.true;
+        });
+        it("should return false if any given value is not time string", function() {
+            expect(is.all.timeString('13:45:30', '12:12:90')).to.be.false;
+            expect(is.all.timeString(['13:45:30', '12:12:90'])).to.be.false;
+        });
+    });
+    describe("is.any.timeString", function() {
+        it("should return true if any given value is time string", function() {
+            expect(is.any.timeString('13:45:30', '12:12:90')).to.be.true;
+            expect(is.any.timeString(['13:45:30', '12:12:90'])).to.be.true;
+        });
+        it("should return false if all given values are not time string", function() {
+            expect(is.any.timeString('12:12:90', '12:12:66')).to.be.false;
+            expect(is.any.timeString(['12:12:90', '12:12:66'])).to.be.false;
+        });
+    });
+    describe("is.dateString", function() {
+        it("should return true if given value is date string", function() {
+            expect(is.dateString('11/11/2011')).to.be.true;
+        });
+        it("should return false if given value is not date string", function() {
+            expect(is.dateString('1')).to.be.false;
+        });
+    });
+    describe("is.not.dateString", function() {
+        it("should return false if given value is date string", function() {
+            expect(is.not.dateString('11/11/2011')).to.be.false;
+        });
+        it("should return true if given value is not date string", function() {
+            expect(is.not.dateString('1/5')).to.be.true;
+        });
+    });
+    describe("is.all.dateString", function() {
+        it("should return true if all given values are date string", function() {
+            expect(is.all.dateString('11/11/2011', '10/21/2012')).to.be.true;
+            expect(is.all.dateString(['11/11/2011', '10/21/2012'])).to.be.true;
+        });
+        it("should return false if any given value is not dateString", function() {
+            expect(is.all.dateString('11/11/2011', '1')).to.be.false;
+            expect(is.all.dateString(['11/11/2011', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.dateString", function() {
+        it("should return true if any given value is date string", function() {
+            expect(is.any.dateString('11/11/2011', '1')).to.be.true;
+            expect(is.any.dateString(['11/11/2011', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not date string", function() {
+            expect(is.any.dateString('11/11/1', '11/11/1')).to.be.false;
+            expect(is.any.dateString(['11/11/1', '11/11/1'])).to.be.false;
+        });
+    });
+    describe("is.usZipCode", function() {
+        it("should return true if given value is US zip code", function() {
+            expect(is.usZipCode('02201-1020')).to.be.true;
+        });
+        it("should return false if given value is not US zip code", function() {
+            expect(is.usZipCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.usZipCode", function() {
+        it("should return false if given value is US zip code", function() {
+            expect(is.not.usZipCode('02201-1020')).to.be.false;
+        });
+        it("should return true if given value is not US zip code", function() {
+            expect(is.not.usZipCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.usZipCode", function() {
+        it("should return true if all given values are US zip code", function() {
+            expect(is.all.usZipCode('02201-1020', '02201-2003')).to.be.true;
+            expect(is.all.usZipCode(['02201-1020', '02201-2003'])).to.be.true;
+        });
+        it("should return false if any given value is not US zip code", function() {
+            expect(is.all.usZipCode('02201-1020', '1')).to.be.false;
+            expect(is.all.usZipCode(['02201-1020', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.usZipCode", function() {
+        it("should return true if any given value is US zip code", function() {
+            expect(is.any.usZipCode('02201-1020', '1')).to.be.true;
+            expect(is.any.usZipCode(['02201-1020', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not US zip code", function() {
+            expect(is.any.usZipCode('1', '2')).to.be.false;
+            expect(is.any.usZipCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.caPostalCode", function() {
+        it("should return true if given value is Canada postal code", function() {
+            expect(is.caPostalCode('L8V3Y1')).to.be.true;
+        });
+        it("should return false if given value is not Canada postal code", function() {
+            expect(is.caPostalCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.caPostalCode", function() {
+        it("should return false if given value is Canada postal code", function() {
+            expect(is.not.caPostalCode('L8V3Y1')).to.be.false;
+        });
+        it("should return true if given value is not Canada postal code", function() {
+            expect(is.not.caPostalCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.caPostalCode", function() {
+        it("should return true if all given values are Canada postal code", function() {
+            expect(is.all.caPostalCode('L8V3Y1', 'V6Z1T0')).to.be.true;
+            expect(is.all.caPostalCode(['L8V3Y1', 'V6Z1T0'])).to.be.true;
+        });
+        it("should return false if any given value is not Canada postal code", function() {
+            expect(is.all.caPostalCode('L8V3Y1', '1')).to.be.false;
+            expect(is.all.caPostalCode(['L8V3Y1', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.caPostalCode", function() {
+        it("should return true if any given value is Canada postal code", function() {
+            expect(is.any.caPostalCode('L8V3Y1', '1')).to.be.true;
+            expect(is.any.caPostalCode(['L8V3Y1', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not Canada postal code", function() {
+            expect(is.any.caPostalCode('1', '2')).to.be.false;
+            expect(is.any.caPostalCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.ukPostCode", function() {
+        it("should return true if given value is UK post code", function() {
+            expect(is.ukPostCode('B184BJ')).to.be.true;
+        });
+        it("should return false if given value is not UK post code", function() {
+            expect(is.ukPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.ukPostCode", function() {
+        it("should return false if given value is UK post code", function() {
+            expect(is.not.ukPostCode('B184BJ')).to.be.false;
+        });
+        it("should return true if given value is not UK post code", function() {
+            expect(is.not.ukPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.ukPostCode", function() {
+        it("should return true if all given values are UK post code", function() {
+            expect(is.all.ukPostCode('B184BJ', 'M601NW')).to.be.true;
+            expect(is.all.ukPostCode(['B184BJ', 'M601NW'])).to.be.true;
+        });
+        it("should return false if any given value is not UK post code", function() {
+            expect(is.all.ukPostCode('B184BJ', '1')).to.be.false;
+            expect(is.all.ukPostCode(['B184BJ', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.ukPostCode", function() {
+        it("should return true if any given value is UK post code", function() {
+            expect(is.any.ukPostCode('B184BJ', '1')).to.be.true;
+            expect(is.any.ukPostCode(['B184BJ', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not UK post code", function() {
+            expect(is.any.ukPostCode('1', '2')).to.be.false;
+            expect(is.any.ukPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.nanpPhone", function() {
+        it("should return true if given value is nanpPhone", function() {
+            expect(is.nanpPhone('609-555-0175')).to.be.true;
+        });
+        it("should return false if given value is not nanpPhone", function() {
+            expect(is.nanpPhone('1')).to.be.false;
+        });
+    });
+    describe("is.not.nanpPhone", function() {
+        it("should return false if given value is nanpPhone", function() {
+            expect(is.not.nanpPhone('609-555-0175')).to.be.false;
+        });
+        it("should return true if given value is not nanpPhone", function() {
+            expect(is.not.nanpPhone('1')).to.be.true;
+        });
+    });
+    describe("is.all.nanpPhone", function() {
+        it("should return true if all given values are nanpPhone", function() {
+            expect(is.all.nanpPhone('609-555-0175', '609-555-0174')).to.be.true;
+            expect(is.all.nanpPhone(['609-555-0175', '609-555-0174'])).to.be.true;
+        });
+        it("should return false if any given value is not nanpPhone", function() {
+            expect(is.all.nanpPhone('609-555-0175', '1')).to.be.false;
+            expect(is.all.nanpPhone(['609-555-0175', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.nanpPhone", function() {
+        it("should return true if any given value is nanpPhone", function() {
+            expect(is.any.nanpPhone('609-555-0175', '1')).to.be.true;
+            expect(is.any.nanpPhone(['609-555-0175', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not nanpPhone", function() {
+            expect(is.any.nanpPhone('1', '2')).to.be.false;
+            expect(is.any.nanpPhone(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.eppPhone", function() {
+        it("should return true if given value is eppPhone", function() {
+            expect(is.eppPhone('+90.2322456789')).to.be.true;
+        });
+        it("should return false if given value is not eppPhone", function() {
+            expect(is.eppPhone('1')).to.be.false;
+        });
+    });
+    describe("is.not.eppPhone", function() {
+        it("should return false if given value is eppPhone", function() {
+            expect(is.not.eppPhone('+90.2322456789')).to.be.false;
+        });
+        it("should return true if given value is not eppPhone", function() {
+            expect(is.not.eppPhone('1')).to.be.true;
+        });
+    });
+    describe("is.all.eppPhone", function() {
+        it("should return true if all given values are eppPhone", function() {
+            expect(is.all.eppPhone('+90.2322456789', '+90.2322456799')).to.be.true;
+            expect(is.all.eppPhone(['+90.2322456789', '+90.2322456799'])).to.be.true;
+        });
+        it("should return false if any given value is not eppPhone", function() {
+            expect(is.all.eppPhone('+90.2322456789', '1')).to.be.false;
+            expect(is.all.eppPhone(['+90.2322456789', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.eppPhone", function() {
+        it("should return true if any given value is eppPhone", function() {
+            expect(is.any.eppPhone('+90.2322456789', '1')).to.be.true;
+            expect(is.any.eppPhone(['+90.2322456789', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not eppPhone", function() {
+            expect(is.any.eppPhone('1', '2')).to.be.false;
+            expect(is.any.eppPhone(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.socialSecurityNumber", function() {
+        it("should return true if given value is socialSecurityNumber", function() {
+            expect(is.socialSecurityNumber('017-90-7890')).to.be.true;
+        });
+        it("should return false if given value is not socialSecurityNumber", function() {
+            expect(is.socialSecurityNumber('1')).to.be.false;
+        });
+    });
+    describe("is.not.socialSecurityNumber", function() {
+        it("should return false if given value is socialSecurityNumber", function() {
+            expect(is.not.socialSecurityNumber('017-90-7890')).to.be.false;
+        });
+        it("should return true if given value is not socialSecurityNumber", function() {
+            expect(is.not.socialSecurityNumber('1')).to.be.true;
+        });
+    });
+    describe("is.all.socialSecurityNumber", function() {
+        it("should return true if all given values are socialSecurityNumber", function() {
+            expect(is.all.socialSecurityNumber('017-90-7890', '017-90-7891')).to.be.true;
+            expect(is.all.socialSecurityNumber(['017-90-7890', '017-90-7891'])).to.be.true;
+        });
+        it("should return false if any given value is not socialSecurityNumber", function() {
+            expect(is.all.socialSecurityNumber('017-90-7890', '1')).to.be.false;
+            expect(is.all.socialSecurityNumber(['017-90-7890', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.socialSecurityNumber", function() {
+        it("should return true if any given value is socialSecurityNumber", function() {
+            expect(is.any.socialSecurityNumber('017-90-7890', '1')).to.be.true;
+            expect(is.any.socialSecurityNumber(['017-90-7890', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not socialSecurityNumber", function() {
+            expect(is.any.socialSecurityNumber('1', '2')).to.be.false;
+            expect(is.any.socialSecurityNumber(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.affirmative", function() {
+        it("should return true if given value is affirmative", function() {
+            expect(is.affirmative('yes')).to.be.true;
+        });
+        it("should return false if given value is not affirmative", function() {
+            expect(is.affirmative('no')).to.be.false;
+        });
+    });
+    describe("is.not.affirmative", function() {
+        it("should return false if given value is affirmative", function() {
+            expect(is.not.affirmative('yes')).to.be.false;
+        });
+        it("should return true if given value is not affirmative", function() {
+            expect(is.not.affirmative('no')).to.be.true;
+        });
+    });
+    describe("is.all.affirmative", function() {
+        it("should return true if all given values are affirmative", function() {
+            expect(is.all.affirmative('yes', 'true')).to.be.true;
+            expect(is.all.affirmative(['yes', 'true'])).to.be.true;
+        });
+        it("should return false if any given value is not affirmative", function() {
+            expect(is.all.affirmative('yes', 'no')).to.be.false;
+            expect(is.all.affirmative(['yes', 'no'])).to.be.false;
+        });
+    });
+    describe("is.any.affirmative", function() {
+        it("should return true if any given value is affirmative", function() {
+            expect(is.any.affirmative('yes', 'no')).to.be.true;
+            expect(is.any.affirmative(['yes', 'no'])).to.be.true;
+        });
+        it("should return false if all given values are not affirmative", function() {
+            expect(is.any.affirmative('no', '2')).to.be.false;
+            expect(is.any.affirmative(['no', '2'])).to.be.false;
+        });
+    });
+});
