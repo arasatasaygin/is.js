@@ -32,7 +32,7 @@ is.js
 - [x] odd
 - [x] positive
 - [x] negative
-- [x] least
+- [x] under
 - [x] above
 - [x] within
 - [x] decimal
