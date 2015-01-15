@@ -34,6 +34,7 @@ describe("type checks", function() {
             };
             var arguments = getArguments('test');
             expect(is.all.arguments(arguments, arguments)).to.be.true;
+            expect(is.all.arguments([arguments, arguments])).to.be.true;
         });
         it("should return false if any passed parameter type is not arguments", function() {
             var notArguments = ['test'];
@@ -42,6 +43,7 @@ describe("type checks", function() {
             };
             var arguments = getArguments('test');
             expect(is.all.arguments(arguments, notArguments)).to.be.false;
+            expect(is.all.arguments([arguments, notArguments])).to.be.false;
         });
     });
     describe("is.any.arguments", function() {
@@ -51,9 +53,11 @@ describe("type checks", function() {
             };
             var arguments = getArguments('test');
             expect(is.any.arguments('test', arguments)).to.be.true;
+            expect(is.any.arguments(['test', arguments])).to.be.true;
         });
         it("should return false if all passed parameter types are not arguments", function() {
             expect(is.any.arguments('test', null)).to.be.false;
+            expect(is.any.arguments(['test', null])).to.be.false;
         });
     });
     describe("is.array", function() {
@@ -81,21 +85,25 @@ describe("type checks", function() {
             var array = ['test'];
             var array2 = ['test2'];
             expect(is.all.array(array, array2)).to.be.true;
+            expect(is.all.array([array, array2])).to.be.true;
         });
         it("should return false if any passed parameter type is not array", function() {
             var notArray = 'test';
             var array = ['test'];
             expect(is.all.array(notArray, array)).to.be.false;
+            expect(is.all.array([notArray, array])).to.be.false;
         });
     });
     describe("is.any.array", function() {
         it("should return true if any passed parameter type is array", function() {
             var array = ['test'];
             var array2 = ['test2'];
+            expect(is.any.array(array, array2, 'test')).to.be.true;
             expect(is.any.array([array, array2, 'test'])).to.be.true;
         });
         it("should return false if all passed parameter types are not array", function() {
             expect(is.any.array('test', 'test2')).to.be.false;
+            expect(is.any.array(['test', 'test2'])).to.be.false;
         });
     });
     describe("is.boolean", function() {
@@ -123,11 +131,13 @@ describe("type checks", function() {
             var bool1 = true;
             var bool2 = false;
             expect(is.all.boolean(bool1, bool2)).to.be.true;
+            expect(is.all.boolean([bool1, bool2])).to.be.true;
         });
         it("should return false if passed parameter type is boolean", function() {
             var bool = true;
             var notBool = 'test';
             expect(is.all.boolean(bool, notBool)).to.be.false;
+            expect(is.all.boolean([bool, notBool])).to.be.false;
         });
     });
     describe("is.any.boolean", function() {
@@ -135,9 +145,11 @@ describe("type checks", function() {
             var bool1 = true;
             var bool2 = false;
             expect(is.any.boolean(bool1, bool2, ['test'])).to.be.true;
+            expect(is.any.boolean([bool1, bool2, ['test']])).to.be.true;
         });
         it("should return false if all passed parameter types are not boolean", function() {
             expect(is.any.boolean('test', {}, null)).to.be.false;
+            expect(is.any.boolean(['test', {}, null])).to.be.false;
         });
     });
     describe("is.date", function() {
@@ -165,19 +177,23 @@ describe("type checks", function() {
             var myBirthDay = new Date('06-28-1986');
             var date = new Date();
             expect(is.all.date(myBirthDay, date)).to.be.true;
+            expect(is.all.date([myBirthDay, date])).to.be.true;
         });
         it("should return false if any passed parameter type is not date", function() {
             var date = new Date();
             var notDate = 'test';
             expect(is.all.date(date, notDate)).to.be.false;
+            expect(is.all.date([date, notDate])).to.be.false;
         });
     });
     describe("is.any.date", function() {
         it("should return true if any passed parameter type is date", function() {
             var date = new Date();
             expect(is.any.date('test', date)).to.be.true;
+            expect(is.any.date(['test', date])).to.be.true;
         });
         it("should return false if all passed parameter types are not date", function() {
+            expect(is.any.date('test', 1, undefined)).to.be.false;
             expect(is.any.date(['test', 1, undefined])).to.be.false;
         });
     });
@@ -206,19 +222,23 @@ describe("type checks", function() {
             var error1 = new Error();
             var error2 = new Error();
             expect(is.all.error(error1, error2)).to.be.true;
+            expect(is.all.error([error1, error2])).to.be.true;
         });
         it("should return false if any passed parameter type is not error", function() {
             var error = new Error();
             var notError = 'test';
             expect(is.all.error(error, notError)).to.be.false;
+            expect(is.all.error([error, notError])).to.be.false;
         });
     });
     describe("is.any.error", function() {
         it("should return true if any passed parameter type is error", function() {
             var error1 = new Error();
             expect(is.any.error(error1, new Date())).to.be.true;
+            expect(is.any.error([error1, new Date()])).to.be.true;
         });
         it("should return false if all passed parameter types are not error", function() {
+            expect(is.any.error(1, 2, 3)).to.be.false;
             expect(is.any.error([1, 2, 3])).to.be.false;
         });
     });
@@ -243,18 +263,22 @@ describe("type checks", function() {
     describe("is.all.function", function() {
         it("should return true if all passed parameter types are function", function() {
             expect(is.all.function(is.function, is.string)).to.be.true;
+            expect(is.all.function([is.function, is.string])).to.be.true;
         });
         it("should return false if any passed parameter type is not function", function() {
             var notFunction = 'test';
             expect(is.all.function(is.function, notFunction)).to.be.false;
+            expect(is.all.function([is.function, notFunction])).to.be.false;
         });
     });
     describe("is.any.function", function() {
         it("should return true if any passed parameter type is function", function() {
             expect(is.any.function(is.function, [])).to.be.true;
+            expect(is.any.function([is.function, []])).to.be.true;
         });
         it("should return false if all passed parameter types are not function", function() {
             expect(is.any.function(2, 'test')).to.be.false;
+            expect(is.any.function([2, 'test'])).to.be.false;
         });
     });
     describe("is.nan", function() {
@@ -278,18 +302,22 @@ describe("type checks", function() {
     describe("is.all.nan", function() {
         it("should return true if all passed parameter types are NaN", function() {
             expect(is.all.nan(NaN, NaN)).to.be.true;
+            expect(is.all.nan([NaN, NaN])).to.be.true;
         });
         it("should return false if any passed parameter type is not NaN", function() {
             var notNaN = 'test';
             expect(is.all.nan(NaN, notNaN)).to.be.false;
+            expect(is.all.nan([NaN, notNaN])).to.be.false;
         });
     });
     describe("is.any.nan", function() {
         it("should return true if any passed parameter type is NaN", function() {
             expect(is.any.nan(NaN, NaN, 'test')).to.be.true;
+            expect(is.any.nan([NaN, NaN, 'test'])).to.be.true;
         });
         it("should return false if all passed parameter types are not NaN", function() {
             expect(is.any.nan('test', new RegExp())).to.be.false;
+            expect(is.any.nan(['test', new RegExp()])).to.be.false;
         });
     });
     describe("is.null", function() {
@@ -313,18 +341,22 @@ describe("type checks", function() {
     describe("is.all.null", function() {
         it("should return true if all passed parameter types are null", function() {
             expect(is.all.null(null, null)).to.be.true;
+            expect(is.all.null([null, null])).to.be.true;
         });
         it("should return false if any passed parameter type is not null", function() {
             var notNull = 'test';
             expect(is.all.null(null, notNull)).to.be.false;
+            expect(is.all.null([null, notNull])).to.be.false;
         });
     });
     describe("is.any.null", function() {
         it("should return true if any passed parameter type is null", function() {
+            expect(is.any.null(null, null, undefined)).to.be.true;
             expect(is.any.null([null, null, undefined])).to.be.true;
         });
         it("should return false if all passed parameter types are not null", function() {
             expect(is.any.null(1, 2)).to.be.false;
+            expect(is.any.null([1, 2])).to.be.false;
         });
     });
     describe("is.number", function() {
@@ -348,18 +380,22 @@ describe("type checks", function() {
     describe("is.all.number", function() {
         it("should return true if all passed parameter types are number", function() {
             expect(is.all.number(1, 2)).to.be.true;
+            expect(is.all.number([1, 2])).to.be.true;
         });
         it("should return false if any passed parameter type is not number", function() {
             var notNumber = 'test';
             expect(is.all.number(1, notNumber)).to.be.false;
+            expect(is.all.number([1, notNumber])).to.be.false;
         });
     });
     describe("is.any.number", function() {
         it("should return true if any passed parameter type is number", function() {
             expect(is.any.number(1, 2, NaN)).to.be.true;
+            expect(is.any.number([1, 2, NaN])).to.be.true;
         });
         it("should return false if all passed parameter types are not number", function() {
             expect(is.any.number(null, 'test')).to.be.false;
+            expect(is.any.number([null, 'test'])).to.be.false;
         });
     });
     describe("is.object", function() {
@@ -383,18 +419,22 @@ describe("type checks", function() {
     describe("is.all.object", function() {
         it("should return true if all passed parameter types are object", function() {
             expect(is.all.object({}, {})).to.be.true;
+            expect(is.all.object([{}, {}])).to.be.true;
         });
         it("should return false if any passed parameter type is not object", function() {
             var notObject = 'test';
             expect(is.all.object({}, notObject)).to.be.false;
+            expect(is.all.object([{}, notObject])).to.be.false;
         });
     });
     describe("is.any.object", function() {
         it("should return true if any passed parameter type is object", function() {
             expect(is.any.object({}, {}, 'test')).to.be.true;
+            expect(is.any.object([{}, {}, 'test'])).to.be.true;
         });
         it("should return false if all passed parameter types are not object", function() {
             expect(is.any.object(1, 2, 3)).to.be.false;
+            expect(is.any.object([1, 2, 3])).to.be.false;
         });
     });
     describe("is.regexp", function() {
@@ -421,19 +461,23 @@ describe("type checks", function() {
         it("should return true if all passed parameter types are regexp", function() {
             var regexp = new RegExp();
             expect(is.all.regexp(regexp, /test/)).to.be.true;
+            expect(is.all.regexp([regexp, /test/])).to.be.true;
         });
         it("should return false if any passed parameter type is not regexp", function() {
             var notRegexp = 'test';
             var regexp = new RegExp();
             expect(is.all.regexp(regexp, notRegexp)).to.be.false;
+            expect(is.all.regexp([regexp, notRegexp])).to.be.false;
         });
     });
     describe("is.any.regexp", function() {
         it("should return true if any passed parameter type is regexp", function() {
             var regexp = new RegExp();
             expect(is.any.regexp(regexp, /test/, 1)).to.be.true;
+            expect(is.any.regexp([regexp, /test/, 1])).to.be.true;
         });
         it("should return false if any passed parameter type is not regexp", function() {
+            expect(is.any.regexp(1, 2)).to.be.false;
             expect(is.any.regexp([1, 2])).to.be.false;
         });
     });
@@ -474,17 +518,21 @@ describe("type checks", function() {
     describe("is.all.string", function() {
         it("should return true if all passed parameter types are string", function() {
             expect(is.all.string('test', 'test')).to.be.true;
+            expect(is.all.string(['test', 'test'])).to.be.true;
         });
         it("should return false if any passed parameter type is not string", function() {
             expect(is.all.string('test', 1)).to.be.false;
+            expect(is.all.string(['test', 1])).to.be.false;
         });
     });
     describe("is.any.string", function() {
         it("should return true if any passed parameter type is string", function() {
             expect(is.any.string('test', 1)).to.be.true;
+            expect(is.any.string(['test', 1])).to.be.true;
         });
         it("should return false if all passed parameter types are not string", function() {
             expect(is.any.string(null, 1)).to.be.false;
+            expect(is.any.string([null, 1])).to.be.false;
         });
     });
     describe("is.undefined", function() {
@@ -507,17 +555,21 @@ describe("type checks", function() {
     describe("is.all.undefined", function() {
         it("should return true if all passed parameter types are undefined", function() {
             expect(is.all.undefined(undefined, undefined)).to.be.true;
+            expect(is.all.undefined([undefined, undefined])).to.be.true;
         });
         it("should return false if any passed parameter type is not undefined", function() {
             expect(is.all.undefined(undefined, null)).to.be.false;
+            expect(is.all.undefined([undefined, null])).to.be.false;
         });
     });
     describe("is.any.undefined", function() {
         it("should return true if any passed parameter type is undefined", function() {
             expect(is.any.undefined('test', undefined)).to.be.true;
+            expect(is.any.undefined(['test', undefined])).to.be.true;
         });
         it("should return false if any passed parameter type is not undefined", function() {
             expect(is.any.undefined(2, null)).to.be.false;
+            expect(is.any.undefined([2, null])).to.be.false;
         });
     });
 });
@@ -541,9 +593,11 @@ describe("presence checks", function() {
     describe("is.all.empty", function() {
         it("should return true if given array, object and srting are empty", function() {
             expect(is.all.empty([], '', {})).to.be.true;
+            expect(is.all.empty([[], '', {}])).to.be.true;
         });
         it("should return false if any given element is not empty", function() {
             expect(is.all.empty(['test'], {}, '')).to.be.false;
+            expect(is.all.empty([['test'], {}, ''])).to.be.false;
         });
     });
     describe("is.existy", function() {
@@ -571,9 +625,11 @@ describe("presence checks", function() {
     describe("is.all.existy", function() {
         it("should return true if all given values are existy", function() {
             expect(is.all.existy([], {}, 'test', true)).to.be.true;
+            expect(is.all.existy([[], {}, 'test', true])).to.be.true;
         });
         it("should return false if given any value is not existy", function() {
             expect(is.all.existy([], {}, 'test', true, undefined)).to.be.false;
+            expect(is.all.existy([[], {}, 'test', true, undefined])).to.be.false;
         });
     });
     describe("is.truthy", function() {
@@ -601,9 +657,11 @@ describe("presence checks", function() {
     describe("is.all.truthy", function() {
         it("should return true if all given values are existy and not false", function() {
             expect(is.all.truthy('test', [], true)).to.be.true;
+            expect(is.all.truthy(['test', [], true])).to.be.true;
         });
         it("should return false if any given value is not existy or false", function() {
             expect(is.all.truthy('test', undefined)).to.be.false;
+            expect(is.all.truthy(['test', undefined])).to.be.false;
         });
     });
     describe("is.falsy", function() {
@@ -631,9 +689,11 @@ describe("presence checks", function() {
     describe("is.all.falsy", function() {
         it("should return true if all given values are falsy", function() {
             expect(is.all.falsy(undefined, false)).to.be.true;
+            expect(is.all.falsy([undefined, false])).to.be.true;
         });
         it("should return false if any given value is not falsy", function() {
             expect(is.all.falsy(undefined, 'test')).to.be.false;
+            expect(is.all.falsy([undefined, 'test'])).to.be.false;
         });
     });
     describe("is.space", function() {
@@ -655,9 +715,11 @@ describe("presence checks", function() {
     describe("is.all.space", function() {
         it("should return false if all given values are not space", function() {
             expect(is.all.space(' ', 'a')).to.be.false;
+            expect(is.all.space([' ', 'a'])).to.be.false;
         });
         it("should return true if given values are space", function() {
             expect(is.all.space(' ', ' ')).to.be.true;
+            expect(is.all.space([' ', ' '])).to.be.true;
         });
     });
 });
