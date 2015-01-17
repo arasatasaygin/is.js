@@ -1535,3 +1535,189 @@ describe("regexp checks", function() {
         });
     });
 });
+describe("string checks", function() {
+    describe("is.include", function() {
+        it("should return true if given string contains substring", function() {
+            expect(is.include('test.com', 't.com')).to.be.true;
+        });
+        it("should return false if given string does not contain substring", function() {
+            expect(is.include('test.com', 'nope')).to.be.false;
+        });
+    });
+    describe("is.not.include", function() {
+        it("should return false if given string contains substring", function() {
+            expect(is.not.include('test.com', 't.com')).to.be.false;
+        });
+        it("should return false if given string does not contain substring", function() {
+            expect(is.not.include('test.com', 'nope')).to.be.true;
+        });
+    });
+    describe("is.upperCase", function() {
+        it("should return true if given string is uppercase", function() {
+            expect(is.upperCase('TEST')).to.be.true;
+        });
+        it("should return false if given string is not uppercase", function() {
+            expect(is.upperCase('test')).to.be.false;
+        });
+    });
+    describe("is.not.upperCase", function() {
+        it("should return false if given string is uppercase", function() {
+            expect(is.not.upperCase('TEST')).to.be.false;
+        });
+        it("should return true if given string is not uppercase", function() {
+            expect(is.not.upperCase('test')).to.be.true;
+        });
+    });
+    describe("is.all.upperCase", function() {
+        it("should return true if all given strings are uppercase", function() {
+            expect(is.all.upperCase('TEST', 'FOO')).to.be.true;
+            expect(is.all.upperCase(['TEST', 'FOO', 'BAR'])).to.be.true;
+        });
+        it("should return false if any given string is not uppercase", function() {
+            expect(is.all.upperCase('TEST', 'foo')).to.be.false;
+            expect(is.all.upperCase(['TEST', 'FOO', 'bar'])).to.be.false;
+        });
+    });
+    describe("is.any.upperCase", function() {
+        it("should return true if any given strings is uppercase", function() {
+            expect(is.any.upperCase('test', 'FOO')).to.be.true;
+            expect(is.any.upperCase(['TEST', 'foo', 'BAR'])).to.be.true;
+        });
+        it("should return false if all given strings are not uppercase", function() {
+            expect(is.any.upperCase('test', 'foo')).to.be.false;
+            expect(is.any.upperCase(['test', 'foo', 'bar'])).to.be.false;
+        });
+    });
+    describe("is.lowerCase", function() {
+        it("should return true if given string is lowerCase", function() {
+            expect(is.lowerCase('test')).to.be.true;
+        });
+        it("should return false if given string is not lowerCase", function() {
+            expect(is.lowerCase('TEST')).to.be.false;
+        });
+    });
+    describe("is.not.lowerCase", function() {
+        it("should return false if given string is lowerCase", function() {
+            expect(is.not.lowerCase('test')).to.be.false;
+        });
+        it("should return true if given string is not lowerCase", function() {
+            expect(is.not.lowerCase('TEST')).to.be.true;
+        });
+    });
+    describe("is.all.lowerCase", function() {
+        it("should return true if all given strings are lowerCase", function() {
+            expect(is.all.lowerCase('test', 'foo')).to.be.true;
+            expect(is.all.lowerCase(['test', 'foo', 'bar'])).to.be.true;
+        });
+        it("should return false if any given string is not lowerCase", function() {
+            expect(is.all.lowerCase('test', 'FOO')).to.be.false;
+            expect(is.all.lowerCase(['test', 'foo', 'BAR'])).to.be.false;
+        });
+    });
+    describe("is.any.lowerCase", function() {
+        it("should return true if any given strings is lowerCase", function() {
+            expect(is.any.lowerCase('TEST', 'foo')).to.be.true;
+            expect(is.any.lowerCase(['test', 'FOO', 'bar'])).to.be.true;
+        });
+        it("should return false if all given strings are not lowerCase", function() {
+            expect(is.any.lowerCase('TEST', 'FOO')).to.be.false;
+            expect(is.any.lowerCase(['TEST', 'FOO', 'BAR'])).to.be.false;
+        });
+    });
+    describe("is.startWith", function() {
+        it("should return true if given string starts with substring", function() {
+            expect(is.startWith('test', 'te')).to.be.true;
+        });
+        it("should return false if given string does not start with substring", function() {
+            expect(is.startWith('test', 'st')).to.be.false;
+        });
+    });
+    describe("is.not.startWith", function() {
+        it("should return false if given string starts with substring", function() {
+            expect(is.not.startWith('test', 'te')).to.be.false;
+        });
+        it("should return true if given string does not start with substring", function() {
+            expect(is.not.startWith('test', 'st')).to.be.true;
+        });
+    });
+    describe("is.endWith", function() {
+        it("should return true if given string ends with substring", function() {
+            expect(is.endWith('test', 'st')).to.be.true;
+        });
+        it("should return false if given string does not end with substring", function() {
+            expect(is.endWith('test', 'te')).to.be.false;
+        });
+    });
+    describe("is.not.endWith", function() {
+        it("should return false if given string ends with substring", function() {
+            expect(is.not.endWith('test', 'st')).to.be.false;
+        });
+        it("should return true if given string does not end with substring", function() {
+            expect(is.not.endWith('test', 'te')).to.be.true;
+        });
+    });
+    describe("is.capitalized", function() {
+        it("should return true if given string is capitalized", function() {
+            expect(is.capitalized('Test')).to.be.true;
+        });
+        it("should return false if given string is not capitalized", function() {
+            expect(is.capitalized('test')).to.be.false;
+        });
+        it("should return true if given sentences' words are capitalized", function() {
+            expect(is.capitalized('Test Is Good')).to.be.true;
+        });
+        it("should return false if given sentences' words are not capitalized", function() {
+            expect(is.capitalized('Test is good')).to.be.false;
+        });
+    });
+    describe("is.not.capitalized", function() {
+        it("should return false if given string is capitalized", function() {
+            expect(is.not.capitalized('Test')).to.be.false;
+        });
+        it("should return true if given string is not capitalized", function() {
+            expect(is.not.capitalized('test')).to.be.true;
+        });
+        it("should return false if given sentences' words are capitalized", function() {
+            expect(is.not.capitalized('Test Is Good')).to.be.false;
+        });
+        it("should return false if given sentences' words are not capitalized", function() {
+            expect(is.not.capitalized('Test is good')).to.be.true;
+        });
+    });
+    describe("is.all.capitalized", function() {
+        it("should return true if all given strings are capitalized", function() {
+            expect(is.all.capitalized('Test', 'Is', 'Good')).to.be.true;
+            expect(is.all.capitalized(['Test', 'Is', 'Good'])).to.be.true;
+        });
+        it("should return false if any given string is not capitalized", function() {
+            expect(is.all.capitalized('Test', 'Is', 'good')).to.be.false;
+            expect(is.all.capitalized(['Test', 'Is', 'good'])).to.be.false;
+        });
+        it("should return true if given all sentences' words are capitalized", function() {
+            expect(is.all.capitalized('Test Is Good', 'Hypest Hype')).to.be.true;
+            expect(is.all.capitalized(['Test Is Good', 'Hypest Hype'])).to.be.true;
+        });
+        it("should return false if given any sentences' words are not capitalized", function() {
+            expect(is.all.capitalized('Test Is Good', 'chase and status')).to.be.false;
+            expect(is.all.capitalized(['Test Is Good', 'chase and status'])).to.be.false;
+        });
+    });
+    describe("is.any.capitalized", function() {
+        it("should return true if any given string is capitalized", function() {
+            expect(is.any.capitalized('Test', 'is', 'good')).to.be.true;
+            expect(is.any.capitalized(['Test', 'is', 'good'])).to.be.true;
+        });
+        it("should return false if all given strings are not capitalized", function() {
+            expect(is.any.capitalized('test', 'is', 'good')).to.be.false;
+            expect(is.any.capitalized(['test', 'is', 'good'])).to.be.false;
+        });
+        it("should return true if any given sentences' words are capitalized", function() {
+            expect(is.any.capitalized('Test Is Good', 'hypest hype')).to.be.true;
+            expect(is.any.capitalized(['Test Is Good', 'hypest hype'])).to.be.true;
+        });
+        it("should return false if all given sentences' words are not capitalized", function() {
+            expect(is.any.capitalized('test is good', 'chase and status')).to.be.false;
+            expect(is.any.capitalized(['test is good', 'chase and status'])).to.be.false;
+        });
+    });
+});
