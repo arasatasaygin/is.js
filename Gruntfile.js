@@ -8,17 +8,10 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            options: {
-                '-W083': true,
-            },
             src: ['is.js'],
         },
         mocha_phantomjs: {
-            options: {
-                // reporter: 'xunit',
-                // output: 'test/result.xml'
-            },
-            all: ['test/*.html']
+            src: ['test/*.html']
         }
     });
     grunt.loadNpmTasks('grunt-mocha-phantomjs');
