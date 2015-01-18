@@ -1175,37 +1175,37 @@ describe("regexp checks", function() {
         });
     });
     describe("is.alphaNumeric", function() {
-        it("should return true if given value is al sha numeric", function() {
+        it("should return true if given value is alpha numeric", function() {
             expect(is.alphaNumeric(123)).to.be.true;
         });
-        it("should return false if given value is not al sha numeric", function() {
+        it("should return false if given value is not alpha numeric", function() {
             expect(is.alphaNumeric('*?')).to.be.false;
         });
     });
     describe("is.not.alphaNumeric", function() {
-        it("should return false if given value is al sha numeric", function() {
+        it("should return false if given value is alpha numeric", function() {
             expect(is.not.alphaNumeric('test')).to.be.false;
         });
-        it("should return true if given value is not al sha numeric", function() {
+        it("should return true if given value is not alpha numeric", function() {
             expect(is.not.alphaNumeric('&%')).to.be.true;
         });
     });
     describe("is.all.alphaNumeric", function() {
-        it("should return true if all given values are al sha numeric", function() {
+        it("should return true if all given values are alpha numeric", function() {
             expect(is.all.alphaNumeric(123, '123a')).to.be.true;
             expect(is.all.alphaNumeric([123, '123a'])).to.be.true;
         });
-        it("should return false if any given value is not al sha numeric", function() {
+        it("should return false if any given value is not alpha numeric", function() {
             expect(is.all.alphaNumeric(123, '/(')).to.be.false;
             expect(is.all.alphaNumeric([123, '/('])).to.be.false;
         });
     });
     describe("is.any.alphaNumeric", function() {
-        it("should return true if any given value is al sha numeric", function() {
+        it("should return true if any given value is alpha numeric", function() {
             expect(is.any.alphaNumeric(123, 123)).to.be.true;
             expect(is.any.alphaNumeric([123, 123])).to.be.true;
         });
-        it("should return false if all given values are not al sha numeric", function() {
+        it("should return false if all given values are not alpha numeric", function() {
             expect(is.any.alphaNumeric('=', '=')).to.be.false;
             expect(is.any.alphaNumeric(['=', '='])).to.be.false;
         });
