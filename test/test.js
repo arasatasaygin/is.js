@@ -2738,3 +2738,53 @@ describe("object checks", function() {
         });
     });
 });
+describe("array checks", function() {
+    describe("is.sorted", function() {
+        it("should return true if given array is sorted", function() {
+            var arr = [1, 2, 3, 4, 5];
+            expect(is.sorted(arr)).to.be.true;
+        });
+        it("should return false if given array is not sorted", function() {
+            var arr = [1, 2, 3, 5, 4];
+            expect(is.sorted(arr)).to.be.false;
+        });
+    });
+    describe("is.not.sorted", function() {
+        it("should return false if given array is sorted", function() {
+            var arr = [1, 2, 3, 4, 5];
+            expect(is.not.sorted(arr)).to.be.false;
+        });
+        it("should return true if given array is not sorted", function() {
+            var arr = [1, 2, 3, 5, 4];
+            expect(is.not.sorted(arr)).to.be.true;
+        });
+    });
+    describe("is.all.sorted", function() {
+        it("should return true if all given arrays are sorted", function() {
+            var arr1 = [1, 2, 3, 4, 5];
+            var arr2 = [5, 6, 7, 8, 9];
+            expect(is.all.sorted(arr1, arr2)).to.be.true;
+            expect(is.all.sorted([arr1, arr2])).to.be.true;
+        });
+        it("should return false if any given array is not sorted", function() {
+            var arr1 = [1, 2, 3, 4, 5];
+            var arr2 = [5, 6, 7, 9, 8];
+            expect(is.all.sorted(arr1, arr2)).to.be.false;
+            expect(is.all.sorted([arr1, arr2])).to.be.false;
+        });
+    });
+    describe("is.any.sorted", function() {
+        it("should return true if any given array is sorted", function() {
+            var arr1 = [1, 2, 3, 4, 5];
+            var arr2 = [10, 6, 7, 8, 9];
+            expect(is.any.sorted(arr1, arr2)).to.be.true;
+            expect(is.any.sorted([arr1, arr2])).to.be.true;
+        });
+        it("should return false if all given arrays are not sorted", function() {
+            var arr1 = [6, 2, 3, 4, 5];
+            var arr2 = [9, 5, 6, 7, 8];
+            expect(is.any.sorted(arr1, arr2)).to.be.false;
+            expect(is.any.sorted([arr1, arr2])).to.be.false;
+        });
+    });
+});
