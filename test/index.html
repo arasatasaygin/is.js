@@ -16,6 +16,12 @@
     <!-- tests -->
     <script src="test.js"></script>
     <!-- /tests -->
-    <script>mocha.run();</script>
+    <script>
+        if (window.mochaPhantomJS) {
+            mochaPhantomJS.run();
+        } else {
+            mocha.run();
+        }
+    </script>
 </body>
 </html>
