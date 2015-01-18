@@ -106,17 +106,12 @@ is.js
 - [x] offline
 
 **Object checks:**
-- [ ] extensible
-- [ ] frozen
-- [ ] sealed
 - [x] propertyCount
 - [x] propertyDefined
 - [x] window
 
 **Array checks:**
 - [x] sorted
-- [ ] all
-- [ ] any
 
 **Configuration methods:**
 - [x] setRegexp
