@@ -2632,3 +2632,109 @@ describe("time checks", function() {
         });
     });
 });
+describe("object checks", function() {
+    describe("is.propertyCount", function() {
+        it("should return true if given count is objects' property count", function() {
+            var obj = {
+                test: 'test',
+                is: 'is',
+                good: 'good'
+            };
+            expect(is.propertyCount(obj, 3)).to.be.true;
+        });
+        it("should return false if given count is not objects' property count", function() {
+            var obj = {
+                test: 'test',
+                is: 'is'
+            };
+            expect(is.propertyCount(obj, 3)).to.be.false;
+        });
+    });
+    describe("is.not.propertyCount", function() {
+        it("should return false if given count is objects' property count", function() {
+            var obj = {
+                test: 'test',
+                is: 'is',
+                good: 'good'
+            };
+            expect(is.not.propertyCount(obj, 3)).to.be.false;
+        });
+        it("should return true if given count is not objects' property count", function() {
+            var obj = {
+                test: 'test',
+                is: 'is'
+            };
+            expect(is.not.propertyCount(obj, 3)).to.be.true;
+        });
+    });
+    describe("is.propertyDefined", function() {
+        it("should return true if given property is in objects", function() {
+            var obj = {
+                test: 'test',
+                is: 'is',
+                good: 'good'
+            };
+            expect(is.propertyDefined(obj, 'good')).to.be.true;
+        });
+        it("should return false if given property is not in objects", function() {
+            var obj = {
+                test: 'test',
+                is: 'is'
+            };
+            expect(is.propertyDefined(obj, 'good')).to.be.false;
+        });
+    });
+    describe("is.not.propertyDefined", function() {
+        it("should return false if given property is in objects", function() {
+            var obj = {
+                test: 'test',
+                is: 'is',
+                good: 'good'
+            };
+            expect(is.not.propertyDefined(obj, 'good')).to.be.false;
+        });
+        it("should return true if given property is not in objects", function() {
+            var obj = {
+                test: 'test',
+                is: 'is'
+            };
+            expect(is.not.propertyDefined(obj, 'good')).to.be.true;
+        });
+    });
+    describe("is.windowObject", function() {
+        it("should return true if given object is window object", function() {
+            expect(is.windowObject(window)).to.be.true;
+        });
+        it("should return false if given object is not window object", function() {
+            expect(is.windowObject({})).to.be.false;
+        });
+    });
+    describe("is.not.windowObject", function() {
+        it("should return false if given object is window object", function() {
+            expect(is.not.windowObject(window)).to.be.false;
+        });
+        it("should return true if given object is nor window object", function() {
+            expect(is.not.windowObject({})).to.be.true;
+        });
+    });
+    describe("is.all.windowObject", function() {
+        it("should return true if all given objects are window object", function() {
+            expect(is.all.windowObject(window, window)).to.be.true;
+            expect(is.all.windowObject([window, window])).to.be.true;
+        });
+        it("should return false if any given object is not window object", function() {
+            expect(is.all.windowObject({}, window)).to.be.false;
+            expect(is.all.windowObject([{}, window])).to.be.false;
+        });
+    });
+    describe("is.any.windowObject", function() {
+        it("should return true if any given object is window object", function() {
+            expect(is.any.windowObject(window, {})).to.be.true;
+            expect(is.any.windowObject([window, {}])).to.be.true;
+        });
+        it("should return false if all given objects are not window object", function() {
+            expect(is.any.windowObject({}, {})).to.be.false;
+            expect(is.any.windowObject([{}, {}])).to.be.false;
+        });
+    });
+});
