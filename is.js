@@ -398,24 +398,21 @@
 
     // is a given dates day equal given dayString parameter?
     is.day = function(obj, dayString) {
-        var now = new Date();
-        return is.date(obj) && dayString.toLowerCase() === days[now.getDay()];
+        return is.date(obj) && dayString.toLowerCase() === days[obj.getDay()];
     };
     // day method does not support 'all' and 'any' interfaces
     is.day.api = ['not'];
 
     // is a given dates month equal given monthString parameter?
     is.month = function(obj, monthString) {
-        var now = new Date();
-        return is.date(obj) && monthString.toLowerCase() === months[now.getMonth()];
+        return is.date(obj) && monthString.toLowerCase() === months[obj.getMonth()];
     };
     // month method does not support 'all' and 'any' interfaces
     is.month.api = ['not'];
 
     // is a given dates year equal given year parameter?
     is.year = function(obj, year) {
-        var now = new Date();
-        return is.date(obj) && is.number(year) && year === now.getFullYear();
+        return is.date(obj) && is.number(year) && year === obj.getFullYear();
     };
     // year method does not support 'all' and 'any' interfaces
     is.year.api = ['not'];
