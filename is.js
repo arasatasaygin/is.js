@@ -1,4 +1,4 @@
-// is.js 0.0.1
+// is.js 0.1.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
