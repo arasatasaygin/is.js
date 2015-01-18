@@ -662,7 +662,7 @@
 
     // is a given object window?
     // setInterval method is only available for window object
-    is.window = function(obj) {
+    is.windowObject = function(obj) {
         return typeof obj === 'object' && 'setInterval' in obj;
     };
 

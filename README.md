@@ -108,7 +108,7 @@ is.js
 **Object checks:**
 - [x] propertyCount
 - [x] propertyDefined
-- [x] window
+- [x] windowObject
 
 **Array checks:**
 - [x] sorted
