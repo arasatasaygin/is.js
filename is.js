@@ -283,7 +283,7 @@
 
     // eppPhone match extensible provisioning protocol format
     // nanpPhone match north american number plan format
-    // date match m/d/yy and mm/dd/yyyy, allowing any combination of one or two digits for the day and month, and two or four digits for the year
+    // dateString match m/d/yy and mm/dd/yyyy, allowing any combination of one or two digits for the day and month, and two or four digits for the year
     // time match hours, minutes, and seconds, 24-hour clock
     var regexps = {
         url: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
@@ -304,15 +304,13 @@
     // create regexp checks methods from 'regexp' object
     for(var regexp in regexps) {
         if(regexps.hasOwnProperty(regexp)) {
-            (function() {
-                var r = regexp;
-                is[r] = regexpCheck(r, regexps);
-            })();
+            var r = regexp;
+            regexpCheck(r, regexps);
         }
     }
 
-    function regexpCheck(regexp, regexps, value) {
-        return function(value) {
+    function regexpCheck(regexp, regexps) {
+        is[regexp] = function(value) {
             return regexps[regexp].test(value);
         };
     }
