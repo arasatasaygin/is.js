@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.0.1';
+    is.VERSION = '0.1.0';
 
     // define interfaces
     is.not = {};
