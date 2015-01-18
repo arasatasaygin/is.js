@@ -673,7 +673,7 @@
     is.sorted = function(arr) {
         if(is.not.array(arr)) return false;
         for(var i = 0; i < arr.length; i++) {
-            if(arr[i] > arr[i+1]) return false;
+            if(arr[i] > arr[i + 1]) return false;
         }
         return true;
     };
