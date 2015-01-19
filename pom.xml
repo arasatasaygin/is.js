@@ -15,7 +15,6 @@
     <properties>
         <sonar.language>js</sonar.language>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.javascript.jstestdriver.reportsPath>/test_driver</sonar.javascript.jstestdriver.reportsPath>
         <path.to.browser>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</path.to.browser>
     </properties>
 
@@ -33,7 +32,6 @@
                     <verbose>true</verbose>
                     <browser>${path.to.browser}</browser>
                     <port>9876</port>
-                    <testOutput>/test_driver</testOutput>
                     <runnerMode>DEBUG</runnerMode>
                 </configuration>
                 <executions>
