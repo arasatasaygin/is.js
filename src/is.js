@@ -715,6 +715,11 @@
     // Set 'not', 'all' and 'any' interfaces to methods based on their api property
     /* -------------------------------------------------------------------------- */
 
+    /**
+     * @todo Control flow statements "if", "for", "while", "switch" and "try" should not be nested too deeply
+     * Nested if, for, while, switch and try statements is a key ingredient for making what's known as "Spaghetti code".
+     * Such code is hard to read, refactor and therefore maintain.
+     */
     function setInterfaces() {
         var options = is;
         for (var option in options) {
