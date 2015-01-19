@@ -6,7 +6,7 @@
     <!--<version>[YOUR PROJECT VERSION]</version>-->
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>Refactor Turkey</groupId>
+    <groupId>RefactorTurkey</groupId>
     <artifactId>is.js</artifactId>
     <name>Is Js</name>
     <version>0.1.0</version>
