@@ -20,8 +20,8 @@
 
     <build>
         <directory>build</directory>
-        <sourceDirectory>/src</sourceDirectory>
-        <testSourceDirectory>/test</testSourceDirectory>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
 
         <plugins>
             <plugin>
