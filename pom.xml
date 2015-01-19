@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<project>
+    <!--<groupId>[YOUR.ORGANIZATION]</groupId>-->
+    <!--<artifactId>[YOUR.PROJECT]</artifactId>-->
+    <!--<name>[YOUR PROJECT NAME]</name>-->
+    <!--<version>[YOUR PROJECT VERSION]</version>-->
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>RefactorTurkey</groupId>
+    <artifactId>is.js</artifactId>
+    <name>Is Js</name>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <sonar.language>js</sonar.language>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <path.to.browser>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</path.to.browser>
+    </properties>
+
+    <build>
+        <directory>build</directory>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.jstd-maven-plugin</groupId>
+                <artifactId>jstd-maven-plugin</artifactId>
+                <version>1.3.5.1</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <browser>${path.to.browser}</browser>
+                    <port>9876</port>
+                    <runnerMode>DEBUG</runnerMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>run-tests</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+
+</project>
