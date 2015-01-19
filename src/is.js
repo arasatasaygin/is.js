@@ -70,7 +70,7 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if (results[i] === false) {
+                if (results[i]) {
                     return false;
                 }
             }
@@ -92,7 +92,7 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if (results[i] === true) {
+                if (results[i]) {
                     return true;
                 }
             }
@@ -115,7 +115,7 @@
 
     // is a given value Boolean?
     is.boolean = function (value) {
-        return value === true || value === false;
+        return value || !value;
     };
 
     // is a given value Date Object?
@@ -207,7 +207,7 @@
 
     // is a given value truthy?
     is.truthy = function (value) {
-        return is.existy(value) && value !== false;
+        return is.existy(value) && value;
     };
 
     // is a given value falsy?
