@@ -20,8 +20,8 @@
 
     <build>
         <directory>build</directory>
-        <sourceDirectory>/</sourceDirectory>
-        <testSourceDirectory>test</testSourceDirectory>
+        <sourceDirectory>/src</sourceDirectory>
+        <testSourceDirectory>/test</testSourceDirectory>
 
         <plugins>
             <plugin>
@@ -38,7 +38,7 @@
                     <execution>
                         <id>run-tests</id>
                         <goals>
-                            <goal>test</goal>
+                            <goal>/test</goal>
                         </goals>
                     </execution>
                 </executions>
