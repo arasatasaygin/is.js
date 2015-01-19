@@ -74,7 +74,7 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if (results[i]) {
+                if (!results[i]) {
                     return false;
                 }
             }
@@ -211,7 +211,7 @@
 
     // is a given value truthy?
     is.truthy = function (value) {
-        return is.existy(value) && value;
+        return is.existy(value) && !value;
     };
 
     // is a given value falsy?
