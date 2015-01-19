@@ -130,7 +130,7 @@
 
     // is a given value function?
     is.function = function (value) {    // fallback check is for IE
-        return toString.call(value) === '[object Function]' || typeof value == 'function';
+        return toString.call(value) === '[object Function]' || typeof value === 'function';
     };
 
     // is a given value NaN?
