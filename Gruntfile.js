@@ -8,7 +8,7 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            src: ['is.js'],
+            src: ['is.js']
         },
         mocha_phantomjs: {
             src: ['test/*.html']
