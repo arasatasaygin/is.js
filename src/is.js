@@ -61,6 +61,10 @@
         return function () {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
+
+            /**
+             * @todo Duplicated blocks line 87 to 97
+             */
             if (length === 1 && is.array(parameters[0])) {    // support array
                 parameters = parameters[0];
                 length = parameters.length;
