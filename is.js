@@ -63,7 +63,7 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if(results[i] === false) return false;
+                if(!results[i]) return false;
             }
             return true;
         };
@@ -83,7 +83,7 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if(results[i] === true) return true;
+                if(results[i]) return true;
             }
             return false;
         };
