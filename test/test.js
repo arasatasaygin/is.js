@@ -2181,172 +2181,150 @@ describe("time checks", function() {
     });
     describe("is.inLastWeek", function() {
         it("should return true if date is within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var saturday = new Date(date.setDate(date.getDate() - 1));
-            expect(is.inLastWeek(saturday)).to.be.true;
+            var date = new Date();
+            var twoDaysAgo = new Date(date.setDate(date.getDate() - 2));
+            expect(is.inLastWeek(twoDaysAgo)).to.be.true;
         });
         it("should return false if date is not within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            expect(is.inLastWeek(nextMonday)).to.be.false;
+            var date = new Date();
+            var eightDaysAgo = new Date(date.setDate(date.getDate() - 8));
+            expect(is.inLastWeek(eightDaysAgo)).to.be.false;
         });
     });
     describe("is.not.inLastWeek", function() {
         it("should return false if date is within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var saturday = new Date(date.setDate(date.getDate() - 1));
-            expect(is.not.inLastWeek(saturday)).to.be.false;
+            var date = new Date();
+            var twoDaysAgo = new Date(date.setDate(date.getDate() - 2));
+            expect(is.not.inLastWeek(twoDaysAgo)).to.be.false;
         });
         it("should return true if date is not within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            expect(is.not.inLastWeek(nextMonday)).to.be.true;
+            var date = new Date();
+            var eightDaysAgo = new Date(date.setDate(date.getDate() - 8));
+            expect(is.not.inLastWeek(eightDaysAgo)).to.be.true;
         });
     });
     describe("is.all.inLastWeek", function() {
         it("should return true if all given dates are within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var saturday = new Date(date.setDate(date.getDate() - 1));
-            var friday = new Date(date.setDate(date.getDate() - 1));
-            expect(is.all.inLastWeek(saturday, friday)).to.be.true;
-            expect(is.all.inLastWeek([saturday, friday])).to.be.true;
+            var date = new Date();
+            var twoDaysAgo = new Date(date.setDate(date.getDate() - 2));
+            var threeDaysAgo = new Date(date.setDate(date.getDate() - 1));
+            expect(is.all.inLastWeek(twoDaysAgo, threeDaysAgo)).to.be.true;
+            expect(is.all.inLastWeek([twoDaysAgo, threeDaysAgo])).to.be.true;
         });
         it("should return false if any given date is not within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            var saturday = new Date(date.setDate(date.getDate() - 2));
-            expect(is.all.inLastWeek(nextMonday, saturday)).to.be.false;
-            expect(is.all.inLastWeek([nextMonday, saturday])).to.be.false;
+            var date = new Date();
+            var twoDaysAgo = new Date(date.setDate(date.getDate() - 2));
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 8));
+            expect(is.all.inLastWeek(twoDaysAgo, tenDaysAgo)).to.be.false;
+            expect(is.all.inLastWeek([twoDaysAgo, tenDaysAgo])).to.be.false;
         });
     });
     describe("is.any.inLastWeek", function() {
         it("should return true if any given date is within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            var saturday = new Date(date.setDate(date.getDate() - 2));
-            expect(is.any.inLastWeek(nextMonday, saturday)).to.be.true;
-            expect(is.any.inLastWeek([nextMonday, saturday])).to.be.true;
+            var date = new Date();
+            var twoDaysAgo = new Date(date.setDate(date.getDate() - 2));
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 8));
+            expect(is.any.inLastWeek(twoDaysAgo, tenDaysAgo)).to.be.true;
+            expect(is.any.inLastWeek([twoDaysAgo, tenDaysAgo])).to.be.true;
         });
         it("should return false if all given dates are not within last week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            var nextTuesDay = new Date(date.setDate(date.getDate() + 1));
-            expect(is.any.inLastWeek(nextMonday, nextTuesDay)).to.be.false;
-            expect(is.any.inLastWeek([nextMonday, nextTuesDay])).to.be.false;
+            var date = new Date();
+            var eightDaysAgo = new Date(date.setDate(date.getDate() - 8));
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 2));
+            expect(is.any.inLastWeek(eightDaysAgo, tenDaysAgo)).to.be.false;
+            expect(is.any.inLastWeek([eightDaysAgo, tenDaysAgo])).to.be.false;
         });
     });
     describe("is.inLastMonth", function() {
         it("should return true if date is within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var aWeekAgo = new Date(date.setDate(date.getDate() - 7));
-            expect(is.inLastMonth(aWeekAgo)).to.be.true;
+            var date = new Date();
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            expect(is.inLastMonth(tenDaysAgo)).to.be.true;
         });
         it("should return false if date is not within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var future = new Date(date.setDate(date.getDate() + 1));
-            expect(is.inLastMonth(future)).to.be.false;
+            var date = new Date();
+            var fiftyDaysAgo = new Date(date.setDate(date.getDate() - 50));
+            expect(is.inLastMonth(fiftyDaysAgo)).to.be.false;
         });
     });
     describe("is.not.inLastMonth", function() {
         it("should return false if date is within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var twoWeeksAgo = new Date(date.setDate(date.getDate() - 14));
-            expect(is.not.inLastMonth(twoWeeksAgo)).to.be.false;
+            var date = new Date();
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            expect(is.not.inLastMonth(tenDaysAgo)).to.be.false;
         });
         it("should return true if date is not within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var future = new Date(date.setDate(date.getDate() + 1));
-            expect(is.not.inLastMonth(future)).to.be.true;
+            var date = new Date();
+            var fiftyDaysAgo = new Date(date.setDate(date.getDate() - 50));
+            expect(is.not.inLastMonth(fiftyDaysAgo)).to.be.true;
         });
     });
     describe("is.all.inLastMonth", function() {
         it("should return true if all given dates are within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var twoWeeksAgo = new Date(date.setDate(date.getDate() - 14));
-            var threeWeeksAgo = new Date(date.setDate(date.getDate() - 7));
-            expect(is.all.inLastMonth(twoWeeksAgo, threeWeeksAgo)).to.be.true;
-            expect(is.all.inLastMonth([twoWeeksAgo, threeWeeksAgo])).to.be.true;
+            var date = new Date();
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            var twentyDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            expect(is.all.inLastMonth(tenDaysAgo, twentyDaysAgo)).to.be.true;
+            expect(is.all.inLastMonth([tenDaysAgo, twentyDaysAgo])).to.be.true;
         });
         it("should return false if any given date is not within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var future = new Date(date.setDate(date.getDate() + 1));
-            var twoWeeksAgo = new Date(date.setDate(date.getDate() - 15));
-            expect(is.all.inLastMonth(future, twoWeeksAgo)).to.be.false;
-            expect(is.all.inLastMonth([future, twoWeeksAgo])).to.be.false;
+            var date = new Date();
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            var fiftyDaysAgo = new Date(date.setDate(date.getDate() - 40));
+            expect(is.all.inLastMonth(tenDaysAgo, fiftyDaysAgo)).to.be.false;
+            expect(is.all.inLastMonth([tenDaysAgo, fiftyDaysAgo])).to.be.false;
         });
     });
     describe("is.any.inLastMonth", function() {
         it("should return true if any given date is within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var future = new Date(date.setDate(date.getDate() + 1));
-            var yesterday = new Date(date.setDate(date.getDate() - 2));
-            expect(is.any.inLastMonth(future, yesterday)).to.be.true;
-            expect(is.any.inLastMonth([future, yesterday])).to.be.true;
+            var date = new Date();
+            var tenDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            var fiftyDaysAgo = new Date(date.setDate(date.getDate() - 40));
+            expect(is.any.inLastMonth(tenDaysAgo, fiftyDaysAgo)).to.be.true;
+            expect(is.any.inLastMonth([tenDaysAgo, fiftyDaysAgo])).to.be.true;
         });
         it("should return false if all given dates are not within last month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var future = new Date(date.setDate(date.getDate() + 1));
-            var alsoFuture = new Date(date.setDate(date.getDate() + 1));
-            expect(is.any.inLastMonth(future, alsoFuture)).to.be.false;
-            expect(is.any.inLastMonth([future, alsoFuture])).to.be.false;
+            var date = new Date();
+            var fortyDaysAgo = new Date(date.setDate(date.getDate() - 40));
+            var fiftyDaysAgo = new Date(date.setDate(date.getDate() - 10));
+            expect(is.any.inLastMonth(fortyDaysAgo, fiftyDaysAgo)).to.be.false;
+            expect(is.any.inLastMonth([fortyDaysAgo, fiftyDaysAgo])).to.be.false;
         });
     });
     describe("is.inLastYear", function() {
         it("should return true if date is within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var threeMonthsAgo = new Date(date.setMonth(date.getMonth() - 3));
             expect(is.inLastYear(threeMonthsAgo)).to.be.true;
         });
         it("should return false if date is not within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             expect(is.inLastYear(future)).to.be.false;
         });
     });
     describe("is.not.inLastYear", function() {
         it("should return false if date is within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var sixMonthsAgo = new Date(date.setMonth(date.getMonth() - 6));
             expect(is.not.inLastYear(sixMonthsAgo)).to.be.false;
         });
         it("should return true if date is not within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             expect(is.not.inLastYear(future)).to.be.true;
         });
     });
     describe("is.all.inLastYear", function() {
         it("should return true if all given dates are within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var twoMonthsAgo = new Date(date.setMonth(date.getMonth() - 2));
             var sixMonthsAgo = new Date(date.setMonth(date.getMonth() - 4));
             expect(is.all.inLastYear(twoMonthsAgo, sixMonthsAgo)).to.be.true;
             expect(is.all.inLastYear([twoMonthsAgo, sixMonthsAgo])).to.be.true;
         });
         it("should return false if any given date is not within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             var twoWeeksAgo = new Date(date.setDate(date.getDate() - 14));
             expect(is.all.inLastYear(future, twoWeeksAgo)).to.be.false;
@@ -2355,16 +2333,14 @@ describe("time checks", function() {
     });
     describe("is.any.inLastYear", function() {
         it("should return true if any given date is within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             var yesterday = new Date(date.setDate(date.getDate() - 2));
             expect(is.any.inLastYear(future, yesterday)).to.be.true;
             expect(is.any.inLastYear([future, yesterday])).to.be.true;
         });
         it("should return false if all given dates are not within last year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             var alsoFuture = new Date(date.setDate(date.getDate() + 1));
             expect(is.any.inLastYear(future, alsoFuture)).to.be.false;
@@ -2373,62 +2349,54 @@ describe("time checks", function() {
     });
     describe("is.inNextWeek", function() {
         it("should return true if date is within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            expect(is.inNextWeek(nextMonday)).to.be.true;
+            var date = new Date();
+            var future = new Date(date.setDate(date.getDate() + 1));
+            expect(is.inNextWeek(future)).to.be.true;
         });
         it("should return false if date is not within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var saturday = new Date(date.setDate(date.getDate() - 1));
-            expect(is.inNextWeek(saturday)).to.be.false;
+            var date = new Date();
+            var yesterday = new Date(date.setDate(date.getDate() - 1));
+            expect(is.inNextWeek(yesterday)).to.be.false;
         });
     });
     describe("is.not.inNextWeek", function() {
         it("should return false if date is within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            expect(is.not.inNextWeek(nextMonday)).to.be.false;
+            var date = new Date();
+            var future = new Date(date.setDate(date.getDate() + 1));
+            expect(is.not.inNextWeek(future)).to.be.false;
         });
         it("should return true if date is not within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var saturday = new Date(date.setDate(date.getDate() - 1));
-            expect(is.not.inNextWeek(saturday)).to.be.true;
+            var date = new Date();
+            var yesterday = new Date(date.setDate(date.getDate() - 1));
+            expect(is.not.inNextWeek(yesterday)).to.be.true;
         });
     });
     describe("is.all.inNextWeek", function() {
         it("should return true if all given dates are within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var twoDaysLater = new Date(date.setDate(date.getDate() + 2));
             var threeDaysLater = new Date(date.setDate(date.getDate() + 1));
             expect(is.all.inNextWeek(twoDaysLater, threeDaysLater)).to.be.true;
             expect(is.all.inNextWeek([twoDaysLater, threeDaysLater])).to.be.true;
         });
         it("should return false if any given date is not within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            var saturday = new Date(date.setDate(date.getDate() - 2));
-            expect(is.all.inNextWeek(nextMonday, saturday)).to.be.false;
-            expect(is.all.inNextWeek([nextMonday, saturday])).to.be.false;
+            var date = new Date();
+            var future = new Date(date.setDate(date.getDate() + 1));
+            var yesterday = new Date(date.setDate(date.getDate() - 2));
+            expect(is.all.inNextWeek(future, yesterday)).to.be.false;
+            expect(is.all.inNextWeek([future, yesterday])).to.be.false;
         });
     });
     describe("is.any.inNextWeek", function() {
         it("should return true if any given date is within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var nextMonday = new Date(date.setDate(date.getDate() + 1));
-            var saturday = new Date(date.setDate(date.getDate() - 2));
-            expect(is.any.inNextWeek(nextMonday, saturday)).to.be.true;
-            expect(is.any.inNextWeek([nextMonday, saturday])).to.be.true;
+            var date = new Date();
+            var future = new Date(date.setDate(date.getDate() + 1));
+            var yesterday = new Date(date.setDate(date.getDate() - 2));
+            expect(is.any.inNextWeek(future, yesterday)).to.be.true;
+            expect(is.any.inNextWeek([future, yesterday])).to.be.true;
         });
         it("should return false if all given dates are not within next week", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var twoDaysAgo = new Date(date.setDate(date.getDate() - 2));
             var threeDaysAgo = new Date(date.setDate(date.getDate() - 1));
             expect(is.any.inNextWeek(twoDaysAgo, threeDaysAgo)).to.be.false;
@@ -2437,62 +2405,54 @@ describe("time checks", function() {
     });
     describe("is.inNextMonth", function() {
         it("should return true if date is within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var aWeekLater = new Date(date.setDate(date.getDate() + 7));
             expect(is.inNextMonth(aWeekLater)).to.be.true;
         });
         it("should return false if date is not within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var past = new Date(date.setDate(date.getDate() - 1));
-            expect(is.inNextMonth(past)).to.be.false;
+            var date = new Date();
+            var yesterday = new Date(date.setDate(date.getDate() - 1));
+            expect(is.inNextMonth(yesterday)).to.be.false;
         });
     });
     describe("is.not.inNextMonth", function() {
         it("should return false if date is within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var twoWeeksLater = new Date(date.setDate(date.getDate() + 14));
             expect(is.not.inNextMonth(twoWeeksLater)).to.be.false;
         });
         it("should return true if date is not within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var past = new Date(date.setDate(date.getDate() - 1));
-            expect(is.not.inNextMonth(past)).to.be.true;
+            var date = new Date();
+            var yesterday = new Date(date.setDate(date.getDate() - 1));
+            expect(is.not.inNextMonth(yesterday)).to.be.true;
         });
     });
     describe("is.all.inNextMonth", function() {
         it("should return true if all given dates are within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var twoWeeksLater = new Date(date.setDate(date.getDate() + 14));
             var threeWeeksLater = new Date(date.setDate(date.getDate() + 7));
             expect(is.all.inNextMonth(twoWeeksLater, threeWeeksLater)).to.be.true;
             expect(is.all.inNextMonth([twoWeeksLater, threeWeeksLater])).to.be.true;
         });
         it("should return false if any given date is not within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
-            var past = new Date(date.setDate(date.getDate() - 1));
+            var date = new Date();
+            var yesterday = new Date(date.setDate(date.getDate() - 1));
             var twoWeeksLater = new Date(date.setDate(date.getDate() + 15));
-            expect(is.all.inNextMonth(past, twoWeeksLater)).to.be.false;
-            expect(is.all.inNextMonth([past, twoWeeksLater])).to.be.false;
+            expect(is.all.inNextMonth(yesterday, twoWeeksLater)).to.be.false;
+            expect(is.all.inNextMonth([yesterday, twoWeeksLater])).to.be.false;
         });
     });
     describe("is.any.inNextMonth", function() {
         it("should return true if any given date is within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             var yesterday = new Date(date.setDate(date.getDate() - 2));
             expect(is.any.inNextMonth(future, yesterday)).to.be.true;
             expect(is.any.inNextMonth([future, yesterday])).to.be.true;
         });
         it("should return false if all given dates are not within next month", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var past = new Date(date.setDate(date.getDate() - 1));
             var alsoPast = new Date(date.setDate(date.getDate() - 1));
             expect(is.any.inNextMonth(past, alsoPast)).to.be.false;
@@ -2501,62 +2461,54 @@ describe("time checks", function() {
     });
     describe("is.inNextYear", function() {
         it("should return true if date is within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var threeMonthsLater = new Date(date.setMonth(date.getMonth() + 3));
             expect(is.inNextYear(threeMonthsLater)).to.be.true;
         });
         it("should return false if date is not within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var past = new Date(date.setDate(date.getDate() - 1));
             expect(is.inNextYear(past)).to.be.false;
         });
     });
     describe("is.not.inNextYear", function() {
         it("should return false if date is within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var sixMonthsLater = new Date(date.setMonth(date.getMonth() + 6));
             expect(is.not.inNextYear(sixMonthsLater)).to.be.false;
         });
         it("should return true if date is not within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var past = new Date(date.setDate(date.getDate() - 1));
             expect(is.not.inNextYear(past)).to.be.true;
         });
     });
     describe("is.all.inNextYear", function() {
         it("should return true if all given dates are within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var twoMonthsLater = new Date(date.setMonth(date.getMonth() + 2));
             var sixMonthsLater = new Date(date.setMonth(date.getMonth() + 4));
             expect(is.all.inNextYear(twoMonthsLater, sixMonthsLater)).to.be.true;
             expect(is.all.inNextYear([twoMonthsLater, sixMonthsLater])).to.be.true;
         });
         it("should return false if any given date is not within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
-            var twoWeeksAgo = new Date(date.setDate(date.getDate() - 14));
+            var twoWeeksAgo = new Date(date.setDate(date.getDate() - 15));
             expect(is.all.inNextYear(future, twoWeeksAgo)).to.be.false;
             expect(is.all.inNextYear([future, twoWeeksAgo])).to.be.false;
         });
     });
     describe("is.any.inNextYear", function() {
         it("should return true if any given date is within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var future = new Date(date.setDate(date.getDate() + 1));
             var yesterday = new Date(date.setDate(date.getDate() - 2));
             expect(is.any.inNextYear(future, yesterday)).to.be.true;
             expect(is.any.inNextYear([future, yesterday])).to.be.true;
         });
         it("should return false if all given dates are not within next year", function() {
-            var time = 1421572235303;
-            var date = new Date(time);
+            var date = new Date();
             var past = new Date(date.setDate(date.getDate() - 100));
             var alsoPast = new Date(date.setDate(date.getDate() - 150));
             expect(is.any.inNextYear(past, alsoPast)).to.be.false;
