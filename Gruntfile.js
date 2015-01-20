@@ -8,14 +8,14 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            src: ['is.js'],
+            src: ['is.js']
         },
         mocha_phantomjs: {
             src: ['test/*.html']
         }
     });
     grunt.loadNpmTasks('grunt-mocha-phantomjs');
-    grunt.loadNpmTasks('grunt-contrib-uglify'); 
-    grunt.loadNpmTasks('grunt-contrib-jshint'); 
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.registerTask('default', ['uglify', 'jshint', 'mocha_phantomjs']);
 };
