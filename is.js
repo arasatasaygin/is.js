@@ -703,8 +703,8 @@
     // set optional regexps to methods if you think they suck
     is.setRegexp = function(regexp, regexpName) {
         for(var r in regexps) {
-            if (hasOwnProperty.call(regexps, r)) {
-                if(regexpName === r) regexps[r] = regexp;
+            if(hasOwnProperty.call(regexps, r) && (regexpName === r)) {
+                regexps[r] = regexp;
             }
         }
     };
