@@ -304,8 +304,7 @@
     // create regexp checks methods from 'regexp' object
     for(var regexp in regexps) {
         if(regexps.hasOwnProperty(regexp)) {
-            var r = regexp;
-            regexpCheck(r, regexps);
+            regexpCheck(regexp, regexps);
         }
     }
 
