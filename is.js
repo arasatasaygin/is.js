@@ -63,7 +63,9 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if(!results[i]) return false;
+                if(!results[i]) {
+                    return false;
+                }
             }
             return true;
         };
@@ -83,7 +85,9 @@
                 results.push(func.call(null, parameters[i]));
             }
             for (i = 0; i < results.length; i++) {
-                if(results[i]) return true;
+                if(results[i]) {
+                    return true;
+                }
             }
             return false;
         };
@@ -150,7 +154,9 @@
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value1, value2) {
-        if(is.nan(value1) || is.nan(value2)) return is.nan(value1) === is.nan(value2);
+        if(is.nan(value1) || is.nan(value2)) {
+            return is.nan(value1) === is.nan(value2);
+        }
         return toString.call(value1) === toString.call(value2);
     };
     // sameType method does not support 'all' and 'any' interfaces
@@ -217,10 +223,16 @@
     // TODO: Add object and array support
     is.equal = function(value1, value2) {
         // check 0 and -0 equity with Infinity and -Infinity
-        if(is.all.number(value1, value2)) return value1 === value2 && 1 / value1 === 1 / value2;
+        if(is.all.number(value1, value2)) {
+            return value1 === value2 && 1 / value1 === 1 / value2;
+        }
         // check regexps as strings too
-        if(is.all.string(value1, value2) || is.all.regexp(value1, value2)) return '' + value1 === '' + value2;
-        if(is.all.boolean(value1, value2)) return value1 === value2;
+        if(is.all.string(value1, value2) || is.all.regexp(value1, value2)) {
+            return '' + value1 === '' + value2;
+        }
+        if(is.all.boolean(value1, value2)) {
+            return value1 === value2;
+        }
         return false;
     };
     // equal method does not support 'all' and 'any' interfaces
@@ -350,7 +362,9 @@
 
     // is a given string or sentence capitalized?
     is.capitalized = function(str) {
-        if(is.not.string(str)) return false;
+        if(is.not.string(str)) {
+            return false;
+        }
         var words = str.split(' ');
         var capitalized = [];
         for(var i = 0; i < words.length; i++) {
@@ -427,7 +441,9 @@
 
     // is date within given range?
     is.inDateRange = function(obj, startObj, endObj) {
-        if(is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) return false;
+        if(is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) {
+            return false;
+        }
         var givenDate = obj.getTime();
         var start = startObj.getTime();
         var end = endObj.getTime();
@@ -509,7 +525,9 @@
         // is current browser internet explorer?
         // parameter is optional
         is.ie = function(version) {
-            if(!version) return /msie/i.test(userAgent);
+            if(!version) {
+                return /msie/i.test(userAgent);
+            }
             return new RegExp('msie ' + version).test(userAgent);
         };
         // ie method does not support 'all' and 'any' interfaces
@@ -638,8 +656,12 @@
 
     // has a given object got parameterized count property?
     is.propertyCount = function(obj, count) {
-        if(!is.object(obj) || !is.number(count)) return false;
-        if(Object.keys) return Object.keys(obj).length === count;
+        if(!is.object(obj) || !is.number(count)) {
+            return false;
+        }
+        if(Object.keys) {
+            return Object.keys(obj).length === count;
+        }
         var properties = [],
             property;
         for(property in obj) {
@@ -670,7 +692,9 @@
 
     // is a given array sorted?
     is.sorted = function(arr) {
-        if(is.not.array(arr)) return false;
+        if(is.not.array(arr)) {
+            return false;
+        }
         for(var i = 0; i < arr.length; i++) {
             if(arr[i] > arr[i + 1]) return false;
         }
@@ -687,9 +711,15 @@
             if(hasOwnProperty.call(options, option) && is.function(options[option])) {
                 var interfaces = options[option].api || ['not', 'all', 'any'];
                 for (var i = 0; i < interfaces.length; i++) {
-                    if(interfaces[i] === 'not') is.not[option] = not(is[option]);
-                    if(interfaces[i] === 'all') is.all[option] = all(is[option]);
-                    if(interfaces[i] === 'any') is.any[option] = any(is[option]);
+                    if(interfaces[i] === 'not') {
+                        is.not[option] = not(is[option]);
+                    }
+                    if(interfaces[i] === 'all') {
+                        is.all[option] = all(is[option]);
+                    }
+                    if(interfaces[i] === 'any') {
+                        is.any[option] = any(is[option]);
+                    }
                 }
             }
         }
