@@ -202,7 +202,7 @@
     // is a given value space?
     // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space =  function(value) {
-        if(is.string(value)) {        
+        if(is.string(value)) {
             var characterCode = value.charCodeAt(0);
             return (characterCode >  8 && characterCode < 14) || characterCode === 32;
         } else {
@@ -212,7 +212,7 @@
 
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
-    
+
     // are given values equal? supports numbers, strings, regexps, booleans
     // TODO: Add object and array support
     is.equal = function(value1, value2) {
@@ -317,7 +317,7 @@
 
     // String checks
     /* -------------------------------------------------------------------------- */
-    
+
     // is a given string inculde parameter substring?
     is.include = String.prototype.includes || function(str, substr) {
         return str.indexOf(substr) > -1;
@@ -365,7 +365,7 @@
 
     var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-    
+
     // is a given date indicate today?
     is.today = function(obj) {
         var now = new Date();
@@ -475,7 +475,7 @@
     is.quarterOfYear.api = ['not'];
 
     // is a given date in daylight saving time?
-    is.dayLightSavingTime = function(obj) {        
+    is.dayLightSavingTime = function(obj) {
         var january = new Date(obj.getFullYear(), 0, 1);
         var july = new Date(obj.getFullYear(), 6, 1);
         var stdTimezoneOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
@@ -484,7 +484,7 @@
 
     // Environment checks
     /* -------------------------------------------------------------------------- */
-    
+
     // check if library is used as a Node.js module
     if(typeof window !== 'undefined') {
 
@@ -715,8 +715,8 @@
     // preferredName.odd(3);
     // => true
     is.setNamespace = function() {
-       root.is = previousIs;
-       return this;
+        root.is = previousIs;
+        return this;
     };
 
     return is;
