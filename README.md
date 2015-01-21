@@ -36,6 +36,7 @@ is.js
 - [x] above
 - [x] within
 - [x] decimal
+- [x] integer
 - [x] finite
 - [x] infinite
 
@@ -102,6 +103,9 @@ is.js
 - [x] linux
 - [x] mac
 - [x] windows
+- [x] windowsPhone
+- [x] windowsTablet
+- [x] blackberry
 - [x] online
 - [x] offline
 
@@ -115,4 +119,4 @@ is.js
 
 **Configuration methods:**
 - [x] setRegexp
-- [x] setEscapeHatch
+- [x] setNamespace
