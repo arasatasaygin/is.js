@@ -1,5 +1,5 @@
 var expect = chai.expect;
- 
+
 describe("type checks", function() {
     describe("is.arguments", function() {
         it("should return true if passed parameter type is arguments", function() {
@@ -990,6 +990,42 @@ describe("arithmetic checks", function() {
         it("should return false if all given numbers are not decimal", function() {
             expect(is.any.decimal(1, 3, 5)).to.be.false;
             expect(is.any.decimal([1, 3, 5])).to.be.false;
+        });
+    });
+    describe("is.integer", function() {
+        it("should return true if given number is integer", function() {
+            expect(is.integer(4)).to.be.true;
+        });
+        it("should return false if given number is not integer", function() {
+            expect(is.integer(2.2)).to.be.false;
+        });
+    });
+    describe("is.not.integer", function() {
+        it("should return false if given number is integer", function() {
+            expect(is.not.integer(4)).to.be.false;
+        });
+        it("should return true if given number is not integer", function() {
+            expect(is.not.integer(2.2)).to.be.true;
+        });
+    });
+    describe("is.all.integer", function() {
+        it("should return true if all given numbers are integer", function() {
+            expect(is.all.integer(1, 3, 5)).to.be.true;
+            expect(is.all.integer([1, 3, 5])).to.be.true;
+        });
+        it("should return false if any given number is not integer", function() {
+            expect(is.all.integer(1, 3.4, 5)).to.be.false;
+            expect(is.all.integer([1, 3.4, 5])).to.be.false;
+        });
+    });
+    describe("is.any.integer", function() {
+        it("should return true if any given number is integer", function() {
+            expect(is.any.integer(1.2, 3, 5)).to.be.true;
+            expect(is.any.integer([1.2, 3, 5])).to.be.true;
+        });
+        it("should return false if all given numbers are not integer", function() {
+            expect(is.any.integer(1.2, 3.4, 5.6)).to.be.false;
+            expect(is.any.integer([1.2, 3.4, 5.6])).to.be.false;
         });
     });
     describe("is.finite", function() {
