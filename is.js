@@ -244,7 +244,9 @@
     };
 
     // is a given number odd?
-    is.odd = not(is.even);
+    is.odd = function(numb) {
+        return is.number(numb) && numb % 2 !== 0;
+    };
 
     // is a given number positive?
     is.positive = function(numb) {
@@ -252,7 +254,9 @@
     };
 
     // is a given number negative?
-    is.negative = not(is.positive);
+    is.negative = function(numb) {
+        return is.number(numb) && numb < 0;
+    };
 
     // is a given number above minimum parameter?
     is.above = function(numb, min) {
@@ -278,6 +282,11 @@
     // is a given number decimal?
     is.decimal = function(numb) {
         return is.number(numb) && numb % 1 !== 0;
+    };
+
+    // is a given number integer?
+    is.integer = function(numb) {
+        return is.number(numb) && numb % 1 === 0;
     };
 
     // is a given number finite?
