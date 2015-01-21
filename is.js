@@ -605,6 +605,13 @@
         // androidTablet method does not support 'all' and 'any' interfaces
         is.androidTablet.api = ['not'];
 
+        // is current device blackberry?
+        is.blackberry = function() {
+            return /blackberry/i.test(userAgent);
+        };
+        // blackberry method does not support 'all' and 'any' interfaces
+        is.blackberry.api = ['not'];
+
         // is current device mobile?
         is.mobile = function() {
             return is.iphone() || is.ipod() || is.androidPhone();
@@ -646,6 +653,20 @@
         };
         // windows method does not support 'all' and 'any' interfaces
         is.windows.api = ['not'];
+
+        // is current device windows phone?
+        is.windowsPhone = function() {
+            return is.windows() && /phone/i.test(userAgent);
+        };
+        // windowsPhone method does not support 'all' and 'any' interfaces
+        is.windowsPhone.api = ['not'];
+
+        // is current device windows tablet?
+        is.windowsTablet = function() {
+            return is.windows() && is.not.windowsPhone() && /touch/i.test(userAgent);
+        };
+        // windowsTablet method does not support 'all' and 'any' interfaces
+        is.windowsTablet.api = ['not'];
 
         // is current state online?
         is.online = function() {
