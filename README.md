@@ -23,8 +23,6 @@ is.js
 - [x] truthy
 - [x] falsy
 - [x] space
-- [ ] defined
-- [ ] global
 
 **Arithmetic checks:**
 - [x] equal
