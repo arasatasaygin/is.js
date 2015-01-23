@@ -1,6 +1,6 @@
 {
   "name": "is.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
