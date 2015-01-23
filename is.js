@@ -108,7 +108,7 @@
 
     // is a given value Boolean?
     is.boolean = function(value) {
-        return value === true || value === false;
+        return value === true || value === false || toString.call(value) === '[object Boolean]';
     };
 
     // is a given value Date Object?
@@ -143,7 +143,8 @@
 
     // is a given value object?
     is.object = function(value) {
-        return toString.call(value) === '[object Object]';
+        var type = typeof value;
+        return type === 'function' || type === 'object' && !!value;
     };
 
     // is a given value RegExp?
