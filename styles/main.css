@@ -48,3 +48,44 @@ body {
 .hidden {
     display: none;
 }
+
+/* content */
+.logo {
+    display: block;
+    margin: auto;
+    padding: 50px 0;
+}
+h1 {
+    font-size: 21px;
+    color: #4d4d4d;
+    font-weight: 400;
+    text-align: center;
+}
+.terminal {
+    width: 450px;
+    height: 70px;
+    color: #dddddd;
+    font-size: 21px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #2c3233;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.button {
+    display: block;
+    margin: 55px auto;
+    padding: 20px;
+    text-decoration: none;
+    height: 70px;
+    width: 265px;
+    text-align: center;
+    color: #2c3233;
+    font-size: 21px;
+    background-color: #ffffff;
+    border: 1px solid #2c3233;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
