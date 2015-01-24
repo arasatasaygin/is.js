@@ -1,0 +1,50 @@
+/* baseline */
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #a6afb2;
+}
+.content {
+    background-color: #ffffff;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+/* font weights */
+.thin {
+    font-weight: 100;
+}
+.light {
+    font-weight: 300;
+}
+.normal {
+    font-weight: 400;
+}
+.bold {
+    font-weight: 700;
+}
+.ultra-bold {
+    font-weight: 900;
+}
+
+/* helpers */
+.c {
+    clear: both;
+    height: 0;
+    overflow:hidden;
+}
+.fl {
+    float: left;
+    display: inline;
+}
+.fr {
+    float: right;
+    display: inline;
+}
+.hidden {
+    display: none;
+}
