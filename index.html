@@ -1527,7 +1527,7 @@ is.not.propertyDefined({}, 'nope');
                     <div id="windowObject">
                         <div class="method">
                             <h3>is.windowObject(value:window)</h3>
-                            <span>interface: not</span>
+                            <span>interface: not, all, any</span>
                         </div>
                         <p>Checks if given object is window object.</p>
                         <pre>
@@ -1549,6 +1549,36 @@ is.any.windowObject(window, {nope: 'nope'});
 
 // 'all' and 'any' interfaces can also take array parameter
 is.all.windowObject([window, {nope: 'nope'}]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2>array check</h2>
+                    <div id="sorted">
+                        <div class="method">
+                            <h3>is.sorted(value:array)</h3>
+                            <span>interface: not, all, any</span>
+                        </div>
+                        <p>Checks if given array is sorted.</p>
+                        <pre>
+                            <code>
+is.sorted([1, 2, 3]);
+=> true
+
+is.sorted([1, 2, 4, 3]);
+=> false
+
+is.not.sorted([5, 4, 3]);
+=> true
+
+is.all.sorted([1, 2], [3, 4]);
+=> true
+
+is.any.sorted([1, 2], [5, 4]);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.sorted([[1, 2], [5, 4]]);
 => false
                             </code>
                         </pre>
