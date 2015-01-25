@@ -23,20 +23,20 @@
                 <div class="col-5">
                     <h2>Type</h2>
                     <ul>
-                        <li><a href="#">arguments</a></li>
+                        <li><a href="#arguments">arguments</a></li>
                         <li><a href="#array">array</a></li>
-                        <li><a href="#">boolean</a></li>
-                        <li><a href="#">date</a></li>
-                        <li><a href="#">error</a></li>
-                        <li><a href="#">function</a></li>
-                        <li><a href="#">nan</a></li>
-                        <li><a href="#">null</a></li>
-                        <li><a href="#">number</a></li>
-                        <li><a href="#">object</a></li>
-                        <li><a href="#">regexp</a></li>
-                        <li><a href="#">sameType</a></li>
-                        <li><a href="#">string</a></li>
-                        <li><a href="#">undefined</a></li>
+                        <li><a href="#boolean">boolean</a></li>
+                        <li><a href="#date">date</a></li>
+                        <li><a href="#error">error</a></li>
+                        <li><a href="#function">function</a></li>
+                        <li><a href="#nan">nan</a></li>
+                        <li><a href="#null">null</a></li>
+                        <li><a href="#number">number</a></li>
+                        <li><a href="#object">object</a></li>
+                        <li><a href="#regexp">regexp</a></li>
+                        <li><a href="#string">string</a></li>
+                        <li><a href="#undefined">undefined</a></li>
+                        <li><a href="#sameType">sameType</a></li>
                     </ul>
                     <h2>Presence</h2>
                     <ul>
@@ -162,28 +162,368 @@
             <div class="documentation">
                 <div class="col-7">
                     <h2>type checks</h2>
+                    <div id="arguments">
+                        <div class="method">
+                            <h3>is.arguments(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is arguments.</p>
+                        <pre>
+                            <code>
+var getArguments = function() {
+    return arguments;
+};
+var arguments = getArguments();
+
+is.arguments(arguments);
+=> true
+
+is.not.arguments({foo: 'bar'});
+=> true
+
+is.all.arguments(arguments, 'bar');
+=> false
+
+is.any.arguments(['foo'], arguments);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.arguments([arguments, 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
                     <div id="array">
                         <div class="method">
                             <h3>is.array(value:any)</h3>
-                            <span class="fr">interfaces: not, all, any</span>
+                            <span>interfaces: not, all, any</span>
                         </div>
                         <p>Checks if given value type is array.</p>
                         <pre>
                             <code>
-is.array([’foo’, ‘bar’, ‘baz’]);
+is.array(['foo', 'bar', 'baz']);
 => true
 
-is.not.array({foo: ‘bar’});
+is.not.array({foo: 'bar'});
 => true
 
-is.all.array([’foo’], ‘bar’);
+is.all.array(['foo'], 'bar');
 => false
 
-is.any.array([’foo’], ‘bar’);
+is.any.array(['foo'], 'bar');
 => true
 
-// all and any interfaces can alse take array parameter
-is.all.array([[1, 2], ’foo’, ‘bar’]);
+// all and any interfaces can also take array parameter
+is.all.array([[1, 2], 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="boolean">
+                        <div class="method">
+                            <h3>is.boolean(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is boolean.</p>
+                        <pre>
+                            <code>
+is.boolean(true);
+=> true
+
+is.not.boolean({foo: 'bar'});
+=> true
+
+is.all.boolean(true, 'bar');
+=> false
+
+is.any.boolean(true, 'bar');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.boolean([true, 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="date">
+                        <div class="method">
+                            <h3>is.date(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is date.</p>
+                        <pre>
+                            <code>
+is.date(new Date());
+=> true
+
+is.not.date({foo: 'bar'});
+=> true
+
+is.all.date(new Date(), 'bar');
+=> false
+
+is.any.date(new Date(), 'bar');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.date([new Date(), 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="error">
+                        <div class="method">
+                            <h3>is.error(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is error.</p>
+                        <pre>
+                            <code>
+is.error(new Error());
+=> true
+
+is.not.error({foo: 'bar'});
+=> true
+
+is.all.error(new Error(), 'bar');
+=> false
+
+is.any.error(new Error(), 'bar');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.error([new Error(), 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="function">
+                        <div class="method">
+                            <h3>is.function(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is function.</p>
+                        <pre>
+                            <code>
+is.function(toString);
+=> true
+
+is.not.function({foo: 'bar'});
+=> true
+
+is.all.function(toString, 'bar');
+=> false
+
+is.any.function(toString, 'bar');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.function([toString, 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="nan">
+                        <div class="method">
+                            <h3>is.nan(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is NaN.</p>
+                        <pre>
+                            <code>
+is.nan(NaN);
+=> true
+
+is.not.nan(42);
+=> true
+
+is.all.nan(NaN, 1);
+=> false
+
+is.any.nan(NaN, 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.nan([NaN, 'foo', 1]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="null">
+                        <div class="method">
+                            <h3>is.null(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is null.</p>
+                        <pre>
+                            <code>
+is.null(null);
+=> true
+
+is.not.null(42);
+=> true
+
+is.all.null(null, 1);
+=> false
+
+is.any.null(null, 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.null([null, 'foo', 1]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="number">
+                        <div class="method">
+                            <h3>is.number(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is number.</p>
+                        <pre>
+                            <code>
+is.number(42);
+=> true
+
+is.not.number('42');
+=> true
+
+is.all.number('foo', 1);
+=> false
+
+is.any.number({}, 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.number([42, 'foo', 1]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="object">
+                        <div class="method">
+                            <h3>is.object(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is object.</p>
+                        <pre>
+                            <code>
+is.object({foo: 'bar'});
+=> true
+
+// functions are also returnin as true
+is.object(toString);
+=> true
+
+is.not.object('foo');
+=> true
+
+is.all.object({}, 1);
+=> false
+
+is.any.object({}, 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.object([{}, new Object()]);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="regexp">
+                        <div class="method">
+                            <h3>is.regexp(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is RegExp.</p>
+                        <pre>
+                            <code>
+is.regexp(/test/);
+=> true
+
+is.not.regexp(['foo']);
+=> true
+
+is.all.regexp(/test/, 1);
+=> false
+
+is.any.regexp(new RegExp('ab+c'), 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.regexp([{}, /test/]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="string">
+                        <div class="method">
+                            <h3>is.string(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is string.</p>
+                        <pre>
+                            <code>
+is.string('foo');
+=> true
+
+is.not.string(['foo']);
+=> true
+
+is.all.string('foo', 1);
+=> false
+
+is.any.string('foo', 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.string([{}, 'foo']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="undefined">
+                        <div class="method">
+                            <h3>is.undefined(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is undefined.</p>
+                        <pre>
+                            <code>
+is.undefined(undefined);
+=> true
+
+is.not.undefined(null);
+=> true
+
+is.all.undefined(undefined, 1);
+=> false
+
+is.any.undefined(undefined, 2);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.undefined([{}, undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="sameType">
+                        <div class="method">
+                            <h3>is.sameType(value:any)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given value types are same type.</p>
+                        <pre>
+                            <code>
+is.sameType(42, 7);
+=> true
+
+is.sameType(42, '7');
+=> false
+
+is.not.sameType(42, 7);
 => false
                             </code>
                         </pre>
@@ -192,6 +532,7 @@ is.all.array([[1, 2], ’foo’, ‘bar’]);
                 <div class="col-3"></div>
             </div>
         </div>
+        <script src="scripts/is.js"></script>
         <script src="scripts/main.js"></script>
         <!-- TODO: Google Analytics -->
     </body>

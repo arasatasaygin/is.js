@@ -142,6 +142,7 @@ h1 {
 .documentation .method span {
     font-size: 14px;
     line-height: 40px;
+    float: right;
 }
 .documentation h2 {
     font-size: 48px;
