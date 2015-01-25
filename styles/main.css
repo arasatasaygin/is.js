@@ -12,6 +12,7 @@ body {
     background-color: #ffffff;
     margin: 0 auto;
     width: 1000px;
+    overflow: auto;
 }
 
 /* font weights */
@@ -48,12 +49,15 @@ body {
 .hidden {
     display: none;
 }
+.col-5 {
+    width: 20%;
+    float: left
+}
 
 /* content */
 .logo {
     display: block;
-    margin: auto;
-    padding: 50px 0;
+    margin: 80px auto;
 }
 h1 {
     font-size: 21px;
@@ -75,7 +79,7 @@ h1 {
 }
 .button {
     display: block;
-    margin: 55px auto;
+    margin: 60px auto 80px auto;
     padding: 20px;
     text-decoration: none;
     height: 70px;
@@ -88,4 +92,36 @@ h1 {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+}
+.button:hover {
+    border: 2px solid #2c3233;
+    padding: 19px;
+}
+.method-list {
+    background-color: #2c3233;
+    padding: 40px 30px 40px 60px;
+    color: #ffffff;
+    overflow: auto;
+}
+.method-list h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f2f2f2;
+}
+.method-list ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.method-list ul li{
+    line-height: 1.4;
+}
+.method-list ul li a {
+    text-decoration: none;
+    color: #a6afb2;
+    font-size: 16px;
+    font-weight: 300;
+}
+.method-list ul li a:hover {
+    text-decoration: underline;
 }
