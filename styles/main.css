@@ -53,7 +53,14 @@ body {
     width: 20%;
     float: left
 }
-
+.col-7 {
+    width: 70%;
+    float: left
+}
+.col-3 {
+    width: 30%;
+    float: left;
+}
 /* content */
 .logo {
     display: block;
@@ -124,4 +131,37 @@ h1 {
 }
 .method-list ul li a:hover {
     text-decoration: underline;
+}
+.documentation {
+    overflow: auto;
+    padding-left: 40px;
+}
+.documentation .method {
+    margin-top: 50px;
+}
+.documentation .method span {
+    font-size: 14px;
+    line-height: 40px;
+}
+.documentation h2 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #f33e3e;
+    margin-bottom: 0;
+}
+.documentation h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3233;
+    margin: 0;
+    display: inline-block;
+}
+.documentation p {
+    margin-bottom: 25px;
+}
+.documentation pre {
+    font-size: 14px;
+    border-left: 1px solid #a6afb2;
+    background-color: #f2f2f2;
+    padding: 10px 20px 0 20px;
 }

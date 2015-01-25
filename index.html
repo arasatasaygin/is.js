@@ -24,7 +24,7 @@
                     <h2>Type</h2>
                     <ul>
                         <li><a href="#">arguments</a></li>
-                        <li><a href="#">array</a></li>
+                        <li><a href="#array">array</a></li>
                         <li><a href="#">boolean</a></li>
                         <li><a href="#">date</a></li>
                         <li><a href="#">error</a></li>
@@ -158,6 +158,38 @@
                         <li><a href="#">setNamespace</a></li>
                     </ul>
                 </div>
+            </div>
+            <div class="documentation">
+                <div class="col-7">
+                    <h2>type checks</h2>
+                    <div id="array">
+                        <div class="method">
+                            <h3>is.array(value:any)</h3>
+                            <span class="fr">interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value type is array.</p>
+                        <pre>
+                            <code>
+is.array([’foo’, ‘bar’, ‘baz’]);
+=> true
+
+is.not.array({foo: ‘bar’});
+=> true
+
+is.all.array([’foo’], ‘bar’);
+=> false
+
+is.any.array([’foo’], ‘bar’);
+=> true
+
+// all and any interfaces can alse take array parameter
+is.all.array([[1, 2], ’foo’, ‘bar’]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="col-3"></div>
             </div>
         </div>
         <script src="scripts/main.js"></script>
