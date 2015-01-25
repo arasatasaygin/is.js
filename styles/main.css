@@ -148,7 +148,7 @@ h1 {
     font-size: 48px;
     font-weight: 700;
     color: #f33e3e;
-    margin-bottom: 0;
+    margin: 50px 0 0 0;
 }
 .documentation h3 {
     font-size: 24px;

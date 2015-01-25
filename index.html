@@ -77,18 +77,18 @@
                 <div class="col-5">
                     <h2>Arithmetic</h2>
                     <ul>
-                        <li><a href="#">equal</a></li>
-                        <li><a href="#">even</a></li>
-                        <li><a href="#">odd</a></li>
-                        <li><a href="#">positive</a></li>
-                        <li><a href="#">negative</a></li>
-                        <li><a href="#">under</a></li>
-                        <li><a href="#">above</a></li>
-                        <li><a href="#">within</a></li>
-                        <li><a href="#">decimal</a></li>
-                        <li><a href="#">integer</a></li>
-                        <li><a href="#">finite</a></li>
-                        <li><a href="#">infinite</a></li>
+                        <li><a href="#equal">equal</a></li>
+                        <li><a href="#even">even</a></li>
+                        <li><a href="#odd">odd</a></li>
+                        <li><a href="#positive">positive</a></li>
+                        <li><a href="#negative">negative</a></li>
+                        <li><a href="#above">above</a></li>
+                        <li><a href="#under">under</a></li>
+                        <li><a href="#within">within</a></li>
+                        <li><a href="#decimal">decimal</a></li>
+                        <li><a href="#integer">integer</a></li>
+                        <li><a href="#finite">finite</a></li>
+                        <li><a href="#infinite">infinite</a></li>
                     </ul>
                     <h2>Object</h2>
                     <ul>
@@ -187,7 +187,7 @@ is.all.arguments(arguments, 'bar');
 is.any.arguments(['foo'], arguments);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.arguments([arguments, 'foo', 'bar']);
 => false
                             </code>
@@ -213,7 +213,7 @@ is.all.array(['foo'], 'bar');
 is.any.array(['foo'], 'bar');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.array([[1, 2], 'foo', 'bar']);
 => false
                             </code>
@@ -239,7 +239,7 @@ is.all.boolean(true, 'bar');
 is.any.boolean(true, 'bar');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.boolean([true, 'foo', 'bar']);
 => false
                             </code>
@@ -265,7 +265,7 @@ is.all.date(new Date(), 'bar');
 is.any.date(new Date(), 'bar');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.date([new Date(), 'foo', 'bar']);
 => false
                             </code>
@@ -291,7 +291,7 @@ is.all.error(new Error(), 'bar');
 is.any.error(new Error(), 'bar');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.error([new Error(), 'foo', 'bar']);
 => false
                             </code>
@@ -317,7 +317,7 @@ is.all.function(toString, 'bar');
 is.any.function(toString, 'bar');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.function([toString, 'foo', 'bar']);
 => false
                             </code>
@@ -343,7 +343,7 @@ is.all.nan(NaN, 1);
 is.any.nan(NaN, 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.nan([NaN, 'foo', 1]);
 => false
                             </code>
@@ -369,7 +369,7 @@ is.all.null(null, 1);
 is.any.null(null, 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.null([null, 'foo', 1]);
 => false
                             </code>
@@ -395,7 +395,7 @@ is.all.number('foo', 1);
 is.any.number({}, 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.number([42, 'foo', 1]);
 => false
                             </code>
@@ -425,7 +425,7 @@ is.all.object({}, 1);
 is.any.object({}, 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.object([{}, new Object()]);
 => true
                             </code>
@@ -451,7 +451,7 @@ is.all.regexp(/test/, 1);
 is.any.regexp(new RegExp('ab+c'), 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.regexp([{}, /test/]);
 => false
                             </code>
@@ -477,7 +477,7 @@ is.all.string('foo', 1);
 is.any.string('foo', 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.string([{}, 'foo']);
 => false
                             </code>
@@ -503,7 +503,7 @@ is.all.undefined(undefined, 1);
 is.any.undefined(undefined, 2);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.undefined([{}, undefined]);
 => false
                             </code>
@@ -555,7 +555,7 @@ is.all.empty('', {}, ['foo']);
 is.any.empty([], 42);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.empty([{}, 'foo']);
 => false
                             </code>
@@ -584,7 +584,7 @@ is.all.existy(null, ['foo']);
 is.any.existy(undefined, 42);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.existy([{}, 'foo']);
 => true
                             </code>
@@ -613,7 +613,7 @@ is.all.truthy(null, true);
 is.any.truthy(undefined, true);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.truthy([{}, true]);
 => true
                             </code>
@@ -642,7 +642,7 @@ is.all.falsy(null, false);
 is.any.falsy(undefined, true);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.falsy([false, true, undefined]);
 => false
                             </code>
@@ -671,7 +671,7 @@ is.all.space(' ', 'foo');
 is.any.space(' ', true);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.space([' ', 'foo', undefined]);
 => false
                             </code>
@@ -701,7 +701,7 @@ is.all.url('http://www.test.com', 'foo');
 is.any.url('http://www.test.com', true);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.url(['http://www.test.com', 'foo', undefined]);
 => false
                             </code>
@@ -730,7 +730,7 @@ is.all.email('test@test.com', 'foo');
 is.any.email('test@test.com', 'foo');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.email(['test@test.com', 'foo', undefined]);
 => false
                             </code>
@@ -759,7 +759,7 @@ is.all.creditCard(378282246310005, 123);
 is.any.creditCard(378282246310005, 123);
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.creditCard([378282246310005, 123, undefined]);
 => false
                             </code>
@@ -788,7 +788,7 @@ is.all.alphaNumeric('alphaNu3er1k', '*?');
 is.any.alphaNumeric('alphaNu3er1k', '*?');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.alphaNumeric(['alphaNu3er1k', '*?']);
 => false
                             </code>
@@ -817,7 +817,7 @@ is.all.timeString('13:45:30', '90:90:90');
 is.any.timeString('13:45:30', '90:90:90');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.timeString(['13:45:30', '90:90:90']);
 => false
                             </code>
@@ -846,7 +846,7 @@ is.all.dateString('11/11/2011', '90/11/2011');
 is.any.dateString('11/11/2011', '90/11/2011');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.dateString(['11/11/2011', '90/11/2011']);
 => false
                             </code>
@@ -875,7 +875,7 @@ is.all.usZipCode('02201-1020', '123');
 is.any.usZipCode('02201-1020', '123');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.usZipCode(['02201-1020', '123']);
 => false
                             </code>
@@ -904,7 +904,7 @@ is.all.caPostalCode('L8V3Y1', '123');
 is.any.caPostalCode('L8V3Y1', '123');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.caPostalCode(['L8V3Y1', '123']);
 => false
                             </code>
@@ -933,7 +933,7 @@ is.all.ukPostCode('B184BJ', '123');
 is.any.ukPostCode('B184BJ', '123');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.ukPostCode(['B184BJ', '123']);
 => false
                             </code>
@@ -962,7 +962,7 @@ is.all.nanpPhone('609-555-0175', '123');
 is.any.nanpPhone('609-555-0175', '123');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.nanpPhone(['609-555-0175', '123']);
 => false
                             </code>
@@ -991,7 +991,7 @@ is.all.eppPhone('+90.2322456789', '123');
 is.any.eppPhone('+90.2322456789', '123');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.eppPhone(['+90.2322456789', '123']);
 => false
                             </code>
@@ -1020,7 +1020,7 @@ is.all.socialSecurityNumber('017-90-7890', '123');
 is.any.socialSecurityNumber('017-90-7890', '123');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.socialSecurityNumber(['017-90-7890', '123']);
 => false
                             </code>
@@ -1049,7 +1049,7 @@ is.all.affirmative('yes', 'no');
 is.any.affirmative('yes', 'no');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
 => true
                             </code>
@@ -1098,7 +1098,7 @@ is.all.upperCase('YEAP', 'nope');
 is.any.upperCase('YEAP', 'nope');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.upperCase(['YEAP', 'ALL UPPERCASE']);
 => true
                             </code>
@@ -1127,7 +1127,7 @@ is.all.lowerCase('yeap', 'NOPE');
 is.any.lowerCase('yeap', 'NOPE');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.lowerCase(['yeap', 'all lowercase']);
 => true
                             </code>
@@ -1136,7 +1136,7 @@ is.all.lowerCase(['yeap', 'all lowercase']);
                     <div id="startWith">
                         <div class="method">
                             <h3>is.startWith(value:string, value:substring)</h3>
-                            <span>interfaces: not</span>
+                            <span>interface: not</span>
                         </div>
                         <p>Checks if given string starts with substring.</p>
                         <pre>
@@ -1200,12 +1200,292 @@ is.all.capitalized('Yeap', 'All', 'Capitalized');
 is.any.capitalized('Yeap', 'some', 'Capitalized');
 => true
 
-// all and any interfaces can also take array parameter
+// 'all' and 'any' interfaces can also take array parameter
 is.all.upperCase(['Nope', 'not']);
 => false
                             </code>
                         </pre>
                     </div>
+                    <h2>arithmetic checks</h2>
+                    <div id="equal">
+                        <div class="method">
+                            <h3>is.equal(value:number, string, boolean, value:number, string, boolean)</h3>
+                            <span>interfaces: not</span>
+                        </div>
+                        <p>Checks if given values are equal.</p>
+                        <pre>
+                            <code>
+is.equal(42, 40 + 2);
+=> true
+
+is.equal('yeap', 'yeap');
+=> true
+
+is.equal(true, true);
+=> true
+
+is.not.equal('yeap', 'nope');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="even">
+                        <div class="method">
+                            <h3>is.even(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is even.</p>
+                        <pre>
+                            <code>
+is.even(42);
+=> true
+
+is.not.even(41);
+=> true
+
+is.all.even(40, 42, 44);
+=> true
+
+is.any.even(39, 42, 43);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.even([40, 42, 43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="odd">
+                        <div class="method">
+                            <h3>is.odd(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is odd.</p>
+                        <pre>
+                            <code>
+is.odd(41);
+=> true
+
+is.not.odd(42);
+=> true
+
+is.all.odd(39, 41, 43);
+=> true
+
+is.any.odd(39, 42, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.odd([40, 42, 43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="positive">
+                        <div class="method">
+                            <h3>is.positive(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is positive.</p>
+                        <pre>
+                            <code>
+is.positive(41);
+=> true
+
+is.not.positive(-42);
+=> true
+
+is.all.positive(39, 41, 43);
+=> true
+
+is.any.positive(-39, 42, -44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.positive([40, 42, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="negative">
+                        <div class="method">
+                            <h3>is.negative(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is negative.</p>
+                        <pre>
+                            <code>
+is.negative(-41);
+=> true
+
+is.not.negative(42);
+=> true
+
+is.all.negative(-39, -41, -43);
+=> true
+
+is.any.negative(-39, 42, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.negative([40, 42, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="above">
+                        <div class="method">
+                            <h3>is.above(value:number, min)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given value is above minimum value.</p>
+                        <pre>
+                            <code>
+is.above(41, 30);
+=> true
+
+is.not.above(42, 50);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="under">
+                        <div class="method">
+                            <h3>is.under(value:number, min)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given value is under maximum value.</p>
+                        <pre>
+                            <code>
+is.under(30, 35);
+=> true
+
+is.not.under(42, 30);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="within">
+                        <div class="method">
+                            <h3>is.within(value:number, min, max)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given value is within minimum and maximum values.</p>
+                        <pre>
+                            <code>
+is.within(30, 20, 40);
+=> true
+
+is.not.within(40, 30, 35);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="decimal">
+                        <div class="method">
+                            <h3>is.decimal(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is decimal.</p>
+                        <pre>
+                            <code>
+is.decimal(41.5);
+=> true
+
+is.not.decimal(42);
+=> true
+
+is.all.decimal(39.5, 41.5, -43.5);
+=> true
+
+is.any.decimal(-39, 42.5, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.decimal([40, 42.5, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="integer">
+                        <div class="method">
+                            <h3>is.integer(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is integer.</p>
+                        <pre>
+                            <code>
+is.integer(41);
+=> true
+
+is.not.integer(42.5);
+=> true
+
+is.all.integer(39, 41, -43);
+=> true
+
+is.any.integer(-39, 42.5, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.integer([40, 42.5, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="finite">
+                        <div class="method">
+                            <h3>is.finite(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is finite.</p>
+                        <pre>
+                            <code>
+is.finite(41);
+=> true
+
+is.not.finite(42 / 0);
+=> true
+
+is.all.finite(39, 41, -43);
+=> true
+
+is.any.finite(-39, Infinity, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.finite([Infinity, -Infinity, 42.5]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="infinite">
+                        <div class="method">
+                            <h3>is.infinite(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is infinite.</p>
+                        <pre>
+                            <code>
+is.infinite(Infinity);
+=> true
+
+is.not.infinite(42);
+=> true
+
+is.all.infinite(Infinity, -Infinity, -43 / 0);
+=> true
+
+is.any.infinite(-39, Infinity, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.infinite([Infinity, -Infinity, 42.5]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+
                 </div>
                 <div class="col-3"></div>
             </div>
