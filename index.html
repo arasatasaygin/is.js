@@ -66,12 +66,12 @@
                     </ul>
                     <h2>String</h2>
                     <ul>
-                        <li><a href="#">include</a></li>
-                        <li><a href="#">upperCase</a></li>
-                        <li><a href="#">lowerCase</a></li>
-                        <li><a href="#">startWith</a></li>
-                        <li><a href="#">endWith</a></li>
-                        <li><a href="#">capitalized</a></li>
+                        <li><a href="#include">include</a></li>
+                        <li><a href="#upperCase">upperCase</a></li>
+                        <li><a href="#lowerCase">lowerCase</a></li>
+                        <li><a href="#startWith">startWith</a></li>
+                        <li><a href="#endWith">endWith</a></li>
+                        <li><a href="#capitalized">capitalized</a></li>
                     </ul>
                 </div>
                 <div class="col-5">
@@ -511,7 +511,7 @@ is.all.undefined([{}, undefined]);
                     </div>
                     <div id="sameType">
                         <div class="method">
-                            <h3>is.sameType(value:any)</h3>
+                            <h3>is.sameType(value:any, value:any)</h3>
                             <span>interface: not</span>
                         </div>
                         <p>Checks if given value types are same type.</p>
@@ -1052,6 +1052,157 @@ is.any.affirmative('yes', 'no');
 // all and any interfaces can also take array parameter
 is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
 => true
+                            </code>
+                        </pre>
+                    </div>
+                    <h2>string checks</h2>
+                    <div id="include">
+                        <div class="method">
+                            <h3>is.include(value:string, value:substring)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given string contains a substring.</p>
+                        <pre>
+                            <code>
+is.include('Some text goes here', 'text');
+=> true
+
+is.include('test', 'text');
+=> false
+
+is.not.include('test', 'text');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="upperCase">
+                        <div class="method">
+                            <h3>is.upperCase(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given string is UPPERCASE.</p>
+                        <pre>
+                            <code>
+is.upperCase('YEAP');
+=> true
+
+is.upperCase('nope');
+=> false
+
+is.not.upperCase('Nope');
+=> true
+
+is.all.upperCase('YEAP', 'nope');
+=> false
+
+is.any.upperCase('YEAP', 'nope');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.upperCase(['YEAP', 'ALL UPPERCASE']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="lowerCase">
+                        <div class="method">
+                            <h3>is.lowerCase(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given string is lowercase.</p>
+                        <pre>
+                            <code>
+is.lowerCase('yeap');
+=> true
+
+is.lowerCase('NOPE');
+=> false
+
+is.not.lowerCase('Nope');
+=> true
+
+is.all.lowerCase('yeap', 'NOPE');
+=> false
+
+is.any.lowerCase('yeap', 'NOPE');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.lowerCase(['yeap', 'all lowercase']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="startWith">
+                        <div class="method">
+                            <h3>is.startWith(value:string, value:substring)</h3>
+                            <span>interfaces: not</span>
+                        </div>
+                        <p>Checks if given string starts with substring.</p>
+                        <pre>
+                            <code>
+is.startWith('yeap', 'ye');
+=> true
+
+is.startWith('nope', 'ye');
+=> false
+
+is.not.startWith('nope not that', 'not');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="endWith">
+                        <div class="method">
+                            <h3>is.endWith(value:string, value:substring)</h3>
+                            <span>interfaces: not</span>
+                        </div>
+                        <p>Checks if given string ends with substring.</p>
+                        <pre>
+                            <code>
+is.endWith('yeap', 'ap');
+=> true
+
+is.endWith('nope', 'no');
+=> false
+
+is.not.endWith('nope not that', 'not');
+=> true
+
+is.endWith('yeap that one', 'one');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="capitalized">
+                        <div class="method">
+                            <h3>is.capitalized(value:string, value:substring)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given string is capitalized.</p>
+                        <pre>
+                            <code>
+is.capitalized('Yeap');
+=> true
+
+is.capitalized('nope');
+=> false
+
+is.not.capitalized('nope not capitalized');
+=> true
+
+is.capitalized('Yeap Capitalized');
+=> true
+
+is.all.capitalized('Yeap', 'All', 'Capitalized');
+=> true
+
+is.any.capitalized('Yeap', 'some', 'Capitalized');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.upperCase(['Nope', 'not']);
+=> false
                             </code>
                         </pre>
                     </div>
