@@ -2775,4 +2775,28 @@ describe("array checks", function() {
             expect(is.any.sorted([arr1, arr2])).to.be.false;
         });
     });
+    describe("is.inArray", function()  {
+        it("should return true if the item is in the array", function() {
+            var val = 3;
+            var arr = [1, 4, 6, 7, 3];
+            expect(is.inArray(val, arr)).to.be.true;
+        });
+        it("should return false if the item is not in the array", function() {
+            var val = 2;
+            var arr = [1, 4, 6, 7, 3];
+            expect(is.inArray(val, arr)).to.be.false;
+        });
+    });
+    describe("is.not.inArray", function()  {
+        it("should return false if the item is in the array", function() {
+            var val = 3;
+            var arr = [1, 4, 6, 7, 3];
+            expect(is.not.inArray(val, arr)).to.be.false;
+        });
+        it("should return true if the item is not in the array", function() {
+            var val = 2;
+            var arr = [1, 4, 6, 7, 3];
+            expect(is.not.inArray(val, arr)).to.be.true;
+        });
+    });
 });
