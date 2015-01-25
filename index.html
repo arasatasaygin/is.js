@@ -92,9 +92,9 @@
                     </ul>
                     <h2>Object</h2>
                     <ul>
-                        <li><a href="#">propertyCount</a></li>
-                        <li><a href="#">propertyDefined</a></li>
-                        <li><a href="#">windowObject</a></li>
+                        <li><a href="#propertyCount">propertyCount</a></li>
+                        <li><a href="#propertyDefined">propertyDefined</a></li>
+                        <li><a href="#windowObject">windowObject</a></li>
                     </ul>
                     <h2>Array</h2>
                     <ul>
@@ -1485,7 +1485,74 @@ is.all.infinite([Infinity, -Infinity, 42.5]);
                             </code>
                         </pre>
                     </div>
+                    <h2>object checks</h2>
+                    <div id="propertyCount">
+                        <div class="method">
+                            <h3>is.propertyCount(value:object, count)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if objects' property count is equal to given count.</p>
+                        <pre>
+                            <code>
+is.propertyCount({this: 'is', 'sample': object}, 2);
+=> true
 
+is.propertyCount({this: 'is', 'sample': object}, 3);
+=> false
+
+is.not.propertyCount({}, 2);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="propertyDefined">
+                        <div class="method">
+                            <h3>is.propertyDefined(value:object, property)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given property is defined on object.</p>
+                        <pre>
+                            <code>
+is.propertyDefined({yeap: 'yeap'}, 'yeap');
+=> true
+
+is.propertyDefined({yeap: 'yeap'}, 'nope');
+=> false
+
+is.not.propertyDefined({}, 'nope');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windowObject">
+                        <div class="method">
+                            <h3>is.windowObject(value:window)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given object is window object.</p>
+                        <pre>
+                            <code>
+is.windowObject(window);
+=> true
+
+is.windowObject({nope: 'nope'});
+=> false
+
+is.not.windowObject({});
+=> true
+
+is.all.windowObject(window, {nope: 'nope'});
+=> false
+
+is.any.windowObject(window, {nope: 'nope'});
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.windowObject([window, {nope: 'nope'}]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
                 </div>
                 <div class="col-3"></div>
             </div>
