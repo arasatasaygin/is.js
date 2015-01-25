@@ -50,19 +50,19 @@
                 <div class="col-5">
                     <h2>RegExp</h2>
                     <ul>
-                        <li><a href="#">url</a></li>
-                        <li><a href="#">email</a></li>
-                        <li><a href="#">creditCard</a></li>
-                        <li><a href="#">alphaNumeric</a></li>
-                        <li><a href="#">timeString</a></li>
-                        <li><a href="#">dateString</a></li>
-                        <li><a href="#">usZipCode</a></li>
-                        <li><a href="#">caPostalCode</a></li>
-                        <li><a href="#">ukPostCode</a></li>
-                        <li><a href="#">nanpPhone</a></li>
-                        <li><a href="#">eppPhone</a></li>
-                        <li><a href="#">socialSecurityNumber</a></li>
-                        <li><a href="#">affirmative</a></li>
+                        <li><a href="#url">url</a></li>
+                        <li><a href="#email">email</a></li>
+                        <li><a href="#creditCard">creditCard</a></li>
+                        <li><a href="#alphaNumeric">alphaNumeric</a></li>
+                        <li><a href="#timeString">timeString</a></li>
+                        <li><a href="#dateString">dateString</a></li>
+                        <li><a href="#usZipCode">usZipCode</a></li>
+                        <li><a href="#caPostalCode">caPostalCode</a></li>
+                        <li><a href="#ukPostCode">ukPostCode</a></li>
+                        <li><a href="#nanpPhone">nanpPhone</a></li>
+                        <li><a href="#eppPhone">eppPhone</a></li>
+                        <li><a href="#socialSecurityNumber">socialSecurityNumber</a></li>
+                        <li><a href="#affirmative">affirmative</a></li>
                     </ul>
                     <h2>String</h2>
                     <ul>
@@ -674,6 +674,384 @@ is.any.space(' ', true);
 // all and any interfaces can also take array parameter
 is.all.space([' ', 'foo', undefined]);
 => false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2>regexp checks</h2>
+                    <div id="url">
+                        <div class="method">
+                            <h3>is.url(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches url regexp.</p>
+                        <pre>
+                            <code>
+is.url('http://www.test.com');
+=> true
+
+is.url('foo');
+=> false
+
+is.not.url(true);
+=> true
+
+is.all.url('http://www.test.com', 'foo');
+=> false
+
+is.any.url('http://www.test.com', true);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.url(['http://www.test.com', 'foo', undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="email">
+                        <div class="method">
+                            <h3>is.email(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches email regexp.</p>
+                        <pre>
+                            <code>
+is.email('test@test.com');
+=> true
+
+is.email('foo');
+=> false
+
+is.not.email('foo');
+=> true
+
+is.all.email('test@test.com', 'foo');
+=> false
+
+is.any.email('test@test.com', 'foo');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.email(['test@test.com', 'foo', undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="creditCard">
+                        <div class="method">
+                            <h3>is.creditCard(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches credit card regexp.</p>
+                        <pre>
+                            <code>
+is.creditCard(378282246310005);
+=> true
+
+is.creditCard(123);
+=> false
+
+is.not.creditCard(123);
+=> true
+
+is.all.creditCard(378282246310005, 123);
+=> false
+
+is.any.creditCard(378282246310005, 123);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.creditCard([378282246310005, 123, undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="alphaNumeric">
+                        <div class="method">
+                            <h3>is.alphaNumeric(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches alpha numeric regexp.</p>
+                        <pre>
+                            <code>
+is.alphaNumeric('alphaNu3er1k');
+=> true
+
+is.alphaNumeric('*?');
+=> false
+
+is.not.alphaNumeric('*?');
+=> true
+
+is.all.alphaNumeric('alphaNu3er1k', '*?');
+=> false
+
+is.any.alphaNumeric('alphaNu3er1k', '*?');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.alphaNumeric(['alphaNu3er1k', '*?']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="timeString">
+                        <div class="method">
+                            <h3>is.timeString(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches time string regexp.</p>
+                        <pre>
+                            <code>
+is.timeString('13:45:30');
+=> true
+
+is.timeString('90:90:90');
+=> false
+
+is.not.timeString('90:90:90');
+=> true
+
+is.all.timeString('13:45:30', '90:90:90');
+=> false
+
+is.any.timeString('13:45:30', '90:90:90');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.timeString(['13:45:30', '90:90:90']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="dateString">
+                        <div class="method">
+                            <h3>is.dateString(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches date string regexp.</p>
+                        <pre>
+                            <code>
+is.dateString('11/11/2011');
+=> true
+
+is.dateString('90/11/2011');
+=> false
+
+is.not.dateString('90/11/2011');
+=> true
+
+is.all.dateString('11/11/2011', '90/11/2011');
+=> false
+
+is.any.dateString('11/11/2011', '90/11/2011');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.dateString(['11/11/2011', '90/11/2011']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="usZipCode">
+                        <div class="method">
+                            <h3>is.usZipCode(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches US zip code regexp.</p>
+                        <pre>
+                            <code>
+is.usZipCode('02201-1020');
+=> true
+
+is.usZipCode('123');
+=> false
+
+is.not.usZipCode('123');
+=> true
+
+is.all.usZipCode('02201-1020', '123');
+=> false
+
+is.any.usZipCode('02201-1020', '123');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.usZipCode(['02201-1020', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="caPostalCode">
+                        <div class="method">
+                            <h3>is.caPostalCode(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches Canada postal code regexp.</p>
+                        <pre>
+                            <code>
+is.caPostalCode('L8V3Y1');
+=> true
+
+is.caPostalCode('123');
+=> false
+
+is.not.caPostalCode('123');
+=> true
+
+is.all.caPostalCode('L8V3Y1', '123');
+=> false
+
+is.any.caPostalCode('L8V3Y1', '123');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.caPostalCode(['L8V3Y1', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ukPostCode">
+                        <div class="method">
+                            <h3>is.ukPostCode(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches UK post code regexp.</p>
+                        <pre>
+                            <code>
+is.ukPostCode('B184BJ');
+=> true
+
+is.ukPostCode('123');
+=> false
+
+is.not.ukPostCode('123');
+=> true
+
+is.all.ukPostCode('B184BJ', '123');
+=> false
+
+is.any.ukPostCode('B184BJ', '123');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.ukPostCode(['B184BJ', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="nanpPhone">
+                        <div class="method">
+                            <h3>is.nanpPhone(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches North American numbering plan phone regexp.</p>
+                        <pre>
+                            <code>
+is.nanpPhone('609-555-0175');
+=> true
+
+is.nanpPhone('123');
+=> false
+
+is.not.nanpPhone('123');
+=> true
+
+is.all.nanpPhone('609-555-0175', '123');
+=> false
+
+is.any.nanpPhone('609-555-0175', '123');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.nanpPhone(['609-555-0175', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="eppPhone">
+                        <div class="method">
+                            <h3>is.eppPhone(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches extensible provisioning protocol phone regexp.</p>
+                        <pre>
+                            <code>
+is.eppPhone('+90.2322456789');
+=> true
+
+is.eppPhone('123');
+=> false
+
+is.not.eppPhone('123');
+=> true
+
+is.all.eppPhone('+90.2322456789', '123');
+=> false
+
+is.any.eppPhone('+90.2322456789', '123');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.eppPhone(['+90.2322456789', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="socialSecurityNumber">
+                        <div class="method">
+                            <h3>is.socialSecurityNumber(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches social security number regexp.</p>
+                        <pre>
+                            <code>
+is.socialSecurityNumber('017-90-7890');
+=> true
+
+is.socialSecurityNumber('123');
+=> false
+
+is.not.socialSecurityNumber('123');
+=> true
+
+is.all.socialSecurityNumber('017-90-7890', '123');
+=> false
+
+is.any.socialSecurityNumber('017-90-7890', '123');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.socialSecurityNumber(['017-90-7890', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="affirmative">
+                        <div class="method">
+                            <h3>is.affirmative(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value matches affirmative regexp.</p>
+                        <pre>
+                            <code>
+is.affirmative('yes');
+=> true
+
+is.affirmative('no');
+=> false
+
+is.not.affirmative('no');
+=> true
+
+is.all.affirmative('yes', 'no');
+=> false
+
+is.any.affirmative('yes', 'no');
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
+=> true
                             </code>
                         </pre>
                     </div>
