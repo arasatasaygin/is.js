@@ -40,11 +40,11 @@
                     </ul>
                     <h2>Presence</h2>
                     <ul>
-                        <li><a href="#">empty</a></li>
-                        <li><a href="#">existy</a></li>
-                        <li><a href="#">truthy</a></li>
-                        <li><a href="#">falsy</a></li>
-                        <li><a href="#">space</a></li>
+                        <li><a href="#empty">empty</a></li>
+                        <li><a href="#existy">existy</a></li>
+                        <li><a href="#truthy">truthy</a></li>
+                        <li><a href="#falsy">falsy</a></li>
+                        <li><a href="#space">space</a></li>
                     </ul>
                 </div>
                 <div class="col-5">
@@ -524,6 +524,155 @@ is.sameType(42, '7');
 => false
 
 is.not.sameType(42, 7);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2>presence checks</h2>
+                    <div id="empty">
+                        <div class="method">
+                            <h3>is.empty(value:object, array, string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is empty.</p>
+                        <pre>
+                            <code>
+is.empty({});
+=> true
+
+is.empty([]);
+=> true
+
+is.empty('');
+=> true
+
+is.not.empty(['foo']);
+=> true
+
+is.all.empty('', {}, ['foo']);
+=> false
+
+is.any.empty([], 42);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.empty([{}, 'foo']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="existy">
+                        <div class="method">
+                            <h3>is.existy(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is existy. (not null or undefined)</p>
+                        <pre>
+                            <code>
+is.existy({});
+=> true
+
+is.existy(null);
+=> false
+
+is.not.existy(undefined);
+=> true
+
+is.all.existy(null, ['foo']);
+=> false
+
+is.any.existy(undefined, 42);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.existy([{}, 'foo']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="truthy">
+                        <div class="method">
+                            <h3>is.truthy(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is truthy. (existy and not false)</p>
+                        <pre>
+                            <code>
+is.truthy(true);
+=> true
+
+is.truthy(null);
+=> false
+
+is.not.truthy(false);
+=> true
+
+is.all.truthy(null, true);
+=> false
+
+is.any.truthy(undefined, true);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.truthy([{}, true]);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="falsy">
+                        <div class="method">
+                            <h3>is.falsy(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is falsy.</p>
+                        <pre>
+                            <code>
+is.falsy(false);
+=> true
+
+is.falsy(null);
+=> true
+
+is.not.falsy(true);
+=> true
+
+is.all.falsy(null, false);
+=> true
+
+is.any.falsy(undefined, true);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.falsy([false, true, undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="space">
+                        <div class="method">
+                            <h3>is.space(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given value is space.</p>
+                        <pre>
+                            <code>
+is.space(' ');
+=> true
+
+is.space('foo');
+=> false
+
+is.not.space(true);
+=> true
+
+is.all.space(' ', 'foo');
+=> false
+
+is.any.space(' ', true);
+=> true
+
+// all and any interfaces can also take array parameter
+is.all.space([' ', 'foo', undefined]);
 => false
                             </code>
                         </pre>
