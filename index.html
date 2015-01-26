@@ -104,29 +104,29 @@
                 <div class="col-5">
                     <h2>Environment</h2>
                         <ul>
-                            <li><a href="#">chrome</a></li>
-                            <li><a href="#">firefox</a></li>
-                            <li><a href="#">ie</a></li>
-                            <li><a href="#">opera</a></li>
-                            <li><a href="#">safari</a></li>
-                            <li><a href="#">ios</a></li>
-                            <li><a href="#">iphone</a></li>
-                            <li><a href="#">ipad</a></li>
-                            <li><a href="#">ipod</a></li>
-                            <li><a href="#">android</a></li>
-                            <li><a href="#">androidPhone</a></li>
-                            <li><a href="#">androidTablet</a></li>
-                            <li><a href="#">mobile</a></li>
-                            <li><a href="#">tablet</a></li>
-                            <li><a href="#">desktop</a></li>
-                            <li><a href="#">linux</a></li>
-                            <li><a href="#">mac</a></li>
-                            <li><a href="#">windows</a></li>
-                            <li><a href="#">windowsPhone</a></li>
-                            <li><a href="#">windowsTablet</a></li>
-                            <li><a href="#">blackberry</a></li>
-                            <li><a href="#">online</a></li>
-                            <li><a href="#">offline</a></li>
+                            <li><a href="#ie">ie</a></li>
+                            <li><a href="#chrome">chrome</a></li>
+                            <li><a href="#firefox">firefox</a></li>
+                            <li><a href="#opera">opera</a></li>
+                            <li><a href="#safari">safari</a></li>
+                            <li><a href="#ios">ios</a></li>
+                            <li><a href="#iphone">iphone</a></li>
+                            <li><a href="#ipad">ipad</a></li>
+                            <li><a href="#ipod">ipod</a></li>
+                            <li><a href="#android">android</a></li>
+                            <li><a href="#androidPhone">androidPhone</a></li>
+                            <li><a href="#androidTablet">androidTablet</a></li>
+                            <li><a href="#blackberry">blackberry</a></li>
+                            <li><a href="#windowsPhone">windowsPhone</a></li>
+                            <li><a href="#windowsTablet">windowsTablet</a></li>
+                            <li><a href="#windows">windows</a></li>
+                            <li><a href="#mac">mac</a></li>
+                            <li><a href="#linux">linux</a></li>
+                            <li><a href="#desktop">desktop</a></li>
+                            <li><a href="#mobile">mobile</a></li>
+                            <li><a href="#tablet">tablet</a></li>
+                            <li><a href="#online">online</a></li>
+                            <li><a href="#offline">offline</a></li>
                         </ul>
                 </div>
                 <div class="col-5">
@@ -531,7 +531,7 @@ is.not.sameType(42, 7);
                     <h2>presence checks</h2>
                     <div id="empty">
                         <div class="method">
-                            <h3>is.empty(value:object, array, string)</h3>
+                            <h3>is.empty(value:object|array|string)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
                         <p>Checks if given value is empty.</p>
@@ -1209,7 +1209,7 @@ is.all.upperCase(['Nope', 'not']);
                     <h2>arithmetic checks</h2>
                     <div id="equal">
                         <div class="method">
-                            <h3>is.equal(value:number, string, boolean, value:number, string, boolean)</h3>
+                            <h3>is.equal(value:any, value:any)</h3>
                             <span>interfaces: not</span>
                         </div>
                         <p>Checks if given values are equal.</p>
@@ -1580,6 +1580,379 @@ is.any.sorted([1, 2], [5, 4]);
 // 'all' and 'any' interfaces can also take array parameter
 is.all.sorted([[1, 2], [5, 4]]);
 => false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2>environment checks</h2>
+                    <p>Environment checks are not available as node module.</p>
+                    <div id="ie">
+                        <div class="method">
+                            <h3>is.ie(value:number)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current browser is ie. Parameter is optional version number of browser.</p>
+                        <pre>
+                            <code>
+is.ie();
+=> true if current browser is ie
+
+is.ie(6);
+=> hopefully false
+
+is.not.ie();
+=> false if current browser is ie
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="chrome">
+                        <div class="method">
+                            <h3>is.chrome()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current browser is chrome.</p>
+                        <pre>
+                            <code>
+is.chrome();
+=> true if current browser is chrome
+
+is.not.chrome();
+=> false if current browser is chrome
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="firefox">
+                        <div class="method">
+                            <h3>is.firefox()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current browser is firefox.</p>
+                        <pre>
+                            <code>
+is.firefox();
+=> true if current browser is firefox
+
+is.not.firefox();
+=> false if current browser is firefox
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="opera">
+                        <div class="method">
+                            <h3>is.opera()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current browser is opera.</p>
+                        <pre>
+                            <code>
+is.opera();
+=> true if current browser is opera
+
+is.not.opera();
+=> false if current browser is opera
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="safari">
+                        <div class="method">
+                            <h3>is.safari()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current browser is safari.</p>
+                        <pre>
+                            <code>
+is.safari();
+=> true if current browser is safari
+
+is.not.safari();
+=> false if current browser is safari
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ios">
+                        <div class="method">
+                            <h3>is.ios()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device has ios.</p>
+                        <pre>
+                            <code>
+is.ios();
+=> true if current device is iPhone, iPad or iPod
+
+is.not.ios();
+=> true if current device is not iPhone, iPad or iPod
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="iphone">
+                        <div class="method">
+                            <h3>is.iphone()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is iPhone.</p>
+                        <pre>
+                            <code>
+is.iphone();
+=> true if current device is iPhone
+
+is.not.iphone();
+=> true if current device is not iPhone
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ipad">
+                        <div class="method">
+                            <h3>is.ipad()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is iPad.</p>
+                        <pre>
+                            <code>
+is.ipad();
+=> true if current device is iPad
+
+is.not.ipad();
+=> true if current device is not iPad
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ipod">
+                        <div class="method">
+                            <h3>is.ipod()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is iPod.</p>
+                        <pre>
+                            <code>
+is.ipod();
+=> true if current device is iPod
+
+is.not.ipod();
+=> true if current device is not iPod
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="android">
+                        <div class="method">
+                            <h3>is.android()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device has Android.</p>
+                        <pre>
+                            <code>
+is.android();
+=> true if current device has Android OS
+
+is.not.android();
+=> true if current device has not Android OS
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="androidPhone">
+                        <div class="method">
+                            <h3>is.androidPhone()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is Android phone.</p>
+                        <pre>
+                            <code>
+is.androidPhone();
+=> true if current device is Android phone
+
+is.not.androidPhone();
+=> true if current device is not Android phone
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="androidTablet">
+                        <div class="method">
+                            <h3>is.androidTablet()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is Android tablet.</p>
+                        <pre>
+                            <code>
+is.androidTablet();
+=> true if current device is Android tablet
+
+is.not.androidTablet();
+=> true if current device is not Android tablet
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="blackberry">
+                        <div class="method">
+                            <h3>is.blackberry()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is Blackberry.</p>
+                        <pre>
+                            <code>
+is.blackberry();
+=> true if current device is Blackberry
+
+is.not.blackberry();
+=> true if current device is not Blackberry
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windowsPhone">
+                        <div class="method">
+                            <h3>is.windowsPhone()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is Windows phone.</p>
+                        <pre>
+                            <code>
+is.windowsPhone();
+=> true if current device is Windows phone
+
+is.not.windowsPhone();
+=> true if current device is not Windows Phone
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windowsTablet">
+                        <div class="method">
+                            <h3>is.windowsTablet()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is Windows tablet.</p>
+                        <pre>
+                            <code>
+is.windowsTablet();
+=> true if current device is Windows tablet
+
+is.not.windowsTablet();
+=> true if current device is not Windows tablet
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windows">
+                        <div class="method">
+                            <h3>is.windows()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current OS is Windows.</p>
+                        <pre>
+                            <code>
+is.windows();
+=> true if current OS is Windows
+
+is.not.windows();
+=> true if current OS is not Windows
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="mac">
+                        <div class="method">
+                            <h3>is.mac()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current OS is Mac OS X.</p>
+                        <pre>
+                            <code>
+is.mac();
+=> true if current OS is Mac OS X
+
+is.not.mac();
+=> true if current OS is not Mac OS X
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="linux">
+                        <div class="method">
+                            <h3>is.linux()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current OS is linux.</p>
+                        <pre>
+                            <code>
+is.linux();
+=> true if current OS is linux
+
+is.not.linux();
+=> true if current OS is not linux
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="desktop">
+                        <div class="method">
+                            <h3>is.desktop()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is desktop.</p>
+                        <pre>
+                            <code>
+is.desktop();
+=> true if current device is desktop
+
+is.not.desktop();
+=> true if current device is not desktop
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="mobile">
+                        <div class="method">
+                            <h3>is.mobile()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is mobile.<br /> iPhone, iPod, Android Phone, Windows Phone, Blackberry.</p>
+                        <pre>
+                            <code>
+is.mobile();
+=> true if current device is mobile
+
+is.not.mobile();
+=> true if current device is not mobile
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="tablet">
+                        <div class="method">
+                            <h3>is.tablet()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is tablet.<br /> iPad, Android Tablet, Windows Tablet</p>
+                        <pre>
+                            <code>
+is.tablet();
+=> true if current device is tablet
+
+is.not.tablet();
+=> true if current device is not tablet
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="online">
+                        <div class="method">
+                            <h3>is.online()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is online.</p>
+                        <pre>
+                            <code>
+is.online();
+=> true if current device is online
+
+is.not.online();
+=> true if current device is not online
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="offline">
+                        <div class="method">
+                            <h3>is.offline()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if current device is offline.</p>
+                        <pre>
+                            <code>
+is.offline();
+=> true if current device is offline
+
+is.not.offline();
+=> true if current device is not offline
                             </code>
                         </pre>
                     </div>
