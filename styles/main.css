@@ -86,7 +86,7 @@ h1 {
 }
 .button {
     display: block;
-    margin: 60px auto 80px auto;
+    margin: 60px auto 40px auto;
     padding: 20px;
     text-decoration: none;
     height: 70px;
@@ -104,32 +104,39 @@ h1 {
     border: 2px solid #2c3233;
     padding: 19px;
 }
-.method-list {
+.down-arrow {
+    background: url('../images/down-arrow.png');
+    display: block;
+    width: 19px;
+    height: 12px;
+    margin: 30px auto 40px auto;
+}
+#method-list {
     background-color: #2c3233;
-    padding: 40px 30px 40px 60px;
+    padding: 30px 30px 40px 60px;
     color: #ffffff;
     overflow: auto;
 }
-.method-list h2 {
+#method-list h2 {
     font-size: 18px;
     font-weight: 700;
     color: #f2f2f2;
 }
-.method-list ul {
+#method-list ul {
     list-style-type: none;
     padding: 0px;
     margin: 0px;
 }
-.method-list ul li{
+#method-list ul li{
     line-height: 1.4;
 }
-.method-list ul li a {
+#method-list ul li a {
     text-decoration: none;
     color: #a6afb2;
     font-size: 16px;
     font-weight: 300;
 }
-.method-list ul li a:hover {
+#method-list ul li a:hover {
     text-decoration: underline;
 }
 .documentation {
