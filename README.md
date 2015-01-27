@@ -2026,5 +2026,5 @@ Change namespace of library to prevent name collisions.
 ```javascript
 var customName = is.setNamespace();
 customName.odd(3);
-// => true
+=> true
 ```
