@@ -1,8 +1,35 @@
-is.js
-=====
+type checks
+===========
+
+is.arguments(value:any)
+-----------------------
+####Checks if given value type is arguments.
+interfaces: not, all, any
+
+```javascript
+var getArguments = function() {
+    return arguments;
+};
+var arguments = getArguments();
+
+is.arguments(arguments);
+=> true
+
+is.not.arguments({foo: 'bar'});
+=> true
+
+is.all.arguments(arguments, 'bar');
+=> false
+
+is.any.arguments(['foo'], arguments);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.arguments([arguments, 'foo', 'bar']);
+=> false
+```
 
 **Type checks:**
-- [x] arguments
 - [x] array
 - [x] boolean
 - [x] date
