@@ -18,7 +18,7 @@
             <img src="images/is-js-logo.png" alt="is.js logo" class="logo">
             <h1>Check types, regexps, presence, time and more...</h1>
             <div class="terminal">is.number(42);</div>
-            <a href="#" class="button">View on Github</a>
+            <a href="https://github.com/arasatasaygin/is.js" class="button">View on Github</a>
             <div class="method-list">
                 <div class="col-5">
                     <h2>Type</h2>
@@ -132,30 +132,30 @@
                 <div class="col-5">
                     <h2>Time</h2>
                     <ul>
-                        <li><a href="#">today</a></li>
-                        <li><a href="#">yesterday</a></li>
-                        <li><a href="#">tomorrow</a></li>
-                        <li><a href="#">past</a></li>
-                        <li><a href="#">future</a></li>
-                        <li><a href="#">day</a></li>
-                        <li><a href="#">month</a></li>
-                        <li><a href="#">year</a></li>
-                        <li><a href="#">weekDay</a></li>
-                        <li><a href="#">weekEnd</a></li>
-                        <li><a href="#">inDateRange</a></li>
-                        <li><a href="#">inLastWeek</a></li>
-                        <li><a href="#">inLastMonth</a></li>
-                        <li><a href="#">inLastYear</a></li>
-                        <li><a href="#">inNextWeek</a></li>
-                        <li><a href="#">inNextMonth</a></li>
-                        <li><a href="#">inNextYear</a></li>
-                        <li><a href="#">quarterOfYear</a></li>
-                        <li><a href="#">daylightSavingTime</a></li>
+                        <li><a href="#today">today</a></li>
+                        <li><a href="#yesterday">yesterday</a></li>
+                        <li><a href="#tomorrow">tomorrow</a></li>
+                        <li><a href="#past">past</a></li>
+                        <li><a href="#future">future</a></li>
+                        <li><a href="#day">day</a></li>
+                        <li><a href="#month">month</a></li>
+                        <li><a href="#year">year</a></li>
+                        <li><a href="#weekday">weekday</a></li>
+                        <li><a href="#weekend">weekend</a></li>
+                        <li><a href="#inDateRange">inDateRange</a></li>
+                        <li><a href="#inLastWeek">inLastWeek</a></li>
+                        <li><a href="#inLastMonth">inLastMonth</a></li>
+                        <li><a href="#inLastYear">inLastYear</a></li>
+                        <li><a href="#inNextWeek">inNextWeek</a></li>
+                        <li><a href="#inNextMonth">inNextMonth</a></li>
+                        <li><a href="#inNextYear">inNextYear</a></li>
+                        <li><a href="#quarterOfYear">quarterOfYear</a></li>
+                        <li><a href="#dayLightSavingTime">dayLightSavingTime</a></li>
                     </ul>
                     <h2>Configuration</h2>
                     <ul>
-                        <li><a href="#">setRegexp</a></li>
-                        <li><a href="#">setNamespace</a></li>
+                        <li><a href="#setRegexp">setRegexp</a></li>
+                        <li><a href="#setNamespace">setNamespace</a></li>
                     </ul>
                 </div>
             </div>
@@ -1953,6 +1953,515 @@ is.offline();
 
 is.not.offline();
 => true if current device is not offline
+                            </code>
+                        </pre>
+                    </div>
+                    <h2>time checks</h2>
+                    <div id="today">
+                        <div class="method">
+                            <h3>is.today(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date object indicate today.</p>
+                        <pre>
+                            <code>
+var today = new Date();
+is.today(today);
+=> true
+
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+is.today(yesterday);
+=> false
+
+is.not.today(yesterday);
+=> true
+
+is.all.today(today, today);
+=> true
+
+is.any.today(today, yesterday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.today([today, yesterday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="yesterday">
+                        <div class="method">
+                            <h3>is.yesterday(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date object indicate yesterday.</p>
+                        <pre>
+                            <code>
+var today = new Date();
+is.yesterday(today);
+=> false
+
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+is.yesterday(yesterday);
+=> true
+
+is.not.yesterday(today);
+=> true
+
+is.all.yesterday(yesterday, today);
+=> false
+
+is.any.yesterday(today, yesterday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.yesterday([today, yesterday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="tomorrow">
+                        <div class="method">
+                            <h3>is.tomorrow(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date object indicate tomorrow.</p>
+                        <pre>
+                            <code>
+var today = new Date();
+is.tomorrow(today);
+=> false
+
+var tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+is.tomorrow(tomorrow);
+=> true
+
+is.not.tomorrow(today);
+=> true
+
+is.all.tomorrow(tomorrow, today);
+=> false
+
+is.any.tomorrow(today, tomorrow);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.tomorrow([today, tomorrow]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="past">
+                        <div class="method">
+                            <h3>is.past(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date object indicate past.</p>
+                        <pre>
+                            <code>
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+var tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+
+is.past(yesterday);
+=> true
+
+is.past(tomorrow);
+=> false
+
+is.not.past(tomorrow);
+=> true
+
+is.all.past(tomorrow, yesterday);
+=> false
+
+is.any.past(yesterday, tomorrow);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.past([yesterday, tomorrow]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="future">
+                        <div class="method">
+                            <h3>is.future(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date object indicate future.</p>
+                        <pre>
+                            <code>
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+var tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+
+is.future(yesterday);
+=> false
+
+is.future(tomorrow);
+=> true
+
+is.not.future(yesterday);
+=> true
+
+is.all.future(tomorrow, yesterday);
+=> false
+
+is.any.future(yesterday, tomorrow);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.future([yesterday, tomorrow]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="day">
+                        <div class="method">
+                            <h3>is.day(value:object, dayString)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date objects' day equal given dayString parameter.</p>
+                        <pre>
+                            <code>
+var mondayObj = new Date('01/26/2015');
+var tuesdayObj = new Date('01/27/2015');
+is.day(mondayObj, 'monday');
+=> true
+
+is.day(mondayObj, 'tuesday');
+=> false
+
+is.not.day(mondayObj, 'tuesday');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="month">
+                        <div class="method">
+                            <h3>is.month(value:object, monthString)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date objects' month equal given monthString parameter.</p>
+                        <pre>
+                            <code>
+var januaryObj = new Date('01/26/2015');
+var februaryObj = new Date('02/26/2015');
+is.month(januaryObj, 'january');
+=> true
+
+is.month(februaryObj, 'january');
+=> false
+
+is.not.month(februaryObj, 'january');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="year">
+                        <div class="method">
+                            <h3>is.year(value:object, yearNumber)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date objects' year equal given yearNumber parameter.</p>
+                        <pre>
+                            <code>
+var year2015 = new Date('01/26/2015');
+var year2016 = new Date('01/26/2016');
+is.year(year2015, 2015);
+=> true
+
+is.year(year2016, 2015);
+=> false
+
+is.not.year(year2016, 2015);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="weekend">
+                        <div class="method">
+                            <h3>is.weekend(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date objects' day is weekend.</p>
+                        <pre>
+                            <code>
+var monday = new Date('01/26/2015');
+var sunday = new Date('01/25/2015');
+var saturday = new Date('01/24/2015');
+is.weekend(sunday);
+=> true
+
+is.weekend(monday);
+=> false
+
+is.not.weekend(monday);
+=> true
+
+is.all.weekend(sunday, saturday);
+=> true
+
+is.any.weekend(sunday, saturday, monday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.weekend([sunday, saturday, monday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="weekday">
+                        <div class="method">
+                            <h3>is.weekday(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if given date objects' day is weekday.</p>
+                        <pre>
+                            <code>
+var monday = new Date('01/26/2015');
+var sunday = new Date('01/25/2015');
+var saturday = new Date('01/24/2015');
+is.weekday(monday);
+=> true
+
+is.weekday(sunday);
+=> false
+
+is.not.weekday(sunday);
+=> true
+
+is.all.weekday(monday, saturday);
+=> false
+
+is.any.weekday(sunday, saturday, monday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.weekday([sunday, saturday, monday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inDateRange">
+                        <div class="method">
+                            <h3>is.inDateRange(value:object, startObject, endObject)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if date is within given range.</p>
+                        <pre>
+                            <code>
+var saturday = new Date('01/24/2015');
+var sunday = new Date('01/25/2015');
+var monday = new Date('01/26/2015');
+is.inDateRange(sunday, saturday, monday);
+=> true
+
+is.inDateRange(saturday, sunday, monday);
+=> false
+
+is.not.inDateRange(saturday, sunday, monday);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inLastWeek">
+                        <div class="method">
+                            <h3>is.inLastWeek(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is between now and 7 days ago.</p>
+                        <pre>
+                            <code>
+var twoDaysAgo = new Date(new Date().setDate(new Date().getDate() - 2));
+var nineDaysAgo = new Date(new Date().setDate(new Date().getDate() - 9));
+is.inLastWeek(twoDaysAgo);
+=> true
+
+is.inLastWeek(nineDaysAgo);
+=> false
+
+is.not.inLastWeek(nineDaysAgo);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inLastMonth">
+                        <div class="method">
+                            <h3>is.inLastMonth(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is between now and a month ago.</p>
+                        <pre>
+                            <code>
+var tenDaysAgo = new Date(new Date().setDate(new Date().getDate() - 10));
+var fortyDaysAgo = new Date(new Date().setDate(new Date().getDate() - 40));
+is.inLastMonth(tenDaysAgo);
+=> true
+
+is.inLastMonth(fortyDaysAgo);
+=> false
+
+is.not.inLastMonth(fortyDaysAgo);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inLastYear">
+                        <div class="method">
+                            <h3>is.inLastYear(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is between now and a year ago.</p>
+                        <pre>
+                            <code>
+var twoMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 2));
+var thirteenMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 13));
+is.inLastYear(twoMonthsAgo);
+=> true
+
+is.inLastYear(thirteenMonthsAgo);
+=> false
+
+is.not.inLastYear(thirteenMonthsAgo);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inNextWeek">
+                        <div class="method">
+                            <h3>is.inNextWeek(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is between now and 7 days later.</p>
+                        <pre>
+                            <code>
+var twoDaysLater = new Date(new Date().setDate(new Date().getDate() + 2));
+var nineDaysLater = new Date(new Date().setDate(new Date().getDate() + 9));
+is.inNextWeek(twoDaysLater);
+=> true
+
+is.inNextWeek(nineDaysLater);
+=> false
+
+is.not.inNextWeek(nineDaysLater);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inNextMonth">
+                        <div class="method">
+                            <h3>is.inNextMonth(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is between now and a month later.</p>
+                        <pre>
+                            <code>
+var tenDaysLater = new Date(new Date().setDate(new Date().getDate() + 10));
+var fortyDaysLater = new Date(new Date().setDate(new Date().getDate() + 40));
+is.inNextMonth(tenDaysLater);
+=> true
+
+is.inNextMonth(fortyDaysLater);
+=> false
+
+is.not.inNextMonth(fortyDaysLater);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inNextYear">
+                        <div class="method">
+                            <h3>is.inNextYear(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is between now and a year later.</p>
+                        <pre>
+                            <code>
+var twoMonthsLater = new Date(new Date().setMonth(new Date().getMonth() + 2));
+var thirteenMonthsLater = new Date(new Date().setMonth(new Date().getMonth() + 13));
+is.inNextYear(twoMonthsLater);
+=> true
+
+is.inNextYear(thirteenMonthsLater);
+=> false
+
+is.not.inNextYear(thirteenMonthsLater);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="quarterOfYear">
+                        <div class="method">
+                            <h3>is.quarterOfYear(value:object, quarterNumber)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is in the parameter quarter.</p>
+                        <pre>
+                            <code>
+var firstQuarter = new Date('01/26/2015');
+var secondQuarter = new Date('05/26/2015');
+is.quarterOfYear(firstQuarter, 1);
+=> true
+
+is.quarterOfYear(secondQuarter, 1);
+=> false
+
+is.not.quarterOfYear(secondQuarter, 1);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <!-- dayLightSavingTime -->
+                    <div id="dayLightSavingTime">
+                        <div class="method">
+                            <h3>is.dayLightSavingTime(value:object, quarterNumber)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if given date is in daylight saving time.</p>
+                        <pre>
+                            <code>
+// For Turkey Time Zone
+var january1 = new Date('01/01/2015');
+var june1 = new Date('06/01/2015');
+
+is.dayLightSavingTime(june1);
+=> true
+
+is.dayLightSavingTime(january1);
+=> false
+
+is.not.dayLightSavingTime(january1);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+
+                    <h2>configuration methods</h2>
+                    <div id="setRegexp">
+                        <div class="method">
+                            <h3>is.setRegexp(value:RegExp, regexpString)</h3>
+                        </div>
+                        <p>Override RegExps if you think they suck.</p>
+                        <pre>
+                            <code>
+is.url('https://www.duckduckgo.com');
+=> true
+
+is.setRegexp(/quack/, 'url');
+is.url('quack');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="setNamespace">
+                        <div class="method">
+                            <h3>is.setNamespace()</h3>
+                        </div>
+                        <p>Change namespace of library to prevent name collisions.</p>
+                        <pre>
+                            <code>
+var customName = is.setNamespace();
+customName.odd(3);
+// => true
                             </code>
                         </pre>
                     </div>
