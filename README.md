@@ -1,4 +1,4 @@
-type checks
+Type checks
 ===========
 
 is.arguments(value:any)
@@ -325,12 +325,142 @@ is.not.sameType(42, 7);
 => false
 ```
 
-**Presence checks:**
-- [x] empty
-- [x] existy
-- [x] truthy
-- [x] falsy
-- [x] space
+Presence checks
+===============
+
+is.empty(value:object|array|string)
+-----------------------------------
+####Checks if given value is empty.
+interfaces: not, all, any
+
+```javascript
+is.empty({});
+=> true
+
+is.empty([]);
+=> true
+
+is.empty('');
+=> true
+
+is.not.empty(['foo']);
+=> true
+
+is.all.empty('', {}, ['foo']);
+=> false
+
+is.any.empty([], 42);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.empty([{}, 'foo']);
+=> false
+```
+
+is.existy(value:any)
+--------------------
+####Checks if given value is existy. (not null or undefined)
+interfaces: not, all, any
+
+```javascript
+is.existy({});
+=> true
+
+is.existy(null);
+=> false
+
+is.not.existy(undefined);
+=> true
+
+is.all.existy(null, ['foo']);
+=> false
+
+is.any.existy(undefined, 42);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.existy([{}, 'foo']);
+=> true
+```
+
+is.truthy(value:any)
+--------------------
+####Checks if given value is truthy. (existy and not false)
+interfaces: not, all, any
+
+```javascript
+is.truthy(true);
+=> true
+
+is.truthy(null);
+=> false
+
+is.not.truthy(false);
+=> true
+
+is.all.truthy(null, true);
+=> false
+
+is.any.truthy(undefined, true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.truthy([{}, true]);
+=> true
+```
+
+is.falsy(value:any)
+-------------------
+####Checks if given value is falsy.
+interfaces: not, all, any
+
+```javascript
+is.falsy(false);
+=> true
+
+is.falsy(null);
+=> true
+
+is.not.falsy(true);
+=> true
+
+is.all.falsy(null, false);
+=> true
+
+is.any.falsy(undefined, true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.falsy([false, true, undefined]);
+=> false
+```
+
+is.space(value:string)
+----------------------
+####Checks if given value is space.
+interfaces: not, all, any
+
+```javascript
+is.space(' ');
+=> true
+
+is.space('foo');
+=> false
+
+is.not.space(true);
+=> true
+
+is.all.space(' ', 'foo');
+=> false
+
+is.any.space(' ', true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.space([' ', 'foo', undefined]);
+=> false
+```
+
 
 **Arithmetic checks:**
 - [x] equal
