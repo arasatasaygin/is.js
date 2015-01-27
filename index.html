@@ -17,7 +17,7 @@
         <div class="content">
             <img src="images/is-js-logo.png" alt="is.js logo" class="logo">
             <h1>Check types, regexps, presence, time and more...</h1>
-            <div class="terminal">is.number(42);</div>
+            <div class="terminal" data-typer-targets="is.number(42);|is.sameType('foo', NaN);|is.all.number([42, 43, 44]);|is.any.truthy([true, false, null]);|is.not.capitalized('foo');|is.email('foo@bar.com');|is.alphaNumeric('y3s');|is.not.ie(6);|is.chrome( );|is.tablet( );|is.all.even([4, 2, 7]);|is.past(new Date('07/03/1985'));|is.startWith('yeap', 'ye');|is.sorted([1, 2, 4, 3]);|is.boolean(true);|is.not.empty(['foo', 'bar']);"></div>
             <a href="https://github.com/arasatasaygin/is.js" class="button">View on Github</a>
             <div class="method-list">
                 <div class="col-5">
@@ -2470,6 +2470,8 @@ customName.odd(3);
             </div>
         </div>
         <script src="scripts/is.js"></script>
+        <script src="scripts/jquery.min.js"></script>
+        <script src="scripts/jquery.typer.js"></script>
         <script src="scripts/main.js"></script>
         <!-- TODO: Google Analytics -->
     </body>
