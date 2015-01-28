@@ -173,3 +173,25 @@ h1 {
     background-color: #f2f2f2;
     padding: 10px 20px 0 20px;
 }
+ul.side-navigation {
+    list-style: none;
+    padding: 60px 60px 60px 90px;
+    margin: 0px;
+}
+ul.side-navigation li{
+    line-height: 2;
+}
+ul.side-navigation li a {
+    text-decoration: none;
+    color: #a6afb2;
+    font-size: 18px;
+    font-weight: 300;
+}
+ul.side-navigation li a:hover {
+    text-decoration: underline;
+    color: #33302c;
+}
+.fixed {
+    position: fixed;
+    top: 0;
+}

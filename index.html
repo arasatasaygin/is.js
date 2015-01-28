@@ -162,7 +162,7 @@
             </div>
             <div class="documentation">
                 <div class="col-7">
-                    <h2>type checks</h2>
+                    <h2 id="type-checks">type checks</h2>
                     <div id="arguments">
                         <div class="method">
                             <h3>is.arguments(value:any)</h3>
@@ -529,7 +529,7 @@ is.not.sameType(42, 7);
                             </code>
                         </pre>
                     </div>
-                    <h2>presence checks</h2>
+                    <h2 id="presence-checks">presence checks</h2>
                     <div id="empty">
                         <div class="method">
                             <h3>is.empty(value:object|array|string)</h3>
@@ -678,7 +678,7 @@ is.all.space([' ', 'foo', undefined]);
                             </code>
                         </pre>
                     </div>
-                    <h2>regexp checks</h2>
+                    <h2 id="regexp-checks">regexp checks</h2>
                     <div id="url">
                         <div class="method">
                             <h3>is.url(value:any)</h3>
@@ -1056,7 +1056,7 @@ is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
                             </code>
                         </pre>
                     </div>
-                    <h2>string checks</h2>
+                    <h2 id="string-checks">string checks</h2>
                     <div id="include">
                         <div class="method">
                             <h3>is.include(value:string, value:substring)</h3>
@@ -1207,7 +1207,7 @@ is.all.upperCase(['Nope', 'not']);
                             </code>
                         </pre>
                     </div>
-                    <h2>arithmetic checks</h2>
+                    <h2 id="arithmetic-checks">arithmetic checks</h2>
                     <div id="equal">
                         <div class="method">
                             <h3>is.equal(value:any, value:any)</h3>
@@ -1486,7 +1486,7 @@ is.all.infinite([Infinity, -Infinity, 42.5]);
                             </code>
                         </pre>
                     </div>
-                    <h2>object checks</h2>
+                    <h2 id="object-checks">object checks</h2>
                     <div id="propertyCount">
                         <div class="method">
                             <h3>is.propertyCount(value:object, count)</h3>
@@ -1554,7 +1554,7 @@ is.all.windowObject([window, {nope: 'nope'}]);
                             </code>
                         </pre>
                     </div>
-                    <h2>array check</h2>
+                    <h2 id="array-checks">array check</h2>
                     <div id="sorted">
                         <div class="method">
                             <h3>is.sorted(value:array)</h3>
@@ -1584,7 +1584,7 @@ is.all.sorted([[1, 2], [5, 4]]);
                             </code>
                         </pre>
                     </div>
-                    <h2>environment checks</h2>
+                    <h2 id="environment-checks">environment checks</h2>
                     <p>Environment checks are not available as node module.</p>
                     <div id="ie">
                         <div class="method">
@@ -1957,7 +1957,7 @@ is.not.offline();
                             </code>
                         </pre>
                     </div>
-                    <h2>time checks</h2>
+                    <h2 id="time-checks">time checks</h2>
                     <div id="today">
                         <div class="method">
                             <h3>is.today(value:object)</h3>
@@ -2436,7 +2436,7 @@ is.not.dayLightSavingTime(january1);
                         </pre>
                     </div>
 
-                    <h2>configuration methods</h2>
+                    <h2 id="configuration">configuration methods</h2>
                     <div id="setRegexp">
                         <div class="method">
                             <h3>is.setRegexp(value:RegExp, regexpString)</h3>
@@ -2467,7 +2467,20 @@ customName.odd(3);
                         </pre>
                     </div>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-3">
+                    <ul class="side-navigation">
+                        <li><a href="#type-checks">type</a></li>
+                        <li><a href="#presence-checks">presence</a></li>
+                        <li><a href="#regexp-checks">regexp</a></li>
+                        <li><a href="#string-checks">string</a></li>
+                        <li><a href="#arithmetic-checks">arithmetic</a></li>
+                        <li><a href="#object-checks">object</a></li>
+                        <li><a href="#array-checks">array</a></li>
+                        <li><a href="#environment-checks">environment</a></li>
+                        <li><a href="#time-checks">time</a></li>
+                        <li><a href="#configuration">configuration</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <script src="scripts/is.js"></script>
