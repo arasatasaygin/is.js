@@ -1570,6 +1570,48 @@ describe("regexp checks", function() {
             expect(is.any.affirmative(['no', '2'])).to.be.false;
         });
     });
+    describe("is.brCep", function() {
+        it("should return true if given value is BR Cep", function() {
+            expect(is.brCep('13076-000')).to.be.true;
+            expect(is.brCep('13.076-000')).to.be.true;
+        });
+        it("should return false if given value is not br Cep", function() {
+            expect(is.brCep('1')).to.be.false;
+        });
+    });
+    describe("is.not.brCep", function() {
+        it("should return false if given value is BR Cep", function() {
+            expect(is.not.brCep('13076-000')).to.be.false;
+            expect(is.not.brCep('13.076-000')).to.be.false;
+        });
+        it("should return true if given value is not BR Cep", function() {
+            expect(is.not.brCep('1')).to.be.true;
+        });
+    });
+    describe("is.all.brCep", function() {
+        it("should return true if all given values are BR Cep", function() {
+            expect(is.all.brCep('13076-000', '13.076-000', '18682-050', '18.682-050')).to.be.true;
+            expect(is.all.brCep(['13076-000', '13.076-000', '18682-050', '18.682-050'])).to.be.true;
+        });
+        it("should return false if any given value is not BR Cep", function() {
+            expect(is.all.brCep('13076-000', '1')).to.be.false;
+            expect(is.all.brCep('13.076-000', '1')).to.be.false;
+            expect(is.all.brCep(['13076-000', '1'])).to.be.false;
+            expect(is.all.brCep(['13.076-000', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.brCep", function() {
+        it("should return true if any given value is BR cep", function() {
+            expect(is.any.brCep('13076-015', '1')).to.be.true;
+            expect(is.any.brCep('13.076-015', '1')).to.be.true;
+            expect(is.any.brCep(['18682-050', '1'])).to.be.true;
+            expect(is.any.brCep(['18.682-050', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not BR Cep", function() {
+            expect(is.any.brCep('1', '2')).to.be.false;
+            expect(is.any.brCep(['1', '2'])).to.be.false;
+        });
+    });
 });
 describe("string checks", function() {
     describe("is.include", function() {

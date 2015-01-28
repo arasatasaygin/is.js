@@ -809,6 +809,35 @@ is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
 => true
 ```
 
+is.brCep(value:any)
+------------------------
+####Checks if given value matches BR Cep (Brazilian postcode) .
+interfaces: not, all, any
+
+```javascript
+is.brCep('13076-000');
+=> true
+
+is.brCep('13.076-000');
+=> true
+
+is.brCep('123');
+=> false
+
+is.not.brCep('123');
+=> true
+
+is.all.brCep('13076-000', '123');
+=> false
+
+is.any.brCep('18682-015', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.brCep(['13076-000', '123']);
+=> false
+```
+
 String checks
 =============
 
