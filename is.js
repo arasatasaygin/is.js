@@ -664,7 +664,7 @@
 
         // is current device tablet?
         is.tablet = function() {
-            return is.ipad() || is.androidTablet() || is.windowsTablet;
+            return is.ipad() || is.androidTablet() || is.windowsTablet();
         };
         // tablet method does not support 'all' and 'any' interfaces
         is.tablet.api = ['not'];
