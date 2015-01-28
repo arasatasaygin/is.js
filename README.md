@@ -1251,8 +1251,8 @@ is.all.windowObject([window, {nope: 'nope'}]);
 => false
 ```
 
-Array check
-===========
+Array checks
+============
 
 is.inArray(value:any, array)
 ---------------------
