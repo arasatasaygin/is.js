@@ -195,3 +195,14 @@ ul.side-navigation li a:hover {
     position: fixed;
     top: 0;
 }
+#love {
+    margin-left: 40px;
+}
+#love a {
+    color: #2c3233;
+    text-decoration: none;
+    font-weight: 400;
+}
+#love a span {
+    color: #f33e3e;
+}
