@@ -559,7 +559,7 @@
 
         // is current device ios?
         is.ios = function() {
-            return is.iphone() || is.pad() || is.ipod();
+            return is.iphone() || is.ipad() || is.ipod();
         };
         // ios method does not support 'all' and 'any' interfaces
         is.ios.api = ['not'];
