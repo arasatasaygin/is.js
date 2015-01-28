@@ -1228,7 +1228,7 @@ is.not.propertyDefined({}, 'nope');
 is.windowObject(value:window)
 -----------------------------
 ####Checks if given object is window object.
-interface: not, all, any
+interfaces: not, all, any
 
 ```javascript
 is.windowObject(window);
@@ -1254,10 +1254,25 @@ is.all.windowObject([window, {nope: 'nope'}]);
 Array check
 ===========
 
+is.inArray(value:any, array)
+---------------------
+####Checks if given item is in array?
+interface: not
+```javascript
+is.inArray(2, [1, 2, 3]);
+=> true
+
+is.inArray(4, [1, 2, 3]);
+=> false
+
+is.not.inArray(4, [1, 2, 3]);
+=> true
+```
+
 is.sorted(value:array)
 ----------------------
 ####Checks if given array is sorted.
-interface: not, all, any
+interfaces: not, all, any
 
 ```javascript
 is.sorted([1, 2, 3]);
