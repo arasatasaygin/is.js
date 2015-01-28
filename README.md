@@ -1,3 +1,10 @@
+is.js
+=====
+####This is a general-purpose check library.
+- No dependencies
+- AMD, Node & browser ready
+
+
 Type checks
 ===========
 
