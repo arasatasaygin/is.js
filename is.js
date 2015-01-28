@@ -721,7 +721,7 @@
     // Array checks
     /* -------------------------------------------------------------------------- */
 
-    // is a given item in an array
+    // is a given item in an array?
     is.inArray = function(val, arr){
         if(is.not.array(arr)) {
             return false;
