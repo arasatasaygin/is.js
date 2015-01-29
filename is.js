@@ -1,4 +1,4 @@
-// is.js 0.1.2
+// is.js 0.1.3
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -15,7 +15,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('is'));
+        module.exports = factory(require('is_js'));
     } else {
         // Browser globals (root is window)
         root.is = factory(root.is);
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.1.2';
+    is.VERSION = '0.1.3';
 
     // define interfaces
     is.not = {};
