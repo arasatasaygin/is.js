@@ -1,0 +1,35 @@
+{
+  "name": "is_js",
+  "main": "is.js",
+  "version": "0.1.3",
+  "homepage": "http://arasatasaygin.github.io/is.js/",
+  "authors": [
+    "arasatasaygin <arasatasaygin@gmail.com>"
+  ],
+  "description": "micro check library",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "type",
+    "presence",
+    "regexp",
+    "string",
+    "arithmetic",
+    "object",
+    "array",
+    "environment",
+    "time",
+    "configuration"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
