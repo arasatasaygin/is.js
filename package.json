@@ -1,6 +1,8 @@
 {
   "name": "is_js",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "main": "is.js",
+  "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
