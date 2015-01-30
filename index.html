@@ -1,0 +1,2551 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>is.js - micro check library</title>
+        <meta name="description" content="Check types, regexps, presence, time and more...">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/normalize.css">
+        <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="content">
+            <img src="images/is-js-logo.png" alt="is.js logo" class="logo">
+            <h1>Check types, regexps, presence, time and more...</h1>
+            <div class="terminal" data-typer-targets="is.number(42);|is.sameType('foo', NaN);|is.all.number([42, 43, 44]);|is.any.truthy([true, false, null]);|is.not.capitalized('foo');|is.email('foo@bar.com');|is.alphaNumeric('y3s');|is.not.ie(6);|is.chrome( );|is.tablet( );|is.all.even([4, 2, 7]);|is.past(new Date('07/03/1985'));|is.weekend(new Date('07/03/1985'));|is.sorted([1, 2, 4, 3]);|is.boolean(true);|is.not.empty(['foo', 'bar']);"></div>
+            <a href="https://github.com/arasatasaygin/is.js" class="button">View on Github</a>
+            <a href="#method-list" class="down-arrow"></a>
+            <div id="method-list">
+                <div class="col-5">
+                    <h2>Type</h2>
+                    <ul>
+                        <li><a href="#arguments">arguments</a></li>
+                        <li><a href="#array">array</a></li>
+                        <li><a href="#boolean">boolean</a></li>
+                        <li><a href="#date">date</a></li>
+                        <li><a href="#error">error</a></li>
+                        <li><a href="#function">function</a></li>
+                        <li><a href="#nan">nan</a></li>
+                        <li><a href="#null">null</a></li>
+                        <li><a href="#number">number</a></li>
+                        <li><a href="#object">object</a></li>
+                        <li><a href="#regexp">regexp</a></li>
+                        <li><a href="#string">string</a></li>
+                        <li><a href="#char">char</a></li>
+                        <li><a href="#undefined">undefined</a></li>
+                        <li><a href="#sameType">sameType</a></li>
+                    </ul>
+                    <h2>Presence</h2>
+                    <ul>
+                        <li><a href="#empty">empty</a></li>
+                        <li><a href="#existy">existy</a></li>
+                        <li><a href="#truthy">truthy</a></li>
+                        <li><a href="#falsy">falsy</a></li>
+                        <li><a href="#space">space</a></li>
+                    </ul>
+                </div>
+                <div class="col-5">
+                    <h2>RegExp</h2>
+                    <ul>
+                        <li><a href="#url">url</a></li>
+                        <li><a href="#email">email</a></li>
+                        <li><a href="#creditCard">creditCard</a></li>
+                        <li><a href="#alphaNumeric">alphaNumeric</a></li>
+                        <li><a href="#timeString">timeString</a></li>
+                        <li><a href="#dateString">dateString</a></li>
+                        <li><a href="#usZipCode">usZipCode</a></li>
+                        <li><a href="#caPostalCode">caPostalCode</a></li>
+                        <li><a href="#ukPostCode">ukPostCode</a></li>
+                        <li><a href="#nanpPhone">nanpPhone</a></li>
+                        <li><a href="#eppPhone">eppPhone</a></li>
+                        <li><a href="#socialSecurityNumber">socialSecurityNumber</a></li>
+                        <li><a href="#affirmative">affirmative</a></li>
+                    </ul>
+                    <h2>String</h2>
+                    <ul>
+                        <li><a href="#include">include</a></li>
+                        <li><a href="#upperCase">upperCase</a></li>
+                        <li><a href="#lowerCase">lowerCase</a></li>
+                        <li><a href="#startWith">startWith</a></li>
+                        <li><a href="#endWith">endWith</a></li>
+                        <li><a href="#capitalized">capitalized</a></li>
+                    </ul>
+                </div>
+                <div class="col-5">
+                    <h2>Arithmetic</h2>
+                    <ul>
+                        <li><a href="#equal">equal</a></li>
+                        <li><a href="#even">even</a></li>
+                        <li><a href="#odd">odd</a></li>
+                        <li><a href="#positive">positive</a></li>
+                        <li><a href="#negative">negative</a></li>
+                        <li><a href="#above">above</a></li>
+                        <li><a href="#under">under</a></li>
+                        <li><a href="#within">within</a></li>
+                        <li><a href="#decimal">decimal</a></li>
+                        <li><a href="#integer">integer</a></li>
+                        <li><a href="#finite">finite</a></li>
+                        <li><a href="#infinite">infinite</a></li>
+                    </ul>
+                    <h2>Object</h2>
+                    <ul>
+                        <li><a href="#propertyCount">propertyCount</a></li>
+                        <li><a href="#propertyDefined">propertyDefined</a></li>
+                        <li><a href="#windowObject">windowObject</a></li>
+                    </ul>
+                    <h2>Array</h2>
+                    <ul>
+                        <li><a href="#inArray">inArray</a></li>
+                        <li><a href="#sorted">sorted</a></li>
+                    </ul>
+                </div>
+                <div class="col-5">
+                    <h2>Environment</h2>
+                        <ul>
+                            <li><a href="#ie">ie</a></li>
+                            <li><a href="#chrome">chrome</a></li>
+                            <li><a href="#firefox">firefox</a></li>
+                            <li><a href="#opera">opera</a></li>
+                            <li><a href="#safari">safari</a></li>
+                            <li><a href="#ios">ios</a></li>
+                            <li><a href="#iphone">iphone</a></li>
+                            <li><a href="#ipad">ipad</a></li>
+                            <li><a href="#ipod">ipod</a></li>
+                            <li><a href="#android">android</a></li>
+                            <li><a href="#androidPhone">androidPhone</a></li>
+                            <li><a href="#androidTablet">androidTablet</a></li>
+                            <li><a href="#blackberry">blackberry</a></li>
+                            <li><a href="#windowsPhone">windowsPhone</a></li>
+                            <li><a href="#windowsTablet">windowsTablet</a></li>
+                            <li><a href="#windows">windows</a></li>
+                            <li><a href="#mac">mac</a></li>
+                            <li><a href="#linux">linux</a></li>
+                            <li><a href="#desktop">desktop</a></li>
+                            <li><a href="#mobile">mobile</a></li>
+                            <li><a href="#tablet">tablet</a></li>
+                            <li><a href="#online">online</a></li>
+                            <li><a href="#offline">offline</a></li>
+                        </ul>
+                </div>
+                <div class="col-5">
+                    <h2>Time</h2>
+                    <ul>
+                        <li><a href="#today">today</a></li>
+                        <li><a href="#yesterday">yesterday</a></li>
+                        <li><a href="#tomorrow">tomorrow</a></li>
+                        <li><a href="#past">past</a></li>
+                        <li><a href="#future">future</a></li>
+                        <li><a href="#day">day</a></li>
+                        <li><a href="#month">month</a></li>
+                        <li><a href="#year">year</a></li>
+                        <li><a href="#weekday">weekday</a></li>
+                        <li><a href="#weekend">weekend</a></li>
+                        <li><a href="#inDateRange">inDateRange</a></li>
+                        <li><a href="#inLastWeek">inLastWeek</a></li>
+                        <li><a href="#inLastMonth">inLastMonth</a></li>
+                        <li><a href="#inLastYear">inLastYear</a></li>
+                        <li><a href="#inNextWeek">inNextWeek</a></li>
+                        <li><a href="#inNextMonth">inNextMonth</a></li>
+                        <li><a href="#inNextYear">inNextYear</a></li>
+                        <li><a href="#quarterOfYear">quarterOfYear</a></li>
+                        <li><a href="#dayLightSavingTime">dayLightSavingTime</a></li>
+                    </ul>
+                    <h2>Configuration</h2>
+                    <ul>
+                        <li><a href="#setRegexp">setRegexp</a></li>
+                        <li><a href="#setNamespace">setNamespace</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="documentation">
+                <div class="col-7">
+                    <h2 id="type-checks">type checks</h2>
+                    <div id="arguments">
+                        <div class="method">
+                            <h3>is.arguments(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is arguments.</p>
+                        <pre>
+                            <code>
+var getArguments = function() {
+    return arguments;
+};
+var arguments = getArguments();
+
+is.arguments(arguments);
+=> true
+
+is.not.arguments({foo: 'bar'});
+=> true
+
+is.all.arguments(arguments, 'bar');
+=> false
+
+is.any.arguments(['foo'], arguments);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.arguments([arguments, 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="array">
+                        <div class="method">
+                            <h3>is.array(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is array.</p>
+                        <pre>
+                            <code>
+is.array(['foo', 'bar', 'baz']);
+=> true
+
+is.not.array({foo: 'bar'});
+=> true
+
+is.all.array(['foo'], 'bar');
+=> false
+
+is.any.array(['foo'], 'bar');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.array([[1, 2], 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="boolean">
+                        <div class="method">
+                            <h3>is.boolean(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is boolean.</p>
+                        <pre>
+                            <code>
+is.boolean(true);
+=> true
+
+is.not.boolean({foo: 'bar'});
+=> true
+
+is.all.boolean(true, 'bar');
+=> false
+
+is.any.boolean(true, 'bar');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.boolean([true, 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="date">
+                        <div class="method">
+                            <h3>is.date(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is date.</p>
+                        <pre>
+                            <code>
+is.date(new Date());
+=> true
+
+is.not.date({foo: 'bar'});
+=> true
+
+is.all.date(new Date(), 'bar');
+=> false
+
+is.any.date(new Date(), 'bar');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.date([new Date(), 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="error">
+                        <div class="method">
+                            <h3>is.error(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is error.</p>
+                        <pre>
+                            <code>
+is.error(new Error());
+=> true
+
+is.not.error({foo: 'bar'});
+=> true
+
+is.all.error(new Error(), 'bar');
+=> false
+
+is.any.error(new Error(), 'bar');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.error([new Error(), 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="function">
+                        <div class="method">
+                            <h3>is.function(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is function.</p>
+                        <pre>
+                            <code>
+is.function(toString);
+=> true
+
+is.not.function({foo: 'bar'});
+=> true
+
+is.all.function(toString, 'bar');
+=> false
+
+is.any.function(toString, 'bar');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.function([toString, 'foo', 'bar']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="nan">
+                        <div class="method">
+                            <h3>is.nan(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is NaN.</p>
+                        <pre>
+                            <code>
+is.nan(NaN);
+=> true
+
+is.not.nan(42);
+=> true
+
+is.all.nan(NaN, 1);
+=> false
+
+is.any.nan(NaN, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.nan([NaN, 'foo', 1]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="null">
+                        <div class="method">
+                            <h3>is.null(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is null.</p>
+                        <pre>
+                            <code>
+is.null(null);
+=> true
+
+is.not.null(42);
+=> true
+
+is.all.null(null, 1);
+=> false
+
+is.any.null(null, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.null([null, 'foo', 1]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="number">
+                        <div class="method">
+                            <h3>is.number(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is number.</p>
+                        <pre>
+                            <code>
+is.number(42);
+=> true
+
+is.not.number('42');
+=> true
+
+is.all.number('foo', 1);
+=> false
+
+is.any.number({}, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.number([42, 'foo', 1]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="object">
+                        <div class="method">
+                            <h3>is.object(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is object.</p>
+                        <pre>
+                            <code>
+is.object({foo: 'bar'});
+=> true
+
+// functions are also returnin as true
+is.object(toString);
+=> true
+
+is.not.object('foo');
+=> true
+
+is.all.object({}, 1);
+=> false
+
+is.any.object({}, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.object([{}, new Object()]);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="regexp">
+                        <div class="method">
+                            <h3>is.regexp(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is RegExp.</p>
+                        <pre>
+                            <code>
+is.regexp(/test/);
+=> true
+
+is.not.regexp(['foo']);
+=> true
+
+is.all.regexp(/test/, 1);
+=> false
+
+is.any.regexp(new RegExp('ab+c'), 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.regexp([{}, /test/]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="string">
+                        <div class="method">
+                            <h3>is.string(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is string.</p>
+                        <pre>
+                            <code>
+is.string('foo');
+=> true
+
+is.not.string(['foo']);
+=> true
+
+is.all.string('foo', 1);
+=> false
+
+is.any.string('foo', 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.string([{}, 'foo']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="char">
+                        <div class="method">
+                            <h3>is.char(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is char.</p>
+                        <pre>
+                            <code>
+is.char('f');
+=> true
+
+is.not.char(['foo']);
+=> true
+
+is.all.char('f', 1);
+=> false
+
+is.any.char('f', 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.char(['f', 'o', 'o']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="undefined">
+                        <div class="method">
+                            <h3>is.undefined(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is undefined.</p>
+                        <pre>
+                            <code>
+is.undefined(undefined);
+=> true
+
+is.not.undefined(null);
+=> true
+
+is.all.undefined(undefined, 1);
+=> false
+
+is.any.undefined(undefined, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.undefined([{}, undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="sameType">
+                        <div class="method">
+                            <h3>is.sameType(value:any, value:any)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given value types are same.</p>
+                        <pre>
+                            <code>
+is.sameType(42, 7);
+=> true
+
+is.sameType(42, '7');
+=> false
+
+is.not.sameType(42, 7);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="presence-checks">presence checks</h2>
+                    <div id="empty">
+                        <div class="method">
+                            <h3>is.empty(value:object|array|string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is empty.</p>
+                        <pre>
+                            <code>
+is.empty({});
+=> true
+
+is.empty([]);
+=> true
+
+is.empty('');
+=> true
+
+is.not.empty(['foo']);
+=> true
+
+is.all.empty('', {}, ['foo']);
+=> false
+
+is.any.empty([], 42);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.empty([{}, 'foo']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="existy">
+                        <div class="method">
+                            <h3>is.existy(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is existy. (not null or undefined)</p>
+                        <pre>
+                            <code>
+is.existy({});
+=> true
+
+is.existy(null);
+=> false
+
+is.not.existy(undefined);
+=> true
+
+is.all.existy(null, ['foo']);
+=> false
+
+is.any.existy(undefined, 42);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.existy([{}, 'foo']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="truthy">
+                        <div class="method">
+                            <h3>is.truthy(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is truthy. (existy and not false)</p>
+                        <pre>
+                            <code>
+is.truthy(true);
+=> true
+
+is.truthy(null);
+=> false
+
+is.not.truthy(false);
+=> true
+
+is.all.truthy(null, true);
+=> false
+
+is.any.truthy(undefined, true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.truthy([{}, true]);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="falsy">
+                        <div class="method">
+                            <h3>is.falsy(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is falsy.</p>
+                        <pre>
+                            <code>
+is.falsy(false);
+=> true
+
+is.falsy(null);
+=> true
+
+is.not.falsy(true);
+=> true
+
+is.all.falsy(null, false);
+=> true
+
+is.any.falsy(undefined, true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.falsy([false, true, undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="space">
+                        <div class="method">
+                            <h3>is.space(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is space.</p>
+                        <pre>
+                            <code>
+is.space(' ');
+=> true
+
+is.space('foo');
+=> false
+
+is.not.space(true);
+=> true
+
+is.all.space(' ', 'foo');
+=> false
+
+is.any.space(' ', true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.space([' ', 'foo', undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="regexp-checks">regexp checks</h2>
+                    <div id="url">
+                        <div class="method">
+                            <h3>is.url(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches url regexp.</p>
+                        <pre>
+                            <code>
+is.url('http://www.test.com');
+=> true
+
+is.url('foo');
+=> false
+
+is.not.url(true);
+=> true
+
+is.all.url('http://www.test.com', 'foo');
+=> false
+
+is.any.url('http://www.test.com', true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.url(['http://www.test.com', 'foo', undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="email">
+                        <div class="method">
+                            <h3>is.email(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches email regexp.</p>
+                        <pre>
+                            <code>
+is.email('test@test.com');
+=> true
+
+is.email('foo');
+=> false
+
+is.not.email('foo');
+=> true
+
+is.all.email('test@test.com', 'foo');
+=> false
+
+is.any.email('test@test.com', 'foo');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.email(['test@test.com', 'foo', undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="creditCard">
+                        <div class="method">
+                            <h3>is.creditCard(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches credit card regexp.</p>
+                        <pre>
+                            <code>
+is.creditCard(378282246310005);
+=> true
+
+is.creditCard(123);
+=> false
+
+is.not.creditCard(123);
+=> true
+
+is.all.creditCard(378282246310005, 123);
+=> false
+
+is.any.creditCard(378282246310005, 123);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.creditCard([378282246310005, 123, undefined]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="alphaNumeric">
+                        <div class="method">
+                            <h3>is.alphaNumeric(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches alpha numeric regexp.</p>
+                        <pre>
+                            <code>
+is.alphaNumeric('alphaNu3er1k');
+=> true
+
+is.alphaNumeric('*?');
+=> false
+
+is.not.alphaNumeric('*?');
+=> true
+
+is.all.alphaNumeric('alphaNu3er1k', '*?');
+=> false
+
+is.any.alphaNumeric('alphaNu3er1k', '*?');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.alphaNumeric(['alphaNu3er1k', '*?']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="timeString">
+                        <div class="method">
+                            <h3>is.timeString(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches time string regexp.</p>
+                        <pre>
+                            <code>
+is.timeString('13:45:30');
+=> true
+
+is.timeString('90:90:90');
+=> false
+
+is.not.timeString('90:90:90');
+=> true
+
+is.all.timeString('13:45:30', '90:90:90');
+=> false
+
+is.any.timeString('13:45:30', '90:90:90');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.timeString(['13:45:30', '90:90:90']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="dateString">
+                        <div class="method">
+                            <h3>is.dateString(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches date string regexp.</p>
+                        <pre>
+                            <code>
+is.dateString('11/11/2011');
+=> true
+
+is.dateString('90/11/2011');
+=> false
+
+is.not.dateString('90/11/2011');
+=> true
+
+is.all.dateString('11/11/2011', '90/11/2011');
+=> false
+
+is.any.dateString('11/11/2011', '90/11/2011');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.dateString(['11/11/2011', '90/11/2011']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="usZipCode">
+                        <div class="method">
+                            <h3>is.usZipCode(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches US zip code regexp.</p>
+                        <pre>
+                            <code>
+is.usZipCode('02201-1020');
+=> true
+
+is.usZipCode('123');
+=> false
+
+is.not.usZipCode('123');
+=> true
+
+is.all.usZipCode('02201-1020', '123');
+=> false
+
+is.any.usZipCode('02201-1020', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.usZipCode(['02201-1020', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="caPostalCode">
+                        <div class="method">
+                            <h3>is.caPostalCode(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches Canada postal code regexp.</p>
+                        <pre>
+                            <code>
+is.caPostalCode('L8V3Y1');
+=> true
+
+is.caPostalCode('123');
+=> false
+
+is.not.caPostalCode('123');
+=> true
+
+is.all.caPostalCode('L8V3Y1', '123');
+=> false
+
+is.any.caPostalCode('L8V3Y1', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.caPostalCode(['L8V3Y1', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ukPostCode">
+                        <div class="method">
+                            <h3>is.ukPostCode(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches UK post code regexp.</p>
+                        <pre>
+                            <code>
+is.ukPostCode('B184BJ');
+=> true
+
+is.ukPostCode('123');
+=> false
+
+is.not.ukPostCode('123');
+=> true
+
+is.all.ukPostCode('B184BJ', '123');
+=> false
+
+is.any.ukPostCode('B184BJ', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ukPostCode(['B184BJ', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="nanpPhone">
+                        <div class="method">
+                            <h3>is.nanpPhone(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches North American numbering plan phone regexp.</p>
+                        <pre>
+                            <code>
+is.nanpPhone('609-555-0175');
+=> true
+
+is.nanpPhone('123');
+=> false
+
+is.not.nanpPhone('123');
+=> true
+
+is.all.nanpPhone('609-555-0175', '123');
+=> false
+
+is.any.nanpPhone('609-555-0175', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.nanpPhone(['609-555-0175', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="eppPhone">
+                        <div class="method">
+                            <h3>is.eppPhone(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches extensible provisioning protocol phone regexp.</p>
+                        <pre>
+                            <code>
+is.eppPhone('+90.2322456789');
+=> true
+
+is.eppPhone('123');
+=> false
+
+is.not.eppPhone('123');
+=> true
+
+is.all.eppPhone('+90.2322456789', '123');
+=> false
+
+is.any.eppPhone('+90.2322456789', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.eppPhone(['+90.2322456789', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="socialSecurityNumber">
+                        <div class="method">
+                            <h3>is.socialSecurityNumber(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches social security number regexp.</p>
+                        <pre>
+                            <code>
+is.socialSecurityNumber('017-90-7890');
+=> true
+
+is.socialSecurityNumber('123');
+=> false
+
+is.not.socialSecurityNumber('123');
+=> true
+
+is.all.socialSecurityNumber('017-90-7890', '123');
+=> false
+
+is.any.socialSecurityNumber('017-90-7890', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.socialSecurityNumber(['017-90-7890', '123']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="affirmative">
+                        <div class="method">
+                            <h3>is.affirmative(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches affirmative regexp.</p>
+                        <pre>
+                            <code>
+is.affirmative('yes');
+=> true
+
+is.affirmative('no');
+=> false
+
+is.not.affirmative('no');
+=> true
+
+is.all.affirmative('yes', 'no');
+=> false
+
+is.any.affirmative('yes', 'no');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="string-checks">string checks</h2>
+                    <div id="include">
+                        <div class="method">
+                            <h3>is.include(value:string, value:substring)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given string contains a substring.</p>
+                        <pre>
+                            <code>
+is.include('Some text goes here', 'text');
+=> true
+
+is.include('test', 'text');
+=> false
+
+is.not.include('test', 'text');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="upperCase">
+                        <div class="method">
+                            <h3>is.upperCase(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given string is UPPERCASE.</p>
+                        <pre>
+                            <code>
+is.upperCase('YEAP');
+=> true
+
+is.upperCase('nope');
+=> false
+
+is.not.upperCase('Nope');
+=> true
+
+is.all.upperCase('YEAP', 'nope');
+=> false
+
+is.any.upperCase('YEAP', 'nope');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.upperCase(['YEAP', 'ALL UPPERCASE']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="lowerCase">
+                        <div class="method">
+                            <h3>is.lowerCase(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given string is lowercase.</p>
+                        <pre>
+                            <code>
+is.lowerCase('yeap');
+=> true
+
+is.lowerCase('NOPE');
+=> false
+
+is.not.lowerCase('Nope');
+=> true
+
+is.all.lowerCase('yeap', 'NOPE');
+=> false
+
+is.any.lowerCase('yeap', 'NOPE');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.lowerCase(['yeap', 'all lowercase']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="startWith">
+                        <div class="method">
+                            <h3>is.startWith(value:string, value:substring)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given string starts with substring.</p>
+                        <pre>
+                            <code>
+is.startWith('yeap', 'ye');
+=> true
+
+is.startWith('nope', 'ye');
+=> false
+
+is.not.startWith('nope not that', 'not');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="endWith">
+                        <div class="method">
+                            <h3>is.endWith(value:string, value:substring)</h3>
+                            <span>interfaces: not</span>
+                        </div>
+                        <p>Checks if the given string ends with substring.</p>
+                        <pre>
+                            <code>
+is.endWith('yeap', 'ap');
+=> true
+
+is.endWith('nope', 'no');
+=> false
+
+is.not.endWith('nope not that', 'not');
+=> true
+
+is.endWith('yeap that one', 'one');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="capitalized">
+                        <div class="method">
+                            <h3>is.capitalized(value:string, value:substring)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given string is capitalized.</p>
+                        <pre>
+                            <code>
+is.capitalized('Yeap');
+=> true
+
+is.capitalized('nope');
+=> false
+
+is.not.capitalized('nope not capitalized');
+=> true
+
+is.capitalized('Yeap Capitalized');
+=> true
+
+is.all.capitalized('Yeap', 'All', 'Capitalized');
+=> true
+
+is.any.capitalized('Yeap', 'some', 'Capitalized');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.upperCase(['Nope', 'not']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="arithmetic-checks">arithmetic checks</h2>
+                    <div id="equal">
+                        <div class="method">
+                            <h3>is.equal(value:any, value:any)</h3>
+                            <span>interfaces: not</span>
+                        </div>
+                        <p>Checks if the given values are equal.</p>
+                        <pre>
+                            <code>
+is.equal(42, 40 + 2);
+=> true
+
+is.equal('yeap', 'yeap');
+=> true
+
+is.equal(true, true);
+=> true
+
+is.not.equal('yeap', 'nope');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="even">
+                        <div class="method">
+                            <h3>is.even(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is even.</p>
+                        <pre>
+                            <code>
+is.even(42);
+=> true
+
+is.not.even(41);
+=> true
+
+is.all.even(40, 42, 44);
+=> true
+
+is.any.even(39, 42, 43);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.even([40, 42, 43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="odd">
+                        <div class="method">
+                            <h3>is.odd(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is odd.</p>
+                        <pre>
+                            <code>
+is.odd(41);
+=> true
+
+is.not.odd(42);
+=> true
+
+is.all.odd(39, 41, 43);
+=> true
+
+is.any.odd(39, 42, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.odd([40, 42, 43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="positive">
+                        <div class="method">
+                            <h3>is.positive(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is positive.</p>
+                        <pre>
+                            <code>
+is.positive(41);
+=> true
+
+is.not.positive(-42);
+=> true
+
+is.all.positive(39, 41, 43);
+=> true
+
+is.any.positive(-39, 42, -44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.positive([40, 42, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="negative">
+                        <div class="method">
+                            <h3>is.negative(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is negative.</p>
+                        <pre>
+                            <code>
+is.negative(-41);
+=> true
+
+is.not.negative(42);
+=> true
+
+is.all.negative(-39, -41, -43);
+=> true
+
+is.any.negative(-39, 42, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.negative([40, 42, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="above">
+                        <div class="method">
+                            <h3>is.above(value:number, min)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given value is above minimum value.</p>
+                        <pre>
+                            <code>
+is.above(41, 30);
+=> true
+
+is.not.above(42, 50);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="under">
+                        <div class="method">
+                            <h3>is.under(value:number, min)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given value is under maximum value.</p>
+                        <pre>
+                            <code>
+is.under(30, 35);
+=> true
+
+is.not.under(42, 30);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="within">
+                        <div class="method">
+                            <h3>is.within(value:number, min, max)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given value is within minimum and maximum values.</p>
+                        <pre>
+                            <code>
+is.within(30, 20, 40);
+=> true
+
+is.not.within(40, 30, 35);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="decimal">
+                        <div class="method">
+                            <h3>is.decimal(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is decimal.</p>
+                        <pre>
+                            <code>
+is.decimal(41.5);
+=> true
+
+is.not.decimal(42);
+=> true
+
+is.all.decimal(39.5, 41.5, -43.5);
+=> true
+
+is.any.decimal(-39, 42.5, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.decimal([40, 42.5, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="integer">
+                        <div class="method">
+                            <h3>is.integer(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is integer.</p>
+                        <pre>
+                            <code>
+is.integer(41);
+=> true
+
+is.not.integer(42.5);
+=> true
+
+is.all.integer(39, 41, -43);
+=> true
+
+is.any.integer(-39, 42.5, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.integer([40, 42.5, -43]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="finite">
+                        <div class="method">
+                            <h3>is.finite(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is finite.</p>
+                        <pre>
+                            <code>
+is.finite(41);
+=> true
+
+is.not.finite(42 / 0);
+=> true
+
+is.all.finite(39, 41, -43);
+=> true
+
+is.any.finite(-39, Infinity, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.finite([Infinity, -Infinity, 42.5]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="infinite">
+                        <div class="method">
+                            <h3>is.infinite(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value is infinite.</p>
+                        <pre>
+                            <code>
+is.infinite(Infinity);
+=> true
+
+is.not.infinite(42);
+=> true
+
+is.all.infinite(Infinity, -Infinity, -43 / 0);
+=> true
+
+is.any.infinite(-39, Infinity, 44);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.infinite([Infinity, -Infinity, 42.5]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="object-checks">object checks</h2>
+                    <div id="propertyCount">
+                        <div class="method">
+                            <h3>is.propertyCount(value:object, count)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the objects' property count is equal to given count.</p>
+                        <pre>
+                            <code>
+is.propertyCount({this: 'is', 'sample': object}, 2);
+=> true
+
+is.propertyCount({this: 'is', 'sample': object}, 3);
+=> false
+
+is.not.propertyCount({}, 2);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="propertyDefined">
+                        <div class="method">
+                            <h3>is.propertyDefined(value:object, property)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given property is defined on object.</p>
+                        <pre>
+                            <code>
+is.propertyDefined({yeap: 'yeap'}, 'yeap');
+=> true
+
+is.propertyDefined({yeap: 'yeap'}, 'nope');
+=> false
+
+is.not.propertyDefined({}, 'nope');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windowObject">
+                        <div class="method">
+                            <h3>is.windowObject(value:window)</h3>
+                            <span>interface: not, all, any</span>
+                        </div>
+                        <p>Checks if the given object is window object.</p>
+                        <pre>
+                            <code>
+is.windowObject(window);
+=> true
+
+is.windowObject({nope: 'nope'});
+=> false
+
+is.not.windowObject({});
+=> true
+
+is.all.windowObject(window, {nope: 'nope'});
+=> false
+
+is.any.windowObject(window, {nope: 'nope'});
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.windowObject([window, {nope: 'nope'}]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="array-checks">array check</h2>
+                    <div id="inArray">
+                        <div class="method">
+                            <h3>is.inArray(value:array)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given item is in array.</p>
+                        <pre>
+                            <code>
+is.inArray(2, [1, 2, 3]);
+=> true
+
+is.inArray(4, [1, 2, 3]);
+=> false
+
+is.not.inArray(4, [1, 2, 3]);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+
+                    <div id="sorted">
+                        <div class="method">
+                            <h3>is.sorted(value:array)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given array is sorted.</p>
+                        <pre>
+                            <code>
+is.sorted([1, 2, 3]);
+=> true
+
+is.sorted([1, 2, 4, 3]);
+=> false
+
+is.not.sorted([5, 4, 3]);
+=> true
+
+is.all.sorted([1, 2], [3, 4]);
+=> true
+
+is.any.sorted([1, 2], [5, 4]);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.sorted([[1, 2], [5, 4]]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="environment-checks">environment checks</h2>
+                    <p>Environment checks are not available as node module.</p>
+                    <div id="ie">
+                        <div class="method">
+                            <h3>is.ie(value:number)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current browser is ie. Parameter is optional version number of browser.</p>
+                        <pre>
+                            <code>
+is.ie();
+=> true if current browser is ie
+
+is.ie(6);
+=> hopefully false
+
+is.not.ie();
+=> false if current browser is ie
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="chrome">
+                        <div class="method">
+                            <h3>is.chrome()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current browser is chrome.</p>
+                        <pre>
+                            <code>
+is.chrome();
+=> true if current browser is chrome
+
+is.not.chrome();
+=> false if current browser is chrome
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="firefox">
+                        <div class="method">
+                            <h3>is.firefox()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current browser is firefox.</p>
+                        <pre>
+                            <code>
+is.firefox();
+=> true if current browser is firefox
+
+is.not.firefox();
+=> false if current browser is firefox
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="opera">
+                        <div class="method">
+                            <h3>is.opera()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current browser is opera.</p>
+                        <pre>
+                            <code>
+is.opera();
+=> true if current browser is opera
+
+is.not.opera();
+=> false if current browser is opera
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="safari">
+                        <div class="method">
+                            <h3>is.safari()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current browser is safari.</p>
+                        <pre>
+                            <code>
+is.safari();
+=> true if current browser is safari
+
+is.not.safari();
+=> false if current browser is safari
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ios">
+                        <div class="method">
+                            <h3>is.ios()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device has ios.</p>
+                        <pre>
+                            <code>
+is.ios();
+=> true if current device is iPhone, iPad or iPod
+
+is.not.ios();
+=> true if current device is not iPhone, iPad or iPod
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="iphone">
+                        <div class="method">
+                            <h3>is.iphone()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is iPhone.</p>
+                        <pre>
+                            <code>
+is.iphone();
+=> true if current device is iPhone
+
+is.not.iphone();
+=> true if current device is not iPhone
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ipad">
+                        <div class="method">
+                            <h3>is.ipad()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is iPad.</p>
+                        <pre>
+                            <code>
+is.ipad();
+=> true if current device is iPad
+
+is.not.ipad();
+=> true if current device is not iPad
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ipod">
+                        <div class="method">
+                            <h3>is.ipod()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is iPod.</p>
+                        <pre>
+                            <code>
+is.ipod();
+=> true if current device is iPod
+
+is.not.ipod();
+=> true if current device is not iPod
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="android">
+                        <div class="method">
+                            <h3>is.android()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device has Android.</p>
+                        <pre>
+                            <code>
+is.android();
+=> true if current device has Android OS
+
+is.not.android();
+=> true if current device has not Android OS
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="androidPhone">
+                        <div class="method">
+                            <h3>is.androidPhone()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is Android phone.</p>
+                        <pre>
+                            <code>
+is.androidPhone();
+=> true if current device is Android phone
+
+is.not.androidPhone();
+=> true if current device is not Android phone
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="androidTablet">
+                        <div class="method">
+                            <h3>is.androidTablet()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is Android tablet.</p>
+                        <pre>
+                            <code>
+is.androidTablet();
+=> true if current device is Android tablet
+
+is.not.androidTablet();
+=> true if current device is not Android tablet
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="blackberry">
+                        <div class="method">
+                            <h3>is.blackberry()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is Blackberry.</p>
+                        <pre>
+                            <code>
+is.blackberry();
+=> true if current device is Blackberry
+
+is.not.blackberry();
+=> true if current device is not Blackberry
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windowsPhone">
+                        <div class="method">
+                            <h3>is.windowsPhone()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is Windows phone.</p>
+                        <pre>
+                            <code>
+is.windowsPhone();
+=> true if current device is Windows phone
+
+is.not.windowsPhone();
+=> true if current device is not Windows Phone
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windowsTablet">
+                        <div class="method">
+                            <h3>is.windowsTablet()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is Windows tablet.</p>
+                        <pre>
+                            <code>
+is.windowsTablet();
+=> true if current device is Windows tablet
+
+is.not.windowsTablet();
+=> true if current device is not Windows tablet
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="windows">
+                        <div class="method">
+                            <h3>is.windows()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current OS is Windows.</p>
+                        <pre>
+                            <code>
+is.windows();
+=> true if current OS is Windows
+
+is.not.windows();
+=> true if current OS is not Windows
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="mac">
+                        <div class="method">
+                            <h3>is.mac()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current OS is Mac OS X.</p>
+                        <pre>
+                            <code>
+is.mac();
+=> true if current OS is Mac OS X
+
+is.not.mac();
+=> true if current OS is not Mac OS X
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="linux">
+                        <div class="method">
+                            <h3>is.linux()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current OS is linux.</p>
+                        <pre>
+                            <code>
+is.linux();
+=> true if current OS is linux
+
+is.not.linux();
+=> true if current OS is not linux
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="desktop">
+                        <div class="method">
+                            <h3>is.desktop()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is desktop.</p>
+                        <pre>
+                            <code>
+is.desktop();
+=> true if current device is desktop
+
+is.not.desktop();
+=> true if current device is not desktop
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="mobile">
+                        <div class="method">
+                            <h3>is.mobile()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is mobile.<br /> iPhone, iPod, Android Phone, Windows Phone, Blackberry.</p>
+                        <pre>
+                            <code>
+is.mobile();
+=> true if current device is mobile
+
+is.not.mobile();
+=> true if current device is not mobile
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="tablet">
+                        <div class="method">
+                            <h3>is.tablet()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is tablet.<br /> iPad, Android Tablet, Windows Tablet</p>
+                        <pre>
+                            <code>
+is.tablet();
+=> true if current device is tablet
+
+is.not.tablet();
+=> true if current device is not tablet
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="online">
+                        <div class="method">
+                            <h3>is.online()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is online.</p>
+                        <pre>
+                            <code>
+is.online();
+=> true if current device is online
+
+is.not.online();
+=> true if current device is not online
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="offline">
+                        <div class="method">
+                            <h3>is.offline()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device is offline.</p>
+                        <pre>
+                            <code>
+is.offline();
+=> true if current device is offline
+
+is.not.offline();
+=> true if current device is not offline
+                            </code>
+                        </pre>
+                    </div>
+                    <h2 id="time-checks">time checks</h2>
+                    <div id="today">
+                        <div class="method">
+                            <h3>is.today(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date object indicate today.</p>
+                        <pre>
+                            <code>
+var today = new Date();
+is.today(today);
+=> true
+
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+is.today(yesterday);
+=> false
+
+is.not.today(yesterday);
+=> true
+
+is.all.today(today, today);
+=> true
+
+is.any.today(today, yesterday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.today([today, yesterday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="yesterday">
+                        <div class="method">
+                            <h3>is.yesterday(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date object indicate yesterday.</p>
+                        <pre>
+                            <code>
+var today = new Date();
+is.yesterday(today);
+=> false
+
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+is.yesterday(yesterday);
+=> true
+
+is.not.yesterday(today);
+=> true
+
+is.all.yesterday(yesterday, today);
+=> false
+
+is.any.yesterday(today, yesterday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.yesterday([today, yesterday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="tomorrow">
+                        <div class="method">
+                            <h3>is.tomorrow(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date object indicate tomorrow.</p>
+                        <pre>
+                            <code>
+var today = new Date();
+is.tomorrow(today);
+=> false
+
+var tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+is.tomorrow(tomorrow);
+=> true
+
+is.not.tomorrow(today);
+=> true
+
+is.all.tomorrow(tomorrow, today);
+=> false
+
+is.any.tomorrow(today, tomorrow);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.tomorrow([today, tomorrow]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="past">
+                        <div class="method">
+                            <h3>is.past(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date object indicate past.</p>
+                        <pre>
+                            <code>
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+var tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+
+is.past(yesterday);
+=> true
+
+is.past(tomorrow);
+=> false
+
+is.not.past(tomorrow);
+=> true
+
+is.all.past(tomorrow, yesterday);
+=> false
+
+is.any.past(yesterday, tomorrow);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.past([yesterday, tomorrow]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="future">
+                        <div class="method">
+                            <h3>is.future(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date object indicate future.</p>
+                        <pre>
+                            <code>
+var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+var tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+
+is.future(yesterday);
+=> false
+
+is.future(tomorrow);
+=> true
+
+is.not.future(yesterday);
+=> true
+
+is.all.future(tomorrow, yesterday);
+=> false
+
+is.any.future(yesterday, tomorrow);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.future([yesterday, tomorrow]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="day">
+                        <div class="method">
+                            <h3>is.day(value:object, dayString)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date objects' day equal given dayString parameter.</p>
+                        <pre>
+                            <code>
+var mondayObj = new Date('01/26/2015');
+var tuesdayObj = new Date('01/27/2015');
+is.day(mondayObj, 'monday');
+=> true
+
+is.day(mondayObj, 'tuesday');
+=> false
+
+is.not.day(mondayObj, 'tuesday');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="month">
+                        <div class="method">
+                            <h3>is.month(value:object, monthString)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date objects' month equal given monthString parameter.</p>
+                        <pre>
+                            <code>
+var januaryObj = new Date('01/26/2015');
+var februaryObj = new Date('02/26/2015');
+is.month(januaryObj, 'january');
+=> true
+
+is.month(februaryObj, 'january');
+=> false
+
+is.not.month(februaryObj, 'january');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="year">
+                        <div class="method">
+                            <h3>is.year(value:object, yearNumber)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date objects' year equal given yearNumber parameter.</p>
+                        <pre>
+                            <code>
+var year2015 = new Date('01/26/2015');
+var year2016 = new Date('01/26/2016');
+is.year(year2015, 2015);
+=> true
+
+is.year(year2016, 2015);
+=> false
+
+is.not.year(year2016, 2015);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="weekend">
+                        <div class="method">
+                            <h3>is.weekend(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date objects' day is weekend.</p>
+                        <pre>
+                            <code>
+var monday = new Date('01/26/2015');
+var sunday = new Date('01/25/2015');
+var saturday = new Date('01/24/2015');
+is.weekend(sunday);
+=> true
+
+is.weekend(monday);
+=> false
+
+is.not.weekend(monday);
+=> true
+
+is.all.weekend(sunday, saturday);
+=> true
+
+is.any.weekend(sunday, saturday, monday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.weekend([sunday, saturday, monday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="weekday">
+                        <div class="method">
+                            <h3>is.weekday(value:object)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given date objects' day is weekday.</p>
+                        <pre>
+                            <code>
+var monday = new Date('01/26/2015');
+var sunday = new Date('01/25/2015');
+var saturday = new Date('01/24/2015');
+is.weekday(monday);
+=> true
+
+is.weekday(sunday);
+=> false
+
+is.not.weekday(sunday);
+=> true
+
+is.all.weekday(monday, saturday);
+=> false
+
+is.any.weekday(sunday, saturday, monday);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.weekday([sunday, saturday, monday]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inDateRange">
+                        <div class="method">
+                            <h3>is.inDateRange(value:object, startObject, endObject)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the date is within given range.</p>
+                        <pre>
+                            <code>
+var saturday = new Date('01/24/2015');
+var sunday = new Date('01/25/2015');
+var monday = new Date('01/26/2015');
+is.inDateRange(sunday, saturday, monday);
+=> true
+
+is.inDateRange(saturday, sunday, monday);
+=> false
+
+is.not.inDateRange(saturday, sunday, monday);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inLastWeek">
+                        <div class="method">
+                            <h3>is.inLastWeek(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is between now and 7 days ago.</p>
+                        <pre>
+                            <code>
+var twoDaysAgo = new Date(new Date().setDate(new Date().getDate() - 2));
+var nineDaysAgo = new Date(new Date().setDate(new Date().getDate() - 9));
+is.inLastWeek(twoDaysAgo);
+=> true
+
+is.inLastWeek(nineDaysAgo);
+=> false
+
+is.not.inLastWeek(nineDaysAgo);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inLastMonth">
+                        <div class="method">
+                            <h3>is.inLastMonth(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is between now and a month ago.</p>
+                        <pre>
+                            <code>
+var tenDaysAgo = new Date(new Date().setDate(new Date().getDate() - 10));
+var fortyDaysAgo = new Date(new Date().setDate(new Date().getDate() - 40));
+is.inLastMonth(tenDaysAgo);
+=> true
+
+is.inLastMonth(fortyDaysAgo);
+=> false
+
+is.not.inLastMonth(fortyDaysAgo);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inLastYear">
+                        <div class="method">
+                            <h3>is.inLastYear(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is between now and a year ago.</p>
+                        <pre>
+                            <code>
+var twoMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 2));
+var thirteenMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 13));
+is.inLastYear(twoMonthsAgo);
+=> true
+
+is.inLastYear(thirteenMonthsAgo);
+=> false
+
+is.not.inLastYear(thirteenMonthsAgo);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inNextWeek">
+                        <div class="method">
+                            <h3>is.inNextWeek(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is between now and 7 days later.</p>
+                        <pre>
+                            <code>
+var twoDaysLater = new Date(new Date().setDate(new Date().getDate() + 2));
+var nineDaysLater = new Date(new Date().setDate(new Date().getDate() + 9));
+is.inNextWeek(twoDaysLater);
+=> true
+
+is.inNextWeek(nineDaysLater);
+=> false
+
+is.not.inNextWeek(nineDaysLater);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inNextMonth">
+                        <div class="method">
+                            <h3>is.inNextMonth(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is between now and a month later.</p>
+                        <pre>
+                            <code>
+var tenDaysLater = new Date(new Date().setDate(new Date().getDate() + 10));
+var fortyDaysLater = new Date(new Date().setDate(new Date().getDate() + 40));
+is.inNextMonth(tenDaysLater);
+=> true
+
+is.inNextMonth(fortyDaysLater);
+=> false
+
+is.not.inNextMonth(fortyDaysLater);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="inNextYear">
+                        <div class="method">
+                            <h3>is.inNextYear(value:object)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is between now and a year later.</p>
+                        <pre>
+                            <code>
+var twoMonthsLater = new Date(new Date().setMonth(new Date().getMonth() + 2));
+var thirteenMonthsLater = new Date(new Date().setMonth(new Date().getMonth() + 13));
+is.inNextYear(twoMonthsLater);
+=> true
+
+is.inNextYear(thirteenMonthsLater);
+=> false
+
+is.not.inNextYear(thirteenMonthsLater);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="quarterOfYear">
+                        <div class="method">
+                            <h3>is.quarterOfYear(value:object, quarterNumber)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is in the parameter quarter.</p>
+                        <pre>
+                            <code>
+var firstQuarter = new Date('01/26/2015');
+var secondQuarter = new Date('05/26/2015');
+is.quarterOfYear(firstQuarter, 1);
+=> true
+
+is.quarterOfYear(secondQuarter, 1);
+=> false
+
+is.not.quarterOfYear(secondQuarter, 1);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <!-- dayLightSavingTime -->
+                    <div id="dayLightSavingTime">
+                        <div class="method">
+                            <h3>is.dayLightSavingTime(value:object, quarterNumber)</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the given date is in daylight saving time.</p>
+                        <pre>
+                            <code>
+// For Turkey Time Zone
+var january1 = new Date('01/01/2015');
+var june1 = new Date('06/01/2015');
+
+is.dayLightSavingTime(june1);
+=> true
+
+is.dayLightSavingTime(january1);
+=> false
+
+is.not.dayLightSavingTime(january1);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+
+                    <h2 id="configuration">configuration methods</h2>
+                    <div id="setRegexp">
+                        <div class="method">
+                            <h3>is.setRegexp(value:RegExp, regexpString)</h3>
+                        </div>
+                        <p>Override RegExps if you think they suck.</p>
+                        <pre>
+                            <code>
+is.url('https://www.duckduckgo.com');
+=> true
+
+is.setRegexp(/quack/, 'url');
+is.url('quack');
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="setNamespace">
+                        <div class="method">
+                            <h3>is.setNamespace()</h3>
+                        </div>
+                        <p>Change namespace of library to prevent name collisions.</p>
+                        <pre>
+                            <code>
+var customName = is.setNamespace();
+customName.odd(3);
+// => true
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <ul class="side-navigation">
+                        <li><a href="#type-checks">type</a></li>
+                        <li><a href="#presence-checks">presence</a></li>
+                        <li><a href="#regexp-checks">regexp</a></li>
+                        <li><a href="#string-checks">string</a></li>
+                        <li><a href="#arithmetic-checks">arithmetic</a></li>
+                        <li><a href="#object-checks">object</a></li>
+                        <li><a href="#array-checks">array</a></li>
+                        <li><a href="#environment-checks">environment</a></li>
+                        <li><a href="#time-checks">time</a></li>
+                        <li><a href="#configuration">configuration</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h4 id="love">
+                <a href="https://www.youtube.com/watch?v=CHekNnySAfM" rel="nofollow">is.this(<span>♥</span>);</a>
+            </h4>
+        </div>
+        <script src="scripts/is.js"></script>
+        <script src="scripts/jquery.min.js"></script>
+        <script src="scripts/jquery.typer.js"></script>
+        <script src="scripts/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-59050723-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>
