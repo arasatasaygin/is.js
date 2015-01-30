@@ -520,7 +520,7 @@
 
         // store navigator properties to use later
         var userAgent = 'navigator' in window && navigator.userAgent.toLowerCase() || '';
-        var vendor = 'navigator' in window && navigator.vendor.toLowerCase() || '';
+        var vendor = 'navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase() || '';
         var appVersion = 'navigator' in window && navigator.appVersion.toLowerCase() || '';
 
         // is current browser chrome?
