@@ -170,7 +170,7 @@
                             <h3>is.arguments(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is arguments.</p>
+                        <p>Checks if the given value type is arguments.</p>
                         <pre>
                             <code>
 var getArguments = function() {
@@ -201,7 +201,7 @@ is.all.arguments([arguments, 'foo', 'bar']);
                             <h3>is.array(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is array.</p>
+                        <p>Checks if the given value type is array.</p>
                         <pre>
                             <code>
 is.array(['foo', 'bar', 'baz']);
@@ -227,7 +227,7 @@ is.all.array([[1, 2], 'foo', 'bar']);
                             <h3>is.boolean(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is boolean.</p>
+                        <p>Checks if the given value type is boolean.</p>
                         <pre>
                             <code>
 is.boolean(true);
@@ -253,7 +253,7 @@ is.all.boolean([true, 'foo', 'bar']);
                             <h3>is.date(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is date.</p>
+                        <p>Checks if the given value type is date.</p>
                         <pre>
                             <code>
 is.date(new Date());
@@ -279,7 +279,7 @@ is.all.date([new Date(), 'foo', 'bar']);
                             <h3>is.error(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is error.</p>
+                        <p>Checks if the given value type is error.</p>
                         <pre>
                             <code>
 is.error(new Error());
@@ -305,7 +305,7 @@ is.all.error([new Error(), 'foo', 'bar']);
                             <h3>is.function(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is function.</p>
+                        <p>Checks if the given value type is function.</p>
                         <pre>
                             <code>
 is.function(toString);
@@ -331,7 +331,7 @@ is.all.function([toString, 'foo', 'bar']);
                             <h3>is.nan(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is NaN.</p>
+                        <p>Checks if the given value type is NaN.</p>
                         <pre>
                             <code>
 is.nan(NaN);
@@ -357,7 +357,7 @@ is.all.nan([NaN, 'foo', 1]);
                             <h3>is.null(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is null.</p>
+                        <p>Checks if the given value type is null.</p>
                         <pre>
                             <code>
 is.null(null);
@@ -383,7 +383,7 @@ is.all.null([null, 'foo', 1]);
                             <h3>is.number(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is number.</p>
+                        <p>Checks if the given value type is number.</p>
                         <pre>
                             <code>
 is.number(42);
@@ -409,7 +409,7 @@ is.all.number([42, 'foo', 1]);
                             <h3>is.object(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is object.</p>
+                        <p>Checks if the given value type is object.</p>
                         <pre>
                             <code>
 is.object({foo: 'bar'});
@@ -439,7 +439,7 @@ is.all.object([{}, new Object()]);
                             <h3>is.regexp(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is RegExp.</p>
+                        <p>Checks if the given value type is RegExp.</p>
                         <pre>
                             <code>
 is.regexp(/test/);
@@ -465,7 +465,7 @@ is.all.regexp([{}, /test/]);
                             <h3>is.string(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is string.</p>
+                        <p>Checks if the given value type is string.</p>
                         <pre>
                             <code>
 is.string('foo');
@@ -491,7 +491,7 @@ is.all.string([{}, 'foo']);
                             <h3>is.char(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is char.</p>
+                        <p>Checks if the given value type is char.</p>
                         <pre>
                             <code>
 is.char('f');
@@ -517,7 +517,7 @@ is.all.char(['f', 'o', 'o']);
                             <h3>is.undefined(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value type is undefined.</p>
+                        <p>Checks if the given value type is undefined.</p>
                         <pre>
                             <code>
 is.undefined(undefined);
@@ -543,7 +543,7 @@ is.all.undefined([{}, undefined]);
                             <h3>is.sameType(value:any, value:any)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given value types are same type.</p>
+                        <p>Checks if the given value types are same.</p>
                         <pre>
                             <code>
 is.sameType(42, 7);
@@ -563,7 +563,7 @@ is.not.sameType(42, 7);
                             <h3>is.empty(value:object|array|string)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is empty.</p>
+                        <p>Checks if the given value is empty.</p>
                         <pre>
                             <code>
 is.empty({});
@@ -595,7 +595,7 @@ is.all.empty([{}, 'foo']);
                             <h3>is.existy(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is existy. (not null or undefined)</p>
+                        <p>Checks if the given value is existy. (not null or undefined)</p>
                         <pre>
                             <code>
 is.existy({});
@@ -624,7 +624,7 @@ is.all.existy([{}, 'foo']);
                             <h3>is.truthy(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is truthy. (existy and not false)</p>
+                        <p>Checks if the given value is truthy. (existy and not false)</p>
                         <pre>
                             <code>
 is.truthy(true);
@@ -653,7 +653,7 @@ is.all.truthy([{}, true]);
                             <h3>is.falsy(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is falsy.</p>
+                        <p>Checks if the given value is falsy.</p>
                         <pre>
                             <code>
 is.falsy(false);
@@ -682,7 +682,7 @@ is.all.falsy([false, true, undefined]);
                             <h3>is.space(value:string)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is space.</p>
+                        <p>Checks if the given value is space.</p>
                         <pre>
                             <code>
 is.space(' ');
@@ -712,7 +712,7 @@ is.all.space([' ', 'foo', undefined]);
                             <h3>is.url(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches url regexp.</p>
+                        <p>Checks if the given value matches url regexp.</p>
                         <pre>
                             <code>
 is.url('http://www.test.com');
@@ -741,7 +741,7 @@ is.all.url(['http://www.test.com', 'foo', undefined]);
                             <h3>is.email(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches email regexp.</p>
+                        <p>Checks if the given value matches email regexp.</p>
                         <pre>
                             <code>
 is.email('test@test.com');
@@ -770,7 +770,7 @@ is.all.email(['test@test.com', 'foo', undefined]);
                             <h3>is.creditCard(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches credit card regexp.</p>
+                        <p>Checks if the given value matches credit card regexp.</p>
                         <pre>
                             <code>
 is.creditCard(378282246310005);
@@ -799,7 +799,7 @@ is.all.creditCard([378282246310005, 123, undefined]);
                             <h3>is.alphaNumeric(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches alpha numeric regexp.</p>
+                        <p>Checks if the given value matches alpha numeric regexp.</p>
                         <pre>
                             <code>
 is.alphaNumeric('alphaNu3er1k');
@@ -828,7 +828,7 @@ is.all.alphaNumeric(['alphaNu3er1k', '*?']);
                             <h3>is.timeString(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches time string regexp.</p>
+                        <p>Checks if the given value matches time string regexp.</p>
                         <pre>
                             <code>
 is.timeString('13:45:30');
@@ -857,7 +857,7 @@ is.all.timeString(['13:45:30', '90:90:90']);
                             <h3>is.dateString(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches date string regexp.</p>
+                        <p>Checks if the given value matches date string regexp.</p>
                         <pre>
                             <code>
 is.dateString('11/11/2011');
@@ -886,7 +886,7 @@ is.all.dateString(['11/11/2011', '90/11/2011']);
                             <h3>is.usZipCode(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches US zip code regexp.</p>
+                        <p>Checks if the given value matches US zip code regexp.</p>
                         <pre>
                             <code>
 is.usZipCode('02201-1020');
@@ -915,7 +915,7 @@ is.all.usZipCode(['02201-1020', '123']);
                             <h3>is.caPostalCode(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches Canada postal code regexp.</p>
+                        <p>Checks if the given value matches Canada postal code regexp.</p>
                         <pre>
                             <code>
 is.caPostalCode('L8V3Y1');
@@ -944,7 +944,7 @@ is.all.caPostalCode(['L8V3Y1', '123']);
                             <h3>is.ukPostCode(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches UK post code regexp.</p>
+                        <p>Checks if the given value matches UK post code regexp.</p>
                         <pre>
                             <code>
 is.ukPostCode('B184BJ');
@@ -973,7 +973,7 @@ is.all.ukPostCode(['B184BJ', '123']);
                             <h3>is.nanpPhone(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches North American numbering plan phone regexp.</p>
+                        <p>Checks if the given value matches North American numbering plan phone regexp.</p>
                         <pre>
                             <code>
 is.nanpPhone('609-555-0175');
@@ -1002,7 +1002,7 @@ is.all.nanpPhone(['609-555-0175', '123']);
                             <h3>is.eppPhone(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches extensible provisioning protocol phone regexp.</p>
+                        <p>Checks if the given value matches extensible provisioning protocol phone regexp.</p>
                         <pre>
                             <code>
 is.eppPhone('+90.2322456789');
@@ -1031,7 +1031,7 @@ is.all.eppPhone(['+90.2322456789', '123']);
                             <h3>is.socialSecurityNumber(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches social security number regexp.</p>
+                        <p>Checks if the given value matches social security number regexp.</p>
                         <pre>
                             <code>
 is.socialSecurityNumber('017-90-7890');
@@ -1060,7 +1060,7 @@ is.all.socialSecurityNumber(['017-90-7890', '123']);
                             <h3>is.affirmative(value:any)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value matches affirmative regexp.</p>
+                        <p>Checks if the given value matches affirmative regexp.</p>
                         <pre>
                             <code>
 is.affirmative('yes');
@@ -1090,7 +1090,7 @@ is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
                             <h3>is.include(value:string, value:substring)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given string contains a substring.</p>
+                        <p>Checks if the given string contains a substring.</p>
                         <pre>
                             <code>
 is.include('Some text goes here', 'text');
@@ -1109,7 +1109,7 @@ is.not.include('test', 'text');
                             <h3>is.upperCase(value:string)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given string is UPPERCASE.</p>
+                        <p>Checks if the given string is UPPERCASE.</p>
                         <pre>
                             <code>
 is.upperCase('YEAP');
@@ -1138,7 +1138,7 @@ is.all.upperCase(['YEAP', 'ALL UPPERCASE']);
                             <h3>is.lowerCase(value:string)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given string is lowercase.</p>
+                        <p>Checks if the given string is lowercase.</p>
                         <pre>
                             <code>
 is.lowerCase('yeap');
@@ -1167,7 +1167,7 @@ is.all.lowerCase(['yeap', 'all lowercase']);
                             <h3>is.startWith(value:string, value:substring)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given string starts with substring.</p>
+                        <p>Checks if the given string starts with substring.</p>
                         <pre>
                             <code>
 is.startWith('yeap', 'ye');
@@ -1186,7 +1186,7 @@ is.not.startWith('nope not that', 'not');
                             <h3>is.endWith(value:string, value:substring)</h3>
                             <span>interfaces: not</span>
                         </div>
-                        <p>Checks if given string ends with substring.</p>
+                        <p>Checks if the given string ends with substring.</p>
                         <pre>
                             <code>
 is.endWith('yeap', 'ap');
@@ -1208,7 +1208,7 @@ is.endWith('yeap that one', 'one');
                             <h3>is.capitalized(value:string, value:substring)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given string is capitalized.</p>
+                        <p>Checks if the given string is capitalized.</p>
                         <pre>
                             <code>
 is.capitalized('Yeap');
@@ -1241,7 +1241,7 @@ is.all.upperCase(['Nope', 'not']);
                             <h3>is.equal(value:any, value:any)</h3>
                             <span>interfaces: not</span>
                         </div>
-                        <p>Checks if given values are equal.</p>
+                        <p>Checks if the given values are equal.</p>
                         <pre>
                             <code>
 is.equal(42, 40 + 2);
@@ -1263,7 +1263,7 @@ is.not.equal('yeap', 'nope');
                             <h3>is.even(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is even.</p>
+                        <p>Checks if the given value is even.</p>
                         <pre>
                             <code>
 is.even(42);
@@ -1289,7 +1289,7 @@ is.all.even([40, 42, 43]);
                             <h3>is.odd(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is odd.</p>
+                        <p>Checks if the given value is odd.</p>
                         <pre>
                             <code>
 is.odd(41);
@@ -1315,7 +1315,7 @@ is.all.odd([40, 42, 43]);
                             <h3>is.positive(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is positive.</p>
+                        <p>Checks if the given value is positive.</p>
                         <pre>
                             <code>
 is.positive(41);
@@ -1341,7 +1341,7 @@ is.all.positive([40, 42, -43]);
                             <h3>is.negative(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is negative.</p>
+                        <p>Checks if the given value is negative.</p>
                         <pre>
                             <code>
 is.negative(-41);
@@ -1367,7 +1367,7 @@ is.all.negative([40, 42, -43]);
                             <h3>is.above(value:number, min)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given value is above minimum value.</p>
+                        <p>Checks if the given value is above minimum value.</p>
                         <pre>
                             <code>
 is.above(41, 30);
@@ -1383,7 +1383,7 @@ is.not.above(42, 50);
                             <h3>is.under(value:number, min)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given value is under maximum value.</p>
+                        <p>Checks if the given value is under maximum value.</p>
                         <pre>
                             <code>
 is.under(30, 35);
@@ -1399,7 +1399,7 @@ is.not.under(42, 30);
                             <h3>is.within(value:number, min, max)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given value is within minimum and maximum values.</p>
+                        <p>Checks if the given value is within minimum and maximum values.</p>
                         <pre>
                             <code>
 is.within(30, 20, 40);
@@ -1415,7 +1415,7 @@ is.not.within(40, 30, 35);
                             <h3>is.decimal(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is decimal.</p>
+                        <p>Checks if the given value is decimal.</p>
                         <pre>
                             <code>
 is.decimal(41.5);
@@ -1441,7 +1441,7 @@ is.all.decimal([40, 42.5, -43]);
                             <h3>is.integer(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is integer.</p>
+                        <p>Checks if the given value is integer.</p>
                         <pre>
                             <code>
 is.integer(41);
@@ -1467,7 +1467,7 @@ is.all.integer([40, 42.5, -43]);
                             <h3>is.finite(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is finite.</p>
+                        <p>Checks if the given value is finite.</p>
                         <pre>
                             <code>
 is.finite(41);
@@ -1493,7 +1493,7 @@ is.all.finite([Infinity, -Infinity, 42.5]);
                             <h3>is.infinite(value:number)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given value is infinite.</p>
+                        <p>Checks if the given value is infinite.</p>
                         <pre>
                             <code>
 is.infinite(Infinity);
@@ -1520,7 +1520,7 @@ is.all.infinite([Infinity, -Infinity, 42.5]);
                             <h3>is.propertyCount(value:object, count)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if objects' property count is equal to given count.</p>
+                        <p>Checks if the objects' property count is equal to given count.</p>
                         <pre>
                             <code>
 is.propertyCount({this: 'is', 'sample': object}, 2);
@@ -1539,7 +1539,7 @@ is.not.propertyCount({}, 2);
                             <h3>is.propertyDefined(value:object, property)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given property is defined on object.</p>
+                        <p>Checks if the given property is defined on object.</p>
                         <pre>
                             <code>
 is.propertyDefined({yeap: 'yeap'}, 'yeap');
@@ -1558,7 +1558,7 @@ is.not.propertyDefined({}, 'nope');
                             <h3>is.windowObject(value:window)</h3>
                             <span>interface: not, all, any</span>
                         </div>
-                        <p>Checks if given object is window object.</p>
+                        <p>Checks if the given object is window object.</p>
                         <pre>
                             <code>
 is.windowObject(window);
@@ -1588,7 +1588,7 @@ is.all.windowObject([window, {nope: 'nope'}]);
                             <h3>is.inArray(value:array)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given item is in array.</p>
+                        <p>Checks if the given item is in array.</p>
                         <pre>
                             <code>
 is.inArray(2, [1, 2, 3]);
@@ -1608,7 +1608,7 @@ is.not.inArray(4, [1, 2, 3]);
                             <h3>is.sorted(value:array)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given array is sorted.</p>
+                        <p>Checks if the given array is sorted.</p>
                         <pre>
                             <code>
 is.sorted([1, 2, 3]);
@@ -1639,7 +1639,7 @@ is.all.sorted([[1, 2], [5, 4]]);
                             <h3>is.ie(value:number)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current browser is ie. Parameter is optional version number of browser.</p>
+                        <p>Checks if the current browser is ie. Parameter is optional version number of browser.</p>
                         <pre>
                             <code>
 is.ie();
@@ -1658,7 +1658,7 @@ is.not.ie();
                             <h3>is.chrome()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current browser is chrome.</p>
+                        <p>Checks if the current browser is chrome.</p>
                         <pre>
                             <code>
 is.chrome();
@@ -1674,7 +1674,7 @@ is.not.chrome();
                             <h3>is.firefox()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current browser is firefox.</p>
+                        <p>Checks if the current browser is firefox.</p>
                         <pre>
                             <code>
 is.firefox();
@@ -1690,7 +1690,7 @@ is.not.firefox();
                             <h3>is.opera()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current browser is opera.</p>
+                        <p>Checks if the current browser is opera.</p>
                         <pre>
                             <code>
 is.opera();
@@ -1706,7 +1706,7 @@ is.not.opera();
                             <h3>is.safari()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current browser is safari.</p>
+                        <p>Checks if the current browser is safari.</p>
                         <pre>
                             <code>
 is.safari();
@@ -1722,7 +1722,7 @@ is.not.safari();
                             <h3>is.ios()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device has ios.</p>
+                        <p>Checks if the current device has ios.</p>
                         <pre>
                             <code>
 is.ios();
@@ -1738,7 +1738,7 @@ is.not.ios();
                             <h3>is.iphone()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is iPhone.</p>
+                        <p>Checks if the current device is iPhone.</p>
                         <pre>
                             <code>
 is.iphone();
@@ -1754,7 +1754,7 @@ is.not.iphone();
                             <h3>is.ipad()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is iPad.</p>
+                        <p>Checks if the current device is iPad.</p>
                         <pre>
                             <code>
 is.ipad();
@@ -1770,7 +1770,7 @@ is.not.ipad();
                             <h3>is.ipod()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is iPod.</p>
+                        <p>Checks if the current device is iPod.</p>
                         <pre>
                             <code>
 is.ipod();
@@ -1786,7 +1786,7 @@ is.not.ipod();
                             <h3>is.android()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device has Android.</p>
+                        <p>Checks if the current device has Android.</p>
                         <pre>
                             <code>
 is.android();
@@ -1802,7 +1802,7 @@ is.not.android();
                             <h3>is.androidPhone()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is Android phone.</p>
+                        <p>Checks if the current device is Android phone.</p>
                         <pre>
                             <code>
 is.androidPhone();
@@ -1818,7 +1818,7 @@ is.not.androidPhone();
                             <h3>is.androidTablet()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is Android tablet.</p>
+                        <p>Checks if the current device is Android tablet.</p>
                         <pre>
                             <code>
 is.androidTablet();
@@ -1834,7 +1834,7 @@ is.not.androidTablet();
                             <h3>is.blackberry()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is Blackberry.</p>
+                        <p>Checks if the current device is Blackberry.</p>
                         <pre>
                             <code>
 is.blackberry();
@@ -1850,7 +1850,7 @@ is.not.blackberry();
                             <h3>is.windowsPhone()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is Windows phone.</p>
+                        <p>Checks if the current device is Windows phone.</p>
                         <pre>
                             <code>
 is.windowsPhone();
@@ -1866,7 +1866,7 @@ is.not.windowsPhone();
                             <h3>is.windowsTablet()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is Windows tablet.</p>
+                        <p>Checks if the current device is Windows tablet.</p>
                         <pre>
                             <code>
 is.windowsTablet();
@@ -1882,7 +1882,7 @@ is.not.windowsTablet();
                             <h3>is.windows()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current OS is Windows.</p>
+                        <p>Checks if the current OS is Windows.</p>
                         <pre>
                             <code>
 is.windows();
@@ -1898,7 +1898,7 @@ is.not.windows();
                             <h3>is.mac()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current OS is Mac OS X.</p>
+                        <p>Checks if the current OS is Mac OS X.</p>
                         <pre>
                             <code>
 is.mac();
@@ -1914,7 +1914,7 @@ is.not.mac();
                             <h3>is.linux()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current OS is linux.</p>
+                        <p>Checks if the current OS is linux.</p>
                         <pre>
                             <code>
 is.linux();
@@ -1930,7 +1930,7 @@ is.not.linux();
                             <h3>is.desktop()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is desktop.</p>
+                        <p>Checks if the current device is desktop.</p>
                         <pre>
                             <code>
 is.desktop();
@@ -1946,7 +1946,7 @@ is.not.desktop();
                             <h3>is.mobile()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is mobile.<br /> iPhone, iPod, Android Phone, Windows Phone, Blackberry.</p>
+                        <p>Checks if the current device is mobile.<br /> iPhone, iPod, Android Phone, Windows Phone, Blackberry.</p>
                         <pre>
                             <code>
 is.mobile();
@@ -1962,7 +1962,7 @@ is.not.mobile();
                             <h3>is.tablet()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is tablet.<br /> iPad, Android Tablet, Windows Tablet</p>
+                        <p>Checks if the current device is tablet.<br /> iPad, Android Tablet, Windows Tablet</p>
                         <pre>
                             <code>
 is.tablet();
@@ -1978,7 +1978,7 @@ is.not.tablet();
                             <h3>is.online()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is online.</p>
+                        <p>Checks if the current device is online.</p>
                         <pre>
                             <code>
 is.online();
@@ -1994,7 +1994,7 @@ is.not.online();
                             <h3>is.offline()</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if current device is offline.</p>
+                        <p>Checks if the current device is offline.</p>
                         <pre>
                             <code>
 is.offline();
@@ -2011,7 +2011,7 @@ is.not.offline();
                             <h3>is.today(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date object indicate today.</p>
+                        <p>Checks if the given date object indicate today.</p>
                         <pre>
                             <code>
 var today = new Date();
@@ -2042,7 +2042,7 @@ is.all.today([today, yesterday]);
                             <h3>is.yesterday(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date object indicate yesterday.</p>
+                        <p>Checks if the given date object indicate yesterday.</p>
                         <pre>
                             <code>
 var today = new Date();
@@ -2073,7 +2073,7 @@ is.all.yesterday([today, yesterday]);
                             <h3>is.tomorrow(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date object indicate tomorrow.</p>
+                        <p>Checks if the given date object indicate tomorrow.</p>
                         <pre>
                             <code>
 var today = new Date();
@@ -2104,7 +2104,7 @@ is.all.tomorrow([today, tomorrow]);
                             <h3>is.past(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date object indicate past.</p>
+                        <p>Checks if the given date object indicate past.</p>
                         <pre>
                             <code>
 var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
@@ -2136,7 +2136,7 @@ is.all.past([yesterday, tomorrow]);
                             <h3>is.future(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date object indicate future.</p>
+                        <p>Checks if the given date object indicate future.</p>
                         <pre>
                             <code>
 var yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
@@ -2168,7 +2168,7 @@ is.all.future([yesterday, tomorrow]);
                             <h3>is.day(value:object, dayString)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date objects' day equal given dayString parameter.</p>
+                        <p>Checks if the given date objects' day equal given dayString parameter.</p>
                         <pre>
                             <code>
 var mondayObj = new Date('01/26/2015');
@@ -2189,7 +2189,7 @@ is.not.day(mondayObj, 'tuesday');
                             <h3>is.month(value:object, monthString)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date objects' month equal given monthString parameter.</p>
+                        <p>Checks if the given date objects' month equal given monthString parameter.</p>
                         <pre>
                             <code>
 var januaryObj = new Date('01/26/2015');
@@ -2210,7 +2210,7 @@ is.not.month(februaryObj, 'january');
                             <h3>is.year(value:object, yearNumber)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date objects' year equal given yearNumber parameter.</p>
+                        <p>Checks if the given date objects' year equal given yearNumber parameter.</p>
                         <pre>
                             <code>
 var year2015 = new Date('01/26/2015');
@@ -2231,7 +2231,7 @@ is.not.year(year2016, 2015);
                             <h3>is.weekend(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date objects' day is weekend.</p>
+                        <p>Checks if the given date objects' day is weekend.</p>
                         <pre>
                             <code>
 var monday = new Date('01/26/2015');
@@ -2263,7 +2263,7 @@ is.all.weekend([sunday, saturday, monday]);
                             <h3>is.weekday(value:object)</h3>
                             <span>interfaces: not, all, any</span>
                         </div>
-                        <p>Checks if given date objects' day is weekday.</p>
+                        <p>Checks if the given date objects' day is weekday.</p>
                         <pre>
                             <code>
 var monday = new Date('01/26/2015');
@@ -2295,7 +2295,7 @@ is.all.weekday([sunday, saturday, monday]);
                             <h3>is.inDateRange(value:object, startObject, endObject)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if date is within given range.</p>
+                        <p>Checks if the date is within given range.</p>
                         <pre>
                             <code>
 var saturday = new Date('01/24/2015');
@@ -2317,7 +2317,7 @@ is.not.inDateRange(saturday, sunday, monday);
                             <h3>is.inLastWeek(value:object)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is between now and 7 days ago.</p>
+                        <p>Checks if the given date is between now and 7 days ago.</p>
                         <pre>
                             <code>
 var twoDaysAgo = new Date(new Date().setDate(new Date().getDate() - 2));
@@ -2338,7 +2338,7 @@ is.not.inLastWeek(nineDaysAgo);
                             <h3>is.inLastMonth(value:object)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is between now and a month ago.</p>
+                        <p>Checks if the given date is between now and a month ago.</p>
                         <pre>
                             <code>
 var tenDaysAgo = new Date(new Date().setDate(new Date().getDate() - 10));
@@ -2359,7 +2359,7 @@ is.not.inLastMonth(fortyDaysAgo);
                             <h3>is.inLastYear(value:object)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is between now and a year ago.</p>
+                        <p>Checks if the given date is between now and a year ago.</p>
                         <pre>
                             <code>
 var twoMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 2));
@@ -2380,7 +2380,7 @@ is.not.inLastYear(thirteenMonthsAgo);
                             <h3>is.inNextWeek(value:object)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is between now and 7 days later.</p>
+                        <p>Checks if the given date is between now and 7 days later.</p>
                         <pre>
                             <code>
 var twoDaysLater = new Date(new Date().setDate(new Date().getDate() + 2));
@@ -2401,7 +2401,7 @@ is.not.inNextWeek(nineDaysLater);
                             <h3>is.inNextMonth(value:object)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is between now and a month later.</p>
+                        <p>Checks if the given date is between now and a month later.</p>
                         <pre>
                             <code>
 var tenDaysLater = new Date(new Date().setDate(new Date().getDate() + 10));
@@ -2422,7 +2422,7 @@ is.not.inNextMonth(fortyDaysLater);
                             <h3>is.inNextYear(value:object)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is between now and a year later.</p>
+                        <p>Checks if the given date is between now and a year later.</p>
                         <pre>
                             <code>
 var twoMonthsLater = new Date(new Date().setMonth(new Date().getMonth() + 2));
@@ -2443,7 +2443,7 @@ is.not.inNextYear(thirteenMonthsLater);
                             <h3>is.quarterOfYear(value:object, quarterNumber)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is in the parameter quarter.</p>
+                        <p>Checks if the given date is in the parameter quarter.</p>
                         <pre>
                             <code>
 var firstQuarter = new Date('01/26/2015');
@@ -2465,7 +2465,7 @@ is.not.quarterOfYear(secondQuarter, 1);
                             <h3>is.dayLightSavingTime(value:object, quarterNumber)</h3>
                             <span>interface: not</span>
                         </div>
-                        <p>Checks if given date is in daylight saving time.</p>
+                        <p>Checks if the given date is in daylight saving time.</p>
                         <pre>
                             <code>
 // For Turkey Time Zone
