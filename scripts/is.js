@@ -1,4 +1,4 @@
-// is.js 0.1.1
+// is.js 0.2.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -15,7 +15,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('is'));
+        module.exports = factory(require('is_js'));
     } else {
         // Browser globals (root is window)
         root.is = factory(root.is);
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.1.1';
+    is.VERSION = '0.2.0';
 
     // define interfaces
     is.not = {};
@@ -166,6 +166,11 @@
     // is a given value String?
     is.string = function(value) {
         return toString.call(value) === '[object String]';
+    };
+
+    // is a given value Char?
+    is.char = function(value) {
+        return is.string(value) && value.length === 1;
     };
 
     // is a given value undefined?
@@ -559,7 +564,7 @@
 
         // is current device ios?
         is.ios = function() {
-            return is.iphone() || is.pad() || is.ipod();
+            return is.iphone() || is.ipad() || is.ipod();
         };
         // ios method does not support 'all' and 'any' interfaces
         is.ios.api = ['not'];
@@ -592,7 +597,7 @@
         // android method does not support 'all' and 'any' interfaces
         is.android.api = ['not'];
 
-        // is current device android tablet?
+        // is current device android phone?
         is.androidPhone = function() {
             return /android/i.test(userAgent) && /mobile/i.test(userAgent);
         };
@@ -612,20 +617,6 @@
         };
         // blackberry method does not support 'all' and 'any' interfaces
         is.blackberry.api = ['not'];
-
-        // is current device mobile?
-        is.mobile = function() {
-            return is.iphone() || is.ipod() || is.androidPhone();
-        };
-        // mobile method does not support 'all' and 'any' interfaces
-        is.mobile.api = ['not'];
-
-        // is current device tablet?
-        is.tablet = function() {
-            return is.ipad() || is.androidTablet();
-        };
-        // tablet method does not support 'all' and 'any' interfaces
-        is.tablet.api = ['not'];
 
         // is current device desktop?
         is.desktop = function() {
@@ -669,9 +660,23 @@
         // windowsTablet method does not support 'all' and 'any' interfaces
         is.windowsTablet.api = ['not'];
 
+        // is current device mobile?
+        is.mobile = function() {
+            return is.iphone() || is.ipod() || is.androidPhone() || is.blackberry() || is.windowsPhone();
+        };
+        // mobile method does not support 'all' and 'any' interfaces
+        is.mobile.api = ['not'];
+
+        // is current device tablet?
+        is.tablet = function() {
+            return is.ipad() || is.androidTablet() || is.windowsTablet();
+        };
+        // tablet method does not support 'all' and 'any' interfaces
+        is.tablet.api = ['not'];
+
         // is current state online?
         is.online = function() {
-            return navigator.online;
+            return navigator.onLine;
         };
         // online method does not support 'all' and 'any' interfaces
         is.online.api = ['not'];
@@ -720,6 +725,19 @@
 
     // Array checks
     /* -------------------------------------------------------------------------- */
+
+    // is a given item in an array?
+    is.inArray = function(val, arr){
+        if(is.not.array(arr)) {
+            return false;
+        }
+        for(var i = 0; i < arr.length; i++) {
+            if (arr[i] === val) return true;
+        }
+        return false;
+    };
+    // inArray method does not support 'all' and 'any' interfaces
+    is.inArray.api = ['not'];
 
     // is a given array sorted?
     is.sorted = function(arr) {
