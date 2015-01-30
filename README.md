@@ -293,6 +293,29 @@ is.all.string([{}, 'foo']);
 => false
 ```
 
+is.char(value:any)
+--------------------
+####Checks if given value type is char.
+interfaces: not, all, any
+
+```javascript
+is.char('f');
+=> true
+
+is.not.char(['foo']);
+=> true
+
+is.all.char('f', 1);
+=> false
+
+is.any.char('f', 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.char(['f', 'o', 'o']);
+=> true
+```
+
 is.undefined(value:any)
 -----------------------
 ####Checks if given value type is undefined.
