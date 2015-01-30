@@ -168,6 +168,11 @@
         return toString.call(value) === '[object String]';
     };
 
+    // is a given value Char?
+    is.char = function(value) {
+        return is.string(value) && value.length === 1;
+    };
+
     // is a given value undefined?
     is.undefined = function(value) {
         return value === void 0;

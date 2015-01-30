@@ -499,6 +499,42 @@ describe("type checks", function() {
             expect(is.not.sameType(1, 'test')).to.be.true;
         });
     });
+    describe("is.char", function() {
+        it("should return true if passed parameter type is char", function() {
+            expect(is.char('t')).to.be.true;
+        });
+        it("should return false if passed parameter type is not a char", function() {
+          expect(is.char('test')).to.be.false;
+        });
+    });
+    describe("is.not.char", function() {
+        it("should return false if passed parameter type is char", function() {
+            expect(is.not.char('t')).to.be.false;
+        });
+        it("should return true if passed parameter type is not char", function() {
+            expect(is.not.char(1)).to.be.true;
+        });
+    });
+    describe("is.all.char", function() {
+        it("should return true if all passed parameter types are char", function() {
+            expect(is.all.char('t', 't')).to.be.true;
+            expect(is.all.char(['t', 't'])).to.be.true;
+        });
+        it("should return false if any passed parameter type is not char", function() {
+            expect(is.all.char('test', 1)).to.be.false;
+            expect(is.all.char(['test', 1])).to.be.false;
+        });
+    });
+    describe("is.any.char", function() {
+        it("should return true if any passed parameter type is char", function() {
+            expect(is.any.char('t', 1)).to.be.true;
+            expect(is.any.char(['t', 1])).to.be.true;
+        });
+        it("should return false if all passed parameter types are not char", function() {
+            expect(is.any.char(null, 1)).to.be.false;
+            expect(is.any.char([null, 1])).to.be.false;
+        });
+    });
     describe("is.string", function() {
         it("should return true if passed parameter type is string", function() {
             expect(is.string('test')).to.be.true;
