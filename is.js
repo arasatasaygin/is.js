@@ -163,14 +163,14 @@
     // sameType method does not support 'all' and 'any' interfaces
     is.sameType.api = ['not'];
 
-    // is a given value Char?
-    is.char = function(value) {
-      return toString.call(value) === '[object String]' && value.length === 1;
-    };
-
     // is a given value String?
     is.string = function(value) {
         return toString.call(value) === '[object String]';
+    };
+
+    // is a given value Char?
+    is.char = function(value) {
+        return is.string(value) && value.length === 1;
     };
 
     // is a given value undefined?
