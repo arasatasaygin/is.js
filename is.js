@@ -181,27 +181,6 @@
     // Presence checks
     /* -------------------------------------------------------------------------- */
 
-   /* 
-    // is a given value empty? Objects, arrays, strings
-    //ERRORS:
-    //  returns true for an object containing non-enumerable own properties only
-    is.empty = function(value) {
-        if(is.null(value)) {
-            return false;
-        } else if(is.object(value)) {
-            for(var prop in value) {
-                if(value.hasOwnProperty(prop))
-                    return false;
-            }
-            return true;
-        } else if(is.array(value) || is.arguments(value)) {
-            return value.length === 0;
-        } else {    // string case
-            return value === '';
-        }
-    };
-    */
-    
     //is a given value empty? Objects, arrays, strings
     is.empty = function(value) {
         if(is.object(value)){
@@ -222,8 +201,7 @@
 
     // is a given value truthy?
     is.truthy = function(value) {
-        //falsy values are 0, null, undefined, "", NaN, false
-        return is.existy(value) && value !== false && !is.nan(value) && value !== "" && value !== 0;
+        return is.existy(value) && value !== false && is.not.nan(value) && value !== "" && value !== 0;
     };
 
     // is a given value falsy?
