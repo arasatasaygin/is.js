@@ -222,7 +222,8 @@
 
     // is a given value truthy?
     is.truthy = function(value) {
-        return is.existy(value) && value !== false;
+        //falsy values are 0, null, undefined, "", NaN, false
+        return is.existy(value) && value !== false && !is.nan(value) && value !== "" && value !== 0;
     };
 
     // is a given value falsy?
