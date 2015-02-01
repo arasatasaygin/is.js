@@ -669,10 +669,10 @@ describe("presence checks", function() {
         });
     });
     describe("is.truthy", function() {
-        it("should return true if given value is existy and not false", function() {
+        it("should return true if given value is truthy", function() {
             expect(is.truthy('test')).to.be.true;
         });
-        it("should return false if given value is not existy", function() {
+        it("should return false if given value is not truthy", function() {
             expect(is.truthy(undefined)).to.be.false;
         });
         it("should return false if given value is false", function() {
@@ -680,10 +680,10 @@ describe("presence checks", function() {
         });
     });
     describe("is.not.truthy", function() {
-        it("should return false if given value is existy and not false", function() {
+        it("should return false if given value is truthy", function() {
             expect(is.not.truthy(true)).to.be.false;
         });
-        it("should return true if given value is not existy", function() {
+        it("should return true if given value is not truthy", function() {
             expect(is.not.truthy(undefined)).to.be.true;
         });
         it("should return true if given value is false", function() {
@@ -691,20 +691,20 @@ describe("presence checks", function() {
         });
     });
     describe("is.all.truthy", function() {
-        it("should return true if all given values are existy and not false", function() {
+        it("should return true if all given values are truthy", function() {
             expect(is.all.truthy('test', [], true)).to.be.true;
             expect(is.all.truthy(['test', [], true])).to.be.true;
         });
-        it("should return false if any given value is not existy or false", function() {
+        it("should return false if any given value is not truthy", function() {
             expect(is.all.truthy('test', undefined)).to.be.false;
             expect(is.all.truthy(['test', undefined])).to.be.false;
         });
     });
     describe("is.falsy", function() {
-        it("should return false if given value is existy and not false", function() {
+        it("should return false if given value is truthy", function() {
             expect(is.falsy('test')).to.be.false;
         });
-        it("should return true if given value is not existy", function() {
+        it("should return true if given value is falsy", function() {
             expect(is.falsy(undefined)).to.be.true;
         });
         it("should return true if given value is false", function() {
@@ -712,10 +712,10 @@ describe("presence checks", function() {
         });
     });
     describe("is.not.falsy", function() {
-        it("should return true if given value is existy and not false", function() {
+        it("should return true if given value is truthy", function() {
             expect(is.not.falsy(true)).to.be.true;
         });
-        it("should return false if given value is not existy", function() {
+        it("should return false if given value is falsy", function() {
             expect(is.not.falsy(undefined)).to.be.false;
         });
         it("should return false if given value is false", function() {
