@@ -1,12 +1,20 @@
-# Tells git to detect all text files and automatically normalize them
-# Automatic normalization will be enforced only when an unspecified file (file-extensions are specified below) is read from or written into repository
+# This file has been generated using '.gitattributes Generator'.
+# You can generate yours at http://ihopepeace.github.io/gitattributes_generator
+
 * text=auto
 
-# These files are text and should be normalized
+# Explicitly declare text files that should be normalized and converted
+# to native line endings on checkout.
 *.js text
 *.min.js text
 *.json text
 *.html text
-*.htm text
 *.css text
 *.md text
+
+# Declare files that should have CRLF line endings on checkout.
+
+# Declare files that should have LF line endings on checkout.
+
+# Declare files that are truly binary and shouldn't be modified.
+
