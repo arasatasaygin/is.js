@@ -1606,6 +1606,42 @@ describe("regexp checks", function() {
             expect(is.any.affirmative(['no', '2'])).to.be.false;
         });
     });
+    describe("is.hexadecimal", function() {
+        it("should return true if given value is hexadecimal", function() {
+            expect(is.hexadecimal('ff')).to.be.true;
+        });
+        it("should return false if given value is not hexadecimal", function() {
+            expect(is.hexadecimal(0.287)).to.be.false;
+        });
+    });
+    describe("is.not.hexadecimal", function() {
+        it("should return false if given value is hexadecimal", function() {
+            expect(is.not.hexadecimal('ffFF')).to.be.false;
+        });
+        it("should return true if given value is not hexadecimal", function() {
+            expect(is.not.hexadecimal('nohexhere')).to.be.true;
+        });
+    });
+    describe("is.all.hexadecimal", function() {
+        it("should return true if all given values are hexadecimal", function() {
+            expect(is.all.hexadecimal('bcd', 'fF0')).to.be.true;
+            expect(is.all.hexadecimal(['bcd', 'fF0'])).to.be.true;
+        });
+        it("should return false if any given value is not hexadecimal", function() {
+            expect(is.all.hexadecimal('ff', 'nohex')).to.be.false;
+            expect(is.all.hexadecimal(['ff', 'nohex'])).to.be.false;
+        });
+    });
+    describe("is.any.hexadecimal", function() {
+        it("should return true if any given value is hexadecimal", function() {
+            expect(is.any.hexadecimal('F5', 'nohex')).to.be.true;
+            expect(is.any.hexadecimal(['F5', 'nohex'])).to.be.true;
+        });
+        it("should return false if all given values are not hexadecimal", function() {
+            expect(is.any.hexadecimal('hex', 'none')).to.be.false;
+            expect(is.any.hexadecimal(['hex', 'none'])).to.be.false;
+        });
+    });
 });
 describe("string checks", function() {
     describe("is.include", function() {
