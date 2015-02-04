@@ -832,6 +832,58 @@ is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
 => true
 ```
 
+is.hexadecimal(value:any)
+-------------------------
+####Checks if the given value matches hexadecimal regexp.
+interfaces: not, all, any
+
+```javascript
+is.hexadecimal('f0f0f0');
+=> true
+
+is.hexadecimal(2.5);
+=> false
+
+is.not.hexadecimal('string');
+=> true
+
+is.all.hexadecimal('ff', 'f50');
+=> true
+
+is.any.hexadecimal('ff5500', true);
+=> false
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.hexadecimal(['fff', '333', 'f50']);
+=> true
+```
+
+is.hexcolor(value:any)
+-------------------------
+####Checks if the given value matches hexcolor regexp.
+interfaces: not, all, any
+
+```javascript
+is.hexcolor('#333');
+=> true
+
+is.hexcolor('#3333');
+=> false
+
+is.not.hexcolor(0.5);
+=> true
+
+is.all.hexcolor('fff', 'f50');
+=> true
+
+is.any.hexcolor('ff5500', 0.5);
+=> false
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.hexcolor(['fff', '333', 'f50']);
+=> true
+```
+
 String checks
 =============
 
