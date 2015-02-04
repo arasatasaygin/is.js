@@ -884,6 +884,53 @@ is.all.hexColor(['fff', '333', 'f50']);
 => true
 ```
 
+is.ip(value:string)
+-------------------------
+####Checks if the given value matches ip regexp
+interfaces: not, all, any
+
+```javascript
+is.ip('198.156.23.5');
+=> true
+
+is.ip('1.2..5');
+=> false
+
+is.not.ip('8:::::::7');
+=> true
+
+is.all.ip('0:1::4:ff5:54:987:C', '123.123.123.123');
+=> true
+
+is.any.ip('123.8.4.3', '0.0.0.0');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ip(['123.123.23.12', 'A:B:C:D:E:F:0:0']);
+=> true
+```
+
+is.ipv4(value:string)
+-------------------------
+####Checks if the given value matches ipv4 regexp
+interfaces: not, all, any
+
+```javascript
+//same usage as is.ip
+```
+
+is.ipv6(value:string)
+-------------------------
+####Checks if the given value matches ipv6 regexp
+interfaces: not, all, any
+
+```javascript
+//same usage as is.ip
+```
+
+
+
+
 String checks
 =============
 
