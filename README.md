@@ -851,7 +851,7 @@ is.all.hexadecimal('ff', 'f50');
 => true
 
 is.any.hexadecimal('ff5500', true);
-=> false
+=> true
 
 // 'all' and 'any' interfaces can also take array parameter
 is.all.hexadecimal(['fff', '333', 'f50']);
@@ -864,23 +864,23 @@ is.hexcolor(value:any)
 interfaces: not, all, any
 
 ```javascript
-is.hexcolor('#333');
+is.hexColor('#333');
 => true
 
-is.hexcolor('#3333');
+is.hexColor('#3333');
 => false
 
-is.not.hexcolor(0.5);
+is.not.hexColor(0.5);
 => true
 
-is.all.hexcolor('fff', 'f50');
+is.all.hexColor('fff', 'f50');
 => true
 
-is.any.hexcolor('ff5500', 0.5);
+is.any.hexColor('ff5500', 0.5);
 => false
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.hexcolor(['fff', '333', 'f50']);
+is.all.hexColor(['fff', '333', 'f50']);
 => true
 ```
 
