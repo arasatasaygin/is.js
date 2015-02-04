@@ -1,4 +1,4 @@
-// is.js 0.2.2
+// is.js 0.3.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.2.2';
+    is.VERSION = '0.3.0';
 
     // define interfaces
     is.not = {};
@@ -317,11 +317,13 @@
         dateString: /^(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{2})?[0-9]{2}$/,
         usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/,
         caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]?[0-9][A-Z][0-9]$/,
-        ukPostCode: /^[A-Z]{1,2}[0-9R][0-9A-Z]?[0-9][ABD-HJLNP-UW-Z]{2}$/,
+        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
         nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
         socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/,
-        affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/
+        affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/,
+        hexadecimal: /^[0-9a-fA-F]+$/,
+        hexColor: /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/
     };
 
     // create regexp checks methods from 'regexp' object

@@ -1606,6 +1606,78 @@ describe("regexp checks", function() {
             expect(is.any.affirmative(['no', '2'])).to.be.false;
         });
     });
+    describe("is.hexadecimal", function() {
+        it("should return true if given value is hexadecimal", function() {
+            expect(is.hexadecimal('ff')).to.be.true;
+        });
+        it("should return false if given value is not hexadecimal", function() {
+            expect(is.hexadecimal(0.287)).to.be.false;
+        });
+    });
+    describe("is.not.hexadecimal", function() {
+        it("should return false if given value is hexadecimal", function() {
+            expect(is.not.hexadecimal('ffFF')).to.be.false;
+        });
+        it("should return true if given value is not hexadecimal", function() {
+            expect(is.not.hexadecimal('nohexhere')).to.be.true;
+        });
+    });
+    describe("is.all.hexadecimal", function() {
+        it("should return true if all given values are hexadecimal", function() {
+            expect(is.all.hexadecimal('bcd', 'fF0')).to.be.true;
+            expect(is.all.hexadecimal(['bcd', 'fF0'])).to.be.true;
+        });
+        it("should return false if any given value is not hexadecimal", function() {
+            expect(is.all.hexadecimal('ff', 'nohex')).to.be.false;
+            expect(is.all.hexadecimal(['ff', 'nohex'])).to.be.false;
+        });
+    });
+    describe("is.any.hexadecimal", function() {
+        it("should return true if any given value is hexadecimal", function() {
+            expect(is.any.hexadecimal('F5', 'nohex')).to.be.true;
+            expect(is.any.hexadecimal(['F5', 'nohex'])).to.be.true;
+        });
+        it("should return false if all given values are not hexadecimal", function() {
+            expect(is.any.hexadecimal('hex', 'none')).to.be.false;
+            expect(is.any.hexadecimal(['hex', 'none'])).to.be.false;
+        });
+    });
+    describe("is.hexColor", function() {
+        it("should return true if given value is hexColor", function() {
+            expect(is.hexColor('#333')).to.be.true;
+        });
+        it("should return false if given value is not hexColor", function() {
+            expect(is.hexColor(0.287)).to.be.false;
+        });
+    });
+    describe("is.not.hexColor", function() {
+        it("should return false if given value is hexColor", function() {
+            expect(is.not.hexColor('#333')).to.be.false;
+        });
+        it("should return true if given value is not hexColor", function() {
+            expect(is.not.hexColor(0.287)).to.be.true;
+        });
+    });
+    describe("is.all.hexColor", function() {
+        it("should return true if all given values are hexColor", function() {
+            expect(is.all.hexColor('#333', '#444444')).to.be.true;
+            expect(is.all.hexColor(['#333', '#444444'])).to.be.true;
+        });
+        it("should return false if any given value is not hexColor", function() {
+            expect(is.all.hexColor('#3333', 'nohex')).to.be.false;
+            expect(is.all.hexColor(['#3333', 'nohex'])).to.be.false;
+        });
+    });
+    describe("is.any.hexColor", function() {
+        it("should return true if any given values is hexColor", function() {
+            expect(is.any.hexColor('#333', 'nohex')).to.be.true;
+            expect(is.any.hexColor(['#333', 'nohex'])).to.be.true;
+        });
+        it("should return false if all given values are not hexColor", function() {
+            expect(is.any.hexColor('nohex', 'nohex')).to.be.false;
+            expect(is.any.hexColor(['nohex', 'nohex'])).to.be.false;
+        });
+    });
 });
 describe("string checks", function() {
     describe("is.include", function() {
