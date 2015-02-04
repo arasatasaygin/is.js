@@ -321,7 +321,9 @@
         nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
         socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/,
-        affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/
+        affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/,
+        hexadecimal: /^[0-9a-fA-F]+$/,
+        hexColor: /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/
     };
 
     // create regexp checks methods from 'regexp' object
