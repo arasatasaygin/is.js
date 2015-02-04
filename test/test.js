@@ -1678,7 +1678,116 @@ describe("regexp checks", function() {
             expect(is.any.hexColor(['nohex', 'nohex'])).to.be.false;
         });
     });
+    describe("is.ip", function() {
+        it("should return true if given value is a valid IP address", function() {
+                expect(is.ip('2001:DB8:0:0:1::1')).to.be.true;
+        });
+        it("should return false if given value is not a valid IP address", function() {
+                expect(is.ip('985.12.3.4')).to.be.false;
+        });
+    });
+    describe("is.not.ip", function() {
+        it("should return false if given value is a valid IP address", function() {
+                expect(is.not.ip('2001:db8:0:0:1::1')).to.be.false;
+        });
+        it("should return true if given value is not a valid IP address", function() {
+                expect(is.not.ip('0..3.4')).to.be.true;
+        });
+    });
+    describe("is.all.ip", function() {
+        it("should return true if all given values are valid IP addresses", function() {
+                expect(is.all.ip('2001:db8::0:1:0:0:1', '201.50.198.2')).to.be.true;
+                expect(is.all.ip(['2001:db8::0:1:0:0:1', '201.50.198.2'])).to.be.true;
+        });
+        it("should return false if any given value is not a valid IP address", function() {
+                expect(is.all.ip('987.25.45.6', 'QFFF:0:78F:9::8:8:9')).to.be.false;
+                expect(is.all.ip(['987.25.45.6', 'QFFF:0:78F:9::8:8:9'])).to.be.false;
+         });
+    });
+    describe("is.any.ip", function() {
+         it("should return true if any given value is a valid IP address", function() {
+                 expect(is.any.ip('2001:0db8::1:0:0:1', '850..1.4')).to.be.true;
+                 expect(is.any.ip(['2001:0db8::1:0:0:1', '850..1.4'])).to.be.true;
+          });
+          it("should return false if all given values are not valid IP address", function() {
+                 expect(is.any.ip('1.2.3.', '78FF:::::::L')).to.be.false;
+                 expect(is.any.ip(['1.2.3.', '78FF:::::::L'])).to.be.false;
+          });
+    });
+    describe("is.ipv4", function() {
+          it("should return true if given value is a valid IPv4 address", function() {
+                  expect(is.ipv4('198.12.3.142')).to.be.true;
+          });
+          it("should return false if given value is not a valid IPv4 address", function() {
+                  expect(is.ipv4('985.12.3.4')).to.be.false;
+          });
+    });
+    describe("is.not.ipv4", function() {
+           it("should return false if given value is a valid IPv4 address", function() {
+                  expect(is.not.ipv4('102.52.47.18')).to.be.false;
+           });
+           it("should return true if given value is not a valid IPv4 address", function() {
+                  expect(is.not.ipv4('0..3.4')).to.be.true;
+           });
+    });
+    describe("is.all.ipv4", function() {
+           it("should return true if all given values are valid IPv4 addresses", function() {
+                  expect(is.all.ipv4('0.0.0.0', '201.50.198.2')).to.be.true;
+                  expect(is.all.ipv4(['0.0.0.0', '201.50.198.2'])).to.be.true;
+           });
+           it("should return false if any given value is not a valid IPv4 address", function() {
+                  expect(is.all.ipv4('987.25.45.6', '125.256.10.3')).to.be.false;
+                  expect(is.all.ipv4(['987.25.45.6', '125.256.10.3'])).to.be.false;
+           });
+    });
+    describe("is.any.ipv4", function() {
+           it("should return true if any given value is a valid IPv4 address", function() {
+                  expect(is.any.ipv4('255.255.255.255', '850..1.4')).to.be.true;
+                  expect(is.any.ipv4(['255.255.255.255', '850..1.4'])).to.be.true;
+           });
+           it("should return false if all given values are not valid IPv4 address", function() {
+                  expect(is.any.ipv4('1.2.3.', '78FF:::::::L')).to.be.false;
+                  expect(is.any.ipv4(['1.2.3.', '78FF:::::::L'])).to.be.false;
+           });
+    });
+    describe("is.ipv6", function() {
+        it("should return true if given value is a valid IPv6 address", function() {
+                expect(is.ipv6('2001:DB8:0:0:1::1')).to.be.true;
+        });
+        it("should return false if given value is not a valid IPv6 address", function() {
+                expect(is.ip('985.12.3.4')).to.be.false;
+        });
+    });
+    describe("is.not.ipv6", function() {
+        it("should return false if given value is a valid IPv6 address", function() {
+                expect(is.not.ipv6('2001:db8:0:0:1::1')).to.be.false;
+        });
+        it("should return true if given value is not a valid IPv6 address", function() {
+                expect(is.not.ip('0..3.4')).to.be.true;
+        });
+    });
+    describe("is.all.ipv6", function() {
+        it("should return true if all given values are valid IPv6 addresses", function() {
+                expect(is.all.ipv6('2001:db8::0:1:0:0:1', '1:50:198:2::1:2:8')).to.be.true;
+                expect(is.all.ipv6(['2001:db8::0:1:0:0:1','1:50:198:2::1:2:8'])).to.be.true;
+        });
+        it("should return false if any given value is not a valid IPv6 address", function() {
+                expect(is.all.ipv6('987.25.45.6', 'QFFF:0:78F:9::8:8:9')).to.be.false;
+                expect(is.all.ipv6(['987.25.45.6', 'QFFF:0:78F:9::8:8:9'])).to.be.false;
+         });
+    });
+    describe("is.any.ipv6", function() {
+         it("should return true if any given value is a valid IPv6 address", function() {
+                 expect(is.any.ipv6('2001:0db8::1:0:0:1', '850..1.4')).to.be.true;
+                 expect(is.any.ipv6(['2001:0db8::1:0:0:1', '850..1.4'])).to.be.true;
+          });
+          it("should return false if all given values are not valid IPv6 address", function() {
+                 expect(is.any.ipv6('1.2.3.', '78FF:::::::L')).to.be.false;
+                 expect(is.any.ipv6(['1.2.3.', '78FF:::::::L'])).to.be.false;
+          });
+    });
 });
+
 describe("string checks", function() {
     describe("is.include", function() {
         it("should return true if given string contains substring", function() {
