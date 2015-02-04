@@ -858,7 +858,7 @@ is.all.hexadecimal(['fff', '333', 'f50']);
 => true
 ```
 
-is.hexcolor(value:any)
+is.hexColor(value:any)
 -------------------------
 ####Checks if the given value matches hexcolor regexp.
 interfaces: not, all, any
