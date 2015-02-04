@@ -221,8 +221,8 @@
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
 
-    // are given values equal? supports numbers, strings, regexps, booleans
-    // TODO: Add object and array support
+    // are given values equal?
+    // supports numbers, strings, regexps, booleans, objects, arrays
     is.equal = function(value1, value2) {
         // check 0 and -0 equity with Infinity and -Infinity
         if(is.all.number(value1, value2)) {
@@ -234,6 +234,9 @@
         }
         if(is.all.boolean(value1, value2)) {
             return value1 === value2;
+        }
+        if(is.all.object(value1, value2) || is.all.array(value1, value2)) {
+            return JSON.stringify(value1) === JSON.stringify(value2);
         }
         return false;
     };
