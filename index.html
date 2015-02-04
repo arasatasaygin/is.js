@@ -65,6 +65,8 @@
                         <li><a href="#eppPhone">eppPhone</a></li>
                         <li><a href="#socialSecurityNumber">socialSecurityNumber</a></li>
                         <li><a href="#affirmative">affirmative</a></li>
+                        <li><a href="#hexadecimal">hexadecimal</a></li>
+                        <li><a href="#hexColor">hexColor</a></li>
                     </ul>
                     <h2>String</h2>
                     <ul>
@@ -1080,6 +1082,64 @@ is.any.affirmative('yes', 'no');
 
 // 'all' and 'any' interfaces can also take array parameter
 is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="hexadecimal">
+                        <div class="method">
+                            <h3>is.hexadecimal(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches hexadecimal regexp.</p>
+                        <pre>
+                            <code>
+is.hexadecimal('f0f0f0');
+=> true
+
+is.hexadecimal(2.5);
+=> false
+
+is.not.hexadecimal('string');
+=> true
+
+is.all.hexadecimal('ff', 'f50');
+=> true
+
+is.any.hexadecimal('ff5500', true);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.hexadecimal(['fff', '333', 'f50']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="hexColor">
+                        <div class="method">
+                            <h3>is.hexColor(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches hexColor regexp.</p>
+                        <pre>
+                            <code>
+is.hexColor('#333');
+=> true
+
+is.hexColor('#3333');
+=> false
+
+is.not.hexColor(0.5);
+=> true
+
+is.all.hexColor('fff', 'f50');
+=> true
+
+is.any.hexColor('ff5500', 0.5);
+=> false
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.hexColor(['fff', '333', 'f50']);
 => true
                             </code>
                         </pre>
