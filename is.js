@@ -230,7 +230,7 @@
         }
         // check regexps as strings too
         if(is.all.string(value1, value2) || is.all.regexp(value1, value2)) {
-            return '' + value1 === '' + value2;
+            return value1.toString() === value2.toString();
         }
         if(is.all.boolean(value1, value2)) {
             return value1 === value2;
