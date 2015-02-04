@@ -337,6 +337,39 @@
         };
     }
 
+    //Check whether a given value satisfies the Luhn Algorithm
+    is.validLuhn = function(value){
+    	if(!is.number(value)){
+    		return false;
+    	}else{
+    		var sum = 0, valuestr = value.toString().split("").reverse().join("");
+    		
+    		for(var i=0; i<valuestr.length; i++){
+
+    			if (i%2 != 0){
+    				var luhnDigit = parseInt(valuestr.substr(i, 1))*2;
+    				if (luhnDigit>9){
+    					luhnDigitstr = luhnDigit.toString();
+    					luhnDigit = parseInt(luhnDigitstr.charAt(0)) + parseInt(luhnDigitstr.charAt(1));
+    				}    				
+    			}else{
+    				luhnDigit = parseInt(valuestr.substr(i, 1));
+    			}
+    			if (i>0){
+    				sum += luhnDigit;
+    			}
+    		}
+    		var computedDigit = (sum*9)%10;
+    		return computedDigit.toString() == valuestr.substr(0, 1);
+
+    	}
+    }
+
+    // Credit card validation check using the Luhn algorithm
+    is.validCreditCard = function(value){
+    	return is.validLuhn(value) && is.creditCard(value);
+    }
+
     // String checks
     /* -------------------------------------------------------------------------- */
 
