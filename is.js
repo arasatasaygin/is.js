@@ -349,31 +349,33 @@
 
     function regexpCheckContextual(regexp, regexps) {
         for(var regexpContext in regexps[regexp]) {
-            if(regexps[regexp].hasOwnProperty(regexpContext)) {
-                if(is.undefined(is[regexpContext]) && regexpContext !== "default" && regexpContext !== "always") {
-                    is[regexpContext] = {};
+            (function(regexpContext) {
+                if(regexps[regexp].hasOwnProperty(regexpContext)) {
+                    if(is.undefined(is[regexpContext]) && regexpContext !== "default" && regexpContext !== "always") {
+                        is[regexpContext] = {};
+                    }
+                    if(regexpContext === "default") {
+                        is[regexp] = function(value) {
+                            if(regexps[regexp].hasOwnProperty("always")) {
+                                return regexps[regexp].default.test(value) || regexps[regexp].always.test(value);
+                            }
+                            else {
+                                return regexps[regexp].default.test(value);
+                            }
+                        };
+                    }
+                    else if(regexpContext !== "always") {
+                        is[regexpContext][regexp] = function(value) {
+                            if(regexps[regexp].hasOwnProperty("always")) {
+                                return regexps[regexp][regexpContext].test(value) || regexps[regexp].always.test(value);
+                            }
+                            else {
+                                return regexps[regexp][regexpContext].test(value);
+                            }
+                        };
+                    }
                 }
-                if(regexpContext === "default") {
-                    is[regexp] = function(value) {
-                        if(regexps[regexp].hasOwnProperty("always")) {
-                            return regexps[regexp].default.test(value) || regexps[regexp].always.test(value);
-                        }
-                        else {
-                            return regexps[regexp].default.test(value);
-                        }
-                    };
-                }
-                else if(regexpContext !== "always") {
-                    is[regexpContext][regexp] = function(value) {
-                        if(regexps[regexp].hasOwnProperty("always")) {
-                            return regexps[regexp][regexpContext].test(value) || regexps[regexp].always.test(value);
-                        }
-                        else {
-                            return regexps[regexp][regexpContext].test(value);
-                        }
-                    };
-                }
-            }
+            })(regexpContext);
         }
     }
 
