@@ -650,81 +650,107 @@ is.all.dateString(['11/11/2011', '90/11/2011']);
 => false
 ```
 
-is.usZipCode(value:any)
+is.us.postalCode(value:any)
 -----------------------
 ####Checks if the given value matches US zip code regexp.
 interfaces: not, all, any
 
 ```javascript
-is.usZipCode('02201-1020');
+is.us.postalCode('02201-1020');
 => true
 
-is.usZipCode('123');
+is.us.postalCode('123');
 => false
 
-is.not.usZipCode('123');
+is.not.us.postalCode('123');
 => true
 
-is.all.usZipCode('02201-1020', '123');
+is.all.us.postalCode('02201-1020', '123');
 => false
 
-is.any.usZipCode('02201-1020', '123');
+is.any.us.postalCode('02201-1020', '123');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.usZipCode(['02201-1020', '123']);
+is.all.us.postalCode(['02201-1020', '123']);
 => false
 ```
 
-is.caPostalCode(value:any)
+is.ca.postalCode(value:any)
 --------------------------
 ####Checks if the given value matches Canada postal code regexp.
 interfaces: not, all, any
 
 ```javascript
-is.caPostalCode('L8V3Y1');
+is.ca.postalCode('L8V3Y1');
 => true
 
-is.caPostalCode('123');
+is.ca.postalCode('123');
 => false
 
-is.not.caPostalCode('123');
+is.not.ca.postalCode('123');
 => true
 
-is.all.caPostalCode('L8V3Y1', '123');
+is.all.ca.postalCode('L8V3Y1', '123');
 => false
 
-is.any.caPostalCode('L8V3Y1', '123');
+is.any.ca.postalCode('L8V3Y1', '123');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.caPostalCode(['L8V3Y1', '123']);
+is.all.ca.postalCode(['L8V3Y1', '123']);
 => false
 ```
 
-is.ukPostCode(value:any)
+is.uk.postalCode(value:any)
 ------------------------
 ####Checks if the given value matches UK post code regexp.
 interfaces: not, all, any
 
 ```javascript
-is.ukPostCode('B184BJ');
+is.uk.postalCode('B184BJ');
 => true
 
-is.ukPostCode('123');
+is.uk.postalCode('123');
 => false
 
-is.not.ukPostCode('123');
+is.not.uk.postalCode('123');
 => true
 
-is.all.ukPostCode('B184BJ', '123');
+is.all.uk.postalCode('B184BJ', '123');
 => false
 
-is.any.ukPostCode('B184BJ', '123');
+is.any.uk.postalCode('B184BJ', '123');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.ukPostCode(['B184BJ', '123']);
+is.all.uk.postalCode(['B184BJ', '123']);
+=> false
+```
+
+is.fr.postalCode(value:any)
+------------------------
+####Checks if the given value matches FR post code regexp.
+interfaces: not, all, any
+
+```javascript
+is.fr.postalCode('44000');
+=> true
+
+is.fr.postalCode('123');
+=> false
+
+is.not.fr.postalCode('123');
+=> true
+
+is.all.fr.postalCode('44000', '123');
+=> false
+
+is.any.fr.postalCode('44000', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.fr.postalCode(['44000', '123']);
 => false
 ```
 
