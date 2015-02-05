@@ -344,7 +344,7 @@
         };
     }
 
-    function regexpCheckContextual(regexp) {
+    function regexpCheckContextual(regexp, regexps) {
         for(var regexpContext in regexps[regexp]) {
             if(regexps[regexp].hasOwnProperty(regexpContext)) {
                 if(is.undefined(is[regexpContext]) && regexpContext !== "default") {
