@@ -1,4 +1,4 @@
-// is.js 0.2.0
+// is.js 0.4.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.2.0';
+    is.VERSION = '0.4.0';
 
     // define interfaces
     is.not = {};
@@ -58,12 +58,8 @@
                 parameters = parameters[0];
                 length = parameters.length;
             }
-            var results = [];
             for (var i = 0; i < length; i++) {
-                results.push(func.call(null, parameters[i]));
-            }
-            for (i = 0; i < results.length; i++) {
-                if(!results[i]) {
+                if (!func.call(null, parameters[i])) {
                     return false;
                 }
             }
@@ -80,12 +76,8 @@
                 parameters = parameters[0];
                 length = parameters.length;
             }
-            var results = [];
             for (var i = 0; i < length; i++) {
-                results.push(func.call(null, parameters[i]));
-            }
-            for (i = 0; i < results.length; i++) {
-                if(results[i]) {
+                if (func.call(null, parameters[i])) {
                     return true;
                 }
             }
@@ -128,7 +120,7 @@
 
     // is a given value NaN?
     is.nan = function(value) {    // NaN is number :) Also it is the only value which does not equal itself
-        return is.number(value) && value !== value;
+        return value !== value;
     };
 
     // is a given value null?
@@ -181,19 +173,15 @@
     // Presence checks
     /* -------------------------------------------------------------------------- */
 
-    // is a given value empty? Objects, arrays, strings
+    //is a given value empty? Objects, arrays, strings
     is.empty = function(value) {
-        if(is.null(value)) {
-            return false;
-        } else if(is.object(value)) {
-            for(var prop in value) {
-                if(value.hasOwnProperty(prop))
-                    return false;
+        if(is.object(value)){
+            var num = Object.getOwnPropertyNames(value).length;
+            if(num === 0 || (num === 1 && is.array(value)) || (num === 2 && is.arguments(value))){
+                return true;
             }
-            return true;
-        } else if(is.array(value) || is.arguments(value)) {
-            return value.length === 0;
-        } else {    // string case
+            return false;
+        } else {
             return value === '';
         }
     };
@@ -205,7 +193,7 @@
 
     // is a given value truthy?
     is.truthy = function(value) {
-        return is.existy(value) && value !== false;
+        return is.existy(value) && value !== false && is.not.nan(value) && value !== "" && value !== 0;
     };
 
     // is a given value falsy?
@@ -214,7 +202,7 @@
     // is a given value space?
     // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space =  function(value) {
-        if(is.string(value)) {
+        if(is.char(value)) {
             var characterCode = value.charCodeAt(0);
             return (characterCode >  8 && characterCode < 14) || characterCode === 32;
         } else {
@@ -321,11 +309,16 @@
         dateString: /^(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{2})?[0-9]{2}$/,
         usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/,
         caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]?[0-9][A-Z][0-9]$/,
-        ukPostCode: /^[A-Z]{1,2}[0-9R][0-9A-Z]?[0-9][ABD-HJLNP-UW-Z]{2}$/,
+        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
         nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
         socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/,
-        affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/
+        affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/,
+        hexadecimal: /^[0-9a-fA-F]+$/,
+        hexColor: /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/,
+        ipv4: /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/,
+        ipv6: /^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/,
+        ip: /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/
     };
 
     // create regexp checks methods from 'regexp' object
@@ -344,7 +337,7 @@
     // String checks
     /* -------------------------------------------------------------------------- */
 
-    // is a given string inculde parameter substring?
+    // is a given string include parameter substring?
     is.include = String.prototype.includes || function(str, substr) {
         return str.indexOf(substr) > -1;
     };
@@ -519,9 +512,9 @@
     if(typeof window !== 'undefined') {
 
         // store navigator properties to use later
-        var userAgent = 'navigator' in window && navigator.userAgent.toLowerCase() || '';
-        var vendor = 'navigator' in window && navigator.vendor.toLowerCase() || '';
-        var appVersion = 'navigator' in window && navigator.appVersion.toLowerCase() || '';
+        var userAgent = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
+        var vendor = 'navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase() || '';
+        var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
 
         // is current browser chrome?
         is.chrome = function() {
