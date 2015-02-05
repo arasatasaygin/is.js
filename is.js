@@ -58,12 +58,8 @@
                 parameters = parameters[0];
                 length = parameters.length;
             }
-            var results = [];
             for (var i = 0; i < length; i++) {
-                results.push(func.call(null, parameters[i]));
-            }
-            for (i = 0; i < results.length; i++) {
-                if(!results[i]) {
+                if (!func.call(null, parameters[i])) {
                     return false;
                 }
             }
@@ -80,12 +76,8 @@
                 parameters = parameters[0];
                 length = parameters.length;
             }
-            var results = [];
             for (var i = 0; i < length; i++) {
-                results.push(func.call(null, parameters[i]));
-            }
-            for (i = 0; i < results.length; i++) {
-                if(results[i]) {
+                if (func.call(null, parameters[i])) {
                     return true;
                 }
             }
@@ -210,7 +202,7 @@
     // is a given value space?
     // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space =  function(value) {
-        if(is.string(value)) {
+        if(is.char(value)) {
             var characterCode = value.charCodeAt(0);
             return (characterCode >  8 && characterCode < 14) || characterCode === 32;
         } else {
