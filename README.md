@@ -916,7 +916,25 @@ is.ipv4(value:string)
 interfaces: not, all, any
 
 ```javascript
-//same usage as is.ip
+is.ipv4('198.12.3.142');
+=> true
+
+is.ipv4('1.2..5');
+=> false
+
+is.not.ipv4('8:::::::7');
+=> true
+
+is.all.ipv4('198.12.3.142', '123.123.123.123');
+=> true
+
+is.any.ipv4('255.255.255.255', '850..1.4');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ipv4(['198.12.3.142', '1.2.3']);
+=> false
+
 ```
 
 is.ipv6(value:string)
@@ -925,11 +943,25 @@ is.ipv6(value:string)
 interfaces: not, all, any
 
 ```javascript
-//same usage as is.ip
+is.ipv6('2001:DB8:0:0:1::1');
+=> true
+
+is.ipv6('985.12.3.4');
+=> true
+
+is.not.ipv6('8:::::::7');
+=> true
+
+is.all.ipv6('2001:DB8:0:0:1::1', '1:50:198:2::1:2:8');
+=> true
+
+is.any.ipv6('255.255.255.255', '2001:DB8:0:0:1::1');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ipv6(['2001:DB8:0:0:1::1', '1.2.3']);
+=> false
 ```
-
-
-
 
 String checks
 =============
