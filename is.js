@@ -24,7 +24,7 @@
 
     // Baseline
     /* -------------------------------------------------------------------------- */
-
+    console.log(this === window);
     var root = this;
     var previousIs = root.is;
 
@@ -58,12 +58,10 @@
                 parameters = parameters[0];
                 length = parameters.length;
             }
-            var results = [];
+            var result;
             for (var i = 0; i < length; i++) {
-                results.push(func.call(null, parameters[i]));
-            }
-            for (i = 0; i < results.length; i++) {
-                if(!results[i]) {
+                result = func.call(null, parameters[i]);
+                if(!result){
                     return false;
                 }
             }
@@ -80,12 +78,10 @@
                 parameters = parameters[0];
                 length = parameters.length;
             }
-            var results = [];
+            var result;
             for (var i = 0; i < length; i++) {
-                results.push(func.call(null, parameters[i]));
-            }
-            for (i = 0; i < results.length; i++) {
-                if(results[i]) {
+                result = func.call(null, parameters[i]);
+                if(result){
                     return true;
                 }
             }
@@ -797,6 +793,6 @@
         root.is = previousIs;
         return this;
     };
-
+    console.log(is);
     return is;
 }));
