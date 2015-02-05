@@ -133,6 +133,11 @@
         return toString.call(value) === '[object Number]';
     };
 
+    // is a given value strictly an object (ie. {})?
+    is.strictObject = function(value){
+        return !!value && value.constructor == Object;
+    }
+
     // is a given value object?
     is.object = function(value) {
         var type = typeof value;
@@ -338,7 +343,8 @@
     /* -------------------------------------------------------------------------- */
 
     // is a given string include parameter substring?
-    is.include = String.prototype.includes || function(str, substr) {
+    // is.include = String.prototype.includes || function(str, substr) {
+    is.include = function(str, substr){
         return str.indexOf(substr) > -1;
     };
     // include method does not support 'all' and 'any' interfaces

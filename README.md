@@ -247,6 +247,41 @@ is.all.object([{}, new Object()]);
 => true
 ```
 
+is.strictObject(value:any)
+--------------------
+####Checks if the given value type is strictly an object.
+interfaces: not, all, any
+
+```javascript
+is.strictObject({foo: 'bar'});
+=> true
+
+// functions are returned as false
+is.strictObject(toString);
+=> false
+
+// Arrays are returned as false
+is.strictObject([1, 2, 3]);
+=> false
+
+// Custom objects are returned as false
+is.strictObject(new CustomObject());
+=> false
+
+is.not.strictObject('foo');
+=> true
+
+is.all.strictObject({}, 1);
+=> false
+
+is.any.strictObject({}, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.strictObject([{}, new Object()]);
+=> true
+```
+
 is.regexp(value:any)
 --------------------
 ####Checks if the given value type is RegExp.
