@@ -67,6 +67,9 @@
                         <li><a href="#affirmative">affirmative</a></li>
                         <li><a href="#hexadecimal">hexadecimal</a></li>
                         <li><a href="#hexColor">hexColor</a></li>
+                        <li><a href="#ip">ip</a></li>
+                        <li><a href="#ipv4">ipv4</a></li>
+                        <li><a href="#ipv6">ipv6</a></li>
                     </ul>
                     <h2>String</h2>
                     <ul>
@@ -1141,6 +1144,93 @@ is.any.hexColor('ff5500', 0.5);
 // 'all' and 'any' interfaces can also take array parameter
 is.all.hexColor(['fff', '333', 'f50']);
 => true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ip">
+                        <div class="method">
+                            <h3>is.ip(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches ip regexp.</p>
+                        <pre>
+                            <code>
+is.ip('198.156.23.5');
+=> true
+
+is.ip('1.2..5');
+=> false
+
+is.not.ip('8:::::::7');
+=> true
+
+is.all.ip('0:1::4:ff5:54:987:C', '123.123.123.123');
+=> true
+
+is.any.ip('123.8.4.3', '0.0.0.0');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ip(['123.123.23.12', 'A:B:C:D:E:F:0:0']);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ipv4">
+                        <div class="method">
+                            <h3>is.ipv4(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches ipv4 regexp.</p>
+                        <pre>
+                            <code>
+is.ipv4('198.12.3.142');
+=> true
+
+is.ipv4('1.2..5');
+=> false
+
+is.not.ipv4('8:::::::7');
+=> true
+
+is.all.ipv4('198.12.3.142', '123.123.123.123');
+=> true
+
+is.any.ipv4('255.255.255.255', '850..1.4');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ipv4(['198.12.3.142', '1.2.3']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="ipv6">
+                        <div class="method">
+                            <h3>is.ipv6(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value matches ipv6 regexp.</p>
+                        <pre>
+                            <code>
+is.ipv6('2001:DB8:0:0:1::1');
+=> true
+
+is.ipv6('985.12.3.4');
+=> true
+
+is.not.ipv6('8:::::::7');
+=> true
+
+is.all.ipv6('2001:DB8:0:0:1::1', '1:50:198:2::1:2:8');
+=> true
+
+is.any.ipv6('255.255.255.255', '2001:DB8:0:0:1::1');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ipv6(['2001:DB8:0:0:1::1', '1.2.3']);
+=> false
                             </code>
                         </pre>
                     </div>
