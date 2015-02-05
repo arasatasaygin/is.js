@@ -807,6 +807,27 @@
                     }
                 }
             }
+            else if(is.object(options[option])) {
+                for(var contextualOption in options[option]) {
+                    if(hasOwnProperty.call(options[option], contextualOption) && is.function(options[option][contextualOption])) {
+                        var interfaces = options[option][contextualOption].api || ['not', 'all', 'any'];
+                        for (var i = 0; i < interfaces.length; i++) {
+                            if(interfaces[i] === 'not') {
+                                is.not[option] = is.not[option] || {};
+                                is.not[option][contextualOption] = not(is[option][contextualOption]);
+                            }
+                            if(interfaces[i] === 'all') {
+                                is.all[option] = is.all[option] || {};
+                                is.all[option][contextualOption] = all(is[option][contextualOption]);
+                            }
+                            if(interfaces[i] === 'any') {
+                                is.any[option] = is.any[option] || {};
+                                is.any[option][contextualOption] = any(is[option][contextualOption]);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     setInterfaces();
