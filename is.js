@@ -329,7 +329,12 @@
     // create regexp checks methods from 'regexp' object
     for(var regexp in regexps) {
         if(regexps.hasOwnProperty(regexp)) {
-            regexpCheck(regexp, regexps);
+            if(is.object(regexps[regexp])) {
+                regexpCheckContextual(regexp, regexps);
+            }
+            else {
+                regexpCheck(regexp, regexps);
+            }
         }
     }
 
@@ -337,6 +342,26 @@
         is[regexp] = function(value) {
             return regexps[regexp].test(value);
         };
+    }
+
+    function regexpCheckContextual(regexp) {
+        for(var regexpContext in regexps[regexp]) {
+            if(regexps[regexp].hasOwnProperty(regexpContext)) {
+                if(is.undefined(is[regexpContext]) && regexpContext !== "default") {
+                    is[regexpContext] = {};
+                }
+                if(regexpContext === "default") {
+                    is[regexp] = function(value) {
+                        return regexps[regexp].default.test(value);
+                    };
+                }
+                else {
+                    is[regexpContext][regexp] = function(value) {
+                        return regexps[regexp][regexpContext].test(value);
+                    };
+                }
+            }
+        }
     }
 
     // String checks
