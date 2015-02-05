@@ -1,0 +1,20 @@
+# This file has been generated using '.gitattributes Generator'.
+# You can generate yours at http://ihopepeace.github.io/gitattributes_generator
+
+* text=auto
+
+# Explicitly declare text files that should be normalized and converted
+# to native line endings on checkout.
+*.js text
+*.min.js text
+*.json text
+*.html text
+*.css text
+*.md text
+
+# Declare files that should have CRLF line endings on checkout.
+
+# Declare files that should have LF line endings on checkout.
+
+# Declare files that are truly binary and shouldn't be modified.
+
