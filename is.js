@@ -332,7 +332,7 @@
     // create regexp checks methods from 'regexp' object
     for(var regexp in regexps) {
         if(regexps.hasOwnProperty(regexp)) {
-            if(is.object(regexps[regexp])) {
+            if(is.object(regexps[regexp]) && !is.regexp(regexps[regexp])) {
                 regexpCheckContextual(regexp, regexps);
             }
             else {
