@@ -858,6 +858,32 @@ is.all.affirmative(['yes', 'y', 'true', 't', 'ok', 'okay']);
 => true
 ```
 
+is.fr.affirmative(value:any)
+-------------------------
+####Checks if the given value matches affirmative in french regexp.
+interfaces: not, all, any
+
+```javascript
+is.fr.affirmative('oui');
+=> true
+
+is.fr.affirmative('non');
+=> false
+
+is.not.fr.affirmative('non');
+=> true
+
+is.all.fr.affirmative('oui', 'non');
+=> false
+
+is.any.fr.affirmative('oui', 'non');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.fr.affirmative(['oui', 'o', 'vrai', 'v', 'ok', 'okay']);
+=> true
+```
+
 is.hexadecimal(value:any)
 -------------------------
 ####Checks if the given value matches hexadecimal regexp.
