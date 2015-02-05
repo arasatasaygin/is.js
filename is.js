@@ -315,15 +315,18 @@
         alphaNumeric: /^[A-Za-z0-9]+$/,
         timeString: /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/,
         dateString: /^(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{2})?[0-9]{2}$/,
-        usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/,
-        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]?[0-9][A-Z][0-9]$/,
-        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
         nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
         socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/,
         affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/,
         hexadecimal: /^[0-9a-fA-F]+$/,
-        hexColor: /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/
+        hexColor: /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/,
+        postalCode: {
+            us: /^[0-9]{5}(?:-[0-9]{4})?$/,
+            ca: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]?[0-9][A-Z][0-9]$/,
+            uk: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
+            fr: /^[0-9]{5}$/
+        }
     };
 
     // create regexp checks methods from 'regexp' object
