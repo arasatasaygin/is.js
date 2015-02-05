@@ -103,27 +103,27 @@
 
     // is a given value Array?
     is.array = Array.isArray || function(value) {    // check native isArray first
-        return toString.call(value) === '[object Array]';
+        return !value ? false : value.constructor === Array;
     };
 
     // is a given value Boolean?
     is.boolean = function(value) {
-        return value === true || value === false || toString.call(value) === '[object Boolean]';
+        return value === true || value === false || ((value === undefined || value === null) ? false : value.constructor === Boolean);
     };
 
     // is a given value Date Object?
     is.date = function(value) {
-        return toString.call(value) === '[object Date]';
+        return !value ? false : value.constructor === Date;
     };
 
     // is a given value Error object?
     is.error = function(value) {
-        return toString.call(value) === '[object Error]';
+        return !value ? false : value.constructor === Error;
     };
 
     // is a given value function?
     is.function = function(value) {    // fallback check is for IE
-        return toString.call(value) === '[object Function]' || typeof value === 'function';
+        return !value ? false : value.constructor === Function;
     };
 
     // is a given value NaN?
@@ -138,18 +138,17 @@
 
     // is a given value number?
     is.number = function(value) {
-        return toString.call(value) === '[object Number]';
+        return (value === undefined || value === null) ? false : value.constructor === Number;
     };
 
     // is a given value object?
     is.object = function(value) {
-        var type = typeof value;
-        return type === 'function' || type === 'object' && !!value;
+        return !value ? false : (value.constructor === Function || value.constructor === Object);
     };
 
     // is a given value RegExp?
     is.regexp = function(value) {
-        return toString.call(value) === '[object RegExp]';
+        return !value ? false : (value.constructor === RegExp);
     };
 
     // are given values same type?
@@ -165,7 +164,7 @@
 
     // is a given value String?
     is.string = function(value) {
-        return toString.call(value) === '[object String]';
+        return !value ? false : (value.constructor === String);
     };
 
     // is a given value Char?
@@ -183,6 +182,10 @@
 
     //is a given value empty? Objects, arrays, strings
     is.empty = function(value) {
+        if( is.array(value) && value.length === 0) {
+            return true;
+        }
+
         if(is.object(value)){
             var num = Object.getOwnPropertyNames(value).length;
             if(num === 0 || (num === 1 && is.array(value)) || (num === 2 && is.arguments(value))){
