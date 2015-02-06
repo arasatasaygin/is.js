@@ -534,7 +534,10 @@
         // parameter is optional
         is.ie = function(version) {
             if(!version) {
-                return /msie/i.test(userAgent);
+                return /msie/i.test(userAgent) || "ActiveXObject" in window;
+            }
+            if(version >= 11) {
+                return "ActiveXObject" in window;
             }
             return new RegExp('msie ' + version).test(userAgent);
         };
