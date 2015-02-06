@@ -716,6 +716,11 @@
         return typeof obj === 'object' && 'setInterval' in obj;
     };
 
+    // is a given object a DOM node?
+    is.domNode = function(obj) {
+        return obj.nodeType > 0;
+    };
+
     // Array checks
     /* -------------------------------------------------------------------------- */
 
