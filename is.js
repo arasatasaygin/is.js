@@ -141,7 +141,7 @@
 
     // is a given value RegExp?
     is.regexp = function(value) {
-        return toString.call(value) === '[object RegExp]';
+        return value instanceof RegExp;
     };
 
     // are given values same type?
