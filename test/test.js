@@ -437,43 +437,43 @@ describe("type checks", function() {
             expect(is.any.object([1, 2, 3])).to.be.false;
         });
     });
-    describe("is.strictObject", function() {
+    describe("is.plainObject", function() {
         it("should return true if passed parameter type is strictly an object", function() {
-            expect(is.strictObject({})).to.be.true;
+            expect(is.plainObject({})).to.be.true;
         });
         it("should return false if passed parameter type is not strictly an object", function() {
-            var notstrictObject = 'test';
-            expect(is.strictObject(notstrictObject)).to.be.false;
+            var notplainObject = 'test';
+            expect(is.plainObject(notplainObject)).to.be.false;
         });
     });
-    describe("is.not.strictObject", function() {
+    describe("is.not.plainObject", function() {
         it("should return false if passed parameter type is strictly an object", function() {
-            expect(is.not.strictObject({})).to.be.false;
+            expect(is.not.plainObject({})).to.be.false;
         });
         it("should return true if passed parameter type is not strictly an object", function() {
-            var notstrictObject = 'test';
-            expect(is.not.strictObject(notstrictObject)).to.be.true;
+            var notplainObject = 'test';
+            expect(is.not.plainObject(notplainObject)).to.be.true;
         });
     });
-    describe("is.all.strictObject", function() {
+    describe("is.all.plainObject", function() {
         it("should return true if all passed parameter types are strictly an object", function() {
-            expect(is.all.strictObject({}, {})).to.be.true;
-            expect(is.all.strictObject([{}, {}])).to.be.true;
+            expect(is.all.plainObject({}, {})).to.be.true;
+            expect(is.all.plainObject([{}, {}])).to.be.true;
         });
         it("should return false if any passed parameter type is not strictly an object", function() {
-            var notstrictObject = 'test';
-            expect(is.all.strictObject({}, notstrictObject)).to.be.false;
-            expect(is.all.strictObject([{}, notstrictObject])).to.be.false;
+            var notplainObject = 'test';
+            expect(is.all.plainObject({}, notplainObject)).to.be.false;
+            expect(is.all.plainObject([{}, notplainObject])).to.be.false;
         });
     });
-    describe("is.any.strictObject", function() {
+    describe("is.any.plainObject", function() {
         it("should return true if any passed parameter type is strictly an object", function() {
-            expect(is.any.strictObject({}, {}, 'test')).to.be.true;
-            expect(is.any.strictObject([{}, {}, 'test'])).to.be.true;
+            expect(is.any.plainObject({}, {}, 'test')).to.be.true;
+            expect(is.any.plainObject([{}, {}, 'test'])).to.be.true;
         });
         it("should return false if all passed parameter types are not strictly an object", function() {
-            expect(is.any.strictObject(1, 2, 3)).to.be.false;
-            expect(is.any.strictObject([1, 2, 3])).to.be.false;
+            expect(is.any.plainObject(1, 2, 3)).to.be.false;
+            expect(is.any.plainObject([1, 2, 3])).to.be.false;
         });
     });
     describe("is.regexp", function() {

@@ -133,8 +133,8 @@
         return toString.call(value) === '[object Number]';
     };
 
-    // is a given value strictly an object (ie. {})?
-    is.strictObject = function(value){
+    // is a given value a plain object (ie. {})?
+    is.plainObject = function(value){
         return !!value && value.constructor == Object;
     }
 

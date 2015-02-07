@@ -247,38 +247,38 @@ is.all.object([{}, new Object()]);
 => true
 ```
 
-is.strictObject(value:any)
+is.plainObject(value:any)
 --------------------
-####Checks if the given value type is strictly an object.
+####Checks if the given value type is a plain object.
 interfaces: not, all, any
 
 ```javascript
-is.strictObject({foo: 'bar'});
+is.plainObject({foo: 'bar'});
 => true
 
 // functions are returned as false
-is.strictObject(toString);
+is.plainObject(toString);
 => false
 
 // Arrays are returned as false
-is.strictObject([1, 2, 3]);
+is.plainObject([1, 2, 3]);
 => false
 
 // Custom objects are returned as false
-is.strictObject(new CustomObject());
+is.plainObject(new CustomObject());
 => false
 
-is.not.strictObject('foo');
+is.not.plainObject('foo');
 => true
 
-is.all.strictObject({}, 1);
+is.all.plainObject({}, 1);
 => false
 
-is.any.strictObject({}, 2);
+is.any.plainObject({}, 2);
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.strictObject([{}, new Object()]);
+is.all.plainObject([{}, new Object()]);
 => true
 ```
 
