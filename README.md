@@ -702,6 +702,32 @@ is.all.caPostalCode(['L8V3Y1', '123']);
 => false
 ```
 
+is.skPostalCode(value:any)
+--------------------------
+####Checks if the given value matches Slovak postal code regexp.
+interfaces: not, all, any
+
+```javascript
+is.caPostalCode('83107');
+=> true
+
+is.caPostalCode('123');
+=> false
+
+is.not.caPostalCode('123ds');
+=> true
+
+is.all.caPostalCode('83107', '123');
+=> false
+
+is.any.caPostalCode('83107', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.caPostalCode(['83107', '123']);
+=> false
+```
+
 is.ukPostCode(value:any)
 ------------------------
 ####Checks if the given value matches UK post code regexp.
