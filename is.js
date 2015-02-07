@@ -141,7 +141,7 @@
 
     // is a given value RegExp?
     is.regexp = function(value) {
-        return toString.call(value) === '[object RegExp]';
+        return value instanceof RegExp;
     };
 
     // are given values same type?
@@ -437,6 +437,13 @@
     };
     // year method does not support 'all' and 'any' interfaces
     is.year.api = ['not'];
+
+    // is the given year a leap year?
+    is.leapYear = function(year) {
+        return is.number(year) && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+    };
+    // leapYear method does not support 'all' and 'any' interfaces
+    is.leapYear.api = ['not'];
 
     // is a given date weekend?
     // 6: Saturday, 0: Sunday
