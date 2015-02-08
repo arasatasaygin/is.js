@@ -1117,9 +1117,25 @@ is.equal('yeap', 'yeap');
 is.equal(true, true);
 => true
 
+is.equal([0, 1, 2], [0, 1, 2]);
+=> true
+
+is.equal({foo: 'bar'}, {foo: 'bar'});
+=> true
+
+// with nesting (works with objects as well)
+is.equal([0, 1, [2, 3]], [0, 1, [2, 3]]);
+=> true
+
 is.not.equal('yeap', 'nope');
 => true
 ```
+
+> Note that for collections (arrays and objects), `is.equal()` will run a deep, recursive
+> check on the collection's properties, but will respect `hasOwnProperty` for objects.
+> It will check children, grandchidlren, and so on, but will not traverse an object's prototype
+> chain. (Thank you to the Underscore team for their [elegant `eq` implementation](http://underscorejs.org/docs/underscore.html#section-91),
+> which was adapted for is.js).
 
 is.even(value:number)
 ---------------------
