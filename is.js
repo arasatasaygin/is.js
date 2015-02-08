@@ -85,6 +85,75 @@
         };
     }
 
+    // helper function retrieves object keys
+    var objectKeys = function(object) {
+        if(Object.keys) {
+            return Object.keys(object);
+        }
+        var keys = [],
+            key;
+        for(key in object) {
+            if(hasOwnProperty.call(object, key)) {
+                keys.push(key);
+            }
+        }
+        return keys;
+    };
+
+    // helper function recursively compares two collections for deep equality
+    // Adapted from Underscore: https://github.com/jashkenas/underscore
+    var collectionEqual = function(a, b, aStack, bStack) {
+        var areArrays = is.all.array(a, b);
+        // handle non-collections
+        if(!(areArrays || is.all.object(a, b))) {
+            return is.equal(a, b);
+        }
+
+        // Initializing stack of traversed objects.
+        // It's done here since we only need them for objects and arrays comparison.
+        aStack = aStack || [];
+        bStack = bStack || [];
+
+        // Assume equality for cyclic structures. The algorithm for detecting cyclic
+        // structures is adapted from ES 5.1 section 15.12.3, abstract operation JO.
+        var length = aStack.length;
+        while (length--) {
+            // Linear search. Performance is inversely proportional to the number of
+            // unique nested structures.
+            if (aStack[length] === a) return bStack[length] === b;
+        }
+
+        // Add the first object to the stack of traversed objects.
+        aStack.push(a);
+        bStack.push(b);
+
+        // Recursively compare objects and arrays.
+        if (areArrays) {
+            // Compare array lengths to determine if a deep comparison is necessary.
+            length = a.length;
+            if (length !== b.length) return false;
+            // Deep compare the contents, ignoring non-numeric properties.
+            while (length--) {
+                if (!collectionEqual(a[length], b[length], aStack, bStack)) return false;
+            }
+        } else {
+            // Deep compare objects.
+            var keys = objectKeys(a), key;
+            length = keys.length;
+            // Ensure that both objects contain the same number of properties before comparing deep equality.
+            if (objectKeys(b).length !== length) return false;
+            while (length--) {
+                // Deep compare each member
+                key = keys[length];
+                if (!(hasOwnProperty.call(b, key) && collectionEqual(a[key], b[key], aStack, bStack))) return false;
+            }
+        }
+        // Remove the first object from the stack of traversed objects.
+        aStack.pop();
+        bStack.pop();
+        return true;
+    };
+
     // Type checks
     /* -------------------------------------------------------------------------- */
 
@@ -213,8 +282,7 @@
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
 
-    // are given values equal? supports numbers, strings, regexps, booleans
-    // TODO: Add object and array support
+    // are given values equal? supports numbers, strings, regexps, booleans, arrays, objects
     is.equal = function(value1, value2) {
         // check 0 and -0 equity with Infinity and -Infinity
         if(is.all.number(value1, value2)) {
@@ -226,6 +294,9 @@
         }
         if(is.all.boolean(value1, value2)) {
             return value1 === value2;
+        }
+        if(is.all.array(value1, value2) || is.all.object(value1, value2)) {
+            return collectionEqual(value1, value2, [], []);
         }
         return false;
     };

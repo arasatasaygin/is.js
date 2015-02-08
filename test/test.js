@@ -779,6 +779,40 @@ describe("arithmetic checks", function() {
         it("should return false if given two boolean are not same", function() {
             expect(is.equal(false, true)).to.be.false;
         });
+        it("should return true if given two arrays are same", function() {
+            expect(is.equal([], [])).to.be.true;
+            expect(is.equal([0, 1, 2], [0, 1, 2])).to.be.true;
+        });
+        it("should return true if nested collections are equal in given arrays", function() {
+            expect(is.equal([0, 1, [2, 3]], [0, 1, [2, 3]])).to.be.true;
+            expect(is.equal([{foo: 'bar'}], [{foo: 'bar'}])).to.be.true;
+        });
+        it("should return false if nested collections are not equal in given arrays", function() {
+            expect(is.equal([0, 1, [2, 3]], [0, 1, [4, 5]])).to.be.false;
+            expect(is.equal([{foo: 'bar'}], [{foo: 'two'}])).to.be.false;
+            expect(is.equal([{foo: 'bar'}], [{one: 'bar'}])).to.be.false;
+        });
+        it("should return false if given two arrays are not same", function() {
+            expect(is.equal([], [0])).to.be.false;
+            expect(is.equal([0, 1, 2], [2, 0, 1])).to.be.false;
+        });
+        it("should return true if given two objects are same", function() {
+            expect(is.equal({}, {})).to.be.true;
+            expect(is.equal({foo: 'bar'}, {foo: 'bar'})).to.be.true;
+        });
+        it("should return false if given two objects are not same", function() {
+            expect(is.equal({}, {foo: 'bar'})).to.be.false;
+            expect(is.equal({foo: 'bar'}, {one: 'two'})).to.be.false;
+        });
+        it("should return true if nested collections are equal within given objects", function() {
+            expect(is.equal({foo: {one: 'two'}}, {foo: {one: 'two'}})).to.be.true;
+            expect(is.equal({foo: [1]}, {foo: [1]})).to.be.true;
+        });
+        it("should return false if nested collections are not equal within given objects", function() {
+            expect(is.equal({foo: {one: 'two'}}, {foo: {one: 'three'}})).to.be.false;
+            expect(is.equal({foo: {one: 'three'}}, {foo: {two: 'three'}})).to.be.false;
+            expect(is.equal({foo: [1]}, {foo: [2]})).to.be.false;
+        });
     });
     describe("is.not.equal", function() {
         it("should return false if given two numbers are equal", function() {
@@ -798,6 +832,40 @@ describe("arithmetic checks", function() {
         });
         it("should return true if given two boolean are not same", function() {
             expect(is.not.equal(false, true)).to.be.true;
+        });
+        it("should return true if given two arrays are not same", function() {
+            expect(is.not.equal([], [0])).to.be.true;
+            expect(is.not.equal([0, 1, 2], [2, 0, 1])).to.be.true;
+        });
+        it("should return false if given two arrays are same", function() {
+           expect(is.not.equal([], [])).to.be.false;
+           expect(is.not.equal([0, 1, 2], [0, 1, 2])).to.be.false;
+        });
+        it("should return true if nested collections are not equal in given arrays", function() {
+            expect(is.not.equal([0, 1, [2, 3]], [0, 1, [4, 5]])).to.be.true;
+            expect(is.not.equal([{foo: 'bar'}], [{foo: 'two'}])).to.be.true;
+            expect(is.not.equal([{foo: 'bar'}], [{one: 'bar'}])).to.be.true;
+        });
+        it("should return false if nested collections are equal in given arrays", function() {
+            expect(is.not.equal([0, 1, [2, 3]], [0, 1, [2, 3]])).to.be.false;
+            expect(is.not.equal([{foo: 'bar'}], [{foo: 'bar'}])).to.be.false;
+        });
+        it("should return true if given two objects are not same", function () {
+            expect(is.not.equal({}, {foo: 'bar'})).to.be.true;
+            expect(is.not.equal({foo: 'bar'}, {one: 'two'})).to.be.true;
+        });
+        it("should return false if given two objects are same", function() {
+            expect(is.not.equal({}, {})).to.be.false;
+            expect(is.not.equal({foo: 'bar'}, {foo: 'bar'})).to.be.false;
+        });
+        it("should return true if nested collections are not equal within given objects", function() {
+            expect(is.not.equal({foo: {one: 'two'}}, {foo: {one: 'three'}})).to.be.true;
+            expect(is.not.equal({foo: {one: 'three'}}, {foo: {two: 'three'}})).to.be.true;
+            expect(is.not.equal({foo: [1]}, {foo: [2]})).to.be.true;
+        });
+        it("should return false if nested collections are equal within given objects", function() {
+            expect(is.not.equal({foo: {one: 'two'}}, {foo: {one: 'two'}})).to.be.false;
+            expect(is.not.equal({foo: [1]}, {foo: [1]})).to.be.false;
         });
     });
     describe("is.even", function() {
@@ -2798,7 +2866,7 @@ describe("time checks", function() {
             var date = new Date(time);
             expect(is.dayLightSavingTime(date)).to.be.false;
         });
-        it("should return false if given date is in daylight saving time", function() {
+        it("should return true if given date is in daylight saving time", function() {
             var time = 1421572235303;
             var date = new Date(time);
             var sixMonthsAgo = new Date(date.setMonth(date.getMonth() - 6));
