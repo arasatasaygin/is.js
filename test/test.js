@@ -2873,6 +2873,13 @@ describe("object checks", function() {
         });
     });
     describe("is.propertyDefined", function() {
+        it("should return true if given property exists globally", function () {
+          expect(is.globalProperty('top')).to.be.true;
+          expect(is.globalProperty('setInterval')).to.be.true;
+        });
+        it("should return false if given property doesn't exist", function() {
+          expect(is.globalProperty('randomVal')).to.be.false;
+        });
         it("should return true if given property is in objects", function() {
             var obj = {
                 test: 'test',
