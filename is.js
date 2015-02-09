@@ -719,6 +719,14 @@
         return typeof obj === 'object' && 'setInterval' in obj;
     };
 
+    // is a given property defined in the global scope(browser)
+    //convenience method
+    is.globalProperty = function(property) {
+       if(typeof window !== 'undefined') {
+          return is.propertyDefined(window, property+'');
+       }
+    };
+
     // Array checks
     /* -------------------------------------------------------------------------- */
 
