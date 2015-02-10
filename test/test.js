@@ -1462,6 +1462,42 @@ describe("regexp checks", function() {
             expect(is.any.ukPostCode(['1', '2'])).to.be.false;
         });
     });
+    describe("is.brzPostalCode", function() {
+	      it("should return true if given value is Brazil postal code", function() {
+	          expect(is.brzPostalCode('70040-010')).to.be.true;
+	      });
+	      it("should retun false if given value is not Brazil postal code", function() {
+	          expect(is.brzPostalCode('1')).to.be.false;
+	      });
+    });
+    describe("is.not.brzPostalCode", function() {
+        it("should return false if given value is Brazil postal code", function() {
+            expect(is.not.brzPostalCode('70040-010')).to.be.false;
+        });
+        it("should return true if given value is not Brazil postal code", function() {
+            expect(is.not.brzPostalCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.brzPostalCode", function() {
+        it("should return true if all given values are Brazil postal code", function() {
+            expect(is.all.brzPostalCode('70040-010', '70040-210')).to.be.true;
+            expect(is.all.brzPostalCode(['70040-010', '70040-210'])).to.be.true;
+        });
+        it("should return false if any given value is not Brazil postal code", function() {
+            expect(is.all.brzPostalCode('L8V3Y1', '1')).to.be.false;
+            expect(is.all.brzPostalCode(['L8V3Y1', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.brzPostalCode", function() {
+        it("should return true if any given value is Brazil postal code", function() {
+            expect(is.any.brzPostalCode('70040-010', '1')).to.be.true;
+            expect(is.any.brzPostalCode(['70040-010', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not Brazil postal code", function() {
+            expect(is.any.brzPostalCode('1', '2')).to.be.false;
+            expect(is.any.brzPostalCode(['1', '2'])).to.be.false;
+        });
+    });
     describe("is.nanpPhone", function() {
         it("should return true if given value is nanpPhone", function() {
             expect(is.nanpPhone('609-555-0175')).to.be.true;
