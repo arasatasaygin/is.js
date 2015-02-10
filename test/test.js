@@ -1463,16 +1463,16 @@ describe("regexp checks", function() {
         });
     });
     describe("is.brzPostalCode", function() {
-	it("should return true if given value is Brazil postal code", function() {
-	    expect(is.brzPostalCode('70040-010').to.be.true;
-	});
-	it("should retun false if given value is not Brazil postal code", function() {
-	     expect(isbrzPostalCode('1').to.be.false;
-	});
+	      it("should return true if given value is Brazil postal code", function() {
+	          expect(is.brzPostalCode('70040-010')).to.be.true;
+	      });
+	      it("should retun false if given value is not Brazil postal code", function() {
+	          expect(is.brzPostalCode('1')).to.be.false;
+	      });
     });
     describe("is.not.brzPostalCode", function() {
         it("should return false if given value is Brazil postal code", function() {
-            expect(is.not.brzPostalCode('L8V3Y1')).to.be.false;
+            expect(is.not.brzPostalCode('70040-010')).to.be.false;
         });
         it("should return true if given value is not Brazil postal code", function() {
             expect(is.not.brzPostalCode('1')).to.be.true;
