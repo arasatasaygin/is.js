@@ -1462,6 +1462,14 @@ describe("regexp checks", function() {
             expect(is.any.ukPostCode(['1', '2'])).to.be.false;
         });
     });
+    describe("is.brzPostalCode", function() {
+	it("should return true if given value is Brazil post code", function() {
+	    expect(is.brzPostalCode('70040-010').to.be.true;
+	});
+	it("should retun false if given value is not Brazil post code", function() {
+	     expect(isbrzPostalCode('1').to.be.false;
+	});
+    });	
     describe("is.nanpPhone", function() {
         it("should return true if given value is nanpPhone", function() {
             expect(is.nanpPhone('609-555-0175')).to.be.true;
