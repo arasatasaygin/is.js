@@ -381,6 +381,10 @@
         return is.all.truthy.apply(null, capitalized);
     };
 
+    is.palindrome = function(str) {
+      return str.toString() == str.toString().split('').reverse().join('');
+    };
+
     // Time checks
     /* -------------------------------------------------------------------------- */
 
