@@ -447,8 +447,6 @@
     is.leapYear = function(year) {
         return is.number(year) && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
     };
-    // leapYear method does not support 'all' and 'any' interfaces
-    is.leapYear.api = ['not'];
 
     // is a given date weekend?
     // 6: Saturday, 0: Sunday
