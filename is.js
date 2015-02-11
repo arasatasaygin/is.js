@@ -113,6 +113,16 @@
         return toString.call(value) === '[object Error]';
     };
 
+    // is the given value DOM Element
+    is.element = function(value) {
+        return !!(
+            value && (
+                (value.nodeName && value.nodeType > 0) || // a native element
+                (value.prop && value.attr && value.find) // or a jQuery wrapper
+            )
+        );
+    };
+
     // is a given value function?
     is.function = function(value) {    // fallback check is for IE
         return toString.call(value) === '[object Function]' || typeof value === 'function';
