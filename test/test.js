@@ -1394,6 +1394,9 @@ describe("regexp checks", function() {
         it("should return true if given value is Canada postal code", function() {
             expect(is.caPostalCode('L8V3Y1')).to.be.true;
         });
+        it("should return true if given value is Canada postal code with space", function() {
+            expect(is.caPostalCode('L8V 3Y1')).to.be.true;
+        });
         it("should return false if given value is not Canada postal code", function() {
             expect(is.caPostalCode('1')).to.be.false;
         });

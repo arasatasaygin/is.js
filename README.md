@@ -685,6 +685,9 @@ interfaces: not, all, any
 is.caPostalCode('L8V3Y1');
 => true
 
+is.caPostalCode('L8V 3Y1');
+=> true
+
 is.caPostalCode('123');
 => false
 
