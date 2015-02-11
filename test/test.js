@@ -242,6 +242,52 @@ describe("type checks", function() {
             expect(is.any.error([1, 2, 3])).to.be.false;
         });
     });
+    describe("is.element", function() {
+        it("should return true if passed parameter is a dom element", function() {
+            var element = document.createElement('div');
+            //var element = $('<div></div>');
+            expect(is.element(element)).to.be.true;
+        });
+        it("should return false if passed parameter is not a dom element", function() {
+            var notElement = 'test';
+            expect(is.element(notElement)).to.be.false;
+        });
+    });
+    describe("is.not.element", function() {
+        it("should return false if passed parameter is a dom element", function() {
+            var element = document.createElement('div');
+            expect(is.not.element(element)).to.be.false;
+        });
+        it("should return true if passed parameter is not a dom element", function() {
+            var notElement = 'test';
+            expect(is.not.element(notElement)).to.be.true;
+        });
+    });
+    describe("is.all.element", function() {
+        it("should return true if all passed parameters are a dom element", function() {
+            var element1 = document.createElement('div');
+            var element2 = document.createElement('span');
+            expect(is.all.element(element1)).to.be.true;
+            expect(is.all.element(element2)).to.be.true;
+        });
+        it("should return false if any passed parameter is not a dom element", function() {
+            var element1 = document.createElement('div');
+            var notElement = 'test';
+            expect(is.all.element(element1, notElement)).to.be.false;
+            expect(is.all.element([element1, notElement])).to.be.false;
+        });
+    });
+    describe("is.any.element", function() {
+        it("should return true if any passed parameter is a dom element", function() {
+            var element = document.createElement('div');
+            expect(is.any.element(element, new Date())).to.be.true;
+            expect(is.any.element([element, new Date()])).to.be.true;
+        });
+        it("should return false if all passed parameters are not a dom element", function() {
+            expect(is.any.element(1, 2, 3)).to.be.false;
+            expect(is.any.element([1, 2, 3])).to.be.false;
+        });
+    });
     describe("is.function", function() {
         it("should return true if passed parameter type is function", function() {
             expect(is.function(is.function)).to.be.true;
