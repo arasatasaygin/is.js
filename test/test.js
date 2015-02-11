@@ -2318,6 +2318,26 @@ describe("time checks", function() {
             expect(is.not.year(new Date(time), 2016)).to.be.true;
         });
     });
+    describe("is.leapYear", function() {
+        it("should return true if given year is a leap year", function() {
+            var year = 2016;
+            expect(is.leapYear(year)).to.be.true;
+        });
+        it("should return false if given year is not a leap year", function() {
+            var year = 2015;
+            expect(is.leapYear(year)).to.be.false;
+        });
+    });
+    describe("is.not.leapYear", function() {
+        it("should return false if given year is a leap year", function() {
+            var year = 2016;
+            expect(is.not.leapYear(year)).to.be.false;
+        });
+        it("should return true if given year is not a leap year", function() {
+            var year = 2015;
+            expect(is.not.leapYear(year)).to.be.true;
+        });
+    });
     describe("is.weekend", function() {
         it("should return true if given date is weekend", function() {
             var time = 1421572235303;
