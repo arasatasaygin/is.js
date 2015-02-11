@@ -1,4 +1,4 @@
-// is.js 0.4.0
+// is.js 0.5.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.4.0';
+    is.VERSION = '0.5.0';
 
     // define interfaces
     is.not = {};
@@ -381,6 +381,11 @@
         return is.all.truthy.apply(null, capitalized);
     };
 
+    // is a given string palindrome?
+    is.palindrome = function(str) {
+        return is.string(str) && str == str.split('').reverse().join('');
+    };
+
     // Time checks
     /* -------------------------------------------------------------------------- */
 
@@ -437,6 +442,11 @@
     };
     // year method does not support 'all' and 'any' interfaces
     is.year.api = ['not'];
+
+    // is the given year a leap year?
+    is.leapYear = function(year) {
+        return is.number(year) && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+    };
 
     // is a given date weekend?
     // 6: Saturday, 0: Sunday
@@ -534,7 +544,10 @@
         // parameter is optional
         is.ie = function(version) {
             if(!version) {
-                return /msie/i.test(userAgent);
+                return /msie/i.test(userAgent) || "ActiveXObject" in window;
+            }
+            if(version >= 11) {
+                return "ActiveXObject" in window;
             }
             return new RegExp('msie ' + version).test(userAgent);
         };
@@ -714,6 +727,11 @@
     // setInterval method is only available for window object
     is.windowObject = function(obj) {
         return typeof obj === 'object' && 'setInterval' in obj;
+    };
+
+    // is a given object a DOM node?
+    is.domNode = function(obj) {
+        return is.object(obj) && obj.nodeType > 0;
     };
 
     // Array checks

@@ -79,6 +79,7 @@
                         <li><a href="#startWith">startWith</a></li>
                         <li><a href="#endWith">endWith</a></li>
                         <li><a href="#capitalized">capitalized</a></li>
+                        <li><a href="#palindrome">palindrome</a></li>
                     </ul>
                 </div>
                 <div class="col-5">
@@ -102,6 +103,7 @@
                         <li><a href="#propertyCount">propertyCount</a></li>
                         <li><a href="#propertyDefined">propertyDefined</a></li>
                         <li><a href="#windowObject">windowObject</a></li>
+                        <li><a href="#domNode">domNode</a></li>
                     </ul>
                     <h2>Array</h2>
                     <ul>
@@ -148,6 +150,7 @@
                         <li><a href="#day">day</a></li>
                         <li><a href="#month">month</a></li>
                         <li><a href="#year">year</a></li>
+                        <li><a href="#leapYear">leapYear</a></li>
                         <li><a href="#weekday">weekday</a></li>
                         <li><a href="#weekend">weekend</a></li>
                         <li><a href="#inDateRange">inDateRange</a></li>
@@ -1380,7 +1383,39 @@ is.any.capitalized('Yeap', 'some', 'Capitalized');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.upperCase(['Nope', 'not']);
+is.all.capitalized(['Nope', 'not']);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="palindrome">
+                        <div class="method">
+                            <h3>is.palindrome(value:string)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given string is palindrome.</p>
+                        <pre>
+                            <code>
+is.palindrome('testset');
+=> true
+
+is.palindrome('nope');
+=> false
+
+is.not.palindrome('nope not palindrome');
+=> true
+
+is.not.palindrome('tt');
+=> false
+
+is.all.palindrome('testset', 'tt');
+=> true
+
+is.any.palindrome('Yeap', 'some', 'testset');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.palindrome(['Nope', 'testset']);
 => false
                             </code>
                         </pre>
@@ -1728,6 +1763,36 @@ is.any.windowObject(window, {nope: 'nope'});
 
 // 'all' and 'any' interfaces can also take array parameter
 is.all.windowObject([window, {nope: 'nope'}]);
+=> false
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="domNode">
+                        <div class="method">
+                            <h3>is.domNode(value:window)</h3>
+                            <span>interface: not, all, any</span>
+                        </div>
+                        <p>Checks if the given object is a dom node.</p>
+                        <pre>
+                            <code>
+var obj = document.createElement('div');
+is.domNode(obj);
+=> true
+
+is.domNode({nope: 'nope'});
+=> false
+
+is.not.domNode({});
+=> true
+
+is.all.domNode(obj, obj);
+=> true
+
+is.any.domNode(obj, {nope: 'nope'});
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.domNode([obj, {nope: 'nope'}]);
 => false
                             </code>
                         </pre>
@@ -2372,6 +2437,35 @@ is.year(year2016, 2015);
 => false
 
 is.not.year(year2016, 2015);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="leapYear">
+                        <div class="method">
+                            <h3>is.leapYear(value:number)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given year number is leapYear.</p>
+                        <pre>
+                            <code>
+is.leapYear(2016);
+=> true
+
+is.leapYear(2015);
+=> false
+
+is.not.leapYear(2015);
+=> true
+
+is.all.leapYear(2015, 2016);
+=> false
+
+is.any.leapYear(2015, 2016);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.leapYear([2016, 2080]);
 => true
                             </code>
                         </pre>
