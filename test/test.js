@@ -2320,22 +2320,38 @@ describe("time checks", function() {
     });
     describe("is.leapYear", function() {
         it("should return true if given year is a leap year", function() {
-            var year = 2016;
-            expect(is.leapYear(year)).to.be.true;
+            expect(is.leapYear(2016)).to.be.true;
         });
         it("should return false if given year is not a leap year", function() {
-            var year = 2015;
-            expect(is.leapYear(year)).to.be.false;
+            expect(is.leapYear(2015)).to.be.false;
         });
     });
     describe("is.not.leapYear", function() {
         it("should return false if given year is a leap year", function() {
-            var year = 2016;
-            expect(is.not.leapYear(year)).to.be.false;
+            expect(is.not.leapYear(2016)).to.be.false;
         });
         it("should return true if given year is not a leap year", function() {
-            var year = 2015;
-            expect(is.not.leapYear(year)).to.be.true;
+            expect(is.not.leapYear(2015)).to.be.true;
+        });
+    });
+    describe("is.all.leapYear", function() {
+        it("should return true if all given years are leap years", function() {
+            expect(is.all.leapYear(2080, 2180)).to.be.true;
+            expect(is.all.leapYear([2080, 2180])).to.be.true;
+        });
+        it("should return false if any given year is not a leap year", function() {
+            expect(is.all.leapYear(2015, 2080)).to.be.false;
+            expect(is.all.leapYear([2015, 2080])).to.be.false;
+        });
+    });
+    describe("is.any.leapYear", function() {
+        it("should return true if any given year is leap year", function() {
+            expect(is.any.leapYear(2080, 2181)).to.be.true;
+            expect(is.any.leapYear([2080, 2181])).to.be.true;
+        });
+        it("should return false if all given years are not a leap years", function() {
+            expect(is.any.leapYear(2015, 2081)).to.be.false;
+            expect(is.any.leapYear([2015, 2081])).to.be.false;
         });
     });
     describe("is.weekend", function() {
