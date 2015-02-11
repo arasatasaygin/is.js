@@ -1973,6 +1973,42 @@ describe("string checks", function() {
             expect(is.any.capitalized(['test is good', 'chase and status'])).to.be.false;
         });
     });
+    describe("is.palindrome", function() {
+        it("should return true if given string is palindrome", function() {
+            expect(is.palindrome('testset')).to.be.true;
+        });
+        it("should return false if given string is not palindrome", function() {
+            expect(is.palindrome('test')).to.be.false;
+        });
+    });
+    describe("is.not.palindrome", function() {
+        it("should return false if given string is palindrome", function() {
+            expect(is.not.palindrome('testset')).to.be.false;
+        });
+        it("should return true if given string is not palindrome", function() {
+            expect(is.not.palindrome('test')).to.be.true;
+        });
+    });
+    describe("is.all.palindrome", function() {
+        it("should return true if all the given strings are palindrome", function() {
+            expect(is.all.palindrome('testset', 'tt')).to.be.true;
+            expect(is.all.palindrome(['testset', 'tt'])).to.be.true;
+        });
+        it("should return false if any given string is not palindrome", function() {
+            expect(is.all.palindrome('test', 'tt')).to.be.false;
+            expect(is.all.palindrome(['test', 'tt'])).to.be.false;
+        });
+    });
+    describe("is.any.palindrome", function() {
+        it("should return true if any given string is palindrome", function() {
+            expect(is.any.palindrome('testset', 'te')).to.be.true;
+            expect(is.any.palindrome(['testset', 'te'])).to.be.true;
+        });
+        it("should return false if all given strings are not palindrome", function() {
+            expect(is.any.palindrome('test', 'te')).to.be.false;
+            expect(is.any.palindrome(['test', 'te'])).to.be.false;
+        });
+    });
 });
 describe("time checks", function() {
     describe("is.today", function() {
