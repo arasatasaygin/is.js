@@ -721,7 +721,7 @@
 
     // is a given object a DOM node?
     is.domNode = function(obj) {
-        return obj.nodeType > 0;
+        return is.object(obj) && obj.nodeType > 0;
     };
 
     // Array checks
