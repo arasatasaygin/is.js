@@ -381,8 +381,9 @@
         return is.all.truthy.apply(null, capitalized);
     };
 
+    // is a given string palindrome?
     is.palindrome = function(str) {
-      return str.toString() == str.toString().split('').reverse().join('');
+        return is.string(str) && str == str.split('').reverse().join('');
     };
 
     // Time checks
