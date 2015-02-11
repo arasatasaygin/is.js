@@ -1085,7 +1085,7 @@ is.capitalized('nope');
 is.not.capitalized('nope not capitalized');
 => true
 
-is.capitalized('Yeap Capitalized');
+is.not.capitalized('nope Capitalized');
 => true
 
 is.all.capitalized('Yeap', 'All', 'Capitalized');
@@ -1095,7 +1095,36 @@ is.any.capitalized('Yeap', 'some', 'Capitalized');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
-is.all.upperCase(['Nope', 'not']);
+is.all.capitalized(['Nope', 'not']);
+=> false
+```
+
+is.palindrome(value:string, value:substring)
+---------------------------------------------
+####Checks if the given string is palindrome.
+interfaces: not, all, any
+
+```javascript
+is.palindrome('testset');
+=> true
+
+is.palindrome('nope');
+=> false
+
+is.not.palindrome('nope not palindrome');
+=> true
+
+is.not.palindrome('tt');
+=> false
+
+is.all.palindrome('testset', 'tt');
+=> true
+
+is.any.palindrome('Yeap', 'some', 'testset');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.palindrome(['Nope', 'testset']);
 => false
 ```
 
@@ -1953,6 +1982,32 @@ is.year(year2016, 2015);
 => false
 
 is.not.year(year2016, 2015);
+=> true
+```
+
+is.leapYear(value:number)
+---------------------------------
+####Checks if the given year number is a leap year
+interfaces: not, all, any
+
+```javascript
+is.leapYear(2016);
+=> true
+
+is.leapYear(2015);
+=> false
+
+is.not.leapYear(2015);
+=> true
+
+is.all.leapYear(2015, 2016);
+=> false
+
+is.any.leapYear(2015, 2016);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.leapYear([2016, 2080]);
 => true
 ```
 
