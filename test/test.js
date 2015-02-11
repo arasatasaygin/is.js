@@ -3014,6 +3014,47 @@ describe("object checks", function() {
             expect(is.any.windowObject([{}, {}])).to.be.false;
         });
     });
+    describe("is.domNode", function() {
+        it("should return true if given object is a DOM node", function() {
+            var obj = document.createElement('div');
+            expect(is.domNode(obj)).to.be.true;
+        });
+        it("should return false if given object is not a DOM node", function() {
+            expect(is.domNode({})).to.be.false;
+        });
+    });
+    describe("is.not.domNode", function() {
+        it("should return false if given object is a DOM node", function() {
+            var obj = document.createElement('span');
+            expect(is.not.domNode(obj)).to.be.false;
+        });
+        it("should return true if given object is not a DOM node", function() {
+            expect(is.not.domNode({})).to.be.true;
+        });
+    });
+    describe("is.any.domNode", function() {
+        it("should return true if any given object is a DOM node", function() {
+            var obj = document.createElement('blockquote');
+            expect(is.any.domNode(window, {}, obj)).to.be.true;
+            expect(is.any.domNode([window, {}, obj])).to.be.true;
+        });
+        it("should return false if all given objects are not DOM nodes", function() {
+            expect(is.any.domNode({}, {})).to.be.false;
+            expect(is.any.domNode([{}, {}])).to.be.false;
+        });
+    });
+    describe("is.all.domNode", function() {
+        it("should return true if all given objects are DOM nodes", function() {
+            var obj1 = document.createElement('em');
+            var obj2 = document.createElement('a');
+            expect(is.all.domNode(obj1, obj2)).to.be.true;
+            expect(is.all.domNode([obj1, obj2])).to.be.true;
+        });
+        it("should return false if any given object is not a DOM node", function() {
+            expect(is.all.domNode({}, window)).to.be.false;
+            expect(is.all.domNode([{}, window])).to.be.false;
+        });
+    });
 });
 describe("array checks", function() {
     describe("is.sorted", function() {
