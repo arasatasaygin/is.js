@@ -1434,6 +1434,33 @@ is.all.windowObject([window, {nope: 'nope'}]);
 => false
 ```
 
+is.domNode(value:object)
+-----------------------------
+####Checks if the given object is a dom node.
+interfaces: not, all, any
+
+```javascript
+var obj = document.createElement('div');
+is.domNode(obj);
+=> true
+
+is.domNode({nope: 'nope'});
+=> false
+
+is.not.domNode({});
+=> true
+
+is.all.domNode(obj, obj);
+=> true
+
+is.any.domNode(obj, {nope: 'nope'});
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.domNode([obj, {nope: 'nope'}]);
+=> false
+```
+
 Array checks
 ============
 
