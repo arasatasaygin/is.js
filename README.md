@@ -4,8 +4,14 @@ is.js
 - No dependencies
 - AMD, Node & browser ready
 
+Node.js:
 ```
 npm install is_js
+```
+
+Bower:
+```
+bower install is_js
 ```
 
 Type checks
