@@ -139,6 +139,11 @@
         return type === 'function' || type === 'object' && !!value;
     };
 
+    //is given value a pure JSON object.
+    is.json = function(value){
+        return toString.call(value) === '[object Object]';
+    }
+
     // is a given value RegExp?
     is.regexp = function(value) {
         return toString.call(value) === '[object RegExp]';

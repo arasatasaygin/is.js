@@ -437,6 +437,47 @@ describe("type checks", function() {
             expect(is.any.object([1, 2, 3])).to.be.false;
         });
     });
+    describe("is.json",function(){
+        it("should return true if passed parameter type is a json object", function() {
+            expect(is.json({})).to.be.true;
+        });
+        it("should return false if passed parameter type is not a json object", function() {
+            var notObject = 'test';
+            expect(is.json(notObject)).to.be.false;
+        }); 
+    });
+
+     describe("is.not.json", function() {
+        it("should return false if passed parameter type is json object", function() {
+            expect(is.not.json({})).to.be.false;
+        });
+        it("should return true if passed parameter type is not json object", function() {
+            var notObject = 'test';
+            expect(is.not.json(notObject)).to.be.true;
+        });
+    });
+  describe("is.all.json", function() {
+        it("should return true if all passed parameter types are object", function() {
+            expect(is.all.json({}, {})).to.be.true;
+            expect(is.all.json([{}, {}])).to.be.true;
+        });
+        it("should return false if any passed parameter type is not object", function() {
+            var notObject = 'test';
+            expect(is.all.json({}, notObject,[])).to.be.false;
+            expect(is.all.json([{}, notObject,""])).to.be.false;
+        });
+    });
+  describe("is.any.json", function() {
+        it("should return true if any passed parameter type is json object", function() {
+            expect(is.any.json({}, {}, 'test')).to.be.true;
+            expect(is.any.json([{}, {}, 'test'])).to.be.true;
+        });
+        it("should return false if all passed parameter types are not json object", function() {
+            expect(is.any.json(1, 2, 3)).to.be.false;
+            expect(is.any.json([1, 2, 3])).to.be.false;
+        });
+    });
+    
     describe("is.regexp", function() {
         it("should return true if passed parameter type is regexp", function() {
             var regexp = new RegExp();
