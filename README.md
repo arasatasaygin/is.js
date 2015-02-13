@@ -4,6 +4,9 @@ is.js
 - No dependencies
 - AMD, Node & browser ready
 
+```
+npm install is_js
+```
 
 Type checks
 ===========
