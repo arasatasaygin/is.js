@@ -139,7 +139,7 @@
         return type === 'function' || type === 'object' && !!value;
     };
 
-    //is given value a pure JSON object.
+    // is given value a pure JSON object?
     is.json = function(value){
         return toString.call(value) === '[object Object]';
     }
