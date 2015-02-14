@@ -238,7 +238,7 @@ interfaces: not, all, any
 is.object({foo: 'bar'});
 => true
 
-// functions are also returnin as true
+// functions are also returning as true
 is.object(toString);
 => true
 
@@ -253,6 +253,33 @@ is.any.object({}, 2);
 
 // 'all' and 'any' interfaces can also take array parameter
 is.all.object([{}, new Object()]);
+=> true
+```
+
+is.json(value:any)
+--------------------
+####Checks if the given value type is pure json object.
+interfaces: not, all, any
+
+```javascript
+is.json({foo: 'bar'});
+=> true
+
+// functions are returning as false
+is.json(toString);
+=> false
+
+is.not.json([]);
+=> true
+
+is.all.json({}, 1);
+=> false
+
+is.any.json({}, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.json([{}, {foo: 'bar'}]);
 => true
 ```
 
