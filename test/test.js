@@ -2518,6 +2518,18 @@ describe("time checks", function() {
             var eightDaysAgo = new Date(date.setDate(date.getDate() - 8));
             expect(is.inLastWeek(eightDaysAgo)).to.be.false;
         });
+        // only added to test hour shifted cases
+        it("should return true if date is within last week", function() {
+            var date = new Date();
+            var eightDaysAgo = new Date(date.setDate(date.getDate() - 7) + 6400000);
+            expect(is.inLastWeek(eightDaysAgo)).to.be.true;
+        });
+        // only added to test hour shifted cases
+        it("should return false if date is not within last week", function() {
+            var date = new Date();
+            var eightDaysAgo = new Date(date.setDate(date.getDate() - 7) - 6400000);
+            expect(is.inLastWeek(eightDaysAgo)).to.be.false;
+        });
     });
     describe("is.not.inLastWeek", function() {
         it("should return false if date is within last week", function() {

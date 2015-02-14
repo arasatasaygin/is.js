@@ -462,42 +462,63 @@
         if(is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) {
             return false;
         }
-        var givenDate = obj.getTime();
-        var start = startObj.getTime();
-        var end = endObj.getTime();
-        return givenDate > start && givenDate < end;
+        return is.within(obj.getTime(), startObj.getTime(), endObj.getTime());
     };
     // inDateRange method does not support 'all' and 'any' interfaces
     is.inDateRange.api = ['not'];
 
     // is a given date in last week range?
     is.inLastWeek = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
+        if(is.not.date(obj)) {
+            return false;
+        }
+        var d = new Date().getTime();
+        return is.within(obj.getTime(), d-604800000, d);
     };
 
     // is a given date in last month range?
     is.inLastMonth = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
+        if(is.not.date(obj)) {
+            return false;
+        }
+        var d = new Date().getTime();
+        return is.within(obj.getTime(), d-2678400000, d);
     };
 
     // is a given date in last year range?
     is.inLastYear = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
+        if(is.not.date(obj)) {
+            return false;
+        }
+        var d = new Date().getTime();
+        return is.within(obj.getTime(), d - 31536000000, d);
     };
 
     // is a given date in next week range?
     is.inNextWeek = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
+        if(is.not.date(obj)) {
+            return false;
+        }
+        var d = new Date().getTime();
+        return is.within(obj.getTime(), d, d + 604800000);
     };
 
     // is a given date in next month range?
     is.inNextMonth = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
+        if(is.not.date(obj)) {
+            return false;
+        }
+        var d = new Date().getTime();
+        return is.within(obj.getTime(), d, d + 2678400000);
     };
 
     // is a given date in next year range?
     is.inNextYear = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+        if(is.not.date(obj)) {
+            return false;
+        }
+        var d = new Date().getTime();
+        return is.within(obj.getTime(), d, d + 31536000000);
     };
 
     // is a given date in the parameter quarter?
