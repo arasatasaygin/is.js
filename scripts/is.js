@@ -1,4 +1,4 @@
-// is.js 0.5.0
+// is.js 0.6.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.5.0';
+    is.VERSION = '0.6.0';
 
     // define interfaces
     is.not = {};
@@ -137,6 +137,11 @@
     is.object = function(value) {
         var type = typeof value;
         return type === 'function' || type === 'object' && !!value;
+    };
+
+    // is given value a pure JSON object?
+    is.json = function(value) {
+        return toString.call(value) === '[object Object]';
     };
 
     // is a given value RegExp?
@@ -308,7 +313,7 @@
         timeString: /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/,
         dateString: /^(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{2})?[0-9]{2}$/,
         usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/,
-        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]?[0-9][A-Z][0-9]$/,
+        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]\s?[0-9][A-Z][0-9]$/,
         ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
         nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
@@ -363,7 +368,7 @@
 
     // is string end with a given endWith parameter?
     is.endWith = function(str, endWith) {
-        return is.string(str) && str.indexOf(endWith) === str.length -  endWith.length;
+        return is.string(str) && str.indexOf(endWith) > -1 && str.indexOf(endWith) === str.length -  endWith.length;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
@@ -556,7 +561,8 @@
 
         // is current browser opera?
         is.opera = function() {
-            return /opr/i.test(userAgent);
+            return /^Opera\//.test(userAgent) || // Opera 12 and older versions
+                /\x20OPR\//.test(userAgent); // Opera 15+
         };
         // opera method does not support 'all' and 'any' interfaces
         is.opera.api = ['not'];
