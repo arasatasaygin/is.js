@@ -140,9 +140,9 @@
     };
 
     // is given value a pure JSON object?
-    is.json = function(value){
+    is.json = function(value) {
         return toString.call(value) === '[object Object]';
-    }
+    };
 
     // is a given value RegExp?
     is.regexp = function(value) {
