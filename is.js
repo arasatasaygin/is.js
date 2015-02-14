@@ -363,7 +363,8 @@
 
     // is string end with a given endWith parameter?
     is.endWith = function(str, endWith) {
-        return is.string(str) && str.indexOf(endWith) === str.length -  endWith.length;
+        var index = str.indexOf(endWith);
+        return is.string(str) && index !== -1 && index === str.length -  endWith.length;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
