@@ -1903,9 +1903,6 @@ describe("string checks", function() {
         it("should return false if given string does not end with substring", function() {
             expect(is.endWith('test', 'te')).to.be.false;
         });
-        it("should return false if given string does not end with substring", function() {
-            expect(is.endWith('id', '_id')).to.be.false;
-        });
     });
     describe("is.not.endWith", function() {
         it("should return false if given string ends with substring", function() {
