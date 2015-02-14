@@ -34,6 +34,7 @@
                         <li><a href="#null">null</a></li>
                         <li><a href="#number">number</a></li>
                         <li><a href="#object">object</a></li>
+                        <li><a href="#json">json</a></li>
                         <li><a href="#regexp">regexp</a></li>
                         <li><a href="#string">string</a></li>
                         <li><a href="#char">char</a></li>
@@ -438,6 +439,36 @@ is.any.object({}, 2);
 
 // 'all' and 'any' interfaces can also take array parameter
 is.all.object([{}, new Object()]);
+=> true
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="json">
+                        <div class="method">
+                            <h3>is.json(value:any)</h3>
+                            <span>interfaces: not, all, any</span>
+                        </div>
+                        <p>Checks if the given value type is pure json object.</p>
+                        <pre>
+                            <code>
+is.json({foo: 'bar'});
+=> true
+
+// functions are returning as false
+is.json(toString);
+=> false
+
+is.not.json([]);
+=> true
+
+is.all.json({}, 1);
+=> false
+
+is.any.json({}, 2);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.json([{}, {foo: 'bar'}]);
 => true
                             </code>
                         </pre>
