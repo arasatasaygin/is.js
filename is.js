@@ -567,14 +567,18 @@
 
         // is current browser internet explorer?
         // parameter is optional
-        is.ie = function(version) {
-            if(!version) {
-                return /msie/i.test(userAgent) || "ActiveXObject" in window;
+        is.ie = function(minVersion) {
+            var isIe = /msie/i.test(userAgent);
+            if (isIe) {
+                if (!minVersion) {
+                    return true;
+                } else {
+                    var currentIeVersion = userAgent.match(/(?:msie)\s(\d*)/i)[1];
+                    return parseInt(currentIeVersion) >= minVersion;
+                }
+            } else {
+                return false;
             }
-            if(version >= 11) {
-                return "ActiveXObject" in window;
-            }
-            return new RegExp('msie ' + version).test(userAgent);
         };
         // ie method does not support 'all' and 'any' interfaces
         is.ie.api = ['not'];
