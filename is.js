@@ -532,44 +532,93 @@
         var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
 
         // is current browser chrome?
-        is.chrome = function() {
-            return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
+        is.chrome = function(minVersion) {
+            var isChrome = /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
+            if (isChrome) {
+                if (!minVersion) {
+                    return true;
+                } else {
+                    var currentChromeVersion = userAgent.match(/(?:chrome|chromium)\/(\d*)/i)[1];
+                    return parseInt(currentChromeVersion) >= minVersion;
+                }
+            } else {
+                return false;
+            }
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
 
         // is current browser firefox?
-        is.firefox = function() {
-            return /firefox/i.test(userAgent);
+        is.firefox = function(minVersion) {
+            var isFirefox = /firefox/i.test(userAgent);
+            if (isFirefox) {
+                if (!minVersion) {
+                    return true;
+                } else {
+                    var currentFirefoxVersion = userAgent.match(/(?:firefox)\/(\d*)/i)[1];
+                    return parseInt(currentFirefoxVersion) >= minVersion;
+                }
+            } else {
+                return false;
+            }
         };
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
 
         // is current browser internet explorer?
         // parameter is optional
-        is.ie = function(version) {
-            if(!version) {
-                return /msie/i.test(userAgent) || "ActiveXObject" in window;
+        is.ie = function(minVersion) {
+            var isIe = /msie/i.test(userAgent);
+            if (isIe) {
+                if (!minVersion) {
+                    return true;
+                } else {
+                    var currentIeVersion = userAgent.match(/(?:msie)\s(\d*)/i)[1];
+                    return parseInt(currentIeVersion) >= minVersion;
+                }
+            } else {
+                return false;
             }
-            if(version >= 11) {
-                return "ActiveXObject" in window;
-            }
-            return new RegExp('msie ' + version).test(userAgent);
         };
         // ie method does not support 'all' and 'any' interfaces
         is.ie.api = ['not'];
 
         // is current browser opera?
-        is.opera = function() {
-            return /^Opera\//.test(userAgent) || // Opera 12 and older versions
+        is.opera = function(minVersion) {
+            var isOpera = /^Opera\//.test(userAgent) || // Opera 12 and older versions
                 /\x20OPR\//.test(userAgent); // Opera 15+
+            if (isOpera) {
+                if (!minVersion) {
+                    return true;
+                } else {
+                    var currentOperaVersion = userAgent.match(/(?:Opera)\/(\d*)/)[1]; // Opera 12-
+                    if (is.null(currentOperaVersion)) { // Opera 15+
+                        currentOperaVersion = userAgent.match(/(?:OPR)\/(\d*)/)[1];
+                    }
+                    return parseInt(currentOperaVersion) >= minVersion;
+                }
+            } else {
+                return false;
+            }
+
+
         };
         // opera method does not support 'all' and 'any' interfaces
         is.opera.api = ['not'];
 
         // is current browser safari?
-        is.safari = function() {
-            return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
+        is.safari = function(minVersion) {
+            var isSafari = /safari/i.test(userAgent) && /apple computer/i.test(vendor);
+            if (isSafari) {
+                if (!minVersion) {
+                    return true;
+                } else {
+                    var currentSafariVersion = userAgent.match(/(?:Version)\/(\d*)/)[1];
+                    return parseInt(currentSafariVersion) >= minVersion;
+                }
+            } else {
+                return false;
+            }
         };
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
