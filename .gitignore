@@ -36,5 +36,9 @@
 ehthumbs.db
 Thumbs.db
 
+# IDE #
+######################
+.idea
+
 IDEAS.md
 /node_modules
