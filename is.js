@@ -697,7 +697,7 @@
         is.touchDevice = function() {
             return(
               ('ontouchstart' in window) ||
-              ('DocumentTouch' in window. && document instanceof DocumentTouch)
+              ('DocumentTouch' in window && document instanceof DocumentTouch)
             );
         };
     }
