@@ -1504,6 +1504,42 @@ describe("regexp checks", function() {
             expect(is.any.ukPostCode(['1', '2'])).to.be.false;
         });
     });
+    describe("is.krZipCode", function() {
+        it("should return true if given value is KR zip code", function() {
+            expect(is.krZipCode('121-781')).to.be.true;
+        });
+        it("should return false if given value is not KR zip code", function() {
+            expect(is.krZipCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.krZipCode", function() {
+        it("should return false if given value is KR zip code", function() {
+            expect(is.not.krZipCode('121-781')).to.be.false;
+        });
+        it("should return true if given value is not KR zip code", function() {
+            expect(is.not.krZipCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.krZipCode", function() {
+        it("should return true if all given values are KR zip code", function() {
+            expect(is.all.krZipCode('121-781', '153-292')).to.be.true;
+            expect(is.all.krZipCode(['121-781', '153-292'])).to.be.true;
+        });
+        it("should return false if any given value is not KR zip code", function() {
+            expect(is.all.krZipCode('121-781', '1')).to.be.false;
+            expect(is.all.krZipCode(['121-781', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.krZipCode", function() {
+        it("should return true if any given value is KR zip code", function() {
+            expect(is.any.krZipCode('121-781', '1')).to.be.true;
+            expect(is.any.krZipCode(['121-781', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not KR zip code", function() {
+            expect(is.any.krZipCode('1', '2')).to.be.false;
+            expect(is.any.krZipCode(['1', '2'])).to.be.false;
+        });
+    });
     describe("is.nanpPhone", function() {
         it("should return true if given value is nanpPhone", function() {
             expect(is.nanpPhone('609-555-0175')).to.be.true;
