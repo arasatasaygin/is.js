@@ -767,6 +767,32 @@ is.all.ukPostCode(['B184BJ', '123']);
 => false
 ```
 
+is.krZipCode(value:any)
+------------------------
+####Checks if the given value matches KR zipcode regexp.
+interfaces: not, all, any
+
+```javascript
+is.krZipCode('121-781');
+=> true
+
+is.krZipCode('123');
+=> false
+
+is.not.krZipCode('123');
+=> true
+
+is.all.krZipCode('121-781', '123');
+=> false
+
+is.any.krZipCode('121-781', '123');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.krZipCode(['121-781', '123']);
+=> false
+
+```
 is.nanpPhone(value:any)
 -----------------------
 ####Checks if the given value matches North American numbering plan phone regexp.
