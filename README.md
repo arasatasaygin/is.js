@@ -741,6 +741,32 @@ is.all.caPostalCode(['L8V3Y1', '123']);
 => false
 ```
 
+is.brPostalCode(value:any)
+--------------------------
+####Checks if the given value matches Brazil postal code regexp.
+interfaces: not, all, any
+
+```javascript
+is.brPostalCode('38180970');
+=> true
+
+is.brPostalCode('38180AB123');
+=> false
+
+is.not.brPostalCode('3818097');
+=> true
+
+is.all.brPostalCode('38BRA90', '123');
+=> false
+
+is.any.brPostalCode('38180970', '38183000');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.brPostalCode(['38183ABC', '123']);
+=> false
+```
+
 is.ukPostCode(value:any)
 ------------------------
 ####Checks if the given value matches UK post code regexp.

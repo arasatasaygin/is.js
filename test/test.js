@@ -1468,6 +1468,42 @@ describe("regexp checks", function() {
             expect(is.any.caPostalCode(['1', '2'])).to.be.false;
         });
     });
+    describe("is.brPostalCode", function() {
+        it("should return true if given value is Brazil postal code", function() {
+            expect(is.brPostalCode('38180000')).to.be.true;
+        });
+        it("should return false if given value is not Brazil postal code", function() {
+            expect(is.brPostalCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.brPostalCode", function() {
+        it("should return false if given value is Brazil postal code", function() {
+            expect(is.not.brPostalCode('38180970')).to.be.false;
+        });
+        it("should return true if given value is not Brazil postal code", function() {
+            expect(is.not.brPostalCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.brPostalCode", function() {
+        it("should return true if all given values are Brazil postal code", function() {
+            expect(is.all.brPostalCode('38180000', '38180970')).to.be.true;
+            expect(is.all.brPostalCode(['38180123', '38180074'])).to.be.true;
+        });
+        it("should return false if any given value is not Brazil postal code", function() {
+            expect(is.all.brPostalCode('38180970', '1')).to.be.false;
+            expect(is.all.brPostalCode(['38180000', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.brPostalCode", function() {
+        it("should return true if any given value is Brazil postal code", function() {
+            expect(is.any.brPostalCode('38180970', '1')).to.be.true;
+            expect(is.any.brPostalCode(['38183100', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not Brazil postal code", function() {
+            expect(is.any.brPostalCode('1', '2')).to.be.false;
+            expect(is.any.brPostalCode(['1', '2'])).to.be.false;
+        });
+    });
     describe("is.ukPostCode", function() {
         it("should return true if given value is UK post code", function() {
             expect(is.ukPostCode('B184BJ')).to.be.true;
