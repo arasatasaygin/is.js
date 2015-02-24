@@ -1,4 +1,4 @@
-// is.js 0.6.0
+// is.js 0.7.0
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.6.0';
+    is.VERSION = '0.7.0';
 
     // define interfaces
     is.not = {};
@@ -697,6 +697,13 @@
         is.offline = not(is.online);
         // offline method does not support 'all' and 'any' interfaces
         is.offline.api = ['not'];
+
+        // is current device supports touch?
+        is.touchDevice = function() {
+            return 'ontouchstart' in window ||'DocumentTouch' in window && document instanceof DocumentTouch;
+        };
+        // touchDevice method does not support 'all' and 'any' interfaces
+        is.touchDevice.api = ['not'];
     }
 
     // Object checks
