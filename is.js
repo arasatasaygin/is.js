@@ -697,6 +697,14 @@
         is.offline = not(is.online);
         // offline method does not support 'all' and 'any' interfaces
         is.offline.api = ['not'];
+
+        // is a touch device ?
+        is.touchDevice = function() {
+            return(
+              ('ontouchstart' in window) ||
+              ('DocumentTouch' in window && document instanceof DocumentTouch)
+            );
+        };
     }
 
     // Object checks
