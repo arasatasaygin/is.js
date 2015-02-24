@@ -138,6 +138,7 @@
                             <li><a href="#tablet">tablet</a></li>
                             <li><a href="#online">online</a></li>
                             <li><a href="#offline">offline</a></li>
+                            <li><a href="#touchDevice">touchDevice</a></li>
                         </ul>
                 </div>
                 <div class="col-5">
@@ -2248,6 +2249,22 @@ is.offline();
 
 is.not.offline();
 => true if current device is not offline
+                            </code>
+                        </pre>
+                    </div>
+                    <div id="touchDevice">
+                        <div class="method">
+                            <h3>is.touchDevice()</h3>
+                            <span>interface: not</span>
+                        </div>
+                        <p>Checks if the current device supports touch.</p>
+                        <pre>
+                            <code>
+is.touchDevice();
+=> true if current device supports touch
+
+is.not.touchDevice();
+=> true if current device doesn't support touch
                             </code>
                         </pre>
                     </div>
