@@ -1852,6 +1852,19 @@ is.not.offline();
 => true if current device is not offline
 ```
 
+is.touchDevice()
+------------
+####Checks if current device supports touch.
+interface: not
+
+```javascript
+is.touchDevice();
+=> true if current device supports touch
+
+is.not.touchDevice();
+=> true if current device doesn't support touch
+```
+
 Time checks
 ===========
 
