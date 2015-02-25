@@ -707,6 +707,38 @@ describe("presence checks", function() {
             expect(is.all.existy([[], {}, 'test', true, undefined])).to.be.false;
         });
     });
+    describe("is.present", function() {
+        it("should return false if given value is null", function() {
+            expect(is.present(null)).to.be.false;
+        });
+        it("should return false if given value is undefined", function() {
+            expect(is.present(undefined)).to.be.false;
+        });
+        it("should return true if given value is not null or undefined", function() {
+            expect(is.present('test')).to.be.true;
+        });
+    });
+    describe("is.not.present", function() {
+        it("should return true if given value is null", function() {
+            expect(is.not.present(null)).to.be.true;
+        });
+        it("should return true if given value is undefined", function() {
+            expect(is.not.present(undefined)).to.be.true;
+        });
+        it("should return false if given value is not null or undefined", function() {
+            expect(is.not.present('test')).to.be.false;
+        });
+    });
+    describe("is.all.present", function() {
+        it("should return true if all given values are present", function() {
+            expect(is.all.present([], {}, 'test', true)).to.be.true;
+            expect(is.all.present([[], {}, 'test', true])).to.be.true;
+        });
+        it("should return false if given any value is not present", function() {
+            expect(is.all.present([], {}, 'test', true, undefined)).to.be.false;
+            expect(is.all.present([[], {}, 'test', true, undefined])).to.be.false;
+        });
+    });
     describe("is.truthy", function() {
         it("should return true if given value is truthy", function() {
             expect(is.truthy('test')).to.be.true;

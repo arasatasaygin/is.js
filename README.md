@@ -449,6 +449,32 @@ is.all.existy([{}, 'foo']);
 => true
 ```
 
+is.present(value:any)
+--------------------
+####Checks if the given value is present. (not null or undefined)
+interfaces: not, all, any
+
+```javascript
+is.present({});
+=> true
+
+is.present(null);
+=> false
+
+is.not.present(undefined);
+=> true
+
+is.all.present(null, ['foo']);
+=> false
+
+is.any.present(undefined, 42);
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.present([{}, 'foo']);
+=> true
+```
+
 is.truthy(value:any)
 --------------------
 ####Checks if the given value is truthy. (existy and not false)

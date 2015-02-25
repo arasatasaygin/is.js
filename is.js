@@ -195,6 +195,10 @@
     is.existy = function(value) {
         return value !== null && value !== undefined;
     };
+    // is a given value present? alias for existy()
+    is.present = function(value) {
+        return is.existy(value);
+    };
 
     // is a given value truthy?
     is.truthy = function(value) {
