@@ -130,6 +130,9 @@
 
     // is a given value number?
     is.number = function(value) {
+        if (is.nan(value)) {
+            return false;
+        }
         return toString.call(value) === '[object Number]';
     };
 
