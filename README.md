@@ -215,6 +215,9 @@ interfaces: not, all, any
 is.number(42);
 => true
 
+is.number(NaN);
+=> false
+
 is.not.number('42');
 => true
 
