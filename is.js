@@ -1,4 +1,4 @@
-// is.js 0.7.0
+// is.js 0.7.1
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.7.0';
+    is.VERSION = '0.7.1';
 
     // define interfaces
     is.not = {};
