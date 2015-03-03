@@ -367,6 +367,10 @@ describe("type checks", function() {
             var notNumber = 'test';
             expect(is.number(notNumber)).to.be.false;
         });
+        it("should return false if passed parameter is NaN", function() {
+            var nan = Number.NaN;
+            expect(is.number(nan)).to.be.false;
+        })
     });
     describe("is.not.number", function() {
         it("should return false if passed parameter type is number", function() {
@@ -376,6 +380,10 @@ describe("type checks", function() {
             var notNumber = 'test';
             expect(is.not.number(notNumber)).to.be.true;
         });
+        it("should return true if passed parameter is NaN", function() {
+            var nan = Number.NaN;
+            expect(is.not.number(nan)).to.be.true;
+        })
     });
     describe("is.all.number", function() {
         it("should return true if all passed parameter types are number", function() {
