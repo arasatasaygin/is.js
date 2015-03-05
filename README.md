@@ -1190,6 +1190,12 @@ is.equal(true, true);
 
 is.not.equal('yeap', 'nope');
 => true
+
+is.equal([1,2,3], [1,2,3]);
+=> true
+
+is.equal([1,2,3], [4,5,6]);
+=> false
 ```
 
 is.even(value:number)
