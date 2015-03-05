@@ -3,7 +3,7 @@
 
 // AMD with global, Node, or global
 ;(function(root, factory) {
-    if(typeof define === 'function' && define.amd) {
+    if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['is'], function(is) {
             // Also create a global in case some scripts
@@ -11,7 +11,7 @@
             // a global even when an AMD loader is in use.
             return (root.is = factory(is));
         });
-    } else if(typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
@@ -23,7 +23,7 @@
 }(this, function(is) {
 
     // Baseline
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     var root = this;
     var previousIs = root.is;
@@ -49,12 +49,13 @@
         };
     }
 
-    // helper function which call predicate function per parameter and return true if all pass
+    // helper function which call predicate function per parameter
+    // and return true if all pass
     function all(func) {
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
-            if(length === 1 && is.array(parameters[0])) {    // support array
+            if (length === 1 && is.array(parameters[0])) {  // support array
                 parameters = parameters[0];
                 length = parameters.length;
             }
@@ -67,12 +68,13 @@
         };
     }
 
-    // helper function which call predicate function per parameter and return true if any pass
+    // helper function which call predicate function per parameter
+    // and return true if any pass
     function any(func) {
         return function() {
             var parameters = arraySlice.call(arguments);
             var length = parameters.length;
-            if(length === 1 && is.array(parameters[0])) {    // support array
+            if (length === 1 && is.array(parameters[0])) {  // support array
                 parameters = parameters[0];
                 length = parameters.length;
             }
@@ -86,21 +88,24 @@
     }
 
     // Type checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // is a given value Arguments?
-    is.arguments = function(value) {    // fallback check is for IE
-        return is.not.null(value) && (toString.call(value) === '[object Arguments]' || (typeof value === 'object' && 'callee' in value));
+    is.arguments = function(value) {  // fallback check is for IE
+        return is.not.null(value) &&
+            (toString.call(value) === '[object Arguments]' ||
+                (typeof value === 'object' && 'callee' in value));
     };
 
     // is a given value Array?
-    is.array = Array.isArray || function(value) {    // check native isArray first
+    is.array = Array.isArray || function(value) {  // check native isArray first
         return toString.call(value) === '[object Array]';
     };
 
     // is a given value Boolean?
     is.boolean = function(value) {
-        return value === true || value === false || toString.call(value) === '[object Boolean]';
+        return value === true || value === false ||
+            toString.call(value) === '[object Boolean]';
     };
 
     // is a given value Date Object?
@@ -114,23 +119,27 @@
     };
 
     // is a given value function?
-    is.function = function(value) {    // fallback check is for IE
-        return toString.call(value) === '[object Function]' || typeof value === 'function';
+    is.function = function(value) {  // fallback check is for IE
+        return toString.call(value) === '[object Function]' ||
+            typeof value === 'function';
     };
 
     // is a given value NaN?
-    is.nan = function(value) {    // NaN is number :) Also it is the only value which does not equal itself
+    // NaN is number :) Also it is the only value which does not equal itself
+    is.nan = function(value) {
         return value !== value;
     };
 
     // is a given value null?
     is.null = function(value) {
-        return value === null || toString.call(value) === '[object Null]';
+        return value === null ||
+            toString.call(value) === '[object Null]';
     };
 
     // is a given value number?
     is.number = function(value) {
-        return is.not.nan(value) && toString.call(value) === '[object Number]';
+        return is.not.nan(value) &&
+            toString.call(value) === '[object Number]';
     };
 
     // is a given value object?
@@ -152,7 +161,7 @@
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value1, value2) {
-        if(is.nan(value1) || is.nan(value2)) {
+        if (is.nan(value1) || is.nan(value2)) {
             return is.nan(value1) === is.nan(value2);
         }
         return toString.call(value1) === toString.call(value2);
@@ -176,19 +185,16 @@
     };
 
     // Presence checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     //is a given value empty? Objects, arrays, strings
     is.empty = function(value) {
-        if(is.object(value)){
+        if (is.object(value)) {
             var num = Object.getOwnPropertyNames(value).length;
-            if(num === 0 || (num === 1 && is.array(value)) || (num === 2 && is.arguments(value))){
-                return true;
-            }
-            return false;
-        } else {
-            return value === '';
+            return num === 0 || (num === 1 && is.array(value)) ||
+                (num === 2 && is.arguments(value))
         }
+        return value === '';
     };
 
     // is a given value existy?
@@ -198,38 +204,40 @@
 
     // is a given value truthy?
     is.truthy = function(value) {
-        return is.existy(value) && value !== false && is.not.nan(value) && value !== "" && value !== 0;
+        return is.existy(value) && value !== false &&
+            is.not.nan(value) &&value !== "" && value !== 0;
     };
 
     // is a given value falsy?
     is.falsy = not(is.truthy);
 
     // is a given value space?
-    // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
+    // horizantal tab: 9, line feed: 10, vertical tab: 11,
+    // form feed: 12, carriage return: 13, space: 32
     is.space =  function(value) {
-        if(is.char(value)) {
+        if (is.char(value)) {
             var characterCode = value.charCodeAt(0);
-            return (characterCode >  8 && characterCode < 14) || characterCode === 32;
-        } else {
-            return false;
+            return (characterCode >  8 && characterCode < 14) ||
+                characterCode === 32;
         }
+        return false;
     };
 
     // Arithmetic checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // are given values equal? supports numbers, strings, regexps, booleans
     // TODO: Add object and array support
     is.equal = function(value1, value2) {
         // check 0 and -0 equity with Infinity and -Infinity
-        if(is.all.number(value1, value2)) {
+        if (is.all.number(value1, value2)) {
             return value1 === value2 && 1 / value1 === 1 / value2;
         }
         // check regexps as strings too
-        if(is.all.string(value1, value2) || is.all.regexp(value1, value2)) {
+        if (is.all.string(value1, value2) || is.all.regexp(value1, value2)) {
             return '' + value1 === '' + value2;
         }
-        if(is.all.boolean(value1, value2)) {
+        if (is.all.boolean(value1, value2)) {
             return value1 === value2;
         }
         return false;
@@ -327,8 +335,8 @@
     };
 
     // create regexp checks methods from 'regexp' object
-    for(var regexp in regexps) {
-        if(regexps.hasOwnProperty(regexp)) {
+    for (var regexp in regexps) {
+        if (regexps.hasOwnProperty(regexp)) {
             regexpCheck(regexp, regexps);
         }
     }
@@ -340,7 +348,7 @@
     }
 
     // String checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // is a given string include parameter substring?
     is.include = String.prototype.includes || function(str, substr) {
@@ -368,19 +376,20 @@
 
     // is string end with a given endWith parameter?
     is.endWith = function(str, endWith) {
-        return is.string(str) && str.indexOf(endWith) > -1 && str.indexOf(endWith) === str.length -  endWith.length;
+        return is.string(str) && str.indexOf(endWith) > -1 &&
+            str.indexOf(endWith) === str.length -  endWith.length;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
 
     // is a given string or sentence capitalized?
     is.capitalized = function(str) {
-        if(is.not.string(str)) {
+        if (is.not.string(str)) {
             return false;
         }
         var words = str.split(' ');
         var capitalized = [];
-        for(var i = 0; i < words.length; i++) {
+        for (var i = 0; i < words.length; i++) {
             capitalized.push(words[i][0] === words[i][0].toUpperCase());
         }
         return is.all.truthy.apply(null, capitalized);
@@ -392,10 +401,16 @@
     };
 
     // Time checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
-    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    var days = [
+        'sunday', 'monday', 'tuesday', 'wednesday',
+        'thursday', 'friday', 'saturday'
+    ];
+    var months = [
+        'january', 'february', 'march', 'april', 'may', 'june',
+        'july', 'august', 'september', 'october', 'november', 'december'
+    ];
 
     // is a given date indicate today?
     is.today = function(obj) {
@@ -450,7 +465,8 @@
 
     // is the given year a leap year?
     is.leapYear = function(year) {
-        return is.number(year) && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
+        return is.number(year) &&
+            ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
     };
 
     // is a given date weekend?
@@ -464,7 +480,7 @@
 
     // is date within given range?
     is.inDateRange = function(obj, startObj, endObj) {
-        if(is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) {
+        if (is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) {
             return false;
         }
         var givenDate = obj.getTime();
@@ -477,37 +493,44 @@
 
     // is a given date in last week range?
     is.inLastWeek = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
+        return is.inDateRange(obj,
+            new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
     };
 
     // is a given date in last month range?
     is.inLastMonth = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
+        return is.inDateRange(obj,
+            new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
     };
 
     // is a given date in last year range?
     is.inLastYear = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
+        return is.inDateRange(obj,
+            new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
     };
 
     // is a given date in next week range?
     is.inNextWeek = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
+        return is.inDateRange(obj, new Date(),
+            new Date(new Date().setDate(new Date().getDate() + 7)));
     };
 
     // is a given date in next month range?
     is.inNextMonth = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
+        return is.inDateRange(obj, new Date(),
+            new Date(new Date().setMonth(new Date().getMonth() + 1)));
     };
 
     // is a given date in next year range?
     is.inNextYear = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+        return is.inDateRange(obj, new Date(),
+            new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
     };
 
     // is a given date in the parameter quarter?
     is.quarterOfYear = function(obj, quarterNumber) {
-        return is.date(obj) && is.number(quarterNumber) && quarterNumber === Math.floor((obj.getMonth() + 3) / 3);
+        return is.date(obj) && is.number(quarterNumber) &&
+            quarterNumber === Math.floor((obj.getMonth() + 3) / 3);
     };
     // quarterOfYear method does not support 'all' and 'any' interfaces
     is.quarterOfYear.api = ['not'];
@@ -521,19 +544,24 @@
     };
 
     // Environment checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // check if library is used as a Node.js module
-    if(typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
 
         // store navigator properties to use later
-        var userAgent = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
-        var vendor = 'navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase() || '';
-        var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
+        var userAgent = 'navigator' in window &&
+            'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
+
+        var vendor = 'navigator' in window &&
+            'vendor' in navigator && navigator.vendor.toLowerCase() || '';
+        var appVersion = 'navigator' in window &&
+            'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
 
         // is current browser chrome?
         is.chrome = function() {
-            return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
+            return /chrome|chromium/i.test(userAgent) && /google inc/
+                .test(vendor);
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
@@ -548,10 +576,10 @@
         // is current browser internet explorer?
         // parameter is optional
         is.ie = function(version) {
-            if(!version) {
+            if (!version) {
                 return /msie/i.test(userAgent) || "ActiveXObject" in window;
             }
-            if(version >= 11) {
+            if (version >= 11) {
                 return "ActiveXObject" in window;
             }
             return new RegExp('msie ' + version).test(userAgent);
@@ -667,14 +695,16 @@
 
         // is current device windows tablet?
         is.windowsTablet = function() {
-            return is.windows() && is.not.windowsPhone() && /touch/i.test(userAgent);
+            return is.windows() && is.not.windowsPhone() && /touch/i
+                .test(userAgent);
         };
         // windowsTablet method does not support 'all' and 'any' interfaces
         is.windowsTablet.api = ['not'];
 
         // is current device mobile?
         is.mobile = function() {
-            return is.iphone() || is.ipod() || is.androidPhone() || is.blackberry() || is.windowsPhone();
+            return is.iphone() || is.ipod() || is.androidPhone() ||
+                is.blackberry() || is.windowsPhone();
         };
         // mobile method does not support 'all' and 'any' interfaces
         is.mobile.api = ['not'];
@@ -700,26 +730,27 @@
 
         // is current device supports touch?
         is.touchDevice = function() {
-            return 'ontouchstart' in window ||'DocumentTouch' in window && document instanceof DocumentTouch;
+            return 'ontouchstart' in window ||
+                'DocumentTouch' in window && document instanceof DocumentTouch;
         };
         // touchDevice method does not support 'all' and 'any' interfaces
         is.touchDevice.api = ['not'];
     }
 
     // Object checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // has a given object got parameterized count property?
     is.propertyCount = function(obj, count) {
-        if(!is.object(obj) || !is.number(count)) {
+        if (!is.object(obj) || !is.number(count)) {
             return false;
         }
-        if(Object.keys) {
+        if (Object.keys) {
             return Object.keys(obj).length === count;
         }
         var properties = [],
             property;
-        for(property in obj) {
+        for (property in obj) {
             if (hasOwnProperty.call(obj, property)) {
                 properties.push(property);
             }
@@ -748,14 +779,14 @@
     };
 
     // Array checks
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // is a given item in an array?
-    is.inArray = function(val, arr){
-        if(is.not.array(arr)) {
+    is.inArray = function(val, arr) {
+        if (is.not.array(arr)) {
             return false;
         }
-        for(var i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             if (arr[i] === val) return true;
         }
         return false;
@@ -765,32 +796,32 @@
 
     // is a given array sorted?
     is.sorted = function(arr) {
-        if(is.not.array(arr)) {
+        if (is.not.array(arr)) {
             return false;
         }
-        for(var i = 0; i < arr.length; i++) {
-            if(arr[i] > arr[i + 1]) return false;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[i + 1]) return false;
         }
         return true;
     };
 
     // API
-    // Set 'not', 'all' and 'any' interfaces to methods based on their api property
-    /* -------------------------------------------------------------------------- */
+    // Set 'not', 'all' and 'any' interfaces to methods based ontheir api property
+    /* ---------------------------------------------------------------------- */
 
     function setInterfaces() {
         var options = is;
-        for(var option in options) {
-            if(hasOwnProperty.call(options, option) && is.function(options[option])) {
+        for (var option in options) {
+            if (hasOwnProperty.call(options, option) && is.function(options[option])) {
                 var interfaces = options[option].api || ['not', 'all', 'any'];
                 for (var i = 0; i < interfaces.length; i++) {
-                    if(interfaces[i] === 'not') {
+                    if (interfaces[i] === 'not') {
                         is.not[option] = not(is[option]);
                     }
-                    if(interfaces[i] === 'all') {
+                    if (interfaces[i] === 'all') {
                         is.all[option] = all(is[option]);
                     }
-                    if(interfaces[i] === 'any') {
+                    if (interfaces[i] === 'any') {
                         is.any[option] = any(is[option]);
                     }
                 }
@@ -801,12 +832,12 @@
 
     // Configuration methods
     // Intentionally added after setInterfaces function
-    /* -------------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
     // set optional regexps to methods if you think they suck
     is.setRegexp = function(regexp, regexpName) {
-        for(var r in regexps) {
-            if(hasOwnProperty.call(regexps, r) && (regexpName === r)) {
+        for (var r in regexps) {
+            if (hasOwnProperty.call(regexps, r) && (regexpName === r)) {
                 regexps[r] = regexp;
             }
         }
