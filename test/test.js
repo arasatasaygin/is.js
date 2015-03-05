@@ -824,6 +824,19 @@ describe("arithmetic checks", function() {
         it("should return false if given two boolean are not same", function() {
             expect(is.equal(false, true)).to.be.false;
         });
+        it("should return false if given two arrays are the same", function() {
+            expect(is.equal([1,2,3], [1,2,3])).to.be.true;
+        });
+        it("should return false if given two arrays are not same", function() {
+            expect(is.equal([1,2,3], [1,2,4])).to.be.false;
+        });
+        it("should return true if given two nested arrays are the same", function() {
+            expect(is.equal([[1,2],3,4], [[1,2],3,4])).to.be.true;
+        });
+        it("should return false if given two nested arrays are not the same", function() {
+            expect(is.equal([[1,2],3,4], [[1,2],3,5])).to.be.false;
+        });
+
     });
     describe("is.not.equal", function() {
         it("should return false if given two numbers are equal", function() {

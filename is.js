@@ -232,6 +232,27 @@
         if(is.all.boolean(value1, value2)) {
             return value1 === value2;
         }
+        if(is.all.array(value1, value2)){
+            // first compare length to save time
+            if (value1.length != value2.length){
+                return false;
+            }
+            for (var i= 0, l=value1.length; i< l; i++){
+                // Check for nested arrays
+                if(value1[i] instanceof Array && value2[i] instanceof Array){
+                    // Recursively check this Array
+                    if(! is.equal(value1[i], value2[i])){
+                        return false;
+                    }
+                }
+                // Otherwise compare the items
+                else if(value1[i] != value2[i]){
+                    return false;
+                }
+            }
+            // If we reach here then the arrays are equal
+            return true;
+        }
         return false;
     };
     // equal method does not support 'all' and 'any' interfaces
