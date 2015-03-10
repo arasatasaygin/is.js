@@ -625,7 +625,7 @@
 
         // is current device blackberry?
         is.blackberry = function() {
-            return /blackberry/i.test(userAgent);
+            return /blackberry/i.test(userAgent) || /BB10/i.test(userAgent);
         };
         // blackberry method does not support 'all' and 'any' interfaces
         is.blackberry.api = ['not'];
