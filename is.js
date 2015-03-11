@@ -187,7 +187,7 @@
             }
             return false;
         } else {
-            return value === '';
+            return /^\s*$/.test(value);
         }
     };
 
