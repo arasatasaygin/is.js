@@ -662,23 +662,35 @@ describe("presence checks", function() {
         it("should return false if given object is not empty", function() {
             expect(is.empty({test: 'test'})).to.be.false;
         });
+        it("should return true if given string is empty", function() {
+            expect(is.empty('   ')).to.be.true;
+        });
+        it("should return true if given string is just white space", function() {
+            expect(is.empty('\t   \n')).to.be.true;
+        });
     });
     describe("is.not.empty", function() {
-        it("should return false if given strinf is empty", function() {
+        it("should return false if given string is empty", function() {
             expect(is.not.empty('')).to.be.false;
         });
         it("should return true if given array is not empty", function() {
             expect(is.not.empty(['test'])).to.be.true;
         });
+        it("should return true if given string is empty", function() {
+            expect(is.not.empty('   ')).to.be.false;
+        });
+        it("should return true if given string is just white space", function() {
+            expect(is.not.empty('\t   \n')).to.be.false;
+        });
     });
     describe("is.all.empty", function() {
-        it("should return true if given array, object and srting are empty", function() {
-            expect(is.all.empty([], '', {})).to.be.true;
-            expect(is.all.empty([[], '', {}])).to.be.true;
+        it("should return true if given array, object and string are empty", function() {
+            expect(is.all.empty([], '', {}, '\t   \n')).to.be.true;
+            expect(is.all.empty([[], '', {}, '\t   \n'])).to.be.true;
         });
         it("should return false if any given element is not empty", function() {
-            expect(is.all.empty(['test'], {}, '')).to.be.false;
-            expect(is.all.empty([['test'], {}, ''])).to.be.false;
+            expect(is.all.empty(['test'], {}, '', '\t   \n')).to.be.false;
+            expect(is.all.empty([['test'], {}, '', '\t   \n'])).to.be.false;
         });
     });
     describe("is.existy", function() {
