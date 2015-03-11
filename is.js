@@ -215,6 +215,11 @@
         }
     };
 
+    // is a given value white space
+    is.whitespace = function(value) {
+        return /^\s+$/.test(value);
+    };
+
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
 
