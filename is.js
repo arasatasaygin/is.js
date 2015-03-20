@@ -251,6 +251,16 @@
         return result;
     }
 
+
+    // The most important check
+    /* -------------------------------------------------------------------------- */
+    is.is = function(value){
+        return is.equal(value, is);
+    };
+
+    // is method does not support 'all' and 'any' interfaces
+    is.is.api = ['not'];
+
     // Type checks
     /* -------------------------------------------------------------------------- */
 

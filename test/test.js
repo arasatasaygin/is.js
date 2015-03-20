@@ -805,6 +805,20 @@ describe("presence checks", function() {
     });
 });
 describe("equality checks", function() {
+    describe("The most important check", function(){
+        describe("is.is", function(){
+            it("should return true if passed parameter is is", function(){
+                expect(is.is(is)).to.be.true;
+            });
+            it("should return false if passed parameter is not is", function(){
+                expect(is.is({})).to.be.false;
+            });
+            it("should return true if passed parameter is equivalent is", function(){
+                var newIs = Object.create(is);
+                expect(is.is(newIs)).to.be.false;
+            });
+        });
+    });
     describe('is.equal', function(){
         it("should perform comparisons between arrays", function() {
             var array1 = [true, null, 1, "a", undefined],
