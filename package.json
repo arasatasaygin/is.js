@@ -3,7 +3,7 @@
   "version": "0.7.2",
   "main": "is.js",
   "license": "MIT",
-  "description": "a general-purpose check library with no dependencies",
+  "description": "micro check library",
   "repository": {
     "type": "git",
     "url": "https://github.com/arasatasaygin/is.js.git"
