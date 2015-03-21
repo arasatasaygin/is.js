@@ -1,4 +1,4 @@
-// is.js 0.7.2
+// is.js 0.7.3
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -20,7 +20,7 @@
         // Browser globals (root is window)
         root.is = factory(root.is);
     }
-}(this, function(is) {
+} (this, function(is) {
 
     // Baseline
     /* -------------------------------------------------------------------------- */
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.7.2';
+    is.VERSION = '0.7.3';
 
     // define interfaces
     is.not = {};
