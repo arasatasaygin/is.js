@@ -343,7 +343,7 @@
     /* -------------------------------------------------------------------------- */
 
     // is a given string include parameter substring?
-    is.include = String.prototype.includes || function(str, substr) {
+    is.include = function(str, substr) {
         return str.indexOf(substr) > -1;
     };
     // include method does not support 'all' and 'any' interfaces
