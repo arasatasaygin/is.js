@@ -1,4 +1,5 @@
-var expect = chai.expect;
+
+var expect = (typeof chai != 'undefined') ? chai.expect : require('chai').expect;
 
 describe("type checks", function() {
     describe("is.arguments", function() {
