@@ -25,7 +25,7 @@
     // Baseline
     /* -------------------------------------------------------------------------- */
 
-    var root = this;
+    var root = this || global;
     var previousIs = root.is;
 
     // define 'is' object and current version
