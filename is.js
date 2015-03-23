@@ -118,6 +118,21 @@
         return toString.call(value) === '[object Function]' || typeof value === 'function';
     };
 
+    // is a given value image by mimetype?
+    is.image = function(url) {
+        if (is.not.url(url)) {
+            return false;
+        }
+
+        var request = new XMLHttpRequest();
+        request.open('HEAD', url, false);
+        request.send();
+
+        var mimetype = request.getResponseHeader('content-type');
+
+        return mimetype.split('/').shift() === 'image';
+    };
+
     // is a given value NaN?
     is.nan = function(value) {    // NaN is number :) Also it is the only value which does not equal itself
         return value !== value;
