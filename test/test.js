@@ -1328,6 +1328,42 @@ describe("regexp checks", function() {
             expect(is.any.alphaNumeric(['=', '='])).to.be.false;
         });
     });
+    describe("is.macAddress", function() {
+        it("should return true if given value is a MAC address", function() {
+            expect(is.macAddress('01:23:45:67:89:ab')).to.be.true;
+        });
+        it("should return false if given value is not a MAC address", function() {
+            expect(is.macAddress('0123456789ab')).to.be.false;
+        });
+    });
+    describe("is.not.macAddress", function() {
+        it("should return false if given value is a MAC address", function() {
+            expect(is.not.macAddress('01:23:45:67:89:ab')).to.be.false;
+        });
+        it("should return true if given value is not a MAC address", function() {
+            expect(is.not.macAddress('0123456789ab')).to.be.true;
+        });
+    });
+    describe("is.all.macAddress", function() {
+        it("should return true if all given values are MAC addresses", function() {
+            expect(is.all.macAddress('01:23:45:67:89:01', '01:23:45:67:89:ab')).to.be.true;
+            expect(is.all.macAddress(['01:23:45:67:89:01', '01:23:45:67:89:ab'])).to.be.true;
+        });
+        it("should return false if any given value is not a MAC address", function() {
+            expect(is.all.macAddress(123, '0123456789ab')).to.be.false;
+            expect(is.all.macAddress([123, '0123456789ab'])).to.be.false;
+        });
+    });
+    describe("is.any.macAddress", function() {
+        it("should return true if any given value is a MAC address", function() {
+            expect(is.any.macAddress('01:23:45:67:89:ab', '01:23:45:67:89:ab')).to.be.true;
+            expect(is.any.macAddress(['01:23:45:67:89:ab', '01:23:45:67:89:ab'])).to.be.true;
+        });
+        it("should return false if all given values are not MAC addresses", function() {
+            expect(is.any.macAddress('0123456789ab', '0123456789ab')).to.be.false;
+            expect(is.any.macAddress(['0123456789ab', '0123456789ab'])).to.be.false;
+        });
+    });
     describe("is.timeString", function() {
         it("should return true if given value is time string", function() {
             expect(is.timeString('13:45:30')).to.be.true;
