@@ -1576,6 +1576,9 @@ interface: not
 is.chrome();
 => true if current browser is chrome
 
+is.chrome(41);
+=> true if chrome browser is v41
+
 is.not.chrome();
 => false if current browser is chrome
 ```
