@@ -1569,7 +1569,7 @@ is.not.ie();
 
 is.chrome(value:number)
 -----------
-####Checks if current browser is chrome.
+####Checks if current browser is chrome. Parameter is optional version number of browser.
 interface: not
 
 ```javascript
