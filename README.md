@@ -1567,7 +1567,7 @@ is.not.ie();
 => false if current browser is ie
 ```
 
-is.chrome()
+is.chrome(value:number)
 -----------
 ####Checks if current browser is chrome.
 interface: not
