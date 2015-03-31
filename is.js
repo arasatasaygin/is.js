@@ -582,8 +582,21 @@
         is.ios.api = ['not'];
 
         // is current device iphone?
-        is.iphone = function() {
-            return /iphone/i.test(userAgent);
+        //parameter is optional
+        is.iphone = function(version) {
+            var versionNumStart, versionNumEnd, versionNum;
+            if(!version) return /iphone/i.test(userAgent);
+            else if(version) {
+                userAgent = userAgent.toLowerCase();
+                if(is.iphone()) {
+                    versionNumStart = userAgent.indexOf("iphone os ");
+                    versionNumEnd = userAgent.indexOf("_", versionNumStart);
+                    versionNum = userAgent.substring(versionNumStart + 10, versionNumEnd);
+                    //original iPhone doesn't have the os portion of the UA
+                    if(version === 1 && versionNumStart === -1) return true;
+                    else return version === parseInt(versionNum);
+                } else return false;
+            }
         };
         // iphone method does not support 'all' and 'any' interfaces
         is.iphone.api = ['not'];
