@@ -532,9 +532,19 @@
         var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
 
         // is current browser chrome?
-        is.chrome = function() {
-            return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
-        };
+        is.chrome = function(version) {
+            var versionNumStart, versionNumEnd, versionNum, majorVersion;
+            if(!version) return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
+            else if(version) {
+                if(is.chrome()) {
+                    versionNumStart = userAgent.toLowerCase().indexOf("chrom");
+                    versionNumEnd = userAgent.indexOf(" ", versionNumStart);
+                    versionNum = userAgent.substring(versionNumStart, versionNumEnd).split("/")[1];
+                    majorVersion = versionNum.split(".")[0];
+                    return version === parseInt(majorVersion);
+                } else return false;
+            }
+         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
 
