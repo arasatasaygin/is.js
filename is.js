@@ -541,15 +541,19 @@
         var appVersion = ('navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
 
         // is current browser chrome?
-        is.chrome = function() {
-            return /chrome|chromium/.test(userAgent) && /google inc/.test(vendor);
+        // parameter is optional
+        is.chrome = function(version) {
+            var match = userAgent.match(/chrome\/(\d+)/);
+            return !!match && /google inc/.test(vendor) && (version == null || version == match[1]);
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
 
         // is current browser firefox?
-        is.firefox = function() {
-            return /firefox/.test(userAgent);
+        // parameter is optional
+        is.firefox = function(version) {
+            var match = userAgent.match(/firefox\/(\d+)/);
+            return !!match && (version == null || version == match[1]);
         };
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
@@ -581,8 +585,14 @@
         is.opera.api = ['not'];
 
         // is current browser safari?
-        is.safari = function() {
-            return /safari/.test(userAgent) && /apple computer/.test(vendor);
+        // parameter is optional
+        is.safari = function(version) {
+            var result = /safari/.test(userAgent) && /apple computer/.test(vendor);
+            if (!result || version == null) {
+                return result;
+            }
+            var match = userAgent.match(/version\/(\d+)/);
+            return !!match && version == match[1];
         };
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
@@ -595,8 +605,15 @@
         is.ios.api = ['not'];
 
         // is current device iphone?
-        is.iphone = function() {
-            return /iphone/.test(userAgent);
+        // parameter is optional
+        is.iphone = function(version) {
+            var result = /iphone/.test(userAgent);
+            if (!result || version == null) {
+                return result;
+            }
+            // original iPhone doesn't have the os portion of the UA
+            var match = userAgent.match(/iphone os (\d+)/);
+            return match ? (version == match[1]) : (version == 1);
         };
         // iphone method does not support 'all' and 'any' interfaces
         is.iphone.api = ['not'];
