@@ -312,9 +312,26 @@
         alphaNumeric: /^[A-Za-z0-9]+$/,
         timeString: /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/,
         dateString: /^(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{2})?[0-9]{2}$/,
-        usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/,
-        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]\s?[0-9][A-Z][0-9]$/,
-        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
+        usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/, //United States
+        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]\s?[0-9][A-Z][0-9]$/, //Canada
+        auPostCode: /^(0[289][0-9]{2})|([1345689][0-9]{3})|(2[0-8][0-9]{2})|(290[0-9])|(291[0-4])|(7[0-4][0-9]{2})|(7[8-9][0-9]{2})$/, //Australia
+        bePostCode: /^[1-9]{1}[0-9]{3}$/, //Belgium
+        brPostCode: /^\d{5}(-\d{3})?$/, //Brazil
+        chPostCode: /^[1-9]{1}[0-9]{3}$/, //Switzerland
+        cnPostCode: /^([0-9]){6}$/, //China
+        dePostCode: /^[0-9]{5}$/, //Germany
+        dkPostCode: /^([D-d][K-k])?( |-)?[1-9]{1}[0-9]{3}$/, //Denmark
+        frPostCode: /^(F-)?((2[A|B])|[0-9]{2})[0-9]{3}$/, //France
+        inPostCode: /^^[1-9]{3}\s{0,1}[0-9]{3}$/, //India
+        itPostCode: /^(V-|I-)?[0-9]{5}$/, //Italy
+        lvPostCode: /^(LV-)[0-9]{4}$/, //Latvia
+        nlPostCode: /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/, //Netherlands
+        nzPostCode: /^([0-9]){4}?$/, //New Zealand
+        ptPostCode: /^[0-9]{4}-[0-9]{3}$/, //Portugal
+        ruPostCode: /^[0-9]{6}$/, //Russia
+        sePostCode: /^(s-|S-){0,1}[0-9]{3}\s?[0-9]{2}$/, //Sweden
+        skPostCode: /^(([0-9]{5})|([0-9]{3}[ ]{0,1}[0-9]{2}))$/, //Slovakia
+        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/, //United Kingdom
         nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
         socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/,
