@@ -4,7 +4,7 @@ is.js
 - No dependencies
 - AMD, Node & browser ready
 
-**Usage**
+####Usage:
 
 Node.js:
 ```
@@ -26,9 +26,11 @@ Test:
 grunt test
 ```
 
-Contributing
-===========
-More info about [here](CONTRIBUTING.md)
+####Contributing:
+Thanks for considering to contribute. Check [here](CONTRIBUTING.md)
+
+####Contributors:
+Many thanks to our contributors: https://github.com/arasatasaygin/is.js/graphs/contributors
 
 Type checks
 ===========
