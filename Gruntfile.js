@@ -17,5 +17,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-phantomjs');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('default', ['uglify', 'jshint', 'mocha_phantomjs']);
+    grunt.registerTask('build', ['uglify', 'jshint', 'mocha_phantomjs']);
+    grunt.registerTask('test', ['mocha_phantomjs']);
 };
