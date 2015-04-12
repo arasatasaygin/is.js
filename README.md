@@ -4,6 +4,8 @@ is.js
 - No dependencies
 - AMD, Node & browser ready
 
+**Usage**
+
 Node.js:
 ```
 npm install is_js
@@ -13,6 +15,20 @@ Bower:
 ```
 bower install is_js
 ```
+
+Build:
+```
+grunt build
+```
+
+Test:
+```
+grunt test
+```
+
+Contributing
+===========
+More info about [here](CONTRIBUTING.md)
 
 Type checks
 ===========
