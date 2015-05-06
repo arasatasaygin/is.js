@@ -1,6 +1,8 @@
 is.js
-[![JS.ORG](https://img.shields.io/badge/js.org-is-ffb400.svg?style=flat-square)](http://js.org)
 =====
+
+[![JS.ORG](https://img.shields.io/badge/js.org-is-ffb400.svg?style=flat-square)](http://js.org)
+
 ####This is a general-purpose check library.
 - No dependencies
 - AMD, Node & browser ready
