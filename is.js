@@ -1,3 +1,4 @@
+'use strict'
 // is.js 0.7.3
 // Author: Aras Atasaygin
 
@@ -25,7 +26,7 @@
     // Baseline
     /* -------------------------------------------------------------------------- */
 
-    var root = this || global;
+    var root = (typeof global !== 'undefined' && (typeof window === 'undefined' || window === global.window)) ? global : window;
     var previousIs = root.is;
 
     // define 'is' object and current version
