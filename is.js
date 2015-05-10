@@ -570,7 +570,7 @@
         // parameter is optional
         is.ie = function(version) {
             if(!version) {
-                return /msie/i.test(userAgent) || "ActiveXObject" in window;
+                return /msie/i.test(userAgent) || (!(window.ActiveXObject) && "ActiveXObject" in window);
             }
             if(version >= 11) {
                 return "ActiveXObject" in window;
