@@ -1,4 +1,4 @@
-// is.js 0.7.1
+// is.js 0.7.3
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -20,17 +20,17 @@
         // Browser globals (root is window)
         root.is = factory(root.is);
     }
-}(this, function(is) {
+} (this, function(is) {
 
     // Baseline
     /* -------------------------------------------------------------------------- */
 
-    var root = this;
+    var root = this || global;
     var previousIs = root.is;
 
     // define 'is' object and current version
     is = {};
-    is.VERSION = '0.7.1';
+    is.VERSION = '0.7.3';
 
     // define interfaces
     is.not = {};
@@ -364,7 +364,7 @@
     /* -------------------------------------------------------------------------- */
 
     // is a given string include parameter substring?
-    is.include = String.prototype.includes || function(str, substr) {
+    is.include = function(str, substr) {
         return str.indexOf(substr) > -1;
     };
     // include method does not support 'all' and 'any' interfaces
@@ -646,7 +646,7 @@
 
         // is current device blackberry?
         is.blackberry = function() {
-            return /blackberry/i.test(userAgent);
+            return /blackberry/i.test(userAgent) || /BB10/i.test(userAgent);
         };
         // blackberry method does not support 'all' and 'any' interfaces
         is.blackberry.api = ['not'];

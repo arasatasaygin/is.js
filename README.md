@@ -1,8 +1,13 @@
 is.js
 =====
+
+[![JS.ORG](https://img.shields.io/badge/js.org-is-ffb400.svg?style=flat-square)](http://js.org)
+
 ####This is a general-purpose check library.
 - No dependencies
 - AMD, Node & browser ready
+
+####Usage:
 
 Node.js:
 ```
@@ -13,6 +18,22 @@ Bower:
 ```
 bower install is_js
 ```
+
+Build:
+```
+grunt build
+```
+
+Test:
+```
+grunt test
+```
+
+####Contributing:
+Thanks for considering to contribute. Check [here](CONTRIBUTING.md)
+
+####Contributors:
+Many thanks to our contributors: https://github.com/arasatasaygin/is.js/graphs/contributors
 
 Type checks
 ===========

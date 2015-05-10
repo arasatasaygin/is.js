@@ -1,12 +1,23 @@
 {
   "name": "is_js",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "main": "is.js",
   "license": "MIT",
+  "description": "micro check library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arasatasaygin/is.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arasatasaygin/is.js/issues"
+  },
+  "homepage": "https://github.com/arasatasaygin/is.js",
   "devDependencies": {
+    "chai": "^2.1.1",
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-uglify": "~0.5.0",
-    "grunt-mocha-phantomjs": "0.6.0"
+    "grunt-mocha-phantomjs": "0.6.0",
+    "mocha": "^2.2.1"
   }
 }
