@@ -574,6 +574,25 @@
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
 
+        // is current browser vivaldi?
+        // parameter is optional
+        is.vivaldi = function(version) {
+            if (!version) { // null, undefined, empty, etc.
+                return /vivaldi/i.test(userAgent);
+            }
+            else {
+                if (is.vivaldi()) {
+                    return version === parseInt(userAgent.substring(userAgent.search(/vivaldi/i)).split(' ')[0].split('/')[1].split('.')[0]);
+                }
+                else {
+                    return false;
+                }
+            }
+
+        };
+        // vivaldi method does not support 'all' and 'any' interfaces
+        is.vivaldi.api = ['not'];
+
         // is current device ios?
         is.ios = function() {
             return is.iphone() || is.ipad() || is.ipod();

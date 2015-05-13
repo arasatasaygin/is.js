@@ -1836,7 +1836,6 @@ describe("regexp checks", function() {
           });
     });
 });
-
 describe("string checks", function() {
     describe("is.include", function() {
         it("should return true if given string contains substring", function() {
