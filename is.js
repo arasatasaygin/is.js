@@ -187,7 +187,7 @@
             }
             return false;
         } else {
-            return is.existy(value) || value === '';
+            return is.not.existy(value) || value === '';
         }
     };
 
