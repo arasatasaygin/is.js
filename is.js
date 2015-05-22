@@ -747,6 +747,24 @@
         return is.object(obj) && obj.nodeType > 0;
     };
 
+    // Turkish Identification Number Check
+    /* -------------------------------------------------------------------------- */
+    is.validTCKN = function (str) {
+        var n = str.toString().split(''), r, i = 0,
+            s = 0,
+            o = parseInt(n[0], 10), diff;
+        for (r = 0; r < 10; r = r + 1) {
+            i = i + parseInt(n[r], 10);
+        }
+        for (r = 1; r < 9; r = r + 2) {
+            s = s + parseInt(n[r], 10);
+            o = o + parseInt(n[r + 1], 10);
+        }
+        diff = (o * 7 - s);
+        diff = (diff < 0) ? (10 + diff) : diff;
+        return !(!/^[1-9][0-9]{10}$/.test(str) || i % 10 !== parseInt(n[10], 10) || diff % 10 !== parseInt(n[9], 10));
+    };
+    
     // Array checks
     /* -------------------------------------------------------------------------- */
 
