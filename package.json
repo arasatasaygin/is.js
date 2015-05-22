@@ -1,6 +1,6 @@
 {
   "name": "is_js",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "main": "is.js",
   "license": "MIT",
   "description": "micro check library",
