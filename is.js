@@ -125,7 +125,7 @@
 
     // is a given value null?
     is.null = function(value) {
-        return value === null || toString.call(value) === '[object Null]';
+        return value === null;
     };
 
     // is a given value number?
