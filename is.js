@@ -812,6 +812,23 @@
         }
     };
 
+    // Adds new isser.
+    //
+    // If predicate.length (number of arguments) is 1, 'any' and 'all' helpers will be available
+    // Else, only 'not' will be.
+    //
+    is.addPredicate = function(name, predicate){
+        if(is.not.function(predicate)){
+            throw new TypeError('Predicate must be a function.');
+        }
+        is[name] = predicate;
+        is.not[name] = not(predicate);
+        if(predicate.length === 1){
+            is.all[name] = all(predicate);
+            is.any[name] = any(predicate);
+        }
+    };
+
     // change namespace of library to prevent name collisions
     // var preferredName = is.setNamespace();
     // preferredName.odd(3);
