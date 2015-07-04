@@ -64,29 +64,35 @@
    * @param func
    * @returns {Function}
    */
-  var $not = is.$not = function(func) {
+  var $not = function(func) {
     return function () {
       return !func.apply(null, arraySlice.call(arguments));
     };
   };
+  is.$not = $not;
   is.$not.$api = [];
 
   /**
    * helper function which call predicate function per parameter and return true if all pass
+   * TODO: add support for multiple functions
    * @param func
    * @returns {Function}
    */
-  var $all = is.$all = function(func) {
+  var $all = function(func) {
     return $not($any($not(func)));
   };
+  is.$all = $all;
   is.$all.$api = [];
+  // alias for $all
+  is.$and = is.$all;
 
   /**
    * helper function which call predicate function per parameter and return true if any pass
+   * TODO: add support for multiple functions
    * @param func
    * @returns {Function}
    */
-  var $any = is.$any = function(func) {
+  var $any = function(func) {
     return function () {
       var parameters = arraySlice.call(arguments);
       var length = parameters.length;
@@ -102,8 +108,10 @@
       return false;
     };
   };
+  is.$any = $any;
   is.$any.$api = [];
-
+  // alias for $any
+  is.$or = $any;
 
   /** Regexp checks will stored here */
   var regexps = {};
