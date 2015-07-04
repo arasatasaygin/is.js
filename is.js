@@ -2,16 +2,17 @@
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
-;(function(root, factory) {
-  if(typeof define === 'function' && define.amd) {
+;
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['is'], function(is) {
+    define(['is'], function (is) {
       // Also create a global in case some scripts
       // that are loaded still are looking for
       // a global even when an AMD loader is in use.
       return (root.is = factory(is));
     });
-  } else if(typeof exports === 'object') {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like enviroments that support module.exports,
     // like Node.
@@ -20,7 +21,7 @@
     // Browser globals (root is window)
     root.is = factory(root.is);
   }
-} (this, function(is) {
+}(this, function (is) {
 
   // Baseline
   /* -------------------------------------------------------------------------- */
@@ -46,7 +47,7 @@
    * Helper function to check a value is array
    * @type {boolean}
    */
-  var isArray = Array.isArray || function(value) {    // check native isArray first
+  var isArray = Array.isArray || function (value) {    // check native isArray first
       return toString.call(value) === '[object Array]';
     };
 
@@ -63,31 +64,33 @@
    * @param func
    * @returns {Function}
    */
-  function not(func) {
-    return function() {
+  var $not = is.$not = function(func) {
+    return function () {
       return !func.apply(null, arraySlice.call(arguments));
     };
-  }
+  };
+  is.$not.$api = [];
 
   /**
    * helper function which call predicate function per parameter and return true if all pass
    * @param func
    * @returns {Function}
    */
-  function all(func) {
-    return not(any(not(func)));
-  }
+  var $all = is.$all = function(func) {
+    return $not($any($not(func)));
+  };
+  is.$all.$api = [];
 
   /**
    * helper function which call predicate function per parameter and return true if any pass
    * @param func
    * @returns {Function}
    */
-  function any(func) {
-    return function() {
+  var $any = is.$any = function(func) {
+    return function () {
       var parameters = arraySlice.call(arguments);
       var length = parameters.length;
-      if(length === 1 && isArray(parameters[0])) {    // support array
+      if (length === 1 && isArray(parameters[0])) {    // support array
         parameters = parameters[0];
         length = parameters.length;
       }
@@ -98,7 +101,8 @@
       }
       return false;
     };
-  }
+  };
+  is.$any.$api = [];
 
 
   /** Regexp checks will stored here */
@@ -110,7 +114,7 @@
    * @param regexps
    */
   function addRegexpCheck(regexp, regexps) {
-    is[regexp] = function(value) {
+    is[regexp] = function (value) {
       return regexps[regexp].test(value);
     };
   }
@@ -123,10 +127,10 @@
    * @param regexpName
    * @param regexp
    */
-  is.setRegexp = function(regexpName, regexp) {
+  is.$setRegexp = function (regexpName, regexp) {
     var isExist = false;
-    for(var r in regexps) {
-      if(hasOwnProperty.call(regexps, r) && (regexpName === r)) {
+    for (var r in regexps) {
+      if (hasOwnProperty.call(regexps, r) && (regexpName === r)) {
         regexps[r] = regexp;
         isExist = true;
       }
@@ -138,7 +142,7 @@
       addRegexpCheck(regexpName, regexps);
     }
   };
-  is.setRegexp.api = [];
+  is.$setRegexp.$api = [];
 
   /**
    * Change namespace of library to prevent name collisions
@@ -147,36 +151,36 @@
    * => true
    * @returns {is}
    */
-  is.setNamespace = function() {
+  is.$setNamespace = function () {
     root.is = previousIs;
     return this;
   };
-  is.setNamespace.api = [];
+  is.$setNamespace.$api = [];
 
   /**
    * Reset Interfaces after configuration.
    * Set 'not', 'all' and 'any' interfaces to methods based on their api property
    */
-  is.update = function() {
+  is.$update = function () {
     var options = is;
-    for(var option in options) {
-      if(hasOwnProperty.call(options, option) && isFunction(options[option])) {
-        var interfaces = options[option].api || ['not', 'all', 'any'];
+    for (var option in options) {
+      if (hasOwnProperty.call(options, option) && isFunction(options[option])) {
+        var interfaces = options[option].$api || ['not', 'all', 'any'];
         for (var i = 0; i < interfaces.length; i++) {
-          if(interfaces[i] === 'not') {
-            is.not[option] = not(is[option]);
+          if (interfaces[i] === 'not') {
+            is.not[option] = $not(is[option]);
           }
-          if(interfaces[i] === 'all') {
-            is.all[option] = all(is[option]);
+          if (interfaces[i] === 'all') {
+            is.all[option] = $all(is[option]);
           }
-          if(interfaces[i] === 'any') {
-            is.any[option] = any(is[option]);
+          if (interfaces[i] === 'any') {
+            is.any[option] = $any(is[option]);
           }
         }
       }
     }
   };
-  is.update.api = [];
+  is.$update.$api = [];
 
   return is;
 }));
