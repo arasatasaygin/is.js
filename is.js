@@ -60,6 +60,19 @@
   }
 
   /**
+   * Extract parameters from arguments object. Treat array as spread arguments
+   * @param args
+   * @returns {Array.<T>}
+   */
+  function getParams(args) {
+    var parameters = arraySlice.call(args);
+    if (parameters.length === 1 && isArray(parameters[0])) {    // support array
+      parameters = parameters[0];
+    }
+    return parameters;
+  }
+
+  /**
    * Helper function which reverses the sense of predicate result
    * @param func
    * @returns {Function}
@@ -73,33 +86,14 @@
   is.$not.$api = [];
 
   /**
-   * helper function which call predicate function per parameter and return true if all pass
-   * TODO: add support for multiple functions
-   * @param func
-   * @returns {Function}
-   */
-  var $all = function(func) {
-    return $not($any($not(func)));
-  };
-  is.$all = $all;
-  is.$all.$api = [];
-  // alias for $all
-  is.$and = is.$all;
-
-  /**
    * helper function which call predicate function per parameter and return true if any pass
-   * TODO: add support for multiple functions
    * @param func
    * @returns {Function}
    */
   var $any = function(func) {
     return function () {
-      var parameters = arraySlice.call(arguments);
+      var parameters = getParams(arguments);
       var length = parameters.length;
-      if (length === 1 && isArray(parameters[0])) {    // support array
-        parameters = parameters[0];
-        length = parameters.length;
-      }
       for (var i = 0; i < length; i++) {
         if (func.call(null, parameters[i])) {
           return true;
@@ -110,8 +104,37 @@
   };
   is.$any = $any;
   is.$any.$api = [];
-  // alias for $any
-  is.$or = $any;
+
+  /**
+   * helper function which call predicate function per parameter and return true if all pass
+   * @param func
+   * @returns {Function}
+   */
+  var $all = function(func) {
+    return $not($any($not(func)));
+  };
+  is.$all = $all;
+  is.$all.$api = [];
+
+  /**
+   * TODO: planning to support this
+   * Generate a predicate based on a group of predicates.
+   * $or(p1,p2)(args) equivalent to (p1(args) && p2(args) && ...)
+   */
+  is.$and = function(){
+
+  };
+  is.$and.$api = [];
+
+  /**
+   * TODO: planning to support this
+   * Generate a predicate based on a group of predicates.
+   * $or(p1,p2)(args) equivalent to (p1(args) || p2(args) || ...)
+   */
+  is.$or = function(){
+
+  };
+  is.$or.$api = [];
 
   /** Regexp checks will stored here */
   var regexps = {};
@@ -166,7 +189,7 @@
   is.$setNamespace.$api = [];
 
   /**
-   * Reset Interfaces after configuration.
+   * Update Interfaces after configuration.
    * Set 'not', 'all' and 'any' interfaces to methods based on their api property
    */
   is.$update = function () {
