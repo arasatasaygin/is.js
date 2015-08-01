@@ -29,7 +29,7 @@
     var previousIs = root.is;
 
     // define 'is' object and current version
-    is = {};
+    var is = {};
     is.VERSION = '0.7.4';
 
     // define interfaces
