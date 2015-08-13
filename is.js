@@ -391,6 +391,18 @@
         return is.string(str) && str == str.split('').reverse().join('');
     };
 
+    // is a valid bson ObjectId
+    is.ObjectID = function (str) {
+        var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+
+        if(is.null(str)) { return false; }
+        if(is.number(str)) { return true; }
+        if(is.string(str)) {
+            return str.length === 12 || (str.length === 24 && checkForHexRegExp.test(str));
+        }
+        return false;
+    };
+
     // Time checks
     /* -------------------------------------------------------------------------- */
 

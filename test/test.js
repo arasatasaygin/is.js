@@ -2061,6 +2061,42 @@ describe("string checks", function() {
             expect(is.any.palindrome(['test', 'te'])).to.be.false;
         });
     });
+    describe("is.ObjectID", function() {
+        it("should return true if given string is ObjectID", function() {
+            expect(is.ObjectID('53e707f61880884e1fb168fe')).to.be.true;
+        });
+        it("should return false if given string is not ObjectID", function() {
+            expect(is.ObjectID('53e707f61880884e1fb168fx')).to.be.false;
+        });
+    });
+    describe("is.not.ObjectID", function() {
+        it("should return false if given string is ObjectID", function() {
+            expect(is.not.ObjectID('53e707f61880884e1fb168fe')).to.be.false;
+        });
+        it("should return true if given string is not ObjectID", function() {
+            expect(is.not.ObjectID('x')).to.be.true;
+        });
+    });
+    describe("is.all.ObjectID", function() {
+        it("should return true if all the given strings are ObjectID", function() {
+            expect(is.all.ObjectID('53e707f61880884e1fb168fe', '5404704bfd9aeb01a4025426')).to.be.true;
+            expect(is.all.ObjectID(['53e707f61880884e1fb168fe', '5404704bfd9aeb01a4025426'])).to.be.true;
+        });
+        it("should return false if any given string is not ObjectID", function() {
+            expect(is.all.ObjectID('test', 'tt')).to.be.false;
+            expect(is.all.ObjectID(['test', 'tt'])).to.be.false;
+        });
+    });
+    describe("is.any.ObjectID", function() {
+        it("should return true if any given string is ObjectID", function() {
+            expect(is.any.ObjectID('53e707f61880884e1fb168fe', 'te')).to.be.true;
+            expect(is.any.ObjectID(['53e707f61880884e1fb168fe', 'te'])).to.be.true;
+        });
+        it("should return false if all given strings are not ObjectID", function() {
+            expect(is.any.ObjectID('test', 'te')).to.be.false;
+            expect(is.any.ObjectID(['test', 'te'])).to.be.false;
+        });
+    });
 });
 describe("time checks", function() {
     describe("is.today", function() {
