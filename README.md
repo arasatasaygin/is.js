@@ -1191,6 +1191,35 @@ is.all.palindrome(['Nope', 'testset']);
 => false
 ```
 
+is.ObjectID(value:string)
+---------------------------------------------
+####Checks if the given string is a valid bson ObjectId.
+interfaces: not, all, any
+
+```javascript
+is.ObjectID('5404704bfd9aeb01a4025426');
+=> true
+
+is.ObjectID('53e707f61880884e1fb168fx');
+=> false
+
+is.not.ObjectID('53e707f61880884e1fb168fx');
+=> true
+
+is.not.ObjectID('5404704bfd9aeb01a4025426');
+=> false
+
+is.all.ObjectID('53e707f61880884e1fb168fe', '5404704bfd9aeb01a4025426');
+=> true
+
+is.any.ObjectID('53e707f61880884e1fb168fe', 'some', 'testset');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.ObjectID(['53e707f61880884e1fb168fe', '5404704bfd9aeb01a4025426']);
+=> false
+```
+
 Arithmetic checks
 =================
 
