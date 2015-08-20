@@ -731,7 +731,22 @@
 
     // is given object has parameterized property?
     is.propertyDefined = function(obj, property) {
-        return is.object(obj) && is.string(property) && property in obj;
+        if (is.not.string(property) || is.not.object(obj)) {
+            return false;
+        }
+        if (property in obj) {
+            return true;
+        }
+        var parts = property.split('.'),
+            cursor = obj;
+        for (var i = 0; i < parts.length; i++) {
+            if (is.not.object(cursor) || !(parts[i] in cursor)) {
+                return false;
+            } else {
+                cursor = cursor[parts[i]];
+            }
+        }
+        return true;
     };
     // propertyDefined method does not support 'all' and 'any' interfaces
     is.propertyDefined.api = ['not'];
