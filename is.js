@@ -559,6 +559,13 @@
         // ie method does not support 'all' and 'any' interfaces
         is.ie.api = ['not'];
 
+        // is current browser edge?
+        is.edge = function() {
+          return /Edge/i.test(userAgent);
+        }
+        // edge method does not support 'all' and 'any' interfaces
+        is.edge.api = ['not'];
+
         // is current browser opera?
         is.opera = function() {
             return /^Opera\//.test(userAgent) || // Opera 12 and older versions
