@@ -3182,3 +3182,42 @@ describe("array checks", function() {
         });
     });
 });
+
+describe("configuration checks", function(){
+    describe("is.addPredicate", function(){
+        it("should add new predicate", function(){
+            expect(is.eleven).to.be.an('undefined');
+            is.addPredicate('eleven', function(number){ return (number == 11)});
+            expect(is.eleven).not.to.be.an('undefined');
+        });
+
+        it("should be avaliable isser", function(){
+            is.addPredicate('nine', function(number){ return (number == 9)});
+            expect(is.nine(9)).to.be.true;
+            expect(is.nine(10)).to.be.false;
+        });
+
+        it("shold set up is.not.predicate", function(){
+            is.addPredicate('ten', function(number){ return (number == 10)});
+            expect(is.not.ten(11)).to.be.true;
+            expect(is.not.ten(10)).to.be.false;
+        });
+
+        it("should set up is.all.predicate and is.any.predicate", function(){
+            is.addPredicate('eleven', function(number){ return (number == 11)});
+            expect(is.all.eleven(12, 13, 11, 14)).to.be.false;
+            expect(is.all.eleven(11, 11, 11, 11)).to.be.true;
+
+            expect(is.any.eleven(12, 13, 18, 14)).to.be.false;
+            expect(is.any.eleven(11, 21, 14, 12)).to.be.true;
+        })
+
+        it("should not set up is.all.predicate and is.any.predicate", function(){
+            is.addPredicate('twelve', function(number1, number2){ return (number1 == 12 && number2 == 12)});
+            expect(is.all.twelve).to.be.an('undefined');
+            expect(is.any.twelve).to.be.an('undefined');
+            expect(is.twelve).to.be.an('function');
+            expect(is.not.twelve).to.be.an('function');
+        });
+   });
+});

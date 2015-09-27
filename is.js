@@ -5,7 +5,7 @@
 ;(function(root, factory) {
     if(typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['is'], function(is) {
+        define([], function(is) {
             // Also create a global in case some scripts
             // that are loaded still are looking for
             // a global even when an AMD loader is in use.
@@ -809,6 +809,23 @@
             if(hasOwnProperty.call(regexps, r) && (regexpName === r)) {
                 regexps[r] = regexp;
             }
+        }
+    };
+
+    // Adds new isser.
+    //
+    // If predicate.length (number of arguments) is 1, 'any' and 'all' helpers will be available
+    // Else, only 'not' will be.
+    //
+    is.addPredicate = function(name, predicate){
+        if(is.not.function(predicate)){
+            throw new TypeError('Predicate must be a function.');
+        }
+        is[name] = predicate;
+        is.not[name] = not(predicate);
+        if(predicate.length === 1){
+            is.all[name] = all(predicate);
+            is.any[name] = any(predicate);
         }
     };
 
