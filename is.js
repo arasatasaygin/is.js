@@ -244,7 +244,7 @@
 
     // is a given number odd?
     is.odd = function(numb) {
-        return is.number(numb) && numb % 2 !== 0;
+        return is.number(numb) && numb % 2 === 1;
     };
 
     // is a given number positive?
