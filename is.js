@@ -133,6 +133,11 @@
         return is.not.nan(value) && toString.call(value) === '[object Number]';
     };
 
+    // is a given value number or numeric string?
+    is.numeric = function(value) {
+        return parseInt(value) == value;
+    };
+
     // is a given value object?
     is.object = function(value) {
         var type = typeof value;

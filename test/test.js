@@ -405,6 +405,120 @@ describe("type checks", function() {
             expect(is.any.number([null, 'test'])).to.be.false;
         });
     });
+    describe("is.numeric", function() {
+        it("should return true if passed parameter type is numeric", function() {
+            expect(is.numeric(1)).to.be.true;
+        });
+        it("should return true if passed parameter type is numeric", function() {
+            expect(is.numeric("1")).to.be.true;
+        });
+        it("should return false if passed parameter type is not numeric", function() {
+            var notNumber = 'test';
+            expect(is.numeric(notNumber)).to.be.false;
+        });
+        it("should return false if passed parameter type is not numeric", function() {
+            var notNumber = '1abc';
+            expect(is.numeric(notNumber)).to.be.false;
+        });
+        it("should return false if passed parameter type is not numeric", function() {
+            var notNumber = 'abc1';
+            expect(is.numeric(notNumber)).to.be.false;
+        });
+        it("should return false if passed parameter type is not numeric", function() {
+            var notNumber = '';
+            expect(is.numeric(notNumber)).to.be.false;
+        });
+        it("should return false if passed parameter is NaN", function() {
+            expect(is.numeric(NaN)).to.be.false;
+        })
+    });
+    describe("is.not.numeric", function() {
+        it("should return false if passed parameter type is numeric", function() {
+            expect(is.not.numeric(1)).to.be.false;
+        });
+        it("should return false if passed parameter type is numeric", function() {
+            expect(is.not.numeric("1")).to.be.false;
+        });
+        it("should return true if passed parameter type is not numeric", function() {
+            var notNumber = 'test';
+            expect(is.not.numeric(notNumber)).to.be.true;
+        });
+        it("should return true if passed parameter type is not numeric", function() {
+            var notNumber = '1abc';
+            expect(is.not.numeric(notNumber)).to.be.true;
+        });
+        it("should return true if passed parameter type is not numeric", function() {
+            var notNumber = 'abc1';
+            expect(is.not.numeric(notNumber)).to.be.true;
+        });
+        it("should return true if passed parameter type is not numeric", function() {
+            var notNumber = '';
+            expect(is.not.numeric(notNumber)).to.be.true;
+        });
+        it("should return true if passed parameter is NaN", function() {
+            expect(is.not.numeric(NaN)).to.be.true;
+        })
+    });
+    describe("is.all.numeric", function() {
+        it("should return true if all passed parameter types are numeric", function() {
+            expect(is.all.numeric(1, 2)).to.be.true;
+            expect(is.all.numeric([1, 2])).to.be.true;
+        });
+        it("should return true if all passed parameter types are numeric", function() {
+            expect(is.all.numeric("1", "2")).to.be.true;
+            expect(is.all.numeric(["1", "2"])).to.be.true;
+        });
+        it("should return false if any passed parameter type is not numeric", function() {
+            var notNumber = 'test';
+            expect(is.all.numeric(1, notNumber)).to.be.false;
+            expect(is.all.numeric([1, notNumber])).to.be.false;
+        });
+        it("should return false if any passed parameter type is not numeric", function() {
+            var notNumber = '1abc';
+            expect(is.all.numeric(1, notNumber)).to.be.false;
+            expect(is.all.numeric([1, notNumber])).to.be.false;
+        });
+        it("should return false if any passed parameter type is not numeric", function() {
+            var notNumber = 'abc1';
+            expect(is.all.numeric(1, notNumber)).to.be.false;
+            expect(is.all.numeric([1, notNumber])).to.be.false;
+        });
+        it("should return false if any passed parameter type is not numeric", function() {
+            var notNumber = '';
+            expect(is.all.numeric(1, notNumber)).to.be.false;
+            expect(is.all.numeric([1, notNumber])).to.be.false;
+        });
+    });
+    describe("is.any.numeric", function() {
+        it("should return true if any passed parameter type is numeric", function() {
+            expect(is.any.numeric(1, 2, NaN)).to.be.true;
+            expect(is.any.numeric([1, 2, NaN])).to.be.true;
+        });
+        it("should return true if any passed parameter type is numeric", function() {
+            expect(is.any.numeric("1", "2", NaN)).to.be.true;
+            expect(is.any.numeric(["1", "2", NaN])).to.be.true;
+        });
+        it("should return false if all passed parameter types are not numeric", function() {
+            expect(is.any.numeric(null, 'test')).to.be.false;
+            expect(is.any.numeric([null, 'test'])).to.be.false;
+        });
+        it("should return false if all passed parameter types are not numeric", function() {
+            expect(is.any.numeric(null, '1abc')).to.be.false;
+            expect(is.any.numeric([null, '1abc'])).to.be.false;
+        });
+        it("should return false if all passed parameter types are not numeric", function() {
+            expect(is.any.numeric(null, 'abc1')).to.be.false;
+            expect(is.any.numeric([null, 'abc1'])).to.be.false;
+        });
+        it("should return false if all passed parameter types are not numeric", function() {
+            expect(is.any.numeric(null, 'abc1')).to.be.false;
+            expect(is.any.numeric([null, 'abc1'])).to.be.false;
+        });
+        it("should return false if all passed parameter types are not numeric", function() {
+            expect(is.any.numeric(null, '')).to.be.false;
+            expect(is.any.numeric([null, ''])).to.be.false;
+        });
+    });
     describe("is.object", function() {
         it("should return true if passed parameter type is object", function() {
             expect(is.object({})).to.be.true;
