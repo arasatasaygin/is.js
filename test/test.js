@@ -1592,6 +1592,7 @@ describe('regexp checks', function() {
     describe('is.socialSecurityNumber', function() {
         it('should return true if given value is socialSecurityNumber', function() {
             expect(is.socialSecurityNumber('017-90-7890')).to.be.true;
+            expect(is.socialSecurityNumber('017907890')).to.be.true;
         });
         it('should return false if given value is not socialSecurityNumber', function() {
             expect(is.socialSecurityNumber('1')).to.be.false;
@@ -1607,8 +1608,8 @@ describe('regexp checks', function() {
     });
     describe('is.all.socialSecurityNumber', function() {
         it('should return true if all given values are socialSecurityNumber', function() {
-            expect(is.all.socialSecurityNumber('017-90-7890', '017-90-7891')).to.be.true;
-            expect(is.all.socialSecurityNumber(['017-90-7890', '017-90-7891'])).to.be.true;
+            expect(is.all.socialSecurityNumber('017-90-7890', '017907890')).to.be.true;
+            expect(is.all.socialSecurityNumber(['017-90-7890', '017907890'])).to.be.true;
         });
         it('should return false if any given value is not socialSecurityNumber', function() {
             expect(is.all.socialSecurityNumber('017-90-7890', '1')).to.be.false;
