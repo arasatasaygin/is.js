@@ -545,6 +545,13 @@
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
 
+        // is current browser edge?
+        is.edge = function() {
+            return /edge/i.test(userAgent);
+        };
+        // edge method does not support 'all' and 'any' interfaces
+        is.edge.api = ['not'];
+
         // is current browser internet explorer?
         // parameter is optional
         is.ie = function(version) {
