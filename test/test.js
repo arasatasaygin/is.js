@@ -1835,6 +1835,42 @@ describe("regexp checks", function() {
                  expect(is.any.ipv6(['1.2.3.', '78FF:::::::L'])).to.be.false;
           });
     });
+    describe("is.uuid", function() {
+        it("should return true if given value is a valid UUID", function() {
+                expect(is.uuid('f6530d89-7470-4354-96db-983e515e3d6a')).to.be.true;
+        });
+        it("should return false if given value is not a valid UUID", function() {
+                expect(is.uuid('f6530d89-7470-9354-96db-983e515e3d6a')).to.be.false;
+        });
+    });
+    describe("is.not.uuid", function() {
+        it("should return false if given value is a valid UUID", function() {
+                expect(is.not.uuid('f6530d89-7470-4354-96db-983e515e3d6a')).to.be.false;
+        });
+        it("should return true if given value is not a valid UUID", function() {
+                expect(is.not.uuid('f6530d89-7470-4354-16db-983e515e3d6a')).to.be.true;
+        });
+    });
+    describe("is.all.uuid", function() {
+        it("should return true if all given values are valid UUID", function() {
+                expect(is.all.uuid('f6530d89-7470-4354-96db-983e515e3d6a', '4771d0a0-b09d-4fdb-859b-90aab497fcd8')).to.be.true;
+                expect(is.all.uuid(['f6530d89-7470-4354-96db-983e515e3d6a', '4771d0a0-b09d-4fdb-859b-90aab497fcd8'])).to.be.true;
+        });
+        it("should return false if any given value is not a valid UUID", function() {
+                expect(is.all.uuid('4771d0a0-b09d-4fdb-859b-90aab497fcd8', '1234')).to.be.false;
+                expect(is.all.uuid(['4771d0a0-b09d-4fdb-859b-90aab497fcd8', '1234'])).to.be.false;
+         });
+    });
+    describe("is.any.uuid", function() {
+         it("should return true if any given value is a valid UUID", function() {
+                 expect(is.any.uuid('4771d0a0-b09d-4fdb-859b-90aab497fcd8', '1234')).to.be.true;
+                 expect(is.any.uuid(['4771d0a0-b09d-4fdb-859b-90aab497fcd8', '1234'])).to.be.true;
+          });
+          it("should return false if all given values are not valid UUID", function() {
+                 expect(is.any.uuid('4771d0a0-b09d-0fdb-859b-90aab497fcd8', '1234')).to.be.false;
+                 expect(is.any.uuid(['4771d0a0-b09d-0fdb-859b-90aab497fcd8', '1234'])).to.be.false;
+          });
+    });
 });
 
 describe("string checks", function() {
