@@ -5,22 +5,22 @@
 ;(function(root, factory) {
     if(typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['is'], function(is) {
+        define(function() {
             // Also create a global in case some scripts
             // that are loaded still are looking for
             // a global even when an AMD loader is in use.
-            return (root.is = factory(is));
+            return (root.is = factory());
         });
     } else if(typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('is_js'));
+        module.exports = factory();
     } else {
         // Browser globals (root is window)
-        root.is = factory(root.is);
+        root.is = factory();
     }
-} (this, function(is) {
+} (this, function() {
 
     // Baseline
     /* -------------------------------------------------------------------------- */
@@ -29,7 +29,7 @@
     var previousIs = root.is;
 
     // define 'is' object and current version
-    is = {};
+    var is = {};
     is.VERSION = '0.7.4';
 
     // define interfaces
