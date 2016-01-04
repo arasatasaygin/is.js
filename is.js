@@ -1,4 +1,4 @@
-// is.js 0.7.5
+// is.js 0.7.6
 // Author: Aras Atasaygin
 
 // AMD with global, Node, or global
@@ -30,7 +30,7 @@
 
     // define 'is' object and current version
     var is = {};
-    is.VERSION = '0.7.5';
+    is.VERSION = '0.7.6';
 
     // define interfaces
     is.not = {};
@@ -244,7 +244,7 @@
 
     // is a given number odd?
     is.odd = function(numb) {
-        return is.number(numb) && numb % 2 !== 0;
+        return is.number(numb) && numb % 2 === 1;
     };
 
     // is a given number positive?

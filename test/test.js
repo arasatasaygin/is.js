@@ -853,6 +853,9 @@ describe("arithmetic checks", function() {
         it("should return false if given number is not even", function() {
             expect(is.even(3)).to.be.false;
         });
+        it("should return false if given number is not integer", function() {
+            expect(is.even(2.5)).to.be.false;
+        });
     });
     describe("is.not.even", function() {
         it("should return false if given number is even", function() {
@@ -889,7 +892,10 @@ describe("arithmetic checks", function() {
         it("should return false if given number is not odd", function() {
             expect(is.odd(2)).to.be.false;
         });
-    });
+        it("should return false if given number is not integer", function() {
+            expect(is.odd(2.5)).to.be.false;
+        });
+   });
     describe("is.not.odd", function() {
         it("should return false if given number is odd", function() {
             expect(is.not.odd(3)).to.be.false;
