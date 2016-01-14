@@ -1614,6 +1614,19 @@ is.not.firefox();
 => false if current browser is firefox
 ```
 
+is.edge()
+------------
+####Checks if current browser is edge.
+interface: not
+
+```javascript
+is.edge();
+=> true if current browser is edge
+
+is.not.edge();
+=> false if current browser is edge
+```
+
 is.opera()
 ----------
 ####Checks if current browser is opera.
