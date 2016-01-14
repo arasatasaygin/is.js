@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $(window).scroll(function() {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1470) {
+        if (scroll >= 1495) {
             $(".side-navigation").addClass("fixed");
         } else {
             $(".side-navigation").removeClass("fixed");
