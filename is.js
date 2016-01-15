@@ -360,15 +360,15 @@
     };
 
     // is string start with a given startWith parameter?
-    is.startWith = function(str, startWith) {
-        return is.string(str) && str.indexOf(startWith) === 0;
+    is.startWith = function(str, startStr) {
+        return is.all.string(str, startStr) && str.indexOf(startStr) === 0;
     };
     // startWith method does not support 'all' and 'any' interfaces
     is.startWith.api = ['not'];
 
     // is string end with a given endWith parameter?
-    is.endWith = function(str, endWith) {
-        return is.string(str) && str.indexOf(endWith) > -1 && str.indexOf(endWith) === str.length -  endWith.length;
+    is.endWith = function(str, endStr) {
+        return is.string(str) && str.indexOf(endStr) > -1 && str.indexOf(endStr) === str.length -  endStr.length;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
