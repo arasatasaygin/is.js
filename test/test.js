@@ -805,6 +805,360 @@ describe("presence checks", function() {
         });
     });
 });
+describe("equality checks", function() {
+    describe("The most important check", function(){
+        describe("is.is", function(){
+            it("should return true if passed parameter is is", function(){
+                expect(is.is(is)).to.be.true;
+            });
+            it("should return false if passed parameter is not is", function(){
+                expect(is.is({})).to.be.false;
+            });
+            it("should return true if passed parameter is equivalent is", function(){
+                var newIs = Object.create(is);
+                expect(is.is(newIs)).to.be.false;
+            });
+        });
+    });
+    describe('is.equal', function(){
+        it("should perform comparisons between arrays", function() {
+            var array1 = [true, null, 1, "a", undefined],
+                array2 = [true, null, 1, "a", undefined];
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1 = [
+                [1, 2, 3],
+                new Date(2012, 4, 23),
+                /x/,
+                { "e": 1 }
+            ];
+            array2 = [
+                [1, 2, 3],
+                new Date(2012, 4, 23),
+                /x/,
+                { "e": 1 }
+            ];
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1 = [1];
+            array1[2] = 3;
+
+            array2 = [1];
+            array2[1] = undefined;
+            array2[2] = 3;
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1 = [Object(1), false, Object("a"), /x/, new Date(2012, 4, 23), ["a", "b", [Object("c")]], { "a": 1 }];
+            array2 = [1, Object(false), "a", /x/, new Date(2012, 4, 23), ["a", Object("b"), ["c"]], { "a": 1 }];
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1 = [1, 2, 3];
+            array2 = [3, 2, 1];
+
+            expect(is.equal(array1, array2)).to.be.false;
+
+            array1 = [1, 2];
+            array2 = [1, 2, 3];
+
+            expect(is.equal(array1, array2)).to.be.false;
+        });
+        it("should treat arrays with identical values but different non-numeric properties as equal", function() {
+            var array1 = [1, 2, 3],
+                array2 = [1, 2, 3];
+
+            array1.every = array1.filter = array1.forEach = array1.indexOf = array1.lastIndexOf = array1.map = array1.some = array1.reduce = array1.reduceRight = null;
+            array2.concat = array2.join = array2.pop = array2.reverse = array2.shift = array2.slice = array2.sort = array2.splice = array2.unshift = null;
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1 = [1, 2, 3];
+            array1.a = 1;
+
+            array2 = [1, 2, 3];
+            array2.b = 1;
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1 = /x/.exec("vwxyz");
+            array2 = ["x"];
+
+            expect(is.equal(array1, array2)).to.be.true;
+        });
+
+        it("should work with sparse arrays", function() {
+            var array = Array(1);
+
+            expect(is.equal(array, Array(1))).to.be.true;
+            expect(is.equal(array, [undefined])).to.be.true;
+            expect(is.equal(array, Array(2))).to.be.false;
+        });
+
+        it('should perform comparisons between plain objects', function() {
+            var object1 = { 'a': true, 'b': null, 'c': 1, 'd': 'a', 'e': undefined },
+                object2 = { 'a': true, 'b': null, 'c': 1, 'd': 'a', 'e': undefined };
+
+            expect(is.equal(object1, object2)).to.be.true;
+
+            object1 = { 'a': [1, 2, 3], 'b': new Date(2012, 4, 23), 'c': /x/, 'd': { 'e': 1 } };
+            object2 = { 'a': [1, 2, 3], 'b': new Date(2012, 4, 23), 'c': /x/, 'd': { 'e': 1 } };
+
+            expect(is.equal(object1, object2)).to.be.true;
+
+            object1 = { 'a': 1, 'b': 2, 'c': 3 };
+            object2 = { 'a': 3, 'b': 2, 'c': 1 };
+
+            expect(is.equal(object1, object2)).to.be.false;
+
+            object1 = { 'a': 1, 'b': 2, 'c': 3 };
+            object2 = { 'd': 1, 'e': 2, 'f': 3 };
+
+            expect(is.equal(object1, object2)).to.be.false;
+
+            object1 = { 'a': 1, 'b': 2 };
+            object2 = { 'a': 1, 'b': 2, 'c': 3 };
+
+            expect(is.equal(object1, object2)).to.be.false;
+        });
+
+        it('should perform comparisons of nested objects', function() {
+            var noop = function(){};
+
+            var object1 = {
+                'a': [1, 2, 3],
+                'b': true,
+                'c': Object(1),
+                'd': 'a',
+                'e': {
+                    'f': ['a', Object('b'), 'c'],
+                    'g': Object(false),
+                    'h': new Date(2012, 4, 23),
+                    'i': noop,
+                    'j': 'a'
+                }
+            };
+
+            var object2 = {
+                'a': [1, Object(2), 3],
+                'b': Object(true),
+                'c': 1,
+                'd': Object('a'),
+                'e': {
+                    'f': ['a', 'b', 'c'],
+                    'g': false,
+                    'h': new Date(2012, 4, 23),
+                    'i': noop,
+                    'j': 'a'
+                }
+            };
+
+            expect(is.equal(object1, object2)).to.be.true;
+        });
+
+        it('should perform comparisons between object instances', function() {
+            function Foo() {
+                this.value = 1;
+            }
+
+            Foo.prototype.value = 1;
+
+            function Bar() {
+                this.value = 1;
+            }
+
+            Bar.prototype.value = 2;
+
+            expect(is.equal(new Foo, new Foo)).to.be.true;
+            expect(is.equal(new Foo, new Bar)).to.be.false;
+            expect(is.equal({ 'value': 1 }, new Foo)).to.be.false;
+            expect(is.equal({ 'value': 2 }, new Bar)).to.be.false;
+        });
+
+        it('should perform comparisons between objects with constructor properties', function() {
+            expect(is.equal({ 'constructor': 1 }, { 'constructor': 1 })).to.be.true;
+            expect(is.equal({ 'constructor': 1 }, { 'constructor': '1' })).to.be.false;
+            expect(is.equal({ 'constructor': [1] }, { 'constructor': [1] })).to.be.true;
+            expect(is.equal({ 'constructor': [1] }, { 'constructor': ['1'] })).to.be.false;
+            expect(is.equal({ 'constructor': Object }, {})).to.be.false;
+        });
+
+        it('should perform comparisons between arrays with circular references', function() {
+            var array1 = [],
+                array2 = [];
+
+            array1.push(array1);
+            array2.push(array2);
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1.push('b');
+            array2.push('b');
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1.push('c');
+            array2.push('d');
+
+            expect(is.equal(array1, array2)).to.be.false;
+
+            array1 = ['a', 'b', 'c'];
+            array1[1] = array1;
+            array2 = ['a', ['a', 'b', 'c'], 'c'];
+
+            expect(is.equal(array1, array2)).to.be.false;
+        });
+
+        it('should perform comparisons between objects with circular references', function() {
+            var object1 = {},
+                object2 = {};
+
+            object1.a = object1;
+            object2.a = object2;
+
+            expect(is.equal(object1, object2)).to.be.true;
+
+            object1.b = 0;
+            object2.b = Object(0);
+
+            expect(is.equal(object1, object2)).to.be.true;
+
+            object1.c = Object(1);
+            object2.c = Object(2);
+
+            expect(is.equal(object1, object2)).to.be.false;
+
+            object1 = { 'a': 1, 'b': 2, 'c': 3 };
+            object1.b = object1;
+            object2 = { 'a': 1, 'b': { 'a': 1, 'b': 2, 'c': 3 }, 'c': 3 };
+
+            expect(is.equal(object1, object2)).to.be.false;
+        });
+
+        it('should perform comparisons between objects with multiple circular references', function() {
+            var array1 = [
+                    {}
+                ],
+                array2 = [
+                    {}
+                ];
+
+            (array1[0].a = array1).push(array1);
+            (array2[0].a = array2).push(array2);
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1[0].b = 0;
+            array2[0].b = Object(0);
+
+            expect(is.equal(array1, array2)).to.be.true;
+
+            array1[0].c = Object(1);
+            array2[0].c = Object(2);
+
+            expect(is.equal(array1, array2)).to.be.false;
+        });
+
+        it('should perform comparisons between objects with complex circular references', function() {
+            var object1 = {
+                'foo': { 'b': { 'c': { 'd': {} } } },
+                'bar': { 'a': 2 }
+            };
+
+            var object2 = {
+                'foo': { 'b': { 'c': { 'd': {} } } },
+                'bar': { 'a': 2 }
+            };
+
+            object1.foo.b.c.d = object1;
+            object1.bar.b = object1.foo.b;
+
+            object2.foo.b.c.d = object2;
+            object2.bar.b = object2.foo.b;
+
+            expect(is.equal(object1, object2)).to.be.true;
+        });
+
+        it('should perform comparisons between objects with shared property values', function() {
+            var object1 = {
+                'a': [1, 2]
+            };
+
+            var object2 = {
+                'a': [1, 2],
+                'b': [1, 2]
+            };
+
+            object1.b = object1.a;
+
+            expect(is.equal(object1, object2)).to.be.true;
+        });
+
+        it('should perform comparisons between date objects', function() {
+            expect(is.equal(new Date(2012, 4, 23), new Date(2012, 4, 23))).to.be.true;
+            expect(is.equal(new Date(2012, 4, 23), new Date(2013, 3, 25))).to.be.false;
+            expect(is.equal(new Date(2012, 4, 23), { 'getTime': function(){ return 1337756400000 }})).to.be.false;
+            expect(is.equal(new Date('a'), new Date('a'))).to.be.false;
+        });
+
+        it('should perform comparisons between functions', function() {
+            function a() {
+                return 1 + 2;
+            }
+
+            function b() {
+                return 1 + 2;
+            }
+
+            expect(is.equal(a, a)).to.be.true;
+            expect(is.equal(a, b)).to.be.false;
+        });
+
+        it('should perform comparisons between regexes', function() {
+            expect(is.equal(/x/gim, /x/gim)).to.be.true;
+            expect(is.equal(/x/gim, /x/mgi)).to.be.true;
+            expect(is.equal(/x/gi, /x/g)).to.be.false;
+            expect(is.equal(/x/, /y/)).to.be.false;
+            expect(is.equal(/x/g, { 'global': true, 'ignoreCase': false, 'multiline': false, 'source': 'x' })).to.be.false;
+        });
+
+        it('should perform comparisons between error objects', function() {
+            var root = (typeof global == 'object' && global) || window;
+            var times = function(count, fn){
+                var res = [];
+                for (var i = 0; i < count; i++){
+                    res[i] = fn();
+                }
+                return res;
+            };
+
+            var pairs = [
+                'Error',
+                'EvalError',
+                'RangeError',
+                'ReferenceError',
+                'SyntaxError',
+                'TypeError',
+                'URIError'
+            ].map(function (type, index, errorTypes) {
+                    var otherType = errorTypes[++index % errorTypes.length],
+                        CtorA = root[type],
+                        CtorB = root[otherType];
+                    return [new CtorA('a'), new CtorA('a'), new CtorB('a'), new CtorB('b')];
+                });
+
+            var expected = times(pairs.length, function(){ return [true, false, false] });
+
+            console.log(expected);
+            var actual = pairs.map(function (pair) {
+                return [is.equal(pair[0], pair[1]), is.equal(pair[0], pair[2]), is.equal(pair[2], pair[3])];
+            });
+
+            expect(actual).to.deep.equal(expected);
+        });
+    });
+});
 describe("arithmetic checks", function() {
     describe("is.equal", function() {
         it("should return true if given two numbers are equal", function() {

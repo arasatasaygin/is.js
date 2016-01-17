@@ -42,6 +42,18 @@
     var arraySlice = Array.prototype.slice;
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
+    // toString tags
+    var argsTag = '[object Arguments]',
+      arrayTag = '[object Array]',
+      boolTag = '[object Boolean]',
+      dateTag = '[object Date]',
+      errorTag = '[object Error]',
+      funcTag = '[object Function]',      
+      numberTag = '[object Number]',
+      objectTag = '[object Object]',
+      regexpTag = '[object RegExp]',
+      stringTag = '[object String]';
+
     // helper function which reverses the sense of predicate result
     function not(func) {
         return function() {
@@ -85,37 +97,201 @@
         };
     }
 
+    // TODO: this function may be exposed as public API
+    // Taken from Lodash
+    function equalByTag(value1, value2, tag) {
+      switch (tag) {
+        case boolTag:
+        case dateTag:
+          // Coerce dates and booleans to numbers, dates to milliseconds and booleans
+          // to `1` or `0` treating invalid dates coerced to `NaN` as not equal.
+          return +value1 == +value2;
+
+        case errorTag:
+          return value1.name == value2.name && value1.message == value2.message;
+
+        case numberTag:
+          // Treat `NaN` vs. `NaN` as equal.
+          return (value1 != +value1) ? value2 != +value2
+            // But, treat `-0` vs. `+0` as not equal.
+            : (value1 === 0 ? ((1 / value1) == (1 / value2)) : value1 == +value2);
+
+        case regexpTag:
+        case stringTag:
+          // Coerce regexes to strings and treat strings primitives and string
+          // value1s as equal. See https://es5.github.io/#x15.10.6.4 for more details.
+          return value1 == (value2 + '');
+      }
+      return false;
+    }
+
+
+    // Specialized comparison for objects with support for partial deep comparisons.
+    // Adopted from Lodash: https://github.com/lodash/lodash/blob/3.5.0/lodash.src.js#L3657
+    function equalObjects(value1, value2, equalFunc, stackA, stackB) {
+        var value1Props = Object.keys(value1),
+            value1Length = value1Props.length,
+            value2Props = Object.keys(value2),
+            value2Length = value2Props.length;
+
+        if (value1Length != value2Length) {
+            return false;
+        }
+        var hasCtor,
+            index = -1;
+
+        while (++index < value1Length) {
+            var key = value1Props[index],
+                result = hasOwnProperty.call(value2, key);
+
+            if (result) {
+              var objValue = value1[key],
+                  othValue = value2[key];
+
+              result = undefined;
+
+              if (typeof result == 'undefined') {
+                // Recursively compare objects (susceptible to call stack limits).
+                result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, stackA, stackB);
+              }
+            }
+            if (!result) {
+                return false;
+            }
+            hasCtor = hasCtor || key == 'constructor';
+        }
+        if (!hasCtor) {
+            var value1Ctor = value1.constructor,
+                value2Ctor = value2.constructor;
+
+            // Non `Object` object instances with different constructors are not equal.
+            if (value1Ctor != value2Ctor &&
+                ('constructor' in value1 && 'constructor' in value2) &&
+                !(typeof value1Ctor == 'function' && value1Ctor instanceof value1Ctor &&
+                typeof value2Ctor == 'function' && value2Ctor instanceof value2Ctor)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+     // Specialized comparison for arrays with support for partial deep comparisons.
+     // Adopted from Lodash: https://github.com/lodash/lodash/blob/3.5.0/lodash.src.js#L3564
+    function equalArrays(value1, value2, equalFunc, stackA, stackB) {
+        var index = -1,
+            value1Length = value1.length,
+            value2Length = value2.length,
+            result = true;  
+
+        if (value1Length != value2Length) {
+            return false;
+        }
+        while (result && ++index < value1Length) {
+            var arrValue = value1[index],
+                othValue = value2[index];
+
+            result = undefined;
+            if (typeof result == 'undefined') {
+            // Recursively compare arrays (susceptible to call stack limits).
+                result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, stackA, stackB);
+            }
+        }
+        return !!result;
+    }
+
+    // deeply compares two objects/arrays
+    // tracks traversed objects, enabling objects with circular references to be compared 
+    // adopted from Lodash: https://github.com/lodash/lodash/blob/3.5.0/lodash.src.js#L8343
+    // no support for: arguments, typed Arrays, hosted objects
+    function deepEqual(value1, value2, equalFunc, stackA, stackB) {
+        var value1IsArray = is.array(value1),
+            value1Tag = toString.call(value1),
+            value2Tag = toString.call(value2);
+
+        // TODO: omitted support for arguments and typedArray
+  
+        // TODO: omitted check for hostObjects
+        // It may be useful for IE < 9
+        var value1IsObject = value1Tag == objectTag,
+            value2IsObject = value2Tag == objectTag,
+            isSameTag = value1Tag == value2Tag;
+  
+        if (isSameTag && !(value1IsArray || value1IsObject)) {
+            return equalByTag(value1, value2, value1Tag);
+        }
+        var valWrapped = value1IsObject && hasOwnProperty.call(value1, '__wrapped__'),
+            othWrapped = value2IsObject && hasOwnProperty.call(value2, '__wrapped__');
+  
+        if (valWrapped || othWrapped) {
+            return equalFunc(valWrapped ? value1.value() : value1, othWrapped ? value2.value() : value2);
+        }
+        if (!isSameTag) {
+            return false;
+        }
+        // Assume cyclic values are equal.
+        // For more information on detecting circular references see https://es5.github.io/#JO.
+        stackA = stackA || [];
+        stackB = stackB || [];
+  
+        var length = stackA.length;
+        while (length--) {
+            if (stackA[length] == value1) {
+                return stackB[length] == value2;
+            }
+        }
+        // Add `value1` and `value2` to the stack of traversed objects.
+        stackA.push(value1);
+        stackB.push(value2);
+  
+        var result = (value1IsArray ? equalArrays : equalObjects)(value1, value2, equalFunc, stackA, stackB);
+  
+        stackA.pop();
+        stackB.pop();
+  
+        return result;
+    }
+
+
+    // The most important check
+    /* -------------------------------------------------------------------------- */
+    is.is = function(value){
+        return is.equal(value, is);
+    };
+
+    // is method does not support 'all' and 'any' interfaces
+    is.is.api = ['not'];
+
     // Type checks
     /* -------------------------------------------------------------------------- */
 
     // is a given value Arguments?
     is.arguments = function(value) {    // fallback check is for IE
-        return is.not.null(value) && (toString.call(value) === '[object Arguments]' || (typeof value === 'object' && 'callee' in value));
+        return is.not.null(value) && (toString.call(value) === argsTag || (typeof value === 'object' && 'callee' in value));
     };
 
     // is a given value Array?
     is.array = Array.isArray || function(value) {    // check native isArray first
-        return toString.call(value) === '[object Array]';
+        return toString.call(value) === arrayTag;
     };
 
     // is a given value Boolean?
     is.boolean = function(value) {
-        return value === true || value === false || toString.call(value) === '[object Boolean]';
+        return value === true || value === false || toString.call(value) === boolTag;
     };
 
     // is a given value Date Object?
     is.date = function(value) {
-        return toString.call(value) === '[object Date]';
+        return toString.call(value) === dateTag;
     };
 
     // is a given value Error object?
     is.error = function(value) {
-        return toString.call(value) === '[object Error]';
+        return toString.call(value) === errorTag;
     };
 
     // is a given value function?
     is.function = function(value) {    // fallback check is for IE
-        return toString.call(value) === '[object Function]' || typeof value === 'function';
+        return toString.call(value) === funcTag || typeof value === 'function';
     };
 
     // is a given value NaN?
@@ -130,7 +306,7 @@
 
     // is a given value number?
     is.number = function(value) {
-        return is.not.nan(value) && toString.call(value) === '[object Number]';
+        return is.not.nan(value) && toString.call(value) === numberTag;
     };
 
     // is a given value object?
@@ -141,12 +317,12 @@
 
     // is given value a pure JSON object?
     is.json = function(value) {
-        return toString.call(value) === '[object Object]';
+        return toString.call(value) === objectTag;
     };
 
     // is a given value RegExp?
     is.regexp = function(value) {
-        return toString.call(value) === '[object RegExp]';
+        return toString.call(value) === regexpTag;
     };
 
     // are given values same type?
@@ -162,7 +338,7 @@
 
     // is a given value String?
     is.string = function(value) {
-        return toString.call(value) === '[object String]';
+        return toString.call(value) === stringTag;
     };
 
     // is a given value Char?
@@ -219,18 +395,31 @@
     /* -------------------------------------------------------------------------- */
 
     // are given values equal? supports numbers, strings, regexps, booleans
-    // TODO: Add object and array support
-    is.equal = function(value1, value2) {
+    is.equal = function(value1, value2, stackA, stackB) {
         // check 0 and -0 equity with Infinity and -Infinity
         if(is.all.number(value1, value2)) {
-            return value1 === value2 && 1 / value1 === 1 / value2;
+            // see https://github.com/lodash/lodash/blob/3.5.0/lodash.src.js#L3629
+            // case: Object(1) == 1
+            return (value1 != +value1) ?
+                value2 != +value2 :
+                // But, treat `-0` vs. `+0` as not equal.
+                (value1 === 0 ? ((1 / value1) == (1 / value2)) : value1 == +value2);
+        }
+        // handle null and undefined
+        if (value1 === value2) {
+            return true;
         }
         // check regexps as strings too
         if(is.all.string(value1, value2) || is.all.regexp(value1, value2)) {
             return '' + value1 === '' + value2;
         }
         if(is.all.boolean(value1, value2)) {
-            return value1 === value2;
+            // see https://github.com/lodash/lodash/blob/3.5.0/lodash.src.js#L3622
+            // case: Object(false) == false
+            return +value1 == +value2;
+        }
+        if (is.all.object(value1, value2) || is.all.array(value1, value2)) {
+            return deepEqual(value1, value2, is.equal, stackA, stackB);
         }
         return false;
     };
