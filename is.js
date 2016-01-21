@@ -575,8 +575,32 @@
         is.opera.api = ['not'];
 
         // is current browser safari?
-        is.safari = function() {
-            return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
+        //
+        is.safari = function(version) {
+            var versionNumStart, versionNumEnd, majorVersion;
+            if(!version) return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
+            else if(version) {
+                if(is.safari()) {
+                    //safari 3+ includes a version section
+                    userAgent = userAgent.toLowerCase();
+                    if(userAgent.indexOf("version/")!==-1) {
+                        versionNumStart = userAgent.indexOf("version/") + 8;
+                        versionNumEnd = userAgent.indexOf(".", versionNumStart);
+                        majorVersion = userAgent.substring(versionNumStart, versionNumEnd);
+                        return version === parseInt(majorVersion);
+                    //otherwise handle all the old UA string formats
+                    } else {
+                        versionNumStart = userAgent.indexOf("safari/") + 7;
+                        versionNumEnd = userAgent.indexOf(".", versionNumStart);
+                        majorVersion = parseInt(userAgent.substring(versionNumStart, versionNumEnd));
+                        //safari 2 has a block of version numbers from 400-500
+                        if(version === 2 && majorVersion < 500 && majorVersion > 400) return true;
+                        //safari 1 has a block of version numbers less than 400
+                        else if(version === 1 && majorVersion < 400) return true;
+                        else return false;
+                    }
+                } else return false;
+            }
         };
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
