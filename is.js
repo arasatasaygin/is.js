@@ -539,8 +539,18 @@
         is.chrome.api = ['not'];
 
         // is current browser firefox?
-        is.firefox = function() {
-            return /firefox/i.test(userAgent);
+        //parameter is optional
+        is.firefox = function(version) {
+            var versionNumStart, versionNumEnd, majorVersion;
+            if(!version) return /firefox/i.test(userAgent);
+            else if(version) {
+                if(is.firefox()) {
+                    versionNumStart = userAgent.toLowerCase().indexOf("firefox/") + 8;
+                    versionNumEnd = userAgent.indexOf(".", versionNumStart);
+                    majorVersion = userAgent.substring(versionNumStart, versionNumEnd);
+                    return version === parseInt(majorVersion);
+                } else return false;
+            }
         };
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
