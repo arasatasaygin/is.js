@@ -1133,7 +1133,7 @@ is.endWith('yeap that one', 'one');
 => true
 ```
 
-is.capitalized(value:string, value:substring)
+is.capitalized(value:string)
 ---------------------------------------------
 ####Checks if the given string is capitalized.
 interfaces: not, all, any
@@ -1162,7 +1162,7 @@ is.all.capitalized(['Nope', 'not']);
 => false
 ```
 
-is.palindrome(value:string, value:substring)
+is.palindrome(value:string)
 ---------------------------------------------
 ####Checks if the given string is palindrome.
 interfaces: not, all, any
