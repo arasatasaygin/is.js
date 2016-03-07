@@ -1318,7 +1318,7 @@ is.not.above(42, 50);
 => true
 ```
 
-is.under(value:number, min)
+is.under(value:number, max)
 ---------------------------
 ####Checks if the given value is under maximum value.
 interface: not
