@@ -581,6 +581,13 @@
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
 
+        // is current browser phantomjs?
+        is.phantomjs = function() {
+            return /phantomjs/i.test(userAgent);
+        };
+        // phantomjs method does not support 'all' and 'any' interfaces
+        is.phantomjs.api = ['not'];
+
         // is current device ios?
         is.ios = function() {
             return is.iphone() || is.ipad() || is.ipod();
