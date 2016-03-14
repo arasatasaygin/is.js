@@ -431,7 +431,10 @@
     };
 
     // is a given date future?
-    is.future = not(is.past);
+    is.future = function(obj) {
+        var now = new Date();
+        return is.date(obj) && obj.getTime() > now.getTime();
+    }
 
     // is a given dates day equal given dayString parameter?
     is.day = function(obj, dayString) {

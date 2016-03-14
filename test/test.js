@@ -2273,6 +2273,7 @@ describe('time checks', function() {
         it('should return false if given date is not future', function() {
             var date = new Date();
             var past = new Date(date.setDate(date.getDate() - 1));
+            expect(is.future(date)).to.be.false;
             expect(is.future(past)).to.be.false;
         });
     });
