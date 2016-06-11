@@ -1226,52 +1226,51 @@ describe("regexp checks", function() {
             expect(is.any.url([1, 2])).to.be.false;
         });
     });
-    describe("is.strictUrl", function() {
-        it("should return true if given value is strictUrl", function() {
-            expect(is.strictUrl('http://test.com')).to.be.true;
-            expect(is.strictUrl('http://www.test.com/')).to.be.true;
-            expect(is.strictUrl('http://www.test.com:8080')).to.be.true;
-            expect(is.strictUrl('http://user:pass@www.test.com:8080')).to.be.true;
-            expect(is.strictUrl('https://www.youtube.com/watch?v=Ex6Brmg4Jes')).to.be.true;
-            expect(is.strictUrl('http://xn--80af0a3e.com/')).to.be.true;
+    describe("is.uri", function() {
+        it("should return true if given value is uri", function() {
+            expect(is.uri('http://localhost')).to.be.true;
+            expect(is.uri('http://test.com')).to.be.true;
+            expect(is.uri('http://www.test.com/')).to.be.true;
+            expect(is.uri('http://www.test.com:8080')).to.be.true;
+            expect(is.uri('ftp://user:pass@com:8080')).to.be.true;
+            expect(is.uri('mongodb://user:pass@cluster1.test.com:8080')).to.be.true;
+            expect(is.uri('http://user:pass@www.test.com:8080')).to.be.true;
+            expect(is.uri('https://www.youtube.com/watch?v=Ex6Brmg4Jes')).to.be.true;
+            expect(is.uri('http://xn--80af0a3e.com/')).to.be.true;
         });
-        it("should return false if given value is not strictUrl", function() {
-            expect(is.strictUrl('http://com')).to.be.false;
-            expect(is.strictUrl('http://com/')).to.be.false;
-            expect(is.strictUrl('http://com:8080')).to.be.false;
-            expect(is.strictUrl('http://user:pass@com:8080')).to.be.false;
-            expect(is.strictUrl('user:pass@com:8080')).to.be.false;
-            expect(is.strictUrl('test.com')).to.be.false;
-            expect(is.strictUrl('www.test.com')).to.be.false;
-            expect(is.strictUrl(1)).to.be.false;
-        });
-    });
-    describe("is.not.strictUrl", function() {
-        it("should return false if given value is strictUrl", function() {
-            expect(is.not.strictUrl('http://www.test.com')).to.be.false;
-        });
-        it("should return true if given value is not strictUrl", function() {
-            expect(is.not.strictUrl(1)).to.be.true;
+        it("should return false if given value is not uri", function() {
+            expect(is.uri('#')).to.be.false;
+            expect(is.uri('test.com')).to.be.false;
+            expect(is.uri('www.test.com')).to.be.false;
+            expect(is.uri(1)).to.be.false;
         });
     });
-    describe("is.all.strictUrl", function() {
-        it("should return true if all given values are strictUrl", function() {
-            expect(is.all.strictUrl('http://www.test.com', 'http://www.test2.com')).to.be.true;
-            expect(is.all.strictUrl(['http://www.test.com', 'http://www.test2.com'])).to.be.true;
+    describe("is.not.uri", function() {
+        it("should return false if given value is uri", function() {
+            expect(is.not.uri('http://www.test.com')).to.be.false;
         });
-        it("should return false if any given value is not strictUrl", function() {
-            expect(is.all.strictUrl('http://www.test.com', 1)).to.be.false;
-            expect(is.all.strictUrl(['http://www.test.com', 1])).to.be.false;
+        it("should return true if given value is not uri", function() {
+            expect(is.not.uri(1)).to.be.true;
         });
     });
-    describe("is.any.strictUrl", function() {
-        it("should return true if any given value is strictUrl", function() {
-            expect(is.any.strictUrl('http://www.test.com', 1)).to.be.true;
-            expect(is.any.strictUrl(['http://www.test.com', 1])).to.be.true;
+    describe("is.all.uri", function() {
+        it("should return true if all given values are uri", function() {
+            expect(is.all.uri('http://www.test.com', 'http://www.test2.com')).to.be.true;
+            expect(is.all.uri(['http://www.test.com', 'http://www.test2.com'])).to.be.true;
         });
-        it("should return false if all given values are not strictUrl", function() {
-            expect(is.any.strictUrl(1, 2)).to.be.false;
-            expect(is.any.strictUrl([1, 2])).to.be.false;
+        it("should return false if any given value is not uri", function() {
+            expect(is.all.uri('http://www.test.com', 1)).to.be.false;
+            expect(is.all.uri(['http://www.test.com', 1])).to.be.false;
+        });
+    });
+    describe("is.any.uri", function() {
+        it("should return true if any given value is uri", function() {
+            expect(is.any.uri('http://www.test.com', 1)).to.be.true;
+            expect(is.any.uri(['http://www.test.com', 1])).to.be.true;
+        });
+        it("should return false if all given values are not uri", function() {
+            expect(is.any.uri(1, 2)).to.be.false;
+            expect(is.any.uri([1, 2])).to.be.false;
         });
     });
     describe("is.email", function() {
