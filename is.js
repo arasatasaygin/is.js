@@ -206,14 +206,8 @@
     is.falsy = not(is.truthy);
 
     // is a given value space?
-    // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space =  function(value) {
-        if(is.char(value)) {
-            var characterCode = value.charCodeAt(0);
-            return (characterCode >  8 && characterCode < 14) || characterCode === 32;
-        } else {
-            return false;
-        }
+        return /^\s$/.test(value);
     };
 
     // Arithmetic checks

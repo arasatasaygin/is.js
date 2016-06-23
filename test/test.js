@@ -785,6 +785,12 @@ describe("presence checks", function() {
         it("should return true if given value is space", function() {
             expect(is.space(' ')).to.be.true;
         });
+        it("should return false if given value is more than one space", function() {
+            expect(is.space('  ')).to.be.false;
+        });
+        it("should return true if given value is tab character", function() {
+            expect(is.space('\t')).to.be.true;
+        });
     });
     describe("is.not.space", function() {
         it("should return true if given value is not string", function() {
@@ -792,6 +798,9 @@ describe("presence checks", function() {
         });
         it("should return false if given value is space", function() {
             expect(is.not.space(' ')).to.be.false;
+        });
+        it("should return false if given value is tab character", function() {
+            expect(is.not.space('\t')).to.be.false;
         });
     });
     describe("is.all.space", function() {
