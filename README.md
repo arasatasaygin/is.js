@@ -1899,7 +1899,7 @@ is.touchDevice();
 => true if current device supports touch
 
 is.not.touchDevice();
-=> true if current device doesn't support touch
+=> true if current device does not support touch
 ```
 
 Time checks
