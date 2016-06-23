@@ -582,6 +582,13 @@
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
 
+        // is current browser amazon silk?
+        is.silk = function() {
+            return /silk/i.test(userAgent);
+        };
+        // silk method does not support 'all' and 'any' interfaces
+        is.silk.api = ['not'];
+
         // is current device ios?
         is.ios = function() {
             return is.iphone() || is.ipad() || is.ipod();
