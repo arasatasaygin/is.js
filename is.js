@@ -527,27 +527,27 @@
     if(typeof window !== 'undefined') {
 
         // store navigator properties to use later
-        var userAgent = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase() || '';
-        var vendor = 'navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase() || '';
-        var appVersion = 'navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase() || '';
+        var userAgent = ('navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';
+        var vendor = ('navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase()) || '';
+        var appVersion = ('navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
 
         // is current browser chrome?
         is.chrome = function() {
-            return /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor);
+            return /chrome|chromium/.test(userAgent) && /google inc/.test(vendor);
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
 
         // is current browser firefox?
         is.firefox = function() {
-            return /firefox/i.test(userAgent);
+            return /firefox/.test(userAgent);
         };
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
 
         // is current browser edge?
         is.edge = function() {
-            return /edge/i.test(userAgent);
+            return /edge/.test(userAgent);
         };
         // edge method does not support 'all' and 'any' interfaces
         is.edge.api = ['not'];
@@ -556,7 +556,7 @@
         // parameter is optional
         is.ie = function(version) {
             if(!version) {
-                return /msie/i.test(userAgent) || "ActiveXObject" in window;
+                return /msie/.test(userAgent) || "ActiveXObject" in window;
             }
             if(version >= 11) {
                 return "ActiveXObject" in window;
@@ -576,7 +576,7 @@
 
         // is current browser safari?
         is.safari = function() {
-            return /safari/i.test(userAgent) && /apple computer/i.test(vendor);
+            return /safari/.test(userAgent) && /apple computer/.test(vendor);
         };
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
@@ -590,49 +590,49 @@
 
         // is current device iphone?
         is.iphone = function() {
-            return /iphone/i.test(userAgent);
+            return /iphone/.test(userAgent);
         };
         // iphone method does not support 'all' and 'any' interfaces
         is.iphone.api = ['not'];
 
         // is current device ipad?
         is.ipad = function() {
-            return /ipad/i.test(userAgent);
+            return /ipad/.test(userAgent);
         };
         // ipad method does not support 'all' and 'any' interfaces
         is.ipad.api = ['not'];
 
         // is current device ipod?
         is.ipod = function() {
-            return /ipod/i.test(userAgent);
+            return /ipod/.test(userAgent);
         };
         // ipod method does not support 'all' and 'any' interfaces
         is.ipod.api = ['not'];
 
         // is current device android?
         is.android = function() {
-            return /android/i.test(userAgent);
+            return /android/.test(userAgent);
         };
         // android method does not support 'all' and 'any' interfaces
         is.android.api = ['not'];
 
         // is current device android phone?
         is.androidPhone = function() {
-            return /android/i.test(userAgent) && /mobile/i.test(userAgent);
+            return /android/.test(userAgent) && /mobile/.test(userAgent);
         };
         // androidPhone method does not support 'all' and 'any' interfaces
         is.androidPhone.api = ['not'];
 
         // is current device android tablet?
         is.androidTablet = function() {
-            return /android/i.test(userAgent) && !/mobile/i.test(userAgent);
+            return /android/.test(userAgent) && !/mobile/.test(userAgent);
         };
         // androidTablet method does not support 'all' and 'any' interfaces
         is.androidTablet.api = ['not'];
 
         // is current device blackberry?
         is.blackberry = function() {
-            return /blackberry/i.test(userAgent) || /BB10/i.test(userAgent);
+            return /blackberry/.test(userAgent) || /bb10/.test(userAgent);
         };
         // blackberry method does not support 'all' and 'any' interfaces
         is.blackberry.api = ['not'];
@@ -646,35 +646,35 @@
 
         // is current operating system linux?
         is.linux = function() {
-            return /linux/i.test(appVersion);
+            return /linux/.test(appVersion);
         };
         // linux method does not support 'all' and 'any' interfaces
         is.linux.api = ['not'];
 
         // is current operating system mac?
         is.mac = function() {
-            return /mac/i.test(appVersion);
+            return /mac/.test(appVersion);
         };
         // mac method does not support 'all' and 'any' interfaces
         is.mac.api = ['not'];
 
         // is current operating system windows?
         is.windows = function() {
-            return /win/i.test(appVersion);
+            return /win/.test(appVersion);
         };
         // windows method does not support 'all' and 'any' interfaces
         is.windows.api = ['not'];
 
         // is current device windows phone?
         is.windowsPhone = function() {
-            return is.windows() && /phone/i.test(userAgent);
+            return is.windows() && /phone/.test(userAgent);
         };
         // windowsPhone method does not support 'all' and 'any' interfaces
         is.windowsPhone.api = ['not'];
 
         // is current device windows tablet?
         is.windowsTablet = function() {
-            return is.windows() && is.not.windowsPhone() && /touch/i.test(userAgent);
+            return is.windows() && is.not.windowsPhone() && /touch/.test(userAgent);
         };
         // windowsTablet method does not support 'all' and 'any' interfaces
         is.windowsTablet.api = ['not'];
