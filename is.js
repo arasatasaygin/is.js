@@ -297,6 +297,56 @@
     // is a given number infinite?
     is.infinite = not(is.finite);
 
+    // is a given number zero?
+    is.zero = function(numb) {
+        return is.number(numb) && numb === 0;
+    };
+
+    // is a given number one?
+    is.one = function(numb) {
+        return is.number(numb) && numb === 1;
+    };
+
+    // is a given number negative or positive but no zero?
+    is.nonZero = not(is.zero);
+
+    // is a given number non-positive?
+    is.nonPositive = function(numb) {
+        return is.negative(numb) || numb === 0;
+    }
+
+    // is a given number non-negative?
+    is.nonNegative = function(numb) {
+        return is.positive(numb) || numb === 0;
+    }
+
+    // is a given number perfect square?
+    is.perfectSquare = function(numb) {
+        return is.integer(Math.sqrt(numb));
+    };
+
+    // is a given number integer-divisible by another number?
+    is.divisibleBy = function(divisor, num) {
+        if (is.integer(divisor)) {
+            if (is.nonZero(divisor)) {
+                return num % divisor === 0;
+            };
+            return false;
+        } else return false;
+    };
+
+    // is a given number a Fibonacci number?
+    // Source http://www.fq.math.ca/Scanned/10-4/advanced10-4.pdf
+    is.fibonacci = function(numb) {
+        return is.perfectSquare(5*Math.pow(numb, 2) + 4) || is.perfectSquare(5*Math.pow(numb, 2) - 4)
+    }
+
+    // is a given number a triangular number?
+    // Source https://en.wikipedia.org/wiki/Triangular_number
+    is.triangular = function(numb) {
+        return is.integer((Math.sqrt(1 + 8 * numb) - 1) / 2)
+    }
+
     // Regexp checks
     /* -------------------------------------------------------------------------- */
     // Steven Levithan, Jan Goyvaerts: Regular Expressions Cookbook
