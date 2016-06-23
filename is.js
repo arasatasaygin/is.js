@@ -582,6 +582,13 @@
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
 
+        // is current browser micromessenger?
+        is.micromessenger = function() {
+            return /micromessenger/i.test(userAgent);
+        };
+        // micromessenger method does not support 'all' and 'any' interfaces
+        is.micromessenger.api = ['not'];
+
         // is current device ios?
         is.ios = function() {
             return is.iphone() || is.ipad() || is.ipod();
