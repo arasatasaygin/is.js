@@ -1481,6 +1481,617 @@ describe("regexp checks", function() {
             expect(is.any.caPostalCode(['1', '2'])).to.be.false;
         });
     });
+    describe("is.auPostCode", function() {
+        it("should return true if given value is AU post code", function() {
+            expect(is.auPostCode('0200')).to.be.true;
+        });
+        it("should return false if given value is not AU post code", function() {
+            expect(is.auPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.auPostCode", function() {
+        it("should return false if given value is AU post code", function() {
+            expect(is.not.auPostCode('0200')).to.be.false;
+        });
+        it("should return true if given value is not AU post code", function() {
+            expect(is.not.auPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.auPostCode", function() {
+        it("should return true if all given values are AU post code", function() {
+            expect(is.all.auPostCode('0200', '0201')).to.be.true;
+            expect(is.all.auPostCode(['0200', '0201'])).to.be.true;
+        });
+        it("should return false if any given value is not AU post code", function() {
+            expect(is.all.auPostCode('0200', '1')).to.be.false;
+            expect(is.all.auPostCode(['0200', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.auPostCode", function() {
+        it("should return true if any given value is AU post code", function() {
+            expect(is.any.auPostCode('0200', '1')).to.be.true;
+            expect(is.any.auPostCode(['0200', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not AU post code", function() {
+            expect(is.any.auPostCode('1', '2')).to.be.false;
+            expect(is.any.auPostCode(['1', '2'])).to.be.false;
+        });
+    });describe("is.bePostCode", function() {
+        it("should return true if given value is BE post code", function() {
+            expect(is.bePostCode('1006')).to.be.true;
+        });
+        it("should return false if given value is not BE post code", function() {
+            expect(is.bePostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.bePostCode", function() {
+        it("should return false if given value is BE post code", function() {
+            expect(is.not.bePostCode('1006')).to.be.false;
+        });
+        it("should return true if given value is not BE post code", function() {
+            expect(is.not.bePostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.bePostCode", function() {
+        it("should return true if all given values are BE post code", function() {
+            expect(is.all.bePostCode('1006', '1007')).to.be.true;
+            expect(is.all.bePostCode(['1006', '1007'])).to.be.true;
+        });
+        it("should return false if any given value is not BE post code", function() {
+            expect(is.all.bePostCode('1006', '1')).to.be.false;
+            expect(is.all.bePostCode(['1006', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.bePostCode", function() {
+        it("should return true if any given value is BE post code", function() {
+            expect(is.any.bePostCode('1006', '1')).to.be.true;
+            expect(is.any.bePostCode(['1006', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not BE post code", function() {
+            expect(is.any.bePostCode('1', '2')).to.be.false;
+            expect(is.any.bePostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.brPostCode", function() {
+        it("should return true if given value is BR post code", function() {
+            expect(is.brPostCode('13165-000')).to.be.true;
+        });
+        it("should return false if given value is not BR post code", function() {
+            expect(is.brPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.brPostCode", function() {
+        it("should return false if given value is BR post code", function() {
+            expect(is.not.brPostCode('13165-000')).to.be.false;
+        });
+        it("should return true if given value is not BR post code", function() {
+            expect(is.not.brPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.brPostCode", function() {
+        it("should return true if all given values are BR post code", function() {
+            expect(is.all.brPostCode('13165-000', '13165-001')).to.be.true;
+            expect(is.all.brPostCode(['13165-000', '13165-001'])).to.be.true;
+        });
+        it("should return false if any given value is not BR post code", function() {
+            expect(is.all.brPostCode('13165-000', '1')).to.be.false;
+            expect(is.all.brPostCode(['13165-000', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.brPostCode", function() {
+        it("should return true if any given value is BR post code", function() {
+            expect(is.any.brPostCode('13165-000', '1')).to.be.true;
+            expect(is.any.brPostCode(['13165-000', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not BR post code", function() {
+            expect(is.any.brPostCode('1', '2')).to.be.false;
+            expect(is.any.brPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.chPostCode", function() {
+        it("should return true if given value is CH post code", function() {
+            expect(is.chPostCode('1234')).to.be.true;
+        });
+        it("should return false if given value is not CH post code", function() {
+            expect(is.chPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.chPostCode", function() {
+        it("should return false if given value is CH post code", function() {
+            expect(is.not.chPostCode('1234')).to.be.false;
+        });
+        it("should return true if given value is not CH post code", function() {
+            expect(is.not.chPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.chPostCode", function() {
+        it("should return true if all given values are CH post code", function() {
+            expect(is.all.chPostCode('1234', '1235')).to.be.true;
+            expect(is.all.chPostCode(['1234', '1235'])).to.be.true;
+        });
+        it("should return false if any given value is not CH post code", function() {
+            expect(is.all.chPostCode('1234', '1')).to.be.false;
+            expect(is.all.chPostCode(['1234', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.chPostCode", function() {
+        it("should return true if any given value is CH post code", function() {
+            expect(is.any.chPostCode('1234', '1')).to.be.true;
+            expect(is.any.chPostCode(['1234', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not CH post code", function() {
+            expect(is.any.chPostCode('1', '2')).to.be.false;
+            expect(is.any.chPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.cnPostCode", function() {
+        it("should return true if given value is CH post code", function() {
+            expect(is.cnPostCode('123456')).to.be.true;
+        });
+        it("should return false if given value is not CH post code", function() {
+            expect(is.cnPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.cnPostCode", function() {
+        it("should return false if given value is CH post code", function() {
+            expect(is.not.cnPostCode('123456')).to.be.false;
+        });
+        it("should return true if given value is not CH post code", function() {
+            expect(is.not.cnPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.cnPostCode", function() {
+        it("should return true if all given values are CH post code", function() {
+            expect(is.all.cnPostCode('123456', '123457')).to.be.true;
+            expect(is.all.cnPostCode(['123456', '123457'])).to.be.true;
+        });
+        it("should return false if any given value is not CH post code", function() {
+            expect(is.all.cnPostCode('123456', '1')).to.be.false;
+            expect(is.all.cnPostCode(['123456', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.cnPostCode", function() {
+        it("should return true if any given value is CH post code", function() {
+            expect(is.any.cnPostCode('123456', '1')).to.be.true;
+            expect(is.any.cnPostCode(['123456', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not CH post code", function() {
+            expect(is.any.cnPostCode('1', '2')).to.be.false;
+            expect(is.any.cnPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.dePostCode", function() {
+        it("should return true if given value is DE post code", function() {
+            expect(is.dePostCode('03242')).to.be.true;
+        });
+        it("should return false if given value is not DE post code", function() {
+            expect(is.dePostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.dePostCode", function() {
+        it("should return false if given value is DE post code", function() {
+            expect(is.not.dePostCode('03242')).to.be.false;
+        });
+        it("should return true if given value is not DE post code", function() {
+            expect(is.not.dePostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.dePostCode", function() {
+        it("should return true if all given values are DE post code", function() {
+            expect(is.all.dePostCode('03242', '03243')).to.be.true;
+            expect(is.all.dePostCode(['03242', '03243'])).to.be.true;
+        });
+        it("should return false if any given value is not DE post code", function() {
+            expect(is.all.dePostCode('03242', '1')).to.be.false;
+            expect(is.all.dePostCode(['03242', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.dePostCode", function() {
+        it("should return true if any given value is DE post code", function() {
+            expect(is.any.dePostCode('03242', '1')).to.be.true;
+            expect(is.any.dePostCode(['03242', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not DE post code", function() {
+            expect(is.any.dePostCode('1', '2')).to.be.false;
+            expect(is.any.dePostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.dkPostCode", function() {
+        it("should return true if given value is DK post code", function() {
+            expect(is.dkPostCode('1000')).to.be.true;
+        });
+        it("should return false if given value is not DK post code", function() {
+            expect(is.dkPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.dkPostCode", function() {
+        it("should return false if given value is DK post code", function() {
+            expect(is.not.dkPostCode('1000')).to.be.false;
+        });
+        it("should return true if given value is not DK post code", function() {
+            expect(is.not.dkPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.dkPostCode", function() {
+        it("should return true if all given values are DK post code", function() {
+            expect(is.all.dkPostCode('1000', '1001')).to.be.true;
+            expect(is.all.dkPostCode(['1000', '1001'])).to.be.true;
+        });
+        it("should return false if any given value is not DK post code", function() {
+            expect(is.all.dkPostCode('1000', '1')).to.be.false;
+            expect(is.all.dkPostCode(['1000', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.dkPostCode", function() {
+        it("should return true if any given value is DK post code", function() {
+            expect(is.any.dkPostCode('1000', '1')).to.be.true;
+            expect(is.any.dkPostCode(['1000', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not DK post code", function() {
+            expect(is.any.dkPostCode('1', '2')).to.be.false;
+            expect(is.any.dkPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.frPostCode", function() {
+        it("should return true if given value is FR post code", function() {
+            expect(is.frPostCode('75008')).to.be.true;
+        });
+        it("should return false if given value is not FR post code", function() {
+            expect(is.frPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.frPostCode", function() {
+        it("should return false if given value is FR post code", function() {
+            expect(is.not.frPostCode('75008')).to.be.false;
+        });
+        it("should return true if given value is not FR post code", function() {
+            expect(is.not.frPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.frPostCode", function() {
+        it("should return true if all given values are FR post code", function() {
+            expect(is.all.frPostCode('75008', '75009')).to.be.true;
+            expect(is.all.frPostCode(['75008', '75009'])).to.be.true;
+        });
+        it("should return false if any given value is not FR post code", function() {
+            expect(is.all.frPostCode('75008', '1')).to.be.false;
+            expect(is.all.frPostCode(['75008', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.frPostCode", function() {
+        it("should return true if any given value is FR post code", function() {
+            expect(is.any.frPostCode('75008', '1')).to.be.true;
+            expect(is.any.frPostCode(['75008', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not FR post code", function() {
+            expect(is.any.frPostCode('1', '2')).to.be.false;
+            expect(is.any.frPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.inPostCode", function() {
+        it("should return true if given value is IN post code", function() {
+            expect(is.inPostCode('234675')).to.be.true;
+        });
+        it("should return false if given value is not IN post code", function() {
+            expect(is.inPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.inPostCode", function() {
+        it("should return false if given value is IN post code", function() {
+            expect(is.not.inPostCode('234675')).to.be.false;
+        });
+        it("should return true if given value is not IN post code", function() {
+            expect(is.not.inPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.inPostCode", function() {
+        it("should return true if all given values are IN post code", function() {
+            expect(is.all.inPostCode('234675', '234676')).to.be.true;
+            expect(is.all.inPostCode(['234675', '234676'])).to.be.true;
+        });
+        it("should return false if any given value is not IN post code", function() {
+            expect(is.all.inPostCode('234675', '1')).to.be.false;
+            expect(is.all.inPostCode(['234675', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.inPostCode", function() {
+        it("should return true if any given value is IN post code", function() {
+            expect(is.any.inPostCode('234675', '1')).to.be.true;
+            expect(is.any.inPostCode(['234675', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not IN post code", function() {
+            expect(is.any.inPostCode('1', '2')).to.be.false;
+            expect(is.any.inPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.itPostCode", function() {
+        it("should return true if given value is IT post code", function() {
+            expect(is.itPostCode('00010')).to.be.true;
+        });
+        it("should return false if given value is not IT post code", function() {
+            expect(is.itPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.itPostCode", function() {
+        it("should return false if given value is IT post code", function() {
+            expect(is.not.itPostCode('00010')).to.be.false;
+        });
+        it("should return true if given value is not IT post code", function() {
+            expect(is.not.itPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.itPostCode", function() {
+        it("should return true if all given values are IT post code", function() {
+            expect(is.all.itPostCode('00010', '00011')).to.be.true;
+            expect(is.all.itPostCode(['00010', '00011'])).to.be.true;
+        });
+        it("should return false if any given value is not IT post code", function() {
+            expect(is.all.itPostCode('00010', '1')).to.be.false;
+            expect(is.all.itPostCode(['00010', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.itPostCode", function() {
+        it("should return true if any given value is IT post code", function() {
+            expect(is.any.itPostCode('00010', '1')).to.be.true;
+            expect(is.any.itPostCode(['00010', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not IT post code", function() {
+            expect(is.any.itPostCode('1', '2')).to.be.false;
+            expect(is.any.itPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.lvPostCode", function() {
+        it("should return true if given value is LV post code", function() {
+            expect(is.lvPostCode('LV-1013')).to.be.true;
+        });
+        it("should return false if given value is not LV post code", function() {
+            expect(is.lvPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.lvPostCode", function() {
+        it("should return false if given value is LV post code", function() {
+            expect(is.not.lvPostCode('LV-1013')).to.be.false;
+        });
+        it("should return true if given value is not LV post code", function() {
+            expect(is.not.lvPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.lvPostCode", function() {
+        it("should return true if all given values are LV post code", function() {
+            expect(is.all.lvPostCode('LV-1013', 'LV-1014')).to.be.true;
+            expect(is.all.lvPostCode(['LV-1013', 'LV-1014'])).to.be.true;
+        });
+        it("should return false if any given value is not LV post code", function() {
+            expect(is.all.lvPostCode('LV-1013', '1')).to.be.false;
+            expect(is.all.lvPostCode(['LV-1013', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.lvPostCode", function() {
+        it("should return true if any given value is LV post code", function() {
+            expect(is.any.lvPostCode('LV-1013', '1')).to.be.true;
+            expect(is.any.lvPostCode(['LV-1013', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not LV post code", function() {
+            expect(is.any.lvPostCode('1', '2')).to.be.false;
+            expect(is.any.lvPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.nlPostCode", function() {
+        it("should return true if given value is NL post code", function() {
+            expect(is.nlPostCode('1234AB')).to.be.true;
+        });
+        it("should return false if given value is not NL post code", function() {
+            expect(is.nlPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.nlPostCode", function() {
+        it("should return false if given value is NL post code", function() {
+            expect(is.not.nlPostCode('1234AB')).to.be.false;
+        });
+        it("should return true if given value is not NL post code", function() {
+            expect(is.not.nlPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.nlPostCode", function() {
+        it("should return true if all given values are NL post code", function() {
+            expect(is.all.nlPostCode('1234AB', '1235AB')).to.be.true;
+            expect(is.all.nlPostCode(['1234AB', '1235AB'])).to.be.true;
+        });
+        it("should return false if any given value is not NL post code", function() {
+            expect(is.all.nlPostCode('1234AB', '1')).to.be.false;
+            expect(is.all.nlPostCode(['1234AB', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.nlPostCode", function() {
+        it("should return true if any given value is NL post code", function() {
+            expect(is.any.nlPostCode('1234AB', '1')).to.be.true;
+            expect(is.any.nlPostCode(['1234AB', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not NL post code", function() {
+            expect(is.any.nlPostCode('1', '2')).to.be.false;
+            expect(is.any.nlPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.nzPostCode", function() {
+        it("should return true if given value is NZ post code", function() {
+            expect(is.nzPostCode('1234')).to.be.true;
+        });
+        it("should return false if given value is not NZ post code", function() {
+            expect(is.nzPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.nzPostCode", function() {
+        it("should return false if given value is NZ post code", function() {
+            expect(is.not.nzPostCode('1234')).to.be.false;
+        });
+        it("should return true if given value is not NZ post code", function() {
+            expect(is.not.nzPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.nzPostCode", function() {
+        it("should return true if all given values are NZ post code", function() {
+            expect(is.all.nzPostCode('1234', '1235')).to.be.true;
+            expect(is.all.nzPostCode(['1234', '1235'])).to.be.true;
+        });
+        it("should return false if any given value is not NZ post code", function() {
+            expect(is.all.nzPostCode('1234', '1')).to.be.false;
+            expect(is.all.nzPostCode(['1234', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.nzPostCode", function() {
+        it("should return true if any given value is NZ post code", function() {
+            expect(is.any.nzPostCode('1234', '1')).to.be.true;
+            expect(is.any.nzPostCode(['1234', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not NZ post code", function() {
+            expect(is.any.nzPostCode('1', '2')).to.be.false;
+            expect(is.any.nzPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.ptPostCode", function() {
+        it("should return true if given value is PT post code", function() {
+            expect(is.ptPostCode('4785-252')).to.be.true;
+        });
+        it("should return false if given value is not PT post code", function() {
+            expect(is.ptPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.ptPostCode", function() {
+        it("should return false if given value is PT post code", function() {
+            expect(is.not.ptPostCode('4785-252')).to.be.false;
+        });
+        it("should return true if given value is not PT post code", function() {
+            expect(is.not.ptPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.ptPostCode", function() {
+        it("should return true if all given values are PT post code", function() {
+            expect(is.all.ptPostCode('4785-252', '4785-253')).to.be.true;
+            expect(is.all.ptPostCode(['4785-252', '4785-253'])).to.be.true;
+        });
+        it("should return false if any given value is not PT post code", function() {
+            expect(is.all.ptPostCode('4785-252', '1')).to.be.false;
+            expect(is.all.ptPostCode(['4785-252', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.ptPostCode", function() {
+        it("should return true if any given value is PT post code", function() {
+            expect(is.any.ptPostCode('4785-252', '1')).to.be.true;
+            expect(is.any.ptPostCode(['4785-252', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not PT post code", function() {
+            expect(is.any.ptPostCode('1', '2')).to.be.false;
+            expect(is.any.ptPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.ruPostCode", function() {
+        it("should return true if given value is RU post code", function() {
+            expect(is.ruPostCode('150016')).to.be.true;
+        });
+        it("should return false if given value is not RU post code", function() {
+            expect(is.ruPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.ruPostCode", function() {
+        it("should return false if given value is RU post code", function() {
+            expect(is.not.ruPostCode('150016')).to.be.false;
+        });
+        it("should return true if given value is not RU post code", function() {
+            expect(is.not.ruPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.ruPostCode", function() {
+        it("should return true if all given values are RU post code", function() {
+            expect(is.all.ruPostCode('150016', '150017')).to.be.true;
+            expect(is.all.ruPostCode(['150016', '150017'])).to.be.true;
+        });
+        it("should return false if any given value is not RU post code", function() {
+            expect(is.all.ruPostCode('150016', '1')).to.be.false;
+            expect(is.all.ruPostCode(['150016', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.ruPostCode", function() {
+        it("should return true if any given value is RU post code", function() {
+            expect(is.any.ruPostCode('150016', '1')).to.be.true;
+            expect(is.any.ruPostCode(['150016', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not RU post code", function() {
+            expect(is.any.ruPostCode('1', '2')).to.be.false;
+            expect(is.any.ruPostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.sePostCode", function() {
+        it("should return true if given value is SE post code", function() {
+            expect(is.sePostCode('119 99')).to.be.true;
+        });
+        it("should return false if given value is not SE post code", function() {
+            expect(is.sePostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.sePostCode", function() {
+        it("should return false if given value is SE post code", function() {
+            expect(is.not.sePostCode('119 99')).to.be.false;
+        });
+        it("should return true if given value is not SE post code", function() {
+            expect(is.not.sePostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.sePostCode", function() {
+        it("should return true if all given values are SE post code", function() {
+            expect(is.all.sePostCode('119 99', '11989')).to.be.true;
+            expect(is.all.sePostCode(['119 99', '11989'])).to.be.true;
+        });
+        it("should return false if any given value is not SE post code", function() {
+            expect(is.all.sePostCode('119 99', '1')).to.be.false;
+            expect(is.all.sePostCode(['119 99', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.sePostCode", function() {
+        it("should return true if any given value is SE post code", function() {
+            expect(is.any.sePostCode('119 99', '1')).to.be.true;
+            expect(is.any.sePostCode(['119 99', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not SE post code", function() {
+            expect(is.any.sePostCode('1', '2')).to.be.false;
+            expect(is.any.sePostCode(['1', '2'])).to.be.false;
+        });
+    });
+    describe("is.skPostCode", function() {
+        it("should return true if given value is SK post code", function() {
+            expect(is.skPostCode('960 07')).to.be.true;
+        });
+        it("should return false if given value is not SK post code", function() {
+            expect(is.skPostCode('1')).to.be.false;
+        });
+    });
+    describe("is.not.skPostCode", function() {
+        it("should return false if given value is SK post code", function() {
+            expect(is.not.skPostCode('960 07')).to.be.false;
+        });
+        it("should return true if given value is not SK post code", function() {
+            expect(is.not.skPostCode('1')).to.be.true;
+        });
+    });
+    describe("is.all.skPostCode", function() {
+        it("should return true if all given values are SK post code", function() {
+            expect(is.all.skPostCode('960 07', '960 06')).to.be.true;
+            expect(is.all.skPostCode(['960 07', '960 06'])).to.be.true;
+        });
+        it("should return false if any given value is not SK post code", function() {
+            expect(is.all.skPostCode('960 07', '1')).to.be.false;
+            expect(is.all.skPostCode(['960 07', '1'])).to.be.false;
+        });
+    });
+    describe("is.any.skPostCode", function() {
+        it("should return true if any given value is SK post code", function() {
+            expect(is.any.skPostCode('960 07', '1')).to.be.true;
+            expect(is.any.skPostCode(['960 07', '1'])).to.be.true;
+        });
+        it("should return false if all given values are not SK post code", function() {
+            expect(is.any.skPostCode('1', '2')).to.be.false;
+            expect(is.any.skPostCode(['1', '2'])).to.be.false;
+        });
+    });
     describe("is.ukPostCode", function() {
         it("should return true if given value is UK post code", function() {
             expect(is.ukPostCode('B184BJ')).to.be.true;
