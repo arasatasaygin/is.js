@@ -199,7 +199,7 @@
 
     // is a given value truthy?
     is.truthy = function(value) {
-        return is.existy(value) && value !== false && is.not.nan(value) && value !== "" && value !== 0;
+        return is.existy(value) && value !== false && is.not.nan(value) && value !== '' && value !== 0;
     };
 
     // is a given value falsy?
@@ -557,10 +557,10 @@
         // parameter is optional
         is.ie = function(version) {
             if(!version) {
-                return /msie/.test(userAgent) || "ActiveXObject" in window;
+                return /msie/.test(userAgent) || 'ActiveXObject' in window;
             }
             if(version >= 11) {
-                return "ActiveXObject" in window;
+                return 'ActiveXObject' in window;
             }
             return new RegExp('msie ' + version).test(userAgent);
         };
