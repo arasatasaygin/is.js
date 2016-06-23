@@ -755,6 +755,21 @@
         return is.object(obj) && obj.nodeType > 0;
     };
 
+    // is a Promise object ?
+    is.promise = function(obj){
+    	return obj && typeof obj.then == 'function';
+    };
+
+    // ES6 feature: is a Generator object ?
+    is.generator = function(obj){
+    	return obj && typeof obj.next == 'function' && typeof obj.throw == 'function';
+    };
+
+    // ES6 feature: is a Generator Function ?
+    is.generatorFunction = function(obj){
+    	return obj && obj.constructor && obj.constructor.name == 'GeneratorFunction';
+    };
+
     // Array checks
     /* -------------------------------------------------------------------------- */
 
