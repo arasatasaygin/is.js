@@ -547,8 +547,10 @@
         is.firefox.api = ['not'];
 
         // is current browser edge?
-        is.edge = function() {
-            return /edge/.test(userAgent);
+        // parameter is optional
+        is.edge = function(version) {
+            var match = userAgent.match(/edge\/(\d+)/);
+            return !!match && (version == null || version == match[1]);
         };
         // edge method does not support 'all' and 'any' interfaces
         is.edge.api = ['not'];
