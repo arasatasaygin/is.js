@@ -3003,6 +3003,17 @@ describe("object checks", function() {
         });
     });
     describe("is.propertyDefined", function() {
+        it("should return false if given parameter is not an object", function() {
+           var array = [];
+            expect(is.propertyDefined(array, 'good')).to.be.false;
+        });
+        it("should return false if property is not a string", function() {
+           var obj = {
+               expected: 'expected',
+               result: 'result'
+           };
+            expect(is.propertyDefined(obj, obj)).to.be.false;
+        });
         it("should return true if given property is in objects", function() {
             var obj = {
                 test: 'test',
@@ -3017,6 +3028,22 @@ describe("object checks", function() {
                 is: 'is'
             };
             expect(is.propertyDefined(obj, 'good')).to.be.false;
+        });
+        it("should return true if given nested property is in objects", function() {
+           var obj = {
+               nested: {
+                   property:true
+               }
+           };
+           expect(is.propertyDefined(obj, 'nested.property')).to.be.true;
+        });
+        it("should return false if given nested property is not in objects", function() {
+            var obj = {
+                nested: {
+                    property:false
+                }
+            };
+            expect(is.propertyDefined(obj, 'nested.good')).to.be.false;
         });
     });
     describe("is.not.propertyDefined", function() {

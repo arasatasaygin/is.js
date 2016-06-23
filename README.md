@@ -1469,6 +1469,13 @@ is.propertyDefined({yeap: 'yeap'}, 'nope');
 
 is.not.propertyDefined({}, 'nope');
 => true
+
+is.propertyDefined({nested:{property:'supported'}}, 'nested.property');
+=> true
+
+is.propertyDefined({nested:{property:'supported'}}, 'nested.not.supported');
+=> false
+
 ```
 
 is.windowObject(value:window)
