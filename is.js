@@ -90,7 +90,8 @@
 
     // is a given value Arguments?
     is.arguments = function(value) {    // fallback check is for IE
-        return is.not.null(value) && (toString.call(value) === '[object Arguments]' || (typeof value === 'object' && 'callee' in value));
+        return toString.call(value) === '[object Arguments]' ||
+            (!!value && typeof value === 'object' && 'callee' in value);
     };
 
     // is a given value Array?
@@ -114,7 +115,7 @@
     };
 
     // is a given value function?
-    is.function = function(value) {    // fallback check is for IE
+    is['function'] = function(value) {    // fallback check is for IE
         return toString.call(value) === '[object Function]' || typeof value === 'function';
     };
 
@@ -124,7 +125,7 @@
     };
 
     // is a given value null?
-    is.null = function(value) {
+    is['null'] = function(value) {
         return value === null;
     };
 
@@ -788,7 +789,7 @@
     function setInterfaces() {
         var options = is;
         for(var option in options) {
-            if(hasOwnProperty.call(options, option) && is.function(options[option])) {
+            if(hasOwnProperty.call(options, option) && is['function'](options[option])) {
                 var interfaces = options[option].api || ['not', 'all', 'any'];
                 for (var i = 0; i < interfaces.length; i++) {
                     if(interfaces[i] === 'not') {
