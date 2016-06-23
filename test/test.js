@@ -804,6 +804,42 @@ describe("presence checks", function() {
             expect(is.all.space([' ', ' '])).to.be.true;
         });
     });
+    describe("is.whitespace", function() {
+        it("should return false if given value is not string", function() {
+            expect(is.whitespace(null)).to.be.false;
+        });
+        
+        it("should return false if given value is empty string", function() {
+            expect(is.whitespace('')).to.be.false;
+        });
+
+        it("should return true if given value is whitespace", function() {
+            expect(is.whitespace(' ')).to.be.true;
+            expect(is.whitespace('  ')).to.be.true;
+            expect(is.whitespace('\t\n')).to.be.true;
+        });
+    });
+    describe("is.not.whitespace", function() {
+        it("should return true if given value is not string", function() {
+            expect(is.not.whitespace(null)).to.be.true;
+        });
+        
+        it("should return false if given value is whitespace", function() {
+            expect(is.not.whitespace(' ')).to.be.false;
+            expect(is.not.whitespace('  ')).to.be.false;
+            expect(is.not.whitespace('\t\n')).to.be.false;
+        });
+    });
+    describe("is.all.whitespace", function() {
+        it("should return false if all given values are not whitespace", function() {
+            expect(is.all.whitespace(' ', 'a')).to.be.false;
+            expect(is.all.whitespace([' ', 'a'])).to.be.false;
+        });
+        it("should return true if given values are whitespace", function() {
+            expect(is.all.whitespace(' ', '  ', '\t\n')).to.be.true;
+            expect(is.all.whitespace([' ', ' ', '\t\n'])).to.be.true;
+        });
+    });
 });
 describe("arithmetic checks", function() {
     describe("is.equal", function() {
