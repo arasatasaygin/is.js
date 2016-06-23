@@ -610,6 +610,13 @@
         // ipod method does not support 'all' and 'any' interfaces
         is.ipod.api = ['not'];
 
+        // is site opened as a webapp?
+        is.webapp = function() {
+            return window.navigator.standalone;
+        };
+        // webapp method does not support 'all' and 'any' interfaces
+        is.webapp.api = ['not'];
+
         // is current device android?
         is.android = function() {
             return /android/.test(userAgent);
