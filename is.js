@@ -568,8 +568,8 @@
 
         // is current browser opera?
         is.opera = function() {
-            return /^Opera\//.test(userAgent) || // Opera 12 and older versions
-                /\x20OPR\//.test(userAgent); // Opera 15+
+            // detect opera <= 12 and opera 15+
+            return /(?:^opera| opr)\//.test(userAgent);
         };
         // opera method does not support 'all' and 'any' interfaces
         is.opera.api = ['not'];
