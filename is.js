@@ -776,11 +776,39 @@
         if(is.not.array(arr)) {
             return false;
         }
-        for(var i = 0; i < arr.length; i++) {
-            if(arr[i] > arr[i + 1]) return false;
-        }
-        return true;
+
+        return checkArrayAsc(arr) || checkArrayDesc(arr);
     };
+
+    function checkArrayAsc(arr) {
+      for(var i = 0; i < arr.length; i++) {
+        var current = arr[i];
+        var next = arr[i + 1];
+
+        if(typeof next !== undefined) {
+          if(current > next) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+
+    function checkArrayDesc(arr) {
+      for(var i = 0; i < arr.length; i++) {
+        var current = arr[i];
+        var next = arr[i + 1];
+
+        if(typeof next !== undefined) {
+          if(current < next) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
 
     // API
     // Set 'not', 'all' and 'any' interfaces to methods based on their api property
