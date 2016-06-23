@@ -556,13 +556,8 @@
         // is current browser internet explorer?
         // parameter is optional
         is.ie = function(version) {
-            if (!version) {
-                return /msie/.test(userAgent) || 'ActiveXObject' in window;
-            }
-            if (version >= 11) {
-                return 'ActiveXObject' in window;
-            }
-            return new RegExp('msie ' + version).test(userAgent);
+            var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
+            return !!match && (version == null || version == match[1]);
         };
         // ie method does not support 'all' and 'any' interfaces
         is.ie.api = ['not'];
