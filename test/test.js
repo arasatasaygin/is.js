@@ -282,6 +282,32 @@ describe("type checks", function() {
             expect(is.any.function([2, 'test'])).to.be.false;
         });
     });
+    describe("is.image", function() {
+        it("should return false if passed parameter type is not url", function() {
+            expect(is.image(true)).to.be.false;
+        });
+
+        it("should return true if passed parameter is image", function() {
+            expect(is.image('http://upload.wikimedia.org/wikipedia/commons/5/5b/Ultraviolet_image_of_the_Cygnus_Loop_Nebula_crop.jpg')).to.be.true;
+        });
+
+        it("should return false if passed parameter is not image", function() {
+            expect(is.image('http://upload.wikimedia.org/not_exists.image.png')).to.be.false;
+        });
+    });
+    describe("is.not.image", function() {
+        it("should return false if passed parameter type is not url", function() {
+            expect(is.not.image(true)).to.be.true;
+        });
+
+        it("should return false if passed parameter is image", function() {
+            expect(is.not.image('http://upload.wikimedia.org/wikipedia/commons/5/5b/Ultraviolet_image_of_the_Cygnus_Loop_Nebula_crop.jpg')).to.be.false;
+        });
+
+        it("should return true if passed parameter is not image", function() {
+            expect(is.not.image('http://upload.wikimedia.org/not_exists.image.png')).to.be.true;
+        });
+    });
     describe("is.nan", function() {
         it("should return true if passed parameter type is NaN", function() {
             expect(is.nan(NaN)).to.be.true;
