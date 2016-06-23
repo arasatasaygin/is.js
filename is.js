@@ -188,7 +188,7 @@
             }
             return false;
         } else {
-            return value === '';
+            return is.not.existy(value) || value === '';
         }
     };
 
