@@ -527,6 +527,51 @@ describe("type checks", function() {
             expect(is.any.regexp([1, 2])).to.be.false;
         });
     });
+    describe("is.formData", function() {
+        it("should return true if passed parameter type is FormData", function() {
+            var formData = new FormData();
+            expect(is.formData(formData)).to.be.true;
+        });
+        it("should return false if passed parameter type is not FormData", function() {
+            var notFormData = 'test';
+            expect(is.formData(notFormData)).to.be.false;
+        });
+    });
+    describe("is.not.formData", function() {
+        it("should return false if passed parameter type is FormData", function() {
+            var formData = new FormData();
+            expect(is.not.formData(formData)).to.be.false;
+        });
+        it("should return true if passed parameter type is not FormData", function() {
+            var notFormData = 'test';
+            expect(is.not.formData(notFormData)).to.be.true;
+        });
+    });
+    describe("is.all.formData", function() {
+        it("should return true if all passed parameter types are FormData", function() {
+            var formData = new FormData();
+            expect(is.all.formData(formData, formData)).to.be.true;
+            expect(is.all.formData([formData, formData])).to.be.true;
+        });
+        it("should return false if any passed parameter type is not FormData", function() {
+            var formData = new FormData();
+            var notFormData = 'test';
+            expect(is.all.formData(formData, notFormData)).to.be.false;
+            expect(is.all.formData([formData, notFormData])).to.be.false;
+        });
+    });
+    describe("is.any.formData", function() {
+        it("should return true if any passed parameter type is FormData", function() {
+            var formData = new FormData();
+            expect(is.any.formData(formData, formData)).to.be.true;
+            expect(is.any.formData([formData, formData])).to.be.true;
+        });
+        it("should return false if all passed parameter types are not FormData", function() {
+            var notFormData = 'test';
+            expect(is.any.formData(notFormData, notFormData)).to.be.false;
+            expect(is.any.formData([notFormData, notFormData])).to.be.false;
+        });
+    });
     describe("is.sameType", function() {
         it("should return true if passed parameter types are same", function() {
             expect(is.sameType(1, 2)).to.be.true;

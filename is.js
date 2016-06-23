@@ -150,6 +150,11 @@
         return toString.call(value) === '[object RegExp]';
     };
 
+    // is a given value FromData?
+    is.formData = function(value) {
+        return toString.call(value) === '[object FormData]';
+    };
+
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value1, value2) {
