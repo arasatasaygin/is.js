@@ -1653,16 +1653,16 @@ is.not.safari();
 => false if current browser is safari
 ```
 
-is.phantomjs()
+is.phantom()
 -----------
 ####Checks if current browser is phantomjs.
 interface: not
 
 ```javascript
-is.phantomjs();
+is.phantom();
 => true if current browser is phantomjs
 
-is.not.phantomjs();
+is.not.phantom();
 => false if current browser is phantomjs
 ```
 

@@ -603,11 +603,13 @@
         is.safari.api = ['not'];
 
         // is current browser phantomjs?
-        is.phantomjs = function() {
-            return /phantomjs/i.test(userAgent);
+        // parameter is optional
+        is.phantom = function(version) {
+            var match = userAgent.match(/phantomjs\/(\d+)/);
+            return !!match && (version == null || version == match[1]);
         };
-        // phantomjs method does not support 'all' and 'any' interfaces
-        is.phantomjs.api = ['not'];
+        // phantom method does not support 'all' and 'any' interfaces
+        is.phantom.api = ['not'];
 
         // is current device ios?
         is.ios = function() {
