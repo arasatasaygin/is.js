@@ -1950,6 +1950,7 @@ describe('string checks', function() {
     });
     describe('is.endWith', function() {
         it('should return true if given string ends with substring', function() {
+            expect(is.endWith('test', 't')).to.be.true;
             expect(is.endWith('test', 'st')).to.be.true;
         });
         it('should return false if given string does not end with substring', function() {

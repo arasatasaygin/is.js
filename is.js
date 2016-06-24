@@ -360,16 +360,21 @@
         return is.string(str) && str === str.toLowerCase();
     };
 
-    // is string start with a given startWith parameter?
-    is.startWith = function(str, startWith) {
-        return is.string(str) && str.indexOf(startWith) === 0;
+    // is string start with a given target parameter?
+    is.startWith = function(str, target) {
+        return is.string(str) && str.indexOf(target) === 0;
     };
     // startWith method does not support 'all' and 'any' interfaces
     is.startWith.api = ['not'];
 
-    // is string end with a given endWith parameter?
-    is.endWith = function(str, endWith) {
-        return is.string(str) && str.indexOf(endWith) > -1 && str.indexOf(endWith) === str.length -  endWith.length;
+    // is string end with a given target parameter?
+    is.endWith = function(str, target) {
+        if (!is.string(str)) {
+            return false;
+        }
+        target += '';
+        var position = str.length - target.length;
+        return position >= 0 && str.indexOf(target, position) == position;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
