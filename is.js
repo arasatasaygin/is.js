@@ -577,9 +577,14 @@
         is.ie.api = ['not'];
 
         // is current browser opera?
-        is.opera = function() {
-            // detect opera <= 12 and opera 15+
-            return /(?:^opera| opr)\//.test(userAgent);
+        // parameter is optional
+        is.opera = function(version) {
+            var result = /(?:^opera| opr)\//.test(userAgent);
+            if (!result || version == null) {
+                return result;
+            }
+            var match = userAgent.match(/(?:opr|version)\/(\d+)/);
+            return !!match && version == match[1];
         };
         // opera method does not support 'all' and 'any' interfaces
         is.opera.api = ['not'];
