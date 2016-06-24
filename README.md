@@ -1653,6 +1653,19 @@ is.not.safari();
 => false if current browser is safari
 ```
 
+is.phantomjs()
+-----------
+####Checks if current browser is phantomjs.
+interface: not
+
+```javascript
+is.phantomjs();
+=> true if current browser is phantomjs
+
+is.not.phantomjs();
+=> false if current browser is phantomjs
+```
+
 is.ios()
 --------
 ####Checks if current device has ios.
