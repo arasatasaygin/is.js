@@ -384,10 +384,12 @@
         if (is.not.string(str)) {
             return false;
         }
-        var words = str.split(' ').filter(function(el) {return el.length != 0});
+        var words = str.split(' ');
         var capitalized = [];
         for(var i = 0; i < words.length; i++) {
-            capitalized.push(words[i][0] === words[i][0].toUpperCase());
+            if (words[i].length) {
+                capitalized.push(words[i][0] === words[i][0].toUpperCase());
+            }
         }
         return is.all.truthy.apply(null, capitalized);
     };
