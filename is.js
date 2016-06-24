@@ -328,7 +328,7 @@
     };
 
     // create regexp checks methods from 'regexp' object
-    for(var regexp in regexps) {
+    for (var regexp in regexps) {
         if (regexps.hasOwnProperty(regexp)) {
             regexpCheck(regexp, regexps);
         }
@@ -386,7 +386,7 @@
         }
         var words = str.split(' ');
         var capitalized = [];
-        for(var i = 0; i < words.length; i++) {
+        for (var i = 0; i < words.length; i++) {
             var word = words[i];
             if (word.length) {
                 var chr = word.charAt(0);
@@ -767,7 +767,7 @@
         }
         var properties = [],
             property;
-        for(property in obj) {
+        for (property in obj) {
             if (hasOwnProperty.call(obj, property)) {
                 properties.push(property);
             }
@@ -803,7 +803,7 @@
         if (is.not.array(arr)) {
             return false;
         }
-        for(var i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             if (arr[i] === val) return true;
         }
         return false;
@@ -816,7 +816,7 @@
         if (is.not.array(arr)) {
             return false;
         }
-        for(var i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             if (arr[i] > arr[i + 1]) return false;
         }
         return true;
@@ -828,7 +828,7 @@
 
     function setInterfaces() {
         var options = is;
-        for(var option in options) {
+        for (var option in options) {
             if (hasOwnProperty.call(options, option) && is['function'](options[option])) {
                 var interfaces = options[option].api || ['not', 'all', 'any'];
                 for (var i = 0; i < interfaces.length; i++) {
@@ -853,7 +853,7 @@
 
     // set optional regexps to methods if you think they suck
     is.setRegexp = function(regexp, regexpName) {
-        for(var r in regexps) {
+        for (var r in regexps) {
             if (hasOwnProperty.call(regexps, r) && (regexpName === r)) {
                 regexps[r] = regexp;
             }
