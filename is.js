@@ -631,22 +631,34 @@
                 return result;
             }
             // original iPhone doesn't have the os portion of the UA
-            var match = userAgent.match(/iphone os (\d+)/);
+            var match = userAgent.match(/os (\d+)/);
             return match ? (version == match[1]) : (version == 1);
         };
         // iphone method does not support 'all' and 'any' interfaces
         is.iphone.api = ['not'];
 
         // is current device ipad?
-        is.ipad = function() {
-            return /ipad/.test(userAgent);
+        // parameter is optional
+        is.ipad = function(version) {
+            var result = /ipad/.test(userAgent);
+            if (!result || version == null) {
+                return result;
+            }
+            var match = userAgent.match(/os (\d+)/);
+            return !!match && version == match[1];
         };
         // ipad method does not support 'all' and 'any' interfaces
         is.ipad.api = ['not'];
 
         // is current device ipod?
-        is.ipod = function() {
-            return /ipod/.test(userAgent);
+        // parameter is optional
+        is.ipod = function(version) {
+            var result = /ipod/.test(userAgent);
+            if (!result || version == null) {
+                return result;
+            }
+            var match = userAgent.match(/os (\d+)/);
+            return !!match && version == match[1];
         };
         // ipod method does not support 'all' and 'any' interfaces
         is.ipod.api = ['not'];
