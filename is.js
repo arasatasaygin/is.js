@@ -374,7 +374,7 @@
         }
         target += '';
         var position = str.length - target.length;
-        return position >= 0 && str.indexOf(target, position) == position;
+        return position >= 0 && str.indexOf(target, position) === position;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
@@ -398,7 +398,7 @@
 
     // is a given string palindrome?
     is.palindrome = function(str) {
-        return is.string(str) && str == str.split('').reverse().join('');
+        return is.string(str) && str === str.split('').reverse().join('');
     };
 
     // Time checks
