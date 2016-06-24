@@ -384,7 +384,7 @@
         if (is.not.string(str)) {
             return false;
         }
-        var words = str.split(' ');
+        var words = str.split(' ').filter(function(el) {return el.length != 0});
         var capitalized = [];
         for(var i = 0; i < words.length; i++) {
             capitalized.push(words[i][0] === words[i][0].toUpperCase());

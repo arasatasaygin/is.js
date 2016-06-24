@@ -1978,6 +1978,7 @@ describe('string checks', function() {
         });
         it('should return true if words are capitalized', function() {
             expect(is.capitalized('Test Is Good')).to.be.true;
+            expect(is.capitalized('Test   Is   Good')).to.be.true;
         });
         it('should return false if words are not capitalized', function() {
             expect(is.capitalized('Test is good')).to.be.false;
