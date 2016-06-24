@@ -387,7 +387,11 @@
         var words = str.split(' ');
         var capitalized = [];
         for(var i = 0; i < words.length; i++) {
-            capitalized.push(words[i][0] === words[i][0].toUpperCase());
+            var word = words[i];
+            if (word.length) {
+                var chr = word.charAt(0);
+                capitalized.push(chr === chr.toUpperCase());
+            }
         }
         return is.all.truthy.apply(null, capitalized);
     };
