@@ -390,10 +390,12 @@
             var word = words[i];
             if (word.length) {
                 var chr = word.charAt(0);
-                capitalized.push(chr === chr.toUpperCase());
+                if (chr !== chr.toUpperCase()) {
+                    return false;
+                }
             }
         }
-        return is.all.truthy.apply(null, capitalized);
+        return true;
     };
 
     // is a given string palindrome?
