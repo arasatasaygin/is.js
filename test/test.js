@@ -2037,6 +2037,7 @@ describe('string checks', function() {
     describe('is.palindrome', function() {
         it('should return true if given string is palindrome', function() {
             expect(is.palindrome('testset')).to.be.true;
+            expect(is.palindrome('A man, a plan, a canal - Panama!')).to.be.true;
         });
         it('should return false if given string is not palindrome', function() {
             expect(is.palindrome('test')).to.be.false;
