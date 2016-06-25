@@ -775,17 +775,13 @@
         if (!is.object(obj) || !is.number(count)) {
             return false;
         }
-        if (Object.keys) {
-            return Object.keys(obj).length === count;
-        }
-        var properties = [],
-            property;
-        for (property in obj) {
-            if (hasOwnProperty.call(obj, property)) {
-                properties.push(property);
+        var n = 0;
+        for (var property in obj) {
+            if (hasOwnProperty.call(obj, property) && ++n > count) {
+                return false;
             }
         }
-        return properties.length === count;
+        return n === count;
     };
     // propertyCount method does not support 'all' and 'any' interfaces
     is.propertyCount.api = ['not'];
