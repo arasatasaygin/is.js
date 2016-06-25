@@ -336,12 +336,10 @@
         };
     }
 
-    /*
-    Simplify IP checks by calling the regexes for IPv4 and IPv6 consecutively.
-     */
+    // simplify IP checks by calling the regex helpers for IPv4 and IPv6
     is.ip = function(value){
         return is.ipv4(value) || is.ipv6(value);
-    }
+    };
 
     // String checks
     /* -------------------------------------------------------------------------- */
@@ -405,9 +403,9 @@
         if (is.not.string(str)) {
             return false;
         }
-        var str = str.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
+        str = str.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
         var len = str.length - 1;
-        for (var i = 0; i <= len/2; i++) {
+        for (var i = 0, half = len / 2; i <= half; i++) {
             if (str.charAt(i) !== str.charAt(len - i)) {
                 return false;
             }
