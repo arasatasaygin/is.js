@@ -1750,6 +1750,9 @@ describe('regexp checks', function() {
         it('should return true if given value is not a valid IP address', function() {
                 expect(is.not.ip('0..3.4')).to.be.true;
         });
+        it('should return false if given value is a string with no colons', function() {
+            expect(is.not.ip('H')).to.be.true;
+        })
     });
     describe('is.all.ip', function() {
         it('should return true if all given values are valid IP addresses', function() {
