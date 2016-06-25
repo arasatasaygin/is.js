@@ -1665,6 +1665,7 @@ describe('regexp checks', function() {
     describe('is.hexadecimal', function() {
         it('should return true if given value is hexadecimal', function() {
             expect(is.hexadecimal('ff')).to.be.true;
+            expect(is.hexadecimal('0xff')).to.be.true;
         });
         it('should return false if given value is not hexadecimal', function() {
             expect(is.hexadecimal(0.287)).to.be.false;
