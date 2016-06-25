@@ -17,16 +17,13 @@
         // like Node.
         module.exports = factory();
     } else {
-        // Browser globals (root is window)
+        // Browser globals (root is self)
         root.is = factory();
     }
 } (this, function() {
 
     // Baseline
     /* -------------------------------------------------------------------------- */
-
-    var root = this || global;
-    var previousIs = root.is;
 
     // define 'is' object and current version
     var is = {};
@@ -537,13 +534,26 @@
     // Environment checks
     /* -------------------------------------------------------------------------- */
 
+    // is a given object window?
+    // setInterval method is only available for window object
+    is.windowObject = function(obj) {
+        return typeof obj === 'object' && 'setInterval' in obj;
+    };
+
+    var freeGlobal = is.windowObject(typeof global == 'object' && global) && global;
+    var freeSelf = is.windowObject(typeof self == 'object' && self) && self;
+    var thisGlobal = is.windowObject(typeof this == 'object' && this) && this;
+    var root = freeGlobal || freeSelf || thisGlobal || Function('return this')();
+
+    var previousIs = root.is;
+
     // check if library is used as a Node.js module
-    if (typeof window !== 'undefined') {
+    if (freeSelf) {
 
         // store navigator properties to use later
-        var userAgent = ('navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';
-        var vendor = ('navigator' in window && 'vendor' in navigator && navigator.vendor.toLowerCase()) || '';
-        var appVersion = ('navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
+        var userAgent = ('navigator' in freeSelf && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';
+        var vendor = ('navigator' in freeSelf && 'vendor' in navigator && navigator.vendor.toLowerCase()) || '';
+        var appVersion = ('navigator' in freeSelf && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
 
         // is current browser chrome?
         // parameter is optional
@@ -765,7 +775,7 @@
 
         // is current device supports touch?
         is.touchDevice = function() {
-            return 'ontouchstart' in window ||'DocumentTouch' in window && document instanceof DocumentTouch;
+            return 'ontouchstart' in freeSelf ||'DocumentTouch' in freeSelf && document instanceof DocumentTouch;
         };
         // touchDevice method does not support 'all' and 'any' interfaces
         is.touchDevice.api = ['not'];
@@ -796,12 +806,6 @@
     };
     // propertyDefined method does not support 'all' and 'any' interfaces
     is.propertyDefined.api = ['not'];
-
-    // is a given object window?
-    // setInterval method is only available for window object
-    is.windowObject = function(obj) {
-        return typeof obj === 'object' && 'setInterval' in obj;
-    };
 
     // is a given object a DOM node?
     is.domNode = function(obj) {
