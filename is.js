@@ -402,7 +402,7 @@
         if (is.not.string(str)) {
             return false;
         }
-        var str = str.replace(/[^a-zA-Z0-9]+/gi, '').toLowerCase();
+        var str = str.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
         var len = str.length - 1;
         for (var i = 0; i <= len/2; i++) {
             if (str.charAt(i) !== str.charAt(len - i)) {
