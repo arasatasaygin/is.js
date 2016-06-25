@@ -548,8 +548,8 @@
         // is current browser chrome?
         // parameter is optional
         is.chrome = function(version) {
-            var match = userAgent.match(/chrome\/(\d+)/);
-            return !!match && /google inc/.test(vendor) && (version == null || version == match[1]);
+            var match = /google inc/.test(vendor) && userAgent.match(/chrome\/(\d+)/);
+            return !!match && (version == null || version == match[1]);
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
@@ -597,7 +597,11 @@
         // is current browser safari?
         // parameter is optional
         is.safari = function(version) {
-            var result = /safari/.test(userAgent) && /apple computer/.test(vendor);
+            var result = (
+                /safari/.test(userAgent) &&
+                /apple computer/.test(vendor) &&
+                !(is.chrome() || is.firefox())
+            );
             if (!result || version == null) {
                 return result;
             }
