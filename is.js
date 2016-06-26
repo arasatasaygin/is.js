@@ -150,10 +150,14 @@
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value1, value2) {
-        if (is.any.nan(value1, value2)) {
-            return is.all.nan(value1, value2);
+        var tag = toString.call(value1);
+        if (tag !== toString.call(value2)) {
+            return false;
         }
-        return toString.call(value1) === toString.call(value2);
+        if (tag === '[object Number]') {
+            return !is.any.nan(value1, value2) || is.all.nan(value1, value2);
+        }
+        return true;
     };
     // sameType method does not support 'all' and 'any' interfaces
     is.sameType.api = ['not'];
