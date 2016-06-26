@@ -150,8 +150,8 @@
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value1, value2) {
-        if (is.nan(value1) || is.nan(value2)) {
-            return is.nan(value1) === is.nan(value2);
+        if (is.any.nan(value1, value2)) {
+            return is.all.nan(value1, value2);
         }
         return toString.call(value1) === toString.call(value2);
     };
