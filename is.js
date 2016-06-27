@@ -195,7 +195,7 @@
 
     // is a given value existy?
     is.existy = function(value) {
-        return value !== null && value !== undefined;
+        return value != null;
     };
 
     // is a given value truthy?
