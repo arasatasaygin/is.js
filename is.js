@@ -218,13 +218,13 @@
         return value != null;
     };
 
-    // is a given value truthy?
-    is.truthy = function(value) {
-        return !!value;
+    // is a given value falsy?
+    is.falsy = function(value) {
+        return !value;
     };
 
-    // is a given value falsy?
-    is.falsy = not(is.truthy);
+    // is a given value truthy?
+    is.truthy = not(is.falsy);
 
     // is a given value space?
     // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
