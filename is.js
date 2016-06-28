@@ -82,6 +82,24 @@
         };
     }
 
+    // helper function which compares a version to a range
+    function compareVersion(version, range) {
+        var string = (range + '');
+        var n = +(string.match(/\d+/) || NaN);
+        var op = string.match(/^[<>]=?|/)[0];
+        switch (op) {
+            case '<':
+                return version < n;
+            case '<=':
+                return version <= n;
+            case '>=':
+                return version >= n;
+            case '>':
+                return version > n;
+        }
+        return version == n || n !== n;
+    }
+
     // Type checks
     /* -------------------------------------------------------------------------- */
 
@@ -575,75 +593,67 @@
 
         // is current browser chrome?
         // parameter is optional
-        is.chrome = function(version) {
+        is.chrome = function(range) {
             var match = /google inc/.test(vendor) && userAgent.match(/chrome\/(\d+)/);
-            return !!match && (version == null || version == match[1]);
+            return !!match && compareVersion(match[1], range);
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
 
         // is current browser firefox?
         // parameter is optional
-        is.firefox = function(version) {
+        is.firefox = function(range) {
             var match = userAgent.match(/firefox\/(\d+)/);
-            return !!match && (version == null || version == match[1]);
+            return !!match && compareVersion(match[1], range);
         };
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
 
         // is current browser edge?
         // parameter is optional
-        is.edge = function(version) {
+        is.edge = function(range) {
             var match = userAgent.match(/edge\/(\d+)/);
-            return !!match && (version == null || version == match[1]);
+            return !!match && compareVersion(match[1], range);
         };
         // edge method does not support 'all' and 'any' interfaces
         is.edge.api = ['not'];
 
         // is current browser internet explorer?
         // parameter is optional
-        is.ie = function(version) {
+        is.ie = function(range) {
             var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
-            return !!match && (version == null || version == match[1]);
+            return !!match && compareVersion(match[1], range);
         };
         // ie method does not support 'all' and 'any' interfaces
         is.ie.api = ['not'];
 
         // is current browser opera?
         // parameter is optional
-        is.opera = function(version) {
-            var result = /(?:^opera| opr)\//.test(userAgent);
-            if (!result || version == null) {
-                return result;
-            }
-            var match = userAgent.match(/(?:opr|version)\/(\d+)/);
-            return !!match && version == match[1];
+        is.opera = function(range) {
+            var match = userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);
+            return !!match && compareVersion(match[1], range);
         };
         // opera method does not support 'all' and 'any' interfaces
         is.opera.api = ['not'];
 
         // is current browser safari?
         // parameter is optional
-        is.safari = function(version) {
-            var result = (
-                /safari/.test(userAgent) &&
+        is.safari = function(range) {
+            var match = (
                 /apple computer/.test(vendor) &&
-                !(is.chrome() || is.firefox())
+                !(is.chrome() || is.firefox()) &&
+                userAgent.match(/version\/(\d+).+?safari/)
             );
-            if (!result || version == null) {
-                return result;
-            }
-            var match = userAgent.match(/version\/(\d+)/);
-            return !!match && version == match[1];
+            return !!match && compareVersion(match[1], range);
         };
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
 
         // is current browser phantomjs?
         // parameter is optional
-        is.phantom = function(version) {
+        is.phantom = function(range) {
             var match = userAgent.match(/phantomjs\/(\d+)/);
-            return !!match && (version == null || version == match[1]);
+            return !!match && compareVersion(match[1], range);
         };
         // phantom method does not support 'all' and 'any' interfaces
         is.phantom.api = ['not'];
@@ -657,40 +667,28 @@
 
         // is current device iphone?
         // parameter is optional
-        is.iphone = function(version) {
-            var result = /iphone/.test(userAgent);
-            if (!result || version == null) {
-                return result;
-            }
+        is.iphone = function(range) {
             // original iPhone doesn't have the os portion of the UA
-            var match = userAgent.match(/os (\d+)/);
-            return match ? (version == match[1]) : (version == 1);
+            var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
+            return !!match && compareVersion(match[1] || 1, range);
         };
         // iphone method does not support 'all' and 'any' interfaces
         is.iphone.api = ['not'];
 
         // is current device ipad?
         // parameter is optional
-        is.ipad = function(version) {
-            var result = /ipad/.test(userAgent);
-            if (!result || version == null) {
-                return result;
-            }
-            var match = userAgent.match(/os (\d+)/);
-            return !!match && version == match[1];
+        is.ipad = function(range) {
+            var match = userAgent.match(/ipad.+?os (\d+)/);
+            return !!match && compareVersion(match[1], range);
         };
         // ipad method does not support 'all' and 'any' interfaces
         is.ipad.api = ['not'];
 
         // is current device ipod?
         // parameter is optional
-        is.ipod = function(version) {
-            var result = /ipod/.test(userAgent);
-            if (!result || version == null) {
-                return result;
-            }
-            var match = userAgent.match(/os (\d+)/);
-            return !!match && version == match[1];
+        is.ipod = function(range) {
+            var match = userAgent.match(/ipod.+?os (\d+)/);
+            return !!match && compareVersion(match[1], range);
         };
         // ipod method does not support 'all' and 'any' interfaces
         is.ipod.api = ['not'];
