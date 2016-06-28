@@ -20,7 +20,7 @@
         // Browser globals (root is self)
         root.is = factory();
     }
-} (this, function() {
+}(this, function() {
 
     // Baseline
     /* -------------------------------------------------------------------------- */
