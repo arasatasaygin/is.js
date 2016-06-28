@@ -3196,4 +3196,24 @@ describe('array checks', function() {
             expect(is.not.inArray(val, arr)).to.be.true;
         });
     });
+    describe('is.borschIngredient', function()  {
+        it('should return true if the ingredient is in the borsch', function() {
+            var val = 'potatoes';
+            expect(is.borschIngredient(val)).to.be.true;
+        });
+        it('should return false if the ingredient is not in the borsch', function() {
+            var val = 'sock';
+            expect(is.borschIngredient(val)).to.be.false;
+        });
+    });
+    describe('is.not.borschIngredient', function()  {
+        it('should return false if the ingredient is in the borsch', function() {
+            var val = 'beet';
+            expect(is.not.borschIngredient(val)).to.be.false;
+        });
+        it('should return true if the ingredient is not in the borsch', function() {
+            var val = 'raspberry';
+            expect(is.not.borschIngredient(val)).to.be.true;
+        });
+    });
 });
