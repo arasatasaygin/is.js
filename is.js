@@ -886,10 +886,20 @@
 
     // set optional regexps to methods if you think they suck
     is.setRegexp = function(regexp, regexpName) {
-        for (var r in regexps) {
-            if (hasOwnProperty.call(regexps, r) && (regexpName === r)) {
+        var isExist = false;
+        for(var r in regexps) {
+            if(hasOwnProperty.call(regexps, r) && (regexpName === r)) {
                 regexps[r] = regexp;
+                isExist = true;
             }
+        }
+
+        // Add new regexp
+        if (!isExist) {
+            regexps[regexpName] = regexp;
+            regexpCheck(regexpName, regexps);
+            // Reset interfaces
+            setInterfaces();
         }
     };
 

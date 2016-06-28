@@ -1,6 +1,56 @@
 
 var expect = (typeof chai != 'undefined') ? chai.expect : require('chai').expect;
 
+describe("extension checks", function() {
+    is.setRegexp(/^something$/, 'something');
+    describe("is.something", function() {
+        it("should return true if passed string is 'something'", function() {
+            var something = 'something';
+            expect(is.something(something)).to.be.true;
+        });
+        it("should return false if passed string is not 'something'", function() {
+            var nothing = 'test';
+            expect(is.something(nothing)).to.be.false;
+        });
+    });
+    describe("is.not.something", function() {
+        it("should return false if passed string is 'something'", function() {
+            var something = 'something';
+            expect(is.not.something(something)).to.be.false;
+        });
+        it("should return true if passed string is not 'something'", function() {
+            var nothing = 'test';
+            expect(is.not.something(nothing)).to.be.true;
+        });
+    });
+    describe("is.all.something", function() {
+        it("should return true if all passed parameters are all 'something'", function() {
+            var something = 'something';
+            var something2 = 'something';
+            expect(is.all.something(something, something2)).to.be.true;
+            expect(is.all.something([something, something2])).to.be.true;
+        });
+        it("should return false if any passed parameter type is not 'something'", function() {
+            var something = 'something';
+            var nothing = 'test';
+            expect(is.all.something(something, nothing)).to.be.false;
+            expect(is.all.something([something, nothing])).to.be.false;
+        });
+    });
+    describe("is.any.something", function() {
+        it("should return true if any passed parameter type is 'something'", function() {
+            var something = 'something';
+            var nothing = 'test';
+            expect(is.any.something(something, nothing, 'test2')).to.be.true;
+            expect(is.any.something([something, nothing, 'test2'])).to.be.true;
+        });
+        it("should return false if all passed parameter types are not 'something'", function() {
+            expect(is.any.something('test', 'test2')).to.be.false;
+            expect(is.any.something(['test', 'test2'])).to.be.false;
+        });
+    });
+});
+
 describe('type checks', function() {
     describe('is.arguments', function() {
         it('should return true if passed parameter type is arguments', function() {
