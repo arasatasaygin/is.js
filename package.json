@@ -4,10 +4,8 @@
   "main": "is.js",
   "license": "MIT",
   "description": "micro check library",
-  "repository": {
-    "type": "git",
-    "url": "arasatasaygin/is.js"
-  },
+  "homepage": "http://is.js.org/",
+  "repository": "arasatasaygin/is.js",
   "scripts": {
     "build": "npm run lint min",
     "lint": "eslint .",
@@ -17,7 +15,6 @@
   "pre-commit": [
     "lint"
   ],
-  "homepage": "https://github.com/arasatasaygin/is.js",
   "devDependencies": {
     "chai": "^3.4.0",
     "eslint": "^2.13.1",
