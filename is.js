@@ -227,12 +227,11 @@
     // is a given value space?
     // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space = function(value) {
-        if (is.char(value)) {
-            var charCode = value.charCodeAt(0);
-            return (charCode >  8 && charCode < 14) || charCode === 32;
-        } else {
+        if (is.not.char(value)) {
             return false;
         }
+        var charCode = value.charCodeAt(0);
+        return (charCode > 8 && charCode < 14) || charCode === 32;
     };
 
     // Arithmetic checks
@@ -392,7 +391,7 @@
 
     // is string end with a given target parameter?
     is.endWith = function(string, target) {
-        if (!is.string(string)) {
+        if (is.not.string(string)) {
             return false;
         }
         target += '';
@@ -802,7 +801,7 @@
 
     // has a given object got parameterized count property?
     is.propertyCount = function(object, count) {
-        if (!is.object(object) || !is.number(count)) {
+        if (is.not.object(object) || is.not.number(count)) {
             return false;
         }
         var n = 0;
