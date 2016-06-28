@@ -1,5 +1,7 @@
-// is.js 0.8.0
-// Author: Aras Atasaygin
+/*!
+ * is.js 0.8.0
+ * Author: Aras Atasaygin
+ */
 
 // AMD with global, Node, or global
 ;(function(root, factory) { // eslint-disable-line no-extra-semi
