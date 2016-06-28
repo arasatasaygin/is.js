@@ -586,9 +586,10 @@
     if (freeSelf) {
 
         // store navigator properties to use later
-        var userAgent = ('navigator' in freeSelf && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';
-        var vendor = ('navigator' in freeSelf && 'vendor' in navigator && navigator.vendor.toLowerCase()) || '';
-        var appVersion = ('navigator' in freeSelf && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
+        var navigator = freeSelf.navigator;
+        var appVersion = (navigator && navigator.appVersion || '').toLowerCase();
+        var userAgent = (navigator && navigator.userAgent || '').toLowerCase();
+        var vendor = (navigator && navigator.vendor || '').toLowerCase();
 
         // is current browser chrome?
         // parameter is optional
