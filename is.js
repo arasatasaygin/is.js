@@ -36,27 +36,27 @@
 
     // cache some methods to call later on
     var toString = Object.prototype.toString;
-    var arraySlice = Array.prototype.slice;
+    var slice = Array.prototype.slice;
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
     // helper function which reverses the sense of predicate result
     function not(func) {
         return function() {
-            return !func.apply(null, arraySlice.call(arguments));
+            return !func.apply(null, slice.call(arguments));
         };
     }
 
     // helper function which call predicate function per parameter and return true if all pass
     function all(func) {
         return function() {
-            var parameters = arraySlice.call(arguments);
-            var length = parameters.length;
-            if (length === 1 && is.array(parameters[0])) {    // support array
-                parameters = parameters[0];
-                length = parameters.length;
+            var params = slice.call(arguments);
+            var length = params.length;
+            if (length === 1 && is.array(params[0])) {    // support array
+                params = params[0];
+                length = params.length;
             }
             for (var i = 0; i < length; i++) {
-                if (!func.call(null, parameters[i])) {
+                if (!func.call(null, params[i])) {
                     return false;
                 }
             }
@@ -67,14 +67,14 @@
     // helper function which call predicate function per parameter and return true if any pass
     function any(func) {
         return function() {
-            var parameters = arraySlice.call(arguments);
-            var length = parameters.length;
-            if (length === 1 && is.array(parameters[0])) {    // support array
-                parameters = parameters[0];
-                length = parameters.length;
+            var params = slice.call(arguments);
+            var length = params.length;
+            if (length === 1 && is.array(params[0])) {    // support array
+                params = params[0];
+                length = params.length;
             }
             for (var i = 0; i < length; i++) {
-                if (func.call(null, parameters[i])) {
+                if (func.call(null, params[i])) {
                     return true;
                 }
             }
@@ -167,13 +167,13 @@
 
     // are given values same type?
     // prevent NaN, Number same type check
-    is.sameType = function(value1, value2) {
-        var tag = toString.call(value1);
-        if (tag !== toString.call(value2)) {
+    is.sameType = function(value, other) {
+        var tag = toString.call(value);
+        if (tag !== toString.call(other)) {
             return false;
         }
         if (tag === '[object Number]') {
-            return !is.any.nan(value1, value2) || is.all.nan(value1, value2);
+            return !is.any.nan(value, other) || is.all.nan(value, other);
         }
         return true;
     };
@@ -200,9 +200,10 @@
 
     //is a given value empty? Objects, arrays, strings
     is.empty = function(value) {
-        if (is.object(value)){
-            var num = Object.getOwnPropertyNames(value).length;
-            if (num === 0 || (num === 1 && is.array(value)) || (num === 2 && is.arguments(value))){
+        if (is.object(value)) {
+            var length = Object.getOwnPropertyNames(value).length;
+            if (length === 0 || (length === 1 && is.array(value)) ||
+                    (length === 2 && is.arguments(value))) {
                 return true;
             }
             return false;
@@ -218,7 +219,7 @@
 
     // is a given value truthy?
     is.truthy = function(value) {
-        return is.existy(value) && value !== false && is.not.nan(value) && value !== '' && value !== 0;
+        return !!value;
     };
 
     // is a given value falsy?
@@ -226,10 +227,10 @@
 
     // is a given value space?
     // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
-    is.space =  function(value) {
+    is.space = function(value) {
         if (is.char(value)) {
-            var characterCode = value.charCodeAt(0);
-            return (characterCode >  8 && characterCode < 14) || characterCode === 32;
+            var charCode = value.charCodeAt(0);
+            return (charCode >  8 && charCode < 14) || charCode === 32;
         } else {
             return false;
         }
@@ -238,19 +239,19 @@
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
 
-    // are given values equal? supports numbers, strings, regexps, booleans
+    // are given values equal? supports numbers, strings, regexes, booleans
     // TODO: Add object and array support
-    is.equal = function(value1, value2) {
+    is.equal = function(value, other) {
         // check 0 and -0 equity with Infinity and -Infinity
-        if (is.all.number(value1, value2)) {
-            return value1 === value2 && 1 / value1 === 1 / value2;
+        if (is.all.number(value, other)) {
+            return value === other && 1 / value === 1 / other;
         }
-        // check regexps as strings too
-        if (is.all.string(value1, value2) || is.all.regexp(value1, value2)) {
-            return '' + value1 === '' + value2;
+        // check regexes as strings too
+        if (is.all.string(value, other) || is.all.regexp(value, other)) {
+            return '' + value === '' + other;
         }
-        if (is.all.boolean(value1, value2)) {
-            return value1 === value2;
+        if (is.all.boolean(value, other)) {
+            return value === other;
         }
         return false;
     };
@@ -258,59 +259,59 @@
     is.equal.api = ['not'];
 
     // is a given number even?
-    is.even = function(numb) {
-        return is.number(numb) && numb % 2 === 0;
+    is.even = function(n) {
+        return is.number(n) && n % 2 === 0;
     };
 
     // is a given number odd?
-    is.odd = function(numb) {
-        return is.number(numb) && numb % 2 === 1;
+    is.odd = function(n) {
+        return is.number(n) && n % 2 === 1;
     };
 
     // is a given number positive?
-    is.positive = function(numb) {
-        return is.number(numb) && numb > 0;
+    is.positive = function(n) {
+        return is.number(n) && n > 0;
     };
 
     // is a given number negative?
-    is.negative = function(numb) {
-        return is.number(numb) && numb < 0;
+    is.negative = function(n) {
+        return is.number(n) && n < 0;
     };
 
     // is a given number above minimum parameter?
-    is.above = function(numb, min) {
-        return is.all.number(numb, min) && numb > min;
+    is.above = function(n, min) {
+        return is.all.number(n, min) && n > min;
     };
     // above method does not support 'all' and 'any' interfaces
     is.above.api = ['not'];
 
     // is a given number above maximum parameter?
-    is.under = function(numb, max) {
-        return is.all.number(numb, max) && numb < max;
+    is.under = function(n, max) {
+        return is.all.number(n, max) && n < max;
     };
     // least method does not support 'all' and 'any' interfaces
     is.under.api = ['not'];
 
     // is a given number within minimum and maximum parameters?
-    is.within = function(numb, min, max) {
-        return is.all.number(numb, min, max) && numb > min && numb < max;
+    is.within = function(n, min, max) {
+        return is.all.number(n, min, max) && n > min && n < max;
     };
     // within method does not support 'all' and 'any' interfaces
     is.within.api = ['not'];
 
     // is a given number decimal?
-    is.decimal = function(numb) {
-        return is.number(numb) && numb % 1 !== 0;
+    is.decimal = function(n) {
+        return is.number(n) && n % 1 !== 0;
     };
 
     // is a given number integer?
-    is.integer = function(numb) {
-        return is.number(numb) && numb % 1 === 0;
+    is.integer = function(n) {
+        return is.number(n) && n % 1 === 0;
     };
 
     // is a given number finite?
-    is.finite = isFinite || function(numb) {
-        return numb !== Infinity && numb !== -Infinity && is.not.nan(numb);
+    is.finite = isFinite || function(n) {
+        return n !== Infinity && n !== -Infinity && is.not.nan(n);
     };
 
     // is a given number infinite?
@@ -325,7 +326,7 @@
     // nanpPhone match north american number plan format
     // dateString match m/d/yy and mm/dd/yyyy, allowing any combination of one or two digits for the day and month, and two or four digits for the year
     // time match hours, minutes, and seconds, 24-hour clock
-    var regexps = {
+    var regexes = {
         url: /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i,
         email: /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i, // eslint-disable-line no-control-regex
         creditCard: /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/,
@@ -346,68 +347,68 @@
     };
 
     // create regexp checks methods from 'regexp' object
-    for (var regexp in regexps) {
-        if (regexps.hasOwnProperty(regexp)) {
-            regexpCheck(regexp, regexps);
+    for (var regexp in regexes) {
+        if (regexes.hasOwnProperty(regexp)) {
+            regexpCheck(regexp, regexes);
         }
     }
 
-    function regexpCheck(regexp, regexps) {
+    function regexpCheck(regexp, regexes) {
         is[regexp] = function(value) {
-            return regexps[regexp].test(value);
+            return regexes[regexp].test(value);
         };
     }
 
     // simplify IP checks by calling the regex helpers for IPv4 and IPv6
-    is.ip = function(value){
+    is.ip = function(value) {
         return is.ipv4(value) || is.ipv6(value);
     };
 
     // String checks
     /* -------------------------------------------------------------------------- */
 
-    // is a given string include parameter substring?
-    is.include = function(str, substr) {
-        return str.indexOf(substr) > -1;
+    // is a given string include parameter target?
+    is.include = function(string, target) {
+        return string.indexOf(target) > -1;
     };
     // include method does not support 'all' and 'any' interfaces
     is.include.api = ['not'];
 
     // is a given string all uppercase?
-    is.upperCase = function(str) {
-        return is.string(str) && str === str.toUpperCase();
+    is.upperCase = function(string) {
+        return is.string(string) && string === string.toUpperCase();
     };
 
     // is a given string all lowercase?
-    is.lowerCase = function(str) {
-        return is.string(str) && str === str.toLowerCase();
+    is.lowerCase = function(string) {
+        return is.string(string) && string === string.toLowerCase();
     };
 
     // is string start with a given target parameter?
-    is.startWith = function(str, target) {
-        return is.string(str) && str.indexOf(target) === 0;
+    is.startWith = function(string, target) {
+        return is.string(string) && string.indexOf(target) === 0;
     };
     // startWith method does not support 'all' and 'any' interfaces
     is.startWith.api = ['not'];
 
     // is string end with a given target parameter?
-    is.endWith = function(str, target) {
-        if (!is.string(str)) {
+    is.endWith = function(string, target) {
+        if (!is.string(string)) {
             return false;
         }
         target += '';
-        var position = str.length - target.length;
-        return position >= 0 && str.indexOf(target, position) === position;
+        var position = string.length - target.length;
+        return position >= 0 && string.indexOf(target, position) === position;
     };
     // endWith method does not support 'all' and 'any' interfaces
     is.endWith.api = ['not'];
 
     // is a given string or sentence capitalized?
-    is.capitalized = function(str) {
-        if (is.not.string(str)) {
+    is.capitalized = function(string) {
+        if (is.not.string(string)) {
             return false;
         }
-        var words = str.split(' ');
+        var words = string.split(' ');
         for (var i = 0; i < words.length; i++) {
             var word = words[i];
             if (word.length) {
@@ -421,14 +422,14 @@
     };
 
     // is a given string palindrome?
-    is.palindrome = function(str) {
-        if (is.not.string(str)) {
+    is.palindrome = function(string) {
+        if (is.not.string(string)) {
             return false;
         }
-        str = str.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
-        var len = str.length - 1;
-        for (var i = 0, half = len / 2; i <= half; i++) {
-            if (str.charAt(i) !== str.charAt(len - i)) {
+        string = string.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
+        var length = string.length - 1;
+        for (var i = 0, half = length / 2; i <= half; i++) {
+            if (string.charAt(i) !== string.charAt(length - i)) {
                 return false;
             }
         }
@@ -442,55 +443,55 @@
     var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
     // is a given date indicate today?
-    is.today = function(obj) {
+    is.today = function(object) {
         var now = new Date();
         var todayString = now.toDateString();
-        return is.date(obj) && obj.toDateString() === todayString;
+        return is.date(object) && object.toDateString() === todayString;
     };
 
     // is a given date indicate yesterday?
-    is.yesterday = function(obj) {
+    is.yesterday = function(object) {
         var now = new Date();
         var yesterdayString = new Date(now.setDate(now.getDate() - 1)).toDateString();
-        return is.date(obj) && obj.toDateString() === yesterdayString;
+        return is.date(object) && object.toDateString() === yesterdayString;
     };
 
     // is a given date indicate tomorrow?
-    is.tomorrow = function(obj) {
+    is.tomorrow = function(object) {
         var now = new Date();
         var tomorrowString = new Date(now.setDate(now.getDate() + 1)).toDateString();
-        return is.date(obj) && obj.toDateString() === tomorrowString;
+        return is.date(object) && object.toDateString() === tomorrowString;
     };
 
     // is a given date past?
-    is.past = function(obj) {
+    is.past = function(object) {
         var now = new Date();
-        return is.date(obj) && obj.getTime() < now.getTime();
+        return is.date(object) && object.getTime() < now.getTime();
     };
 
     // is a given date future?
-    is.future = function(obj) {
+    is.future = function(object) {
         var now = new Date();
-        return is.date(obj) && obj.getTime() > now.getTime();
+        return is.date(object) && object.getTime() > now.getTime();
     };
 
     // is a given dates day equal given dayString parameter?
-    is.day = function(obj, dayString) {
-        return is.date(obj) && dayString.toLowerCase() === days[obj.getDay()];
+    is.day = function(object, dayString) {
+        return is.date(object) && dayString.toLowerCase() === days[object.getDay()];
     };
     // day method does not support 'all' and 'any' interfaces
     is.day.api = ['not'];
 
     // is a given dates month equal given monthString parameter?
-    is.month = function(obj, monthString) {
-        return is.date(obj) && monthString.toLowerCase() === months[obj.getMonth()];
+    is.month = function(object, monthString) {
+        return is.date(object) && monthString.toLowerCase() === months[object.getMonth()];
     };
     // month method does not support 'all' and 'any' interfaces
     is.month.api = ['not'];
 
     // is a given dates year equal given year parameter?
-    is.year = function(obj, year) {
-        return is.date(obj) && is.number(year) && year === obj.getFullYear();
+    is.year = function(object, year) {
+        return is.date(object) && is.number(year) && year === object.getFullYear();
     };
     // year method does not support 'all' and 'any' interfaces
     is.year.api = ['not'];
@@ -502,19 +503,19 @@
 
     // is a given date weekend?
     // 6: Saturday, 0: Sunday
-    is.weekend = function(obj) {
-        return is.date(obj) && (obj.getDay() === 6 || obj.getDay() === 0);
+    is.weekend = function(object) {
+        return is.date(object) && (object.getDay() === 6 || object.getDay() === 0);
     };
 
     // is a given date weekday?
     is.weekday = not(is.weekend);
 
     // is date within given range?
-    is.inDateRange = function(obj, startObj, endObj) {
-        if (is.not.date(obj) || is.not.date(startObj) || is.not.date(endObj)) {
+    is.inDateRange = function(object, startObj, endObj) {
+        if (is.not.date(object) || is.not.date(startObj) || is.not.date(endObj)) {
             return false;
         }
-        var givenDate = obj.getTime();
+        var givenDate = object.getTime();
         var start = startObj.getTime();
         var end = endObj.getTime();
         return givenDate > start && givenDate < end;
@@ -523,48 +524,48 @@
     is.inDateRange.api = ['not'];
 
     // is a given date in last week range?
-    is.inLastWeek = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
+    is.inLastWeek = function(object) {
+        return is.inDateRange(object, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
     };
 
     // is a given date in last month range?
-    is.inLastMonth = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
+    is.inLastMonth = function(object) {
+        return is.inDateRange(object, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
     };
 
     // is a given date in last year range?
-    is.inLastYear = function(obj) {
-        return is.inDateRange(obj, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
+    is.inLastYear = function(object) {
+        return is.inDateRange(object, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
     };
 
     // is a given date in next week range?
-    is.inNextWeek = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
+    is.inNextWeek = function(object) {
+        return is.inDateRange(object, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
     };
 
     // is a given date in next month range?
-    is.inNextMonth = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
+    is.inNextMonth = function(object) {
+        return is.inDateRange(object, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
     };
 
     // is a given date in next year range?
-    is.inNextYear = function(obj) {
-        return is.inDateRange(obj, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+    is.inNextYear = function(object) {
+        return is.inDateRange(object, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
     };
 
     // is a given date in the parameter quarter?
-    is.quarterOfYear = function(obj, quarterNumber) {
-        return is.date(obj) && is.number(quarterNumber) && quarterNumber === Math.floor((obj.getMonth() + 3) / 3);
+    is.quarterOfYear = function(object, quarterNumber) {
+        return is.date(object) && is.number(quarterNumber) && quarterNumber === Math.floor((object.getMonth() + 3) / 3);
     };
     // quarterOfYear method does not support 'all' and 'any' interfaces
     is.quarterOfYear.api = ['not'];
 
     // is a given date in daylight saving time?
-    is.dayLightSavingTime = function(obj) {
-        var january = new Date(obj.getFullYear(), 0, 1);
-        var july = new Date(obj.getFullYear(), 6, 1);
+    is.dayLightSavingTime = function(object) {
+        var january = new Date(object.getFullYear(), 0, 1);
+        var july = new Date(object.getFullYear(), 6, 1);
         var stdTimezoneOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
-        return obj.getTimezoneOffset() < stdTimezoneOffset;
+        return object.getTimezoneOffset() < stdTimezoneOffset;
     };
 
     // Environment checks
@@ -572,8 +573,8 @@
 
     // is a given object window?
     // setInterval method is only available for window object
-    is.windowObject = function(obj) {
-        return typeof obj === 'object' && 'setInterval' in obj;
+    is.windowObject = function(object) {
+        return typeof object === 'object' && 'setInterval' in object;
     };
 
     var freeGlobal = is.windowObject(typeof global == 'object' && global) && global;
@@ -801,13 +802,13 @@
     /* -------------------------------------------------------------------------- */
 
     // has a given object got parameterized count property?
-    is.propertyCount = function(obj, count) {
-        if (!is.object(obj) || !is.number(count)) {
+    is.propertyCount = function(object, count) {
+        if (!is.object(object) || !is.number(count)) {
             return false;
         }
         var n = 0;
-        for (var property in obj) {
-            if (hasOwnProperty.call(obj, property) && ++n > count) {
+        for (var property in object) {
+            if (hasOwnProperty.call(object, property) && ++n > count) {
                 return false;
             }
         }
@@ -817,27 +818,27 @@
     is.propertyCount.api = ['not'];
 
     // is given object has parameterized property?
-    is.propertyDefined = function(obj, property) {
-        return is.object(obj) && is.string(property) && property in obj;
+    is.propertyDefined = function(object, property) {
+        return is.object(object) && is.string(property) && property in object;
     };
     // propertyDefined method does not support 'all' and 'any' interfaces
     is.propertyDefined.api = ['not'];
 
     // is a given object a DOM node?
-    is.domNode = function(obj) {
-        return is.object(obj) && obj.nodeType > 0;
+    is.domNode = function(object) {
+        return is.object(object) && object.nodeType > 0;
     };
 
     // Array checks
     /* -------------------------------------------------------------------------- */
 
     // is a given item in an array?
-    is.inArray = function(val, arr){
-        if (is.not.array(arr)) {
+    is.inArray = function(value, array) {
+        if (is.not.array(array)) {
             return false;
         }
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i] === val) return true;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] === value) return true;
         }
         return false;
     };
@@ -845,12 +846,12 @@
     is.inArray.api = ['not'];
 
     // is a given array sorted?
-    is.sorted = function(arr) {
-        if (is.not.array(arr)) {
+    is.sorted = function(array) {
+        if (is.not.array(array)) {
             return false;
         }
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i] > arr[i + 1]) return false;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] > array[i + 1]) return false;
         }
         return true;
     };
@@ -884,11 +885,11 @@
     // Intentionally added after setInterfaces function
     /* -------------------------------------------------------------------------- */
 
-    // set optional regexps to methods if you think they suck
+    // set optional regexes to methods
     is.setRegexp = function(regexp, regexpName) {
-        for (var r in regexps) {
-            if (hasOwnProperty.call(regexps, r) && (regexpName === r)) {
-                regexps[r] = regexp;
+        for (var r in regexes) {
+            if (hasOwnProperty.call(regexes, r) && (regexpName === r)) {
+                regexes[r] = regexp;
             }
         }
     };
