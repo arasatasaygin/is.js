@@ -593,7 +593,7 @@
         // is current browser chrome?
         // parameter is optional
         is.chrome = function(range) {
-            var match = /google inc/.test(vendor) && userAgent.match(/chrome\/(\d+)/);
+            var match = /google inc/.test(vendor) && userAgent.match(/(?:chrome|crios)\/(\d+)/);
             return !!match && compareVersion(match[1], range);
         };
         // chrome method does not support 'all' and 'any' interfaces
@@ -602,7 +602,7 @@
         // is current browser firefox?
         // parameter is optional
         is.firefox = function(range) {
-            var match = userAgent.match(/firefox\/(\d+)/);
+            var match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
             return !!match && compareVersion(match[1], range);
         };
         // firefox method does not support 'all' and 'any' interfaces
