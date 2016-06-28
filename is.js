@@ -207,9 +207,8 @@
                 return true;
             }
             return false;
-        } else {
-            return value === '';
         }
+        return value === '';
     };
 
     // is a given value existy?
