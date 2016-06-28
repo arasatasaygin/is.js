@@ -21,12 +21,12 @@ bower install is_js
 
 Build:
 ```
-grunt build
+npm run build
 ```
 
 Test:
 ```
-grunt test
+npm test
 ```
 
 ####Contributing:
