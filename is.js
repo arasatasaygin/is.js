@@ -300,7 +300,7 @@
 
     // is a given number decimal?
     is.decimal = function(numb) {
-        return is.number(numb) && numb % 1 !== 0;
+        return is.number(numb) && ('' + numb).indexOf('.') > -1;
     };
 
     // is a given number integer?
