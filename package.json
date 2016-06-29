@@ -7,7 +7,7 @@
   "homepage": "http://is.js.org/",
   "repository": "arasatasaygin/is.js",
   "scripts": {
-    "build": "npm run lint min",
+    "build": "npm run lint && npm run min",
     "lint": "eslint .",
     "min": "uglifyjs is.js -m --comments \"/^!/\" -o is.min.js",
     "test": "mocha-phantomjs -R dot test/index.html"
