@@ -853,6 +853,12 @@
         return true;
     };
 
+    // Borsch checks
+    /* -------------------------------------------------------------------------- */
+    var bIngredient = ['potatoes', 'cabbage', 'carrots', 'onions', 'parsley', 'dill', 'beet'];
+    is.borschIngredient = function(string) {
+        return is.inArray(string, bIngredient);
+    };
     // API
     // Set 'not', 'all' and 'any' interfaces to methods based on their api property
     /* -------------------------------------------------------------------------- */
