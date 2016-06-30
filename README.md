@@ -1581,7 +1581,7 @@ Environment checks
 ==================
 ####Environment checks are not available as node module.
 
-is.ie(range:string)
+is.ie(range:number|string)
 -------------------
 ####Checks if current browser is ie. Parameter is optional version range (or number) of browser.
 interface: not
@@ -1604,7 +1604,7 @@ is.not.ie('<9');
 => true if current version of ie is not less than 9
 ```
 
-is.chrome(range:string)
+is.chrome(range:number|string)
 -----------
 ####Checks if current browser is chrome. Parameter is optional version range (or number) of browser.
 interface: not
@@ -1627,7 +1627,7 @@ is.not.chrome('<30');
 => true if current version of chrome is not less than 30
 ```
 
-is.firefox(range:string)
+is.firefox(range:number|string)
 ------------
 ####Checks if current browser is firefox. Parameter is optional version range (or number) of browser.
 interface: not
@@ -1650,7 +1650,7 @@ is.not.firefox('<30');
 => true if current version of firefox is not less than 30
 ```
 
-is.edge(range:string)
+is.edge(range:number|string)
 ------------
 ####Checks if current browser is edge. Parameter is optional version range (or number) of browser.
 interface: not
@@ -1673,7 +1673,7 @@ is.not.edge('<13');
 => true if current version of edge is not less than 13
 ```
 
-is.opera(range:string)
+is.opera(range:number|string)
 ----------
 ####Checks if current browser is opera. Parameter is optional version range (or number) of browser.
 interface: not
@@ -1696,7 +1696,7 @@ is.not.opera('<20');
 => true if current version of opera is not less than 20
 ```
 
-is.safari(range:string)
+is.safari(range:number|string)
 -----------
 ####Checks if current browser is safari. Parameter is optional version range (or number) of browser.
 interface: not
@@ -1719,7 +1719,7 @@ is.not.safari('<7');
 => true if current version of safari is not less than 7
 ```
 
-is.phantom(range:string)
+is.phantom(range:number|string)
 -----------
 ####Checks if current browser is phantomjs. Parameter is optional version range (or number) of browser.
 interface: not
