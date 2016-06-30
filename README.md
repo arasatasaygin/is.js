@@ -852,6 +852,9 @@ interfaces: not, all, any
 is.socialSecurityNumber('017-90-7890');
 => true
 
+is.socialSecurityNumber('017907890');
+=> true
+
 is.socialSecurityNumber('123');
 => false
 
@@ -861,7 +864,7 @@ is.not.socialSecurityNumber('123');
 is.all.socialSecurityNumber('017-90-7890', '123');
 => false
 
-is.any.socialSecurityNumber('017-90-7890', '123');
+is.any.socialSecurityNumber('017907890', '123');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
