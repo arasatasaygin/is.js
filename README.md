@@ -1177,6 +1177,9 @@ interfaces: not, all, any
 is.palindrome('testset');
 => true
 
+is.palindrome('A man, a plan, a canal - Panama!');
+=> true
+
 is.palindrome('nope');
 => false
 
