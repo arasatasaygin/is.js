@@ -1572,25 +1572,32 @@ Environment checks
 ==================
 ####Environment checks are not available as node module.
 
-is.ie(value:number)
+is.ie(range:string)
 -------------------
-####Checks if current browser is ie. Parameter is optional version number of browser.
+####Checks if current browser is ie. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
 is.ie();
 => true if current browser is ie
 
-is.ie(6);
-=> hopefully false
-
 is.not.ie();
 => false if current browser is ie
+
+// also supports version number
+is.ie(10);
+=> true if current version of ie is 10
+
+is.ie('>=10');
+=> true if current version of ie is greater than or equal to 10
+
+is.not.ie('<9');
+=> true if current version of ie is not less than 9
 ```
 
-is.chrome()
+is.chrome(range:string)
 -----------
-####Checks if current browser is chrome.
+####Checks if current browser is chrome. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1599,11 +1606,21 @@ is.chrome();
 
 is.not.chrome();
 => false if current browser is chrome
+
+// also supports version number
+is.chrome(50);
+=> true if current version of chrome is 50
+
+is.chrome('>=40');
+=> true if current version of chrome is greater than or equal to 40
+
+is.not.chrome('<30');
+=> true if current version of chrome is not less than 30
 ```
 
-is.firefox()
+is.firefox(range:string)
 ------------
-####Checks if current browser is firefox.
+####Checks if current browser is firefox. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1612,11 +1629,21 @@ is.firefox();
 
 is.not.firefox();
 => false if current browser is firefox
+
+// also supports version number
+is.firefox(41);
+=> true if current version of firefox is 41
+
+is.firefox('>=40');
+=> true if current version of firefox is greater than or equal to 40
+
+is.not.firefox('<30');
+=> true if current version of firefox is not less than 30
 ```
 
-is.edge()
+is.edge(range:string)
 ------------
-####Checks if current browser is edge.
+####Checks if current browser is edge. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1625,11 +1652,21 @@ is.edge();
 
 is.not.edge();
 => false if current browser is edge
+
+// also supports version number
+is.edge(13);
+=> true if current version of edge is 13
+
+is.edge('>=12');
+=> true if current version of edge is greater than or equal to 12
+
+is.not.edge('<13');
+=> true if current version of edge is not less than 13
 ```
 
-is.opera()
+is.opera(range:string)
 ----------
-####Checks if current browser is opera.
+####Checks if current browser is opera. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1638,11 +1675,21 @@ is.opera();
 
 is.not.opera();
 => false if current browser is opera
+
+// also supports version number
+is.opera(36);
+=> true if current version of opera is 36
+
+is.opera('>=35');
+=> true if current version of opera is greater than or equal to 35
+
+is.not.opera('<20');
+=> true if current version of opera is not less than 20
 ```
 
-is.safari()
+is.safari(range:string)
 -----------
-####Checks if current browser is safari.
+####Checks if current browser is safari. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1651,11 +1698,21 @@ is.safari();
 
 is.not.safari();
 => false if current browser is safari
+
+// also supports version number
+is.safari(9);
+=> true if current version of safari is 9
+
+is.safari('>=8');
+=> true if current version of safari is greater than or equal to 8
+
+is.not.safari('<7');
+=> true if current version of safari is not less than 7
 ```
 
-is.phantom()
+is.phantom(range:string)
 -----------
-####Checks if current browser is phantomjs.
+####Checks if current browser is phantomjs. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1664,6 +1721,16 @@ is.phantom();
 
 is.not.phantom();
 => false if current browser is phantomjs
+
+// also supports version number
+is.phantom(2);
+=> true if current version of phantom is 2
+
+is.phantom('>=1');
+=> true if current version of phantomjs is greater than or equal to 1
+
+is.not.phantom('<2');
+=> true if current version of phantomjs is not less than 2
 ```
 
 is.ios()
