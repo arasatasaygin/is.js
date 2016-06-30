@@ -907,6 +907,9 @@ interfaces: not, all, any
 is.hexadecimal('f0f0f0');
 => true
 
+is.hexadecimal('0xf0f0f0');
+=> true
+
 is.hexadecimal(2.5);
 => false
 
@@ -916,7 +919,7 @@ is.not.hexadecimal('string');
 is.all.hexadecimal('ff', 'f50');
 => true
 
-is.any.hexadecimal('ff5500', true);
+is.any.hexadecimal('0xff5500', true);
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
