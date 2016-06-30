@@ -1755,9 +1755,9 @@ is.not.ios();
 => true if current device is not iPhone, iPad or iPod
 ```
 
-is.iphone()
+is.iphone(range:number|string)
 -----------
-####Checks if current device is iPhone.
+####Checks if current device is iPhone. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1766,9 +1766,19 @@ is.iphone();
 
 is.not.iphone();
 => true if current device is not iPhone
+
+// also supports version number
+is.iphone(9);
+=> true if current version of iPhone is 9
+
+is.iphone('>=7');
+=> true if current version of iPhone is greater than or equal to 7
+
+is.not.iphone('<8');
+=> true if current version of iPhone is not less than 8
 ```
 
-is.ipad()
+is.ipad(range:number|string)
 ---------
 ####Checks if current device is iPad.
 interface: not
@@ -1779,9 +1789,19 @@ is.ipad();
 
 is.not.ipad();
 => true if current device is not iPad
+
+// also supports version number
+is.ipad(9);
+=> true if current version of iPad is 9
+
+is.ipad('>=7');
+=> true if current version of iPad is greater than or equal to 7
+
+is.not.ipad('<8');
+=> true if current version of iPad is not less than 8
 ```
 
-is.ipod()
+is.ipod(range:number|string)
 ---------
 ####Checks if current device is iPod.
 interface: not
@@ -1792,6 +1812,16 @@ is.ipod();
 
 is.not.ipod();
 => true if current device is not iPod
+
+// also supports version number
+is.ipod(7);
+=> true if current version of iPod is 7
+
+is.ipod('>=5');
+=> true if current version of iPod is greater than or equal to 5
+
+is.not.ipod('<5');
+=> true if current version of iPod is not less than 5
 ```
 
 is.android()
