@@ -852,6 +852,9 @@ interfaces: not, all, any
 is.socialSecurityNumber('017-90-7890');
 => true
 
+is.socialSecurityNumber('017907890');
+=> true
+
 is.socialSecurityNumber('123');
 => false
 
@@ -861,7 +864,7 @@ is.not.socialSecurityNumber('123');
 is.all.socialSecurityNumber('017-90-7890', '123');
 => false
 
-is.any.socialSecurityNumber('017-90-7890', '123');
+is.any.socialSecurityNumber('017907890', '123');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
@@ -904,6 +907,9 @@ interfaces: not, all, any
 is.hexadecimal('f0f0f0');
 => true
 
+is.hexadecimal('0xf0f0f0');
+=> true
+
 is.hexadecimal(2.5);
 => false
 
@@ -913,7 +919,7 @@ is.not.hexadecimal('string');
 is.all.hexadecimal('ff', 'f50');
 => true
 
-is.any.hexadecimal('ff5500', true);
+is.any.hexadecimal('0xff5500', true);
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
@@ -1169,6 +1175,9 @@ interfaces: not, all, any
 
 ```javascript
 is.palindrome('testset');
+=> true
+
+is.palindrome('A man, a plan, a canal - Panama!');
 => true
 
 is.palindrome('nope');
@@ -1572,25 +1581,32 @@ Environment checks
 ==================
 ####Environment checks are not available as node module.
 
-is.ie(value:number)
+is.ie(range:number|string)
 -------------------
-####Checks if current browser is ie. Parameter is optional version number of browser.
+####Checks if current browser is ie. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
 is.ie();
 => true if current browser is ie
 
-is.ie(6);
-=> hopefully false
-
 is.not.ie();
 => false if current browser is ie
+
+// also supports version number
+is.ie(10);
+=> true if current version of ie is 10
+
+is.ie('>=10');
+=> true if current version of ie is greater than or equal to 10
+
+is.not.ie('<9');
+=> true if current version of ie is not less than 9
 ```
 
-is.chrome()
+is.chrome(range:number|string)
 -----------
-####Checks if current browser is chrome.
+####Checks if current browser is chrome. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1599,11 +1615,21 @@ is.chrome();
 
 is.not.chrome();
 => false if current browser is chrome
+
+// also supports version number
+is.chrome(50);
+=> true if current version of chrome is 50
+
+is.chrome('>=40');
+=> true if current version of chrome is greater than or equal to 40
+
+is.not.chrome('<30');
+=> true if current version of chrome is not less than 30
 ```
 
-is.firefox()
+is.firefox(range:number|string)
 ------------
-####Checks if current browser is firefox.
+####Checks if current browser is firefox. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1612,11 +1638,21 @@ is.firefox();
 
 is.not.firefox();
 => false if current browser is firefox
+
+// also supports version number
+is.firefox(41);
+=> true if current version of firefox is 41
+
+is.firefox('>=40');
+=> true if current version of firefox is greater than or equal to 40
+
+is.not.firefox('<30');
+=> true if current version of firefox is not less than 30
 ```
 
-is.edge()
+is.edge(range:number|string)
 ------------
-####Checks if current browser is edge.
+####Checks if current browser is edge. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1625,11 +1661,21 @@ is.edge();
 
 is.not.edge();
 => false if current browser is edge
+
+// also supports version number
+is.edge(13);
+=> true if current version of edge is 13
+
+is.edge('>=12');
+=> true if current version of edge is greater than or equal to 12
+
+is.not.edge('<13');
+=> true if current version of edge is not less than 13
 ```
 
-is.opera()
+is.opera(range:number|string)
 ----------
-####Checks if current browser is opera.
+####Checks if current browser is opera. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1638,11 +1684,21 @@ is.opera();
 
 is.not.opera();
 => false if current browser is opera
+
+// also supports version number
+is.opera(36);
+=> true if current version of opera is 36
+
+is.opera('>=35');
+=> true if current version of opera is greater than or equal to 35
+
+is.not.opera('<20');
+=> true if current version of opera is not less than 20
 ```
 
-is.safari()
+is.safari(range:number|string)
 -----------
-####Checks if current browser is safari.
+####Checks if current browser is safari. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1651,11 +1707,21 @@ is.safari();
 
 is.not.safari();
 => false if current browser is safari
+
+// also supports version number
+is.safari(9);
+=> true if current version of safari is 9
+
+is.safari('>=8');
+=> true if current version of safari is greater than or equal to 8
+
+is.not.safari('<7');
+=> true if current version of safari is not less than 7
 ```
 
-is.phantom()
+is.phantom(range:number|string)
 -----------
-####Checks if current browser is phantomjs.
+####Checks if current browser is phantomjs. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1664,6 +1730,16 @@ is.phantom();
 
 is.not.phantom();
 => false if current browser is phantomjs
+
+// also supports version number
+is.phantom(2);
+=> true if current version of phantom is 2
+
+is.phantom('>=1');
+=> true if current version of phantomjs is greater than or equal to 1
+
+is.not.phantom('<2');
+=> true if current version of phantomjs is not less than 2
 ```
 
 is.ios()
@@ -1679,9 +1755,9 @@ is.not.ios();
 => true if current device is not iPhone, iPad or iPod
 ```
 
-is.iphone()
+is.iphone(range:number|string)
 -----------
-####Checks if current device is iPhone.
+####Checks if current device is iPhone. Parameter is optional version range (or number) of browser.
 interface: not
 
 ```javascript
@@ -1690,9 +1766,19 @@ is.iphone();
 
 is.not.iphone();
 => true if current device is not iPhone
+
+// also supports version number
+is.iphone(9);
+=> true if current version of iPhone is 9
+
+is.iphone('>=7');
+=> true if current version of iPhone is greater than or equal to 7
+
+is.not.iphone('<8');
+=> true if current version of iPhone is not less than 8
 ```
 
-is.ipad()
+is.ipad(range:number|string)
 ---------
 ####Checks if current device is iPad.
 interface: not
@@ -1703,9 +1789,19 @@ is.ipad();
 
 is.not.ipad();
 => true if current device is not iPad
+
+// also supports version number
+is.ipad(9);
+=> true if current version of iPad is 9
+
+is.ipad('>=7');
+=> true if current version of iPad is greater than or equal to 7
+
+is.not.ipad('<8');
+=> true if current version of iPad is not less than 8
 ```
 
-is.ipod()
+is.ipod(range:number|string)
 ---------
 ####Checks if current device is iPod.
 interface: not
@@ -1716,6 +1812,16 @@ is.ipod();
 
 is.not.ipod();
 => true if current device is not iPod
+
+// also supports version number
+is.ipod(7);
+=> true if current version of iPod is 7
+
+is.ipod('>=5');
+=> true if current version of iPod is greater than or equal to 5
+
+is.not.ipod('<5');
+=> true if current version of iPod is not less than 5
 ```
 
 is.android()
