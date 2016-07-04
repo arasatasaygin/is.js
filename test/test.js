@@ -1377,6 +1377,7 @@ describe('regexp checks', function() {
         });
         it('should return false if given value is not date string', function() {
             expect(is.dateString('1')).to.be.false;
+            expect(is.dateString('10/21-2012')).to.be.false;
         });
     });
     describe('is.not.dateString', function() {
