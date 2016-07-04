@@ -693,6 +693,9 @@ interfaces: not, all, any
 is.dateString('11/11/2011');
 => true
 
+is.dateString('10-21-2012');
+=> true
+
 is.dateString('90/11/2011');
 => false
 
@@ -702,7 +705,7 @@ is.not.dateString('90/11/2011');
 is.all.dateString('11/11/2011', '90/11/2011');
 => false
 
-is.any.dateString('11/11/2011', '90/11/2011');
+is.any.dateString('11-11-2011', '90/11/2011');
 => true
 
 // 'all' and 'any' interfaces can also take array parameter
