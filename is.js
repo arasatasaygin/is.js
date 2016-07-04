@@ -51,12 +51,8 @@
     // helper function which call predicate function per parameter and return true if all pass
     function all(func) {
         return function() {
-            var params = slice.call(arguments);
+            var params = getParams(arguments);
             var length = params.length;
-            if (length === 1 && is.array(params[0])) {    // support array
-                params = params[0];
-                length = params.length;
-            }
             for (var i = 0; i < length; i++) {
                 if (!func.call(null, params[i])) {
                     return false;
@@ -69,12 +65,8 @@
     // helper function which call predicate function per parameter and return true if any pass
     function any(func) {
         return function() {
-            var params = slice.call(arguments);
+            var params = getParams(arguments);
             var length = params.length;
-            if (length === 1 && is.array(params[0])) {    // support array
-                params = params[0];
-                length = params.length;
-            }
             for (var i = 0; i < length; i++) {
                 if (func.call(null, params[i])) {
                     return true;
@@ -82,6 +74,16 @@
             }
             return false;
         };
+    }
+
+    // helper function which extracts params from arguments
+    function getParams(args) {
+        var params = slice.call(args);
+        var length = params.length;
+        if (length === 1 && is.array(params[0])) {    // support array
+            params = params[0];
+        }
+        return params;
     }
 
     // helper function which compares a version to a range
