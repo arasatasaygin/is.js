@@ -1373,9 +1373,11 @@ describe('regexp checks', function() {
     describe('is.dateString', function() {
         it('should return true if given value is date string', function() {
             expect(is.dateString('11/11/2011')).to.be.true;
+            expect(is.dateString('10-21-2012')).to.be.true;
         });
         it('should return false if given value is not date string', function() {
             expect(is.dateString('1')).to.be.false;
+            expect(is.dateString('10/21-2012')).to.be.false;
         });
     });
     describe('is.not.dateString', function() {
@@ -1389,7 +1391,7 @@ describe('regexp checks', function() {
     describe('is.all.dateString', function() {
         it('should return true if all given values are date string', function() {
             expect(is.all.dateString('11/11/2011', '10/21/2012')).to.be.true;
-            expect(is.all.dateString(['11/11/2011', '10/21/2012'])).to.be.true;
+            expect(is.all.dateString(['11/11/2011', '10-21-2012'])).to.be.true;
         });
         it('should return false if any given value is not dateString', function() {
             expect(is.all.dateString('11/11/2011', '1')).to.be.false;
