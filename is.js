@@ -850,8 +850,8 @@
             return false;
         }
         var predicate = comparator[sign] || comparator['>='];
-        for (var i = 0; i < array.length; i++) {
-            if (i && !predicate(array[i], array[i - 1])) {
+        for (var i = 1; i < array.length; i++) {
+            if (!predicate(array[i], array[i - 1])) {
                 return false;
             }
         }
