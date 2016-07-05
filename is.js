@@ -81,7 +81,7 @@
         '<': function(a, b) { return a < b; },
         '<=': function(a, b) { return a <= b; },
         '>': function(a, b) { return a > b; },
-        '>=': function(a, b) { return a >= b; },
+        '>=': function(a, b) { return a >= b; }
     }
 
     // helper function which compares a version to a range
