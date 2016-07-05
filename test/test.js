@@ -3128,22 +3128,42 @@ describe('object checks', function() {
 describe('array checks', function() {
     describe('is.sorted', function() {
         it('should return true if given array is sorted', function() {
-            var arr = [1, 2, 3, 4, 5];
-            expect(is.sorted(arr)).to.be.true;
+            var arr1 = [1, 2, 3, 4, 5];
+            // default behaviour:
+            expect(is.sorted(arr1)).to.be.true; // increasing
+            // extended behaviour:
+            expect(is.sorted(arr1, '>=')).to.be.true; // increasing
+            expect(is.sorted(arr1, '>')).to.be.true; // strictly increasing
+            expect(is.sorted(arr1, '<=')).to.be.false; // decreasing
+            expect(is.sorted(arr1, '<')).to.be.false; // strictly decreasing
+
+            var arr2 = [5, 4, 4, 3, 1];
+            expect(is.sorted(arr2)).to.be.false;
+            expect(is.sorted(arr2, '>=')).to.be.false;
+            expect(is.sorted(arr2, '>')).to.be.false;
+            expect(is.sorted(arr2, '<=')).to.be.true;
+            expect(is.sorted(arr2, '<')).to.be.false;
         });
         it('should return false if given array is not sorted', function() {
             var arr = [1, 2, 3, 5, 4];
             expect(is.sorted(arr)).to.be.false;
+            expect(is.sorted(arr, '>=')).to.be.false;
+            expect(is.sorted(arr, '>')).to.be.false;
+            expect(is.sorted(arr, '<=')).to.be.false;
+            expect(is.sorted(arr, '<')).to.be.false;
         });
     });
     describe('is.not.sorted', function() {
         it('should return false if given array is sorted', function() {
             var arr = [1, 2, 3, 4, 5];
             expect(is.not.sorted(arr)).to.be.false;
+            expect(is.not.sorted(arr, '>=')).to.be.false;
+            expect(is.not.sorted(arr, '<=')).to.be.true;
         });
         it('should return true if given array is not sorted', function() {
             var arr = [1, 2, 3, 5, 4];
             expect(is.not.sorted(arr)).to.be.true;
+            expect(is.not.sorted(arr, '>')).to.be.true;
         });
     });
     describe('is.all.sorted', function() {
