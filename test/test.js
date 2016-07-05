@@ -3128,52 +3128,96 @@ describe('object checks', function() {
 describe('array checks', function() {
     describe('is.sorted', function() {
         it('should return true if given array is sorted', function() {
-            var arr = [1, 2, 3, 4, 5];
-            expect(is.sorted(arr)).to.be.true;
+            var arr1 = [1, 2, 3, 4, 5];
+            // default behaviour:
+            expect(is.sorted(arr1)).to.be.true; // increasing
+            // extended behaviour:
+            expect(is.sorted(arr1, '>=')).to.be.true; // increasing
+            expect(is.sorted(arr1, '>')).to.be.true; // strictly increasing
+            expect(is.sorted(arr1, '<=')).to.be.false; // decreasing
+            expect(is.sorted(arr1, '<')).to.be.false; // strictly decreasing
+
+            var arr2 = [5, 4, 4, 3, 1];
+            // default behaviour:
+            expect(is.sorted(arr2)).to.be.false;
+            // extended behaviour:
+            expect(is.sorted(arr2, '>=')).to.be.false;
+            expect(is.sorted(arr2, '>')).to.be.false;
+            expect(is.sorted(arr2, '<=')).to.be.true;
+            expect(is.sorted(arr2, '<')).to.be.false;
         });
         it('should return false if given array is not sorted', function() {
             var arr = [1, 2, 3, 5, 4];
+            // default behaviour:
             expect(is.sorted(arr)).to.be.false;
+            // extended behaviour:
+            expect(is.sorted(arr, '>=')).to.be.false;
+            expect(is.sorted(arr, '>')).to.be.false;
+            expect(is.sorted(arr, '<=')).to.be.false;
+            expect(is.sorted(arr, '<')).to.be.false;
         });
     });
     describe('is.not.sorted', function() {
         it('should return false if given array is sorted', function() {
-            var arr = [1, 2, 3, 4, 5];
-            expect(is.not.sorted(arr)).to.be.false;
+            var arr1 = [1, 2, 3, 4, 5];
+            // default behaviour:
+            expect(is.not.sorted(arr1)).to.be.false;
+            // extended behaviour:
+            expect(is.not.sorted(arr1, '>=')).to.be.false;
+            expect(is.not.sorted(arr1, '>')).to.be.false;
+            expect(is.not.sorted(arr1, '<=')).to.be.true;
+            expect(is.not.sorted(arr1, '<')).to.be.true;
+
+            var arr2 = [5, 4, 4, 3, 1];
+            // default behaviour:
+            expect(is.not.sorted(arr2)).to.be.true;
+            // extended behaviour:
+            expect(is.not.sorted(arr2, '>=')).to.be.true;
+            expect(is.not.sorted(arr2, '>')).to.be.true;
+            expect(is.not.sorted(arr2, '<=')).to.be.false;
+            expect(is.not.sorted(arr2, '<')).to.be.true;
         });
         it('should return true if given array is not sorted', function() {
             var arr = [1, 2, 3, 5, 4];
+            // default behaviour:
             expect(is.not.sorted(arr)).to.be.true;
+            // extended behaviour:
+            expect(is.not.sorted(arr, '>=')).to.be.true;
+            expect(is.not.sorted(arr, '>')).to.be.true;
+            expect(is.not.sorted(arr, '<=')).to.be.true;
+            expect(is.not.sorted(arr, '<')).to.be.true;
         });
     });
     describe('is.all.sorted', function() {
         it('should return true if all given arrays are sorted', function() {
             var arr1 = [1, 2, 3, 4, 5];
             var arr2 = [5, 6, 7, 8, 9];
-            var arr3 = [10];
-            expect(is.all.sorted(arr1, arr2, arr3)).to.be.true;
-            expect(is.all.sorted([arr1, arr2, arr3])).to.be.true;
+            expect(is.all.sorted(arr1, arr2)).to.be.true;
+            expect(is.all.sorted([arr1, arr2])).to.be.true;
+            // extended behaviour not available with 'all' interface
         });
         it('should return false if any given array is not sorted', function() {
             var arr1 = [1, 2, 3, 4, 5];
             var arr2 = [5, 6, 7, 9, 8];
             expect(is.all.sorted(arr1, arr2)).to.be.false;
             expect(is.all.sorted([arr1, arr2])).to.be.false;
+            // extended behaviour not available with 'all' interface
         });
     });
     describe('is.any.sorted', function() {
         it('should return true if any given array is sorted', function() {
             var arr1 = [1, 2, 3, 4, 5];
             var arr2 = [10, 6, 7, 8, 9];
-            var arr3 = [10];
-            expect(is.any.sorted(arr1, arr2, arr3)).to.be.true;
-            expect(is.any.sorted([arr1, arr2, arr3])).to.be.true;
+            expect(is.any.sorted(arr1, arr2)).to.be.true;
+            expect(is.any.sorted([arr1, arr2])).to.be.true;
+            // extended behaviour not available with 'any' interface
         });
         it('should return false if all given arrays are not sorted', function() {
             var arr1 = [6, 2, 3, 4, 5];
             var arr2 = [9, 5, 6, 7, 8];
             expect(is.any.sorted(arr1, arr2)).to.be.false;
             expect(is.any.sorted([arr1, arr2])).to.be.false;
+            // extended behaviour not available with 'any' interface
         });
     });
     describe('is.inArray', function()  {
