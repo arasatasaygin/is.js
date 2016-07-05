@@ -843,14 +843,14 @@
     is.inArray.api = ['not'];
 
     // is a given array sorted?
-    is.sorted = function(array) {
+    is.sorted = function(array, sign) {
         if (is.not.array(array)) {
             return false;
         }
-        for (var i = 0; i < array.length - 1; i++) {
-            if (array[i] > array[i + 1]) return false;
-        }
-        return true;
+        var compareFunction = compare[sign] || compare['>=']; // default comparison: increasing sorted array
+        return array.every(function(val, index, arr) {
+            return !index || this(val, arr[index - 1]);
+        }, compareFunction);
     };
 
     // API
