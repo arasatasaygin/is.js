@@ -76,22 +76,20 @@
         };
     }
 
+    // build a 'compare' object for various comparison checks
+    var compare = {
+        '<': function(a, b) { return a < b; },
+        '<=': function(a, b) { return a <= b; },
+        '>': function(a, b) { return a > b; },
+        '>=': function(a, b) { return a >= b; },
+    }
+
     // helper function which compares a version to a range
     function compareVersion(version, range) {
         var string = (range + '');
         var n = +(string.match(/\d+/) || NaN);
         var op = string.match(/^[<>]=?|/)[0];
-        switch (op) {
-            case '<':
-                return version < n;
-            case '<=':
-                return version <= n;
-            case '>=':
-                return version >= n;
-            case '>':
-                return version > n;
-        }
-        return version == n || n !== n;
+        return (compare[op] && compare[op](version, n)) || version == n || n !== n;
     }
 
     // helper function which extracts params from arguments
