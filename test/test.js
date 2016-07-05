@@ -3170,8 +3170,9 @@ describe('array checks', function() {
         it('should return true if all given arrays are sorted', function() {
             var arr1 = [1, 2, 3, 4, 5];
             var arr2 = [5, 6, 7, 8, 9];
-            expect(is.all.sorted(arr1, arr2)).to.be.true;
-            expect(is.all.sorted([arr1, arr2])).to.be.true;
+            var arr3 = [10];
+            expect(is.all.sorted(arr1, arr2, arr3)).to.be.true;
+            expect(is.all.sorted([arr1, arr2, arr3])).to.be.true;
         });
         it('should return false if any given array is not sorted', function() {
             var arr1 = [1, 2, 3, 4, 5];
@@ -3184,8 +3185,9 @@ describe('array checks', function() {
         it('should return true if any given array is sorted', function() {
             var arr1 = [1, 2, 3, 4, 5];
             var arr2 = [10, 6, 7, 8, 9];
-            expect(is.any.sorted(arr1, arr2)).to.be.true;
-            expect(is.any.sorted([arr1, arr2])).to.be.true;
+            var arr3 = [10];
+            expect(is.any.sorted(arr1, arr2, arr3)).to.be.true;
+            expect(is.any.sorted([arr1, arr2, arr3])).to.be.true;
         });
         it('should return false if all given arrays are not sorted', function() {
             var arr1 = [6, 2, 3, 4, 5];
