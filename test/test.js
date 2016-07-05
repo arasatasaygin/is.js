@@ -3159,33 +3159,19 @@ describe('array checks', function() {
     });
     describe('is.not.sorted', function() {
         it('should return false if given array is sorted', function() {
-            var arr1 = [1, 2, 3, 4, 5];
+            var arr = [1, 2, 3, 4, 5];
             // default behaviour:
-            expect(is.not.sorted(arr1)).to.be.false;
+            expect(is.not.sorted(arr)).to.be.false;
             // extended behaviour:
-            expect(is.not.sorted(arr1, '>=')).to.be.false;
-            expect(is.not.sorted(arr1, '>')).to.be.false;
-            expect(is.not.sorted(arr1, '<=')).to.be.true;
-            expect(is.not.sorted(arr1, '<')).to.be.true;
-
-            var arr2 = [5, 4, 4, 3, 1];
-            // default behaviour:
-            expect(is.not.sorted(arr2)).to.be.true;
-            // extended behaviour:
-            expect(is.not.sorted(arr2, '>=')).to.be.true;
-            expect(is.not.sorted(arr2, '>')).to.be.true;
-            expect(is.not.sorted(arr2, '<=')).to.be.false;
-            expect(is.not.sorted(arr2, '<')).to.be.true;
+            expect(is.not.sorted(arr, '>=')).to.be.false;
+            expect(is.not.sorted(arr, '<=')).to.be.true;
         });
         it('should return true if given array is not sorted', function() {
             var arr = [1, 2, 3, 5, 4];
             // default behaviour:
             expect(is.not.sorted(arr)).to.be.true;
             // extended behaviour:
-            expect(is.not.sorted(arr, '>=')).to.be.true;
             expect(is.not.sorted(arr, '>')).to.be.true;
-            expect(is.not.sorted(arr, '<=')).to.be.true;
-            expect(is.not.sorted(arr, '<')).to.be.true;
         });
     });
     describe('is.all.sorted', function() {
