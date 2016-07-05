@@ -89,7 +89,7 @@
         var string = (range + '');
         var n = +(string.match(/\d+/) || NaN);
         var op = string.match(/^[<>]=?|/)[0];
-        return (compare[op] && compare[op](version, n)) || version == n || n !== n;
+        return compare[op] ? compare[op](version, n) : (version == n || n !== n);
     }
 
     // helper function which extracts params from arguments
