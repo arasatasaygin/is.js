@@ -76,8 +76,8 @@
         };
     }
 
-    // build a 'compare' object for various comparison checks
-    var compare = {
+    // build a 'comparator' object for various comparison checks
+    var comparator = {
         '<': function(a, b) { return a < b; },
         '<=': function(a, b) { return a <= b; },
         '>': function(a, b) { return a > b; },
@@ -89,7 +89,7 @@
         var string = (range + '');
         var n = +(string.match(/\d+/) || NaN);
         var op = string.match(/^[<>]=?|/)[0];
-        return compare[op] ? compare[op](version, n) : (version == n || n !== n);
+        return comparator[op] ? comparator[op](version, n) : (version == n || n !== n);
     }
 
     // helper function which extracts params from arguments
@@ -835,7 +835,9 @@
             return false;
         }
         for (var i = 0; i < array.length; i++) {
-            if (array[i] === value) return true;
+            if (array[i] === value) {
+                return true;
+            }
         }
         return false;
     };
@@ -847,10 +849,13 @@
         if (is.not.array(array)) {
             return false;
         }
-        var compareFunction = compare[sign] || compare['>=']; // default comparison: increasing sorted array
-        return array.every(function(val, index, arr) {
-            return !index || this(val, arr[index - 1]);
-        }, compareFunction);
+        var predicate = comparator[sign] || comparator['>='];
+        for (var i = 0; i < array.length; i++) {
+            if (i && !predicate(array[i], array[i - 1])) {
+                return false;
+            }
+        }
+        return true;
     };
 
     // API
