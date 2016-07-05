@@ -851,7 +851,7 @@
         }
         var predicate = comparator[sign] || comparator['>='];
         for (var i = 0; i < array.length; i++) {
-            if (i && !predicate(array[i], array[i - 1])) {
+            if (!predicate(array[i], array[i - 1]) && i) {
                 return false;
             }
         }
