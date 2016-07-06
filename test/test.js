@@ -1,6 +1,7 @@
 ;(function(root) {    // eslint-disable-line no-extra-semi
     var _ = root._ || require('lodash'),
-        expect = _.get(root, 'chai.expect') || require('chai').expect;
+        expect = _.get(root, 'chai.expect') || require('chai').expect,
+        is = root.is || require('../is');
 
     function checkApi(name, list) {
         list || (list = ['not', 'all', 'any']);

@@ -10,7 +10,8 @@
     "build": "npm run lint && npm run min",
     "lint": "eslint .",
     "min": "uglifyjs is.js -m --comments \"/^!/\" -o is.min.js",
-    "test": "mocha-phantomjs -R dot test/index.html"
+    "test": "mocha --check-leaks -R dot",
+    "test:phantom": "mocha-phantomjs -R dot test/index.html"
   },
   "pre-commit": [
     "lint"
