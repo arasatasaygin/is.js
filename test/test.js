@@ -8,12 +8,7 @@
             var exists = _.includes(list, api);
             describe('is.' + api + '.' + name, function()  {
                 it('should ' + (exists ? '' : 'not ') + 'exist', function() {
-                    var func = is[api][name];
-                    if (exists) {
-                        expect(func).to.exist;
-                    } else {
-                        expect(func).to.not.exist;
-                    }
+                    expect(is[api][name]).to[exists ? 'be': 'not'].exist;
                 });
             });
         });
