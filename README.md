@@ -135,6 +135,33 @@ is.all.date([new Date(), 'foo', 'bar']);
 => false
 ```
 
+is.domNode(value:any)
+-----------------------------
+####Checks if the given object is a dom node.
+interfaces: not, all, any
+
+```javascript
+var obj = document.createElement('div');
+is.domNode(obj);
+=> true
+
+is.domNode({nope: 'nope'});
+=> false
+
+is.not.domNode({});
+=> true
+
+is.all.domNode(obj, obj);
+=> true
+
+is.any.domNode(obj, {nope: 'nope'});
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.domNode([obj, {nope: 'nope'}]);
+=> false
+```
+
 is.error(value:any)
 -------------------
 ####Checks if the given value type is error.
@@ -399,7 +426,7 @@ is.all.undefined([{}, undefined]);
 => false
 ```
 
-is.sameType(value:any, value:any)
+is.sameType(value:any, other:any)
 ---------------------------------
 ####Checks if the given value types are same type.
 interface: not
@@ -415,10 +442,36 @@ is.not.sameType(42, 7);
 => false
 ```
 
+is.windowObject(value:any)
+-----------------------------
+####Checks if the given object is window object.
+interfaces: not, all, any
+
+```javascript
+is.windowObject(window);
+=> true
+
+is.windowObject({nope: 'nope'});
+=> false
+
+is.not.windowObject({});
+=> true
+
+is.all.windowObject(window, {nope: 'nope'});
+=> false
+
+is.any.windowObject(window, {nope: 'nope'});
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.windowObject([window, {nope: 'nope'}]);
+=> false
+```
+
 Presence checks
 ===============
 
-is.empty(value:object|array|string)
+is.empty(value:array|object|string)
 -----------------------------------
 ####Checks if the given value is empty.
 interfaces: not, all, any
@@ -525,7 +578,7 @@ is.all.falsy([false, true, undefined]);
 => false
 ```
 
-is.space(value:string)
+is.space(value:any)
 ----------------------
 ####Checks if the given value is space.
 interfaces: not, all, any
@@ -1038,7 +1091,7 @@ is.all.ipv6(['2001:DB8:0:0:1::1', '1.2.3']);
 String checks
 =============
 
-is.include(value:string, value:substring)
+is.include(value:string, target:string)
 -----------------------------------------
 ####Checks if the given string contains a substring.
 interface: not
@@ -1107,7 +1160,7 @@ is.all.lowerCase(['yeap', 'all lowercase']);
 => true
 ```
 
-is.startWith(value:string, value:substring)
+is.startWith(value:string, target:string)
 -------------------------------------------
 ####Checks if the given string starts with substring.
 interface: not
@@ -1123,7 +1176,7 @@ is.not.startWith('nope not that', 'not');
 => true
 ```
 
-is.endWith(value:string, value:substring)
+is.endWith(value:string, target:string)
 -----------------------------------------
 ####Checks if the given string ends with substring.
 interfaces: not
@@ -1206,7 +1259,7 @@ is.all.palindrome(['Nope', 'testset']);
 Arithmetic checks
 =================
 
-is.equal(value:any, value:any)
+is.equal(value:any, other:any)
 ------------------------------
 ####Checks if the given values are equal.
 interfaces: not
@@ -1317,7 +1370,7 @@ is.all.negative([40, 42, -43]);
 => false
 ```
 
-is.above(value:number, min)
+is.above(value:number, min:number)
 ---------------------------
 ####Checks if the given value is above minimum value.
 interface: not
@@ -1330,7 +1383,7 @@ is.not.above(42, 50);
 => true
 ```
 
-is.under(value:number, max)
+is.under(value:number, max:number)
 ---------------------------
 ####Checks if the given value is under maximum value.
 interface: not
@@ -1343,7 +1396,7 @@ is.not.under(42, 30);
 => true
 ```
 
-is.within(value:number, min, max)
+is.within(value:number, min:number, max:number)
 ---------------------------------
 ####Checks if the given value is within minimum and maximum values.
 interface: not
@@ -1451,7 +1504,7 @@ is.all.infinite([Infinity, -Infinity, 42.5]);
 Object checks
 =============
 
-is.propertyCount(value:object, count)
+is.propertyCount(value:object, count:number)
 -------------------------------------
 ####Checks if objects' property count is equal to given count.
 interface: not
@@ -1467,7 +1520,7 @@ is.not.propertyCount({}, 2);
 => true
 ```
 
-is.propertyDefined(value:object, property)
+is.propertyDefined(value:object, property:string)
 ------------------------------------------
 ####Checks if the given property is defined on object.
 interface: not
@@ -1481,59 +1534,6 @@ is.propertyDefined({yeap: 'yeap'}, 'nope');
 
 is.not.propertyDefined({}, 'nope');
 => true
-```
-
-is.windowObject(value:window)
------------------------------
-####Checks if the given object is window object.
-interfaces: not, all, any
-
-```javascript
-is.windowObject(window);
-=> true
-
-is.windowObject({nope: 'nope'});
-=> false
-
-is.not.windowObject({});
-=> true
-
-is.all.windowObject(window, {nope: 'nope'});
-=> false
-
-is.any.windowObject(window, {nope: 'nope'});
-=> true
-
-// 'all' and 'any' interfaces can also take array parameter
-is.all.windowObject([window, {nope: 'nope'}]);
-=> false
-```
-
-is.domNode(value:object)
------------------------------
-####Checks if the given object is a dom node.
-interfaces: not, all, any
-
-```javascript
-var obj = document.createElement('div');
-is.domNode(obj);
-=> true
-
-is.domNode({nope: 'nope'});
-=> false
-
-is.not.domNode({});
-=> true
-
-is.all.domNode(obj, obj);
-=> true
-
-is.any.domNode(obj, {nope: 'nope'});
-=> true
-
-// 'all' and 'any' interfaces can also take array parameter
-is.all.domNode([obj, {nope: 'nope'}]);
-=> false
 ```
 
 Array checks
@@ -2027,7 +2027,7 @@ is.not.touchDevice();
 Time checks
 ===========
 
-is.today(value:object)
+is.today(value:date)
 ----------------------
 ####Checks if the given date object indicate today.
 interfaces: not, all, any
@@ -2055,7 +2055,7 @@ is.all.today([today, yesterday]);
 => false
 ```
 
-is.yesterday(value:object)
+is.yesterday(value:date)
 --------------------------
 ####Checks if the given date object indicate yesterday.
 interfaces: not, all, any
@@ -2083,7 +2083,7 @@ is.all.yesterday([today, yesterday]);
 => false
 ```
 
-is.tomorrow(value:object)
+is.tomorrow(value:date)
 -------------------------
 ####Checks if the given date object indicate tomorrow.
 interfaces: not, all, any
@@ -2111,7 +2111,7 @@ is.all.tomorrow([today, tomorrow]);
 => false
 ```
 
-is.past(value:object)
+is.past(value:date)
 ---------------------
 ####Checks if the given date object indicate past.
 interfaces: not, all, any
@@ -2140,7 +2140,7 @@ is.all.past([yesterday, tomorrow]);
 => false
 ```
 
-is.future(value:object)
+is.future(value:date)
 -----------------------
 ####Checks if the given date object indicate future.
 interfaces: not, all, any
@@ -2169,7 +2169,7 @@ is.all.future([yesterday, tomorrow]);
 => false
 ```
 
-is.day(value:object, dayString)
+is.day(value:date, day:string)
 -------------------------------
 ####Checks if the given date objects' day equal given dayString parameter.
 interface: not
@@ -2187,7 +2187,7 @@ is.not.day(mondayObj, 'tuesday');
 => true
 ```
 
-is.month(value:object, monthString)
+is.month(value:date, month:string)
 -----------------------------------
 ####Checks if the given date objects' month equal given monthString parameter.
 interface: not
@@ -2205,7 +2205,7 @@ is.not.month(februaryObj, 'january');
 => true
 ```
 
-is.year(value:object, yearNumber)
+is.year(value:date, year:number)
 ---------------------------------
 ####Checks if the given date objects' year equal given yearNumber parameter.
 interface: not
@@ -2249,7 +2249,7 @@ is.all.leapYear([2016, 2080]);
 => true
 ```
 
-is.weekend(value:object)
+is.weekend(value:date)
 ------------------------
 ####Checks if the given date objects' day is weekend.
 interfaces: not, all, any
@@ -2278,7 +2278,7 @@ is.all.weekend([sunday, saturday, monday]);
 => false
 ```
 
-is.weekday(value:object)
+is.weekday(value:date)
 ------------------------
 ####Checks if the given date objects' day is weekday.
 interfaces: not, all, any
@@ -2307,7 +2307,7 @@ is.all.weekday([sunday, saturday, monday]);
 => false
 ```
 
-is.inDateRange(value:object, startObject, endObject)
+is.inDateRange(value:date, start:date, end:date)
 ----------------------------------------------------
 ####Checks if date is within given range.
 interface: not
@@ -2326,7 +2326,7 @@ is.not.inDateRange(saturday, sunday, monday);
 => true
 ```
 
-is.inLastWeek(value:object)
+is.inLastWeek(value:date)
 ---------------------------
 ####Checks if the given date is between now and 7 days ago.
 interface: not
@@ -2344,7 +2344,7 @@ is.not.inLastWeek(nineDaysAgo);
 => true
 ```
 
-is.inLastMonth(value:object)
+is.inLastMonth(value:date)
 ----------------------------
 ####Checks if the given date is between now and a month ago.
 interface: not
@@ -2362,7 +2362,7 @@ is.not.inLastMonth(fortyDaysAgo);
 => true
 ```
 
-is.inLastYear(value:object)
+is.inLastYear(value:date)
 ---------------------------
 ####Checks if the given date is between now and a year ago.
 interface: not
@@ -2380,7 +2380,7 @@ is.not.inLastYear(thirteenMonthsAgo);
 => true
 ```
 
-is.inNextWeek(value:object)
+is.inNextWeek(value:date)
 ---------------------------
 ####Checks if the given date is between now and 7 days later.
 interface: not
@@ -2398,7 +2398,7 @@ is.not.inNextWeek(nineDaysLater);
 => true
 ```
 
-is.inNextMonth(value:object)
+is.inNextMonth(value:date)
 ----------------------------
 ####Checks if the given date is between now and a month later.
 interface: not
@@ -2416,7 +2416,7 @@ is.not.inNextMonth(fortyDaysLater);
 => true
 ```
 
-is.inNextYear(value:object)
+is.inNextYear(value:date)
 ---------------------------
 ####Checks if the given date is between now and a year later.
 interface: not
@@ -2434,7 +2434,7 @@ is.not.inNextYear(thirteenMonthsLater);
 => true
 ```
 
-is.quarterOfYear(value:object, quarterNumber)
+is.quarterOfYear(value:date, quarter:number)
 ---------------------------------------------
 ####Checks if the given date is in the parameter quarter.
 interface: not
@@ -2452,7 +2452,7 @@ is.not.quarterOfYear(secondQuarter, 1);
 => true
 ```
 
-is.dayLightSavingTime(value:object, quarterNumber)
+is.dayLightSavingTime(value:date, quarter:number)
 --------------------------------------------------
 ####Checks if the given date is in daylight saving time.
 interface: not
@@ -2475,7 +2475,7 @@ is.not.dayLightSavingTime(january1);
 Configuration methods
 =====================
 
-is.setRegexp(value:RegExp, regexpString)
+is.setRegexp(value:regexp, name:string)
 ----------------------------------------
 Override RegExps if you think they suck.
 
