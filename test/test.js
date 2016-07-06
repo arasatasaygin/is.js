@@ -4,8 +4,8 @@
         is = root.is || require('../is');
 
     function checkApi(name, list) {
-        list || (list = ['not', 'all', 'any']);
-        _.each(['not', 'all', 'any'], function(api) {
+        list || (list = ['all', 'any', 'not']);
+        _.each(['all', 'any', 'not'], function(api) {
             var exists = _.includes(list, api);
             describe('is.' + api + '.' + name, function()  {
                 it('should ' + (exists ? '' : 'not ') + 'exist', function() {
