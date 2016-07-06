@@ -4,7 +4,7 @@
  */
 
 // AMD with global, Node, or global
-;(function(root, factory) { // eslint-disable-line no-extra-semi
+;(function(root, factory) {    // eslint-disable-line no-extra-semi
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(function() {
