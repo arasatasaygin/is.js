@@ -956,7 +956,7 @@ is.all.hexColor(['fff', '333', 'f50']);
 => true
 ```
 
-is.ip(value:string)
+is.ip(value:any)
 -------------------------
 ####Checks if the given value matches ip regexp
 interfaces: not, all, any
@@ -982,7 +982,7 @@ is.all.ip(['123.123.23.12', 'A:B:C:D:E:F:0:0']);
 => true
 ```
 
-is.ipv4(value:string)
+is.ipv4(value:any)
 -------------------------
 ####Checks if the given value matches ipv4 regexp
 interfaces: not, all, any
@@ -1009,7 +1009,7 @@ is.all.ipv4(['198.12.3.142', '1.2.3']);
 
 ```
 
-is.ipv6(value:string)
+is.ipv6(value:any)
 -------------------------
 ####Checks if the given value matches ipv6 regexp
 interfaces: not, all, any
