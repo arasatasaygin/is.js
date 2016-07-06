@@ -1020,13 +1020,11 @@
         describe('is.sorted', function() {
             it('should return true if given array is sorted', function() {
                 var array1 = [1, 2, 3, 4, 5];
-                // default behaviour:
-                expect(is.sorted(array1)).to.be.true; // increasing
-                // extended behaviour:
-                expect(is.sorted(array1, '>=')).to.be.true; // increasing
-                expect(is.sorted(array1, '>')).to.be.true; // strictly increasing
-                expect(is.sorted(array1, '<=')).to.be.false; // decreasing
-                expect(is.sorted(array1, '<')).to.be.false; // strictly decreasing
+                expect(is.sorted(array1)).to.be.true;
+                expect(is.sorted(array1, '>=')).to.be.true;
+                expect(is.sorted(array1, '>')).to.be.true;
+                expect(is.sorted(array1, '<=')).to.be.false;
+                expect(is.sorted(array1, '<')).to.be.false;
 
                 var array2 = [5, 4, 4, 3, 1];
                 expect(is.sorted(array2)).to.be.false;
