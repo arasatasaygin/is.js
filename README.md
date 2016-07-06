@@ -2452,7 +2452,7 @@ is.not.quarterOfYear(secondQuarter, 1);
 => true
 ```
 
-is.dayLightSavingTime(value:date, quarter:number)
+is.dayLightSavingTime(value:date)
 --------------------------------------------------
 ####Checks if the given date is in daylight saving time.
 interface: not
