@@ -2475,6 +2475,16 @@ is.not.dayLightSavingTime(january1);
 Configuration methods
 =====================
 
+is.setNamespace()
+-----------------
+Change namespace of library to prevent name collisions.
+
+```javascript
+var customName = is.setNamespace();
+customName.odd(3);
+=> true
+```
+
 is.setRegexp(value:regexp, name:string)
 ----------------------------------------
 Override RegExps if you think they suck.
@@ -2485,15 +2495,5 @@ is.url('https://www.duckduckgo.com');
 
 is.setRegexp(/quack/, 'url');
 is.url('quack');
-=> true
-```
-
-is.setNamespace()
------------------
-Change namespace of library to prevent name collisions.
-
-```javascript
-var customName = is.setNamespace();
-customName.odd(3);
 => true
 ```

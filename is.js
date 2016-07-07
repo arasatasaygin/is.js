@@ -121,9 +121,19 @@
         return value === true || value === false || toString.call(value) === '[object Boolean]';
     };
 
+    // is a given value Char?
+    is.char = function(value) {
+        return is.string(value) && value.length === 1;
+    };
+
     // is a given value Date Object?
     is.date = function(value) {
         return toString.call(value) === '[object Date]';
+    };
+
+    // is a given object a DOM node?
+    is.domNode = function(object) {
+        return is.object(object) && object.nodeType > 0;
     };
 
     // is a given value Error object?
@@ -134,6 +144,11 @@
     // is a given value function?
     is['function'] = function(value) {    // fallback check is for IE
         return toString.call(value) === '[object Function]' || typeof value === 'function';
+    };
+
+    // is given value a pure JSON object?
+    is.json = function(value) {
+        return toString.call(value) === '[object Object]';
     };
 
     // is a given value NaN?
@@ -155,11 +170,6 @@
     is.object = function(value) {
         var type = typeof value;
         return type === 'function' || type === 'object' && !!value;
-    };
-
-    // is given value a pure JSON object?
-    is.json = function(value) {
-        return toString.call(value) === '[object Object]';
     };
 
     // is a given value RegExp?
@@ -187,14 +197,15 @@
         return toString.call(value) === '[object String]';
     };
 
-    // is a given value Char?
-    is.char = function(value) {
-        return is.string(value) && value.length === 1;
-    };
-
     // is a given value undefined?
     is.undefined = function(value) {
         return value === void 0;
+    };
+
+    // is a given object window?
+    // setInterval method is only available for window object
+    is.windowObject = function(object) {
+        return typeof object === 'object' && 'setInterval' in object;
     };
 
     // Presence checks
@@ -226,18 +237,20 @@
     // is a given value truthy?
     is.truthy = not(is.falsy);
 
-    // is a given value space?
-    // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
-    is.space = function(value) {
-        if (is.not.char(value)) {
-            return false;
-        }
-        var charCode = value.charCodeAt(0);
-        return (charCode > 8 && charCode < 14) || charCode === 32;
-    };
-
     // Arithmetic checks
     /* -------------------------------------------------------------------------- */
+
+    // is a given number above minimum parameter?
+    is.above = function(n, min) {
+        return is.all.number(n, min) && n > min;
+    };
+    // above method does not support 'all' and 'any' interfaces
+    is.above.api = ['not'];
+
+    // is a given number decimal?
+    is.decimal = function(n) {
+        return is.number(n) && n % 1 !== 0;
+    };
 
     // are given values equal? supports numbers, strings, regexes, booleans
     // TODO: Add object and array support
@@ -263,6 +276,24 @@
         return is.number(n) && n % 2 === 0;
     };
 
+    // is a given number finite?
+    is.finite = isFinite || function(n) {
+        return n !== Infinity && n !== -Infinity && is.not.nan(n);
+    };
+
+    // is a given number infinite?
+    is.infinite = not(is.finite);
+
+    // is a given number integer?
+    is.integer = function(n) {
+        return is.number(n) && n % 1 === 0;
+    };
+
+    // is a given number negative?
+    is.negative = function(n) {
+        return is.number(n) && n < 0;
+    };
+
     // is a given number odd?
     is.odd = function(n) {
         return is.number(n) && n % 2 === 1;
@@ -272,18 +303,6 @@
     is.positive = function(n) {
         return is.number(n) && n > 0;
     };
-
-    // is a given number negative?
-    is.negative = function(n) {
-        return is.number(n) && n < 0;
-    };
-
-    // is a given number above minimum parameter?
-    is.above = function(n, min) {
-        return is.all.number(n, min) && n > min;
-    };
-    // above method does not support 'all' and 'any' interfaces
-    is.above.api = ['not'];
 
     // is a given number above maximum parameter?
     is.under = function(n, max) {
@@ -299,64 +318,46 @@
     // within method does not support 'all' and 'any' interfaces
     is.within.api = ['not'];
 
-    // is a given number decimal?
-    is.decimal = function(n) {
-        return is.number(n) && n % 1 !== 0;
-    };
-
-    // is a given number integer?
-    is.integer = function(n) {
-        return is.number(n) && n % 1 === 0;
-    };
-
-    // is a given number finite?
-    is.finite = isFinite || function(n) {
-        return n !== Infinity && n !== -Infinity && is.not.nan(n);
-    };
-
-    // is a given number infinite?
-    is.infinite = not(is.finite);
-
     // Regexp checks
     /* -------------------------------------------------------------------------- */
     // Steven Levithan, Jan Goyvaerts: Regular Expressions Cookbook
     // Scott Gonzalez: Email address validation
 
+    // dateString match m/d/yy and mm/dd/yyyy, allowing any combination of one or two digits for the day and month, and two or four digits for the year
     // eppPhone match extensible provisioning protocol format
     // nanpPhone match north american number plan format
-    // dateString match m/d/yy and mm/dd/yyyy, allowing any combination of one or two digits for the day and month, and two or four digits for the year
     // time match hours, minutes, and seconds, 24-hour clock
     var regexes = {
-        url: /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i,
-        email: /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i, // eslint-disable-line no-control-regex
-        creditCard: /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/,
-        alphaNumeric: /^[A-Za-z0-9]+$/,
-        timeString: /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/,
-        dateString: /^(1[0-2]|0?[1-9])([\/-])(3[01]|[12][0-9]|0?[1-9])(?:\2)(?:[0-9]{2})?[0-9]{2}$/,
-        usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/,
-        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]\s?[0-9][A-Z][0-9]$/,
-        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
-        nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-        eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
-        socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-?(?!00)[0-9]{2}-?(?!0000)[0-9]{4}$/,
         affirmative: /^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$/,
+        alphaNumeric: /^[A-Za-z0-9]+$/,
+        caPostalCode: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]\s?[0-9][A-Z][0-9]$/,
+        creditCard: /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/,
+        dateString: /^(1[0-2]|0?[1-9])([\/-])(3[01]|[12][0-9]|0?[1-9])(?:\2)(?:[0-9]{2})?[0-9]{2}$/,
+        email: /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i, // eslint-disable-line no-control-regex
+        eppPhone: /^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$/,
         hexadecimal: /^(?:0x)?[0-9a-fA-F]+$/,
         hexColor: /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/,
         ipv4: /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/,
-        ipv6: /^((?=.*::)(?!.*::.+::)(::)?([\dA-F]{1,4}:(:|\b)|){5}|([\dA-F]{1,4}:){6})((([\dA-F]{1,4}((?!\3)::|:\b|$))|(?!\2\3)){2}|(((2[0-4]|1\d|[1-9])?\d|25[0-5])\.?\b){4})$/i
+        ipv6: /^((?=.*::)(?!.*::.+::)(::)?([\dA-F]{1,4}:(:|\b)|){5}|([\dA-F]{1,4}:){6})((([\dA-F]{1,4}((?!\3)::|:\b|$))|(?!\2\3)){2}|(((2[0-4]|1\d|[1-9])?\d|25[0-5])\.?\b){4})$/i,
+        nanpPhone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+        socialSecurityNumber: /^(?!000|666)[0-8][0-9]{2}-?(?!00)[0-9]{2}-?(?!0000)[0-9]{4}$/,
+        timeString: /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/,
+        ukPostCode: /^[A-Z]{1,2}[0-9RCHNQ][0-9A-Z]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$|^[A-Z]{2}-?[0-9]{4}$/,
+        url: /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i,
+        usZipCode: /^[0-9]{5}(?:-[0-9]{4})?$/
     };
+
+    function regexpCheck(regexp, regexes) {
+        is[regexp] = function(value) {
+            return regexes[regexp].test(value);
+        };
+    }
 
     // create regexp checks methods from 'regexes' object
     for (var regexp in regexes) {
         if (regexes.hasOwnProperty(regexp)) {
             regexpCheck(regexp, regexes);
         }
-    }
-
-    function regexpCheck(regexp, regexes) {
-        is[regexp] = function(value) {
-            return regexes[regexp].test(value);
-        };
     }
 
     // simplify IP checks by calling the regex helpers for IPv4 and IPv6
@@ -366,42 +367,6 @@
 
     // String checks
     /* -------------------------------------------------------------------------- */
-
-    // is a given string include parameter target?
-    is.include = function(string, target) {
-        return string.indexOf(target) > -1;
-    };
-    // include method does not support 'all' and 'any' interfaces
-    is.include.api = ['not'];
-
-    // is a given string all uppercase?
-    is.upperCase = function(string) {
-        return is.string(string) && string === string.toUpperCase();
-    };
-
-    // is a given string all lowercase?
-    is.lowerCase = function(string) {
-        return is.string(string) && string === string.toLowerCase();
-    };
-
-    // is string start with a given target parameter?
-    is.startWith = function(string, target) {
-        return is.string(string) && string.indexOf(target) === 0;
-    };
-    // startWith method does not support 'all' and 'any' interfaces
-    is.startWith.api = ['not'];
-
-    // is string end with a given target parameter?
-    is.endWith = function(string, target) {
-        if (is.not.string(string)) {
-            return false;
-        }
-        target += '';
-        var position = string.length - target.length;
-        return position >= 0 && string.indexOf(target, position) === position;
-    };
-    // endWith method does not support 'all' and 'any' interfaces
-    is.endWith.api = ['not'];
 
     // is a given string or sentence capitalized?
     is.capitalized = function(string) {
@@ -421,6 +386,30 @@
         return true;
     };
 
+    // is string end with a given target parameter?
+    is.endWith = function(string, target) {
+        if (is.not.string(string)) {
+            return false;
+        }
+        target += '';
+        var position = string.length - target.length;
+        return position >= 0 && string.indexOf(target, position) === position;
+    };
+    // endWith method does not support 'all' and 'any' interfaces
+    is.endWith.api = ['not'];
+
+    // is a given string include parameter target?
+    is.include = function(string, target) {
+        return string.indexOf(target) > -1;
+    };
+    // include method does not support 'all' and 'any' interfaces
+    is.include.api = ['not'];
+
+    // is a given string all lowercase?
+    is.lowerCase = function(string) {
+        return is.string(string) && string === string.toLowerCase();
+    };
+
     // is a given string palindrome?
     is.palindrome = function(string) {
         if (is.not.string(string)) {
@@ -436,146 +425,160 @@
         return true;
     };
 
+    // is a given value space?
+    // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
+    is.space = function(value) {
+        if (is.not.char(value)) {
+            return false;
+        }
+        var charCode = value.charCodeAt(0);
+        return (charCode > 8 && charCode < 14) || charCode === 32;
+    };
+
+    // is string start with a given target parameter?
+    is.startWith = function(string, target) {
+        return is.string(string) && string.indexOf(target) === 0;
+    };
+    // startWith method does not support 'all' and 'any' interfaces
+    is.startWith.api = ['not'];
+
+    // is a given string all uppercase?
+    is.upperCase = function(string) {
+        return is.string(string) && string === string.toUpperCase();
+    };
+
     // Time checks
     /* -------------------------------------------------------------------------- */
 
     var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 
-    // is a given date indicate today?
-    is.today = function(object) {
-        var now = new Date();
-        var todayString = now.toDateString();
-        return is.date(object) && object.toDateString() === todayString;
-    };
-
-    // is a given date indicate yesterday?
-    is.yesterday = function(object) {
-        var now = new Date();
-        var yesterdayString = new Date(now.setDate(now.getDate() - 1)).toDateString();
-        return is.date(object) && object.toDateString() === yesterdayString;
-    };
-
-    // is a given date indicate tomorrow?
-    is.tomorrow = function(object) {
-        var now = new Date();
-        var tomorrowString = new Date(now.setDate(now.getDate() + 1)).toDateString();
-        return is.date(object) && object.toDateString() === tomorrowString;
-    };
-
-    // is a given date past?
-    is.past = function(object) {
-        var now = new Date();
-        return is.date(object) && object.getTime() < now.getTime();
-    };
-
-    // is a given date future?
-    is.future = function(object) {
-        var now = new Date();
-        return is.date(object) && object.getTime() > now.getTime();
-    };
-
-    // is a given dates day equal given dayString parameter?
-    is.day = function(object, dayString) {
-        return is.date(object) && dayString.toLowerCase() === days[object.getDay()];
+    // is a given dates day equal given day parameter?
+    is.day = function(date, day) {
+        return is.date(date) && day.toLowerCase() === days[date.getDay()];
     };
     // day method does not support 'all' and 'any' interfaces
     is.day.api = ['not'];
 
-    // is a given dates month equal given monthString parameter?
-    is.month = function(object, monthString) {
-        return is.date(object) && monthString.toLowerCase() === months[object.getMonth()];
+    // is a given date in daylight saving time?
+    is.dayLightSavingTime = function(date) {
+        var january = new Date(date.getFullYear(), 0, 1);
+        var july = new Date(date.getFullYear(), 6, 1);
+        var stdTimezoneOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
+        return date.getTimezoneOffset() < stdTimezoneOffset;
     };
-    // month method does not support 'all' and 'any' interfaces
-    is.month.api = ['not'];
 
-    // is a given dates year equal given year parameter?
-    is.year = function(object, year) {
-        return is.date(object) && is.number(year) && year === object.getFullYear();
+    // is a given date future?
+    is.future = function(date) {
+        var now = new Date();
+        return is.date(date) && date.getTime() > now.getTime();
     };
-    // year method does not support 'all' and 'any' interfaces
-    is.year.api = ['not'];
+
+    // is date within given range?
+    is.inDateRange = function(date, start, end) {
+        if (is.not.date(date) || is.not.date(start) || is.not.date(end)) {
+            return false;
+        }
+        var stamp = date.getTime();
+        return stamp > start.getTime() && stamp < end.getTime();
+    };
+    // inDateRange method does not support 'all' and 'any' interfaces
+    is.inDateRange.api = ['not'];
+
+    // is a given date in last month range?
+    is.inLastMonth = function(date) {
+        return is.inDateRange(date, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
+    };
+
+    // is a given date in last week range?
+    is.inLastWeek = function(date) {
+        return is.inDateRange(date, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
+    };
+
+    // is a given date in last year range?
+    is.inLastYear = function(date) {
+        return is.inDateRange(date, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
+    };
+
+    // is a given date in next month range?
+    is.inNextMonth = function(date) {
+        return is.inDateRange(date, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
+    };
+
+    // is a given date in next week range?
+    is.inNextWeek = function(date) {
+        return is.inDateRange(date, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
+    };
+
+    // is a given date in next year range?
+    is.inNextYear = function(date) {
+        return is.inDateRange(date, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+    };
 
     // is the given year a leap year?
     is.leapYear = function(year) {
         return is.number(year) && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
     };
 
+    // is a given dates month equal given month parameter?
+    is.month = function(date, month) {
+        return is.date(date) && month.toLowerCase() === months[date.getMonth()];
+    };
+    // month method does not support 'all' and 'any' interfaces
+    is.month.api = ['not'];
+
+    // is a given date past?
+    is.past = function(date) {
+        var now = new Date();
+        return is.date(date) && date.getTime() < now.getTime();
+    };
+
+    // is a given date in the parameter quarter?
+    is.quarterOfYear = function(date, quarter) {
+        return is.date(date) && is.number(quarter) && quarter === Math.floor((date.getMonth() + 3) / 3);
+    };
+    // quarterOfYear method does not support 'all' and 'any' interfaces
+    is.quarterOfYear.api = ['not'];
+
+    // is a given date indicate today?
+    is.today = function(date) {
+        var now = new Date();
+        var todayString = now.toDateString();
+        return is.date(date) && date.toDateString() === todayString;
+    };
+
+    // is a given date indicate tomorrow?
+    is.tomorrow = function(date) {
+        var now = new Date();
+        var tomorrowString = new Date(now.setDate(now.getDate() + 1)).toDateString();
+        return is.date(date) && date.toDateString() === tomorrowString;
+    };
+
     // is a given date weekend?
     // 6: Saturday, 0: Sunday
-    is.weekend = function(object) {
-        return is.date(object) && (object.getDay() === 6 || object.getDay() === 0);
+    is.weekend = function(date) {
+        return is.date(date) && (date.getDay() === 6 || date.getDay() === 0);
     };
 
     // is a given date weekday?
     is.weekday = not(is.weekend);
 
-    // is date within given range?
-    is.inDateRange = function(object, startObj, endObj) {
-        if (is.not.date(object) || is.not.date(startObj) || is.not.date(endObj)) {
-            return false;
-        }
-        var givenDate = object.getTime();
-        var start = startObj.getTime();
-        var end = endObj.getTime();
-        return givenDate > start && givenDate < end;
+    // is a given dates year equal given year parameter?
+    is.year = function(date, year) {
+        return is.date(date) && is.number(year) && year === date.getFullYear();
     };
-    // inDateRange method does not support 'all' and 'any' interfaces
-    is.inDateRange.api = ['not'];
+    // year method does not support 'all' and 'any' interfaces
+    is.year.api = ['not'];
 
-    // is a given date in last week range?
-    is.inLastWeek = function(object) {
-        return is.inDateRange(object, new Date(new Date().setDate(new Date().getDate() - 7)), new Date());
-    };
-
-    // is a given date in last month range?
-    is.inLastMonth = function(object) {
-        return is.inDateRange(object, new Date(new Date().setMonth(new Date().getMonth() - 1)), new Date());
-    };
-
-    // is a given date in last year range?
-    is.inLastYear = function(object) {
-        return is.inDateRange(object, new Date(new Date().setFullYear(new Date().getFullYear() - 1)), new Date());
-    };
-
-    // is a given date in next week range?
-    is.inNextWeek = function(object) {
-        return is.inDateRange(object, new Date(), new Date(new Date().setDate(new Date().getDate() + 7)));
-    };
-
-    // is a given date in next month range?
-    is.inNextMonth = function(object) {
-        return is.inDateRange(object, new Date(), new Date(new Date().setMonth(new Date().getMonth() + 1)));
-    };
-
-    // is a given date in next year range?
-    is.inNextYear = function(object) {
-        return is.inDateRange(object, new Date(), new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
-    };
-
-    // is a given date in the parameter quarter?
-    is.quarterOfYear = function(object, quarterNumber) {
-        return is.date(object) && is.number(quarterNumber) && quarterNumber === Math.floor((object.getMonth() + 3) / 3);
-    };
-    // quarterOfYear method does not support 'all' and 'any' interfaces
-    is.quarterOfYear.api = ['not'];
-
-    // is a given date in daylight saving time?
-    is.dayLightSavingTime = function(object) {
-        var january = new Date(object.getFullYear(), 0, 1);
-        var july = new Date(object.getFullYear(), 6, 1);
-        var stdTimezoneOffset = Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
-        return object.getTimezoneOffset() < stdTimezoneOffset;
+    // is a given date indicate yesterday?
+    is.yesterday = function(date) {
+        var now = new Date();
+        var yesterdayString = new Date(now.setDate(now.getDate() - 1)).toDateString();
+        return is.date(date) && date.toDateString() === yesterdayString;
     };
 
     // Environment checks
     /* -------------------------------------------------------------------------- */
-
-    // is a given object window?
-    // setInterval method is only available for window object
-    is.windowObject = function(object) {
-        return typeof object === 'object' && 'setInterval' in object;
-    };
 
     var freeGlobal = is.windowObject(typeof global == 'object' && global) && global;
     var freeSelf = is.windowObject(typeof self == 'object' && self) && self;
@@ -592,104 +595,6 @@
         var appVersion = (navigator && navigator.appVersion || '').toLowerCase();
         var userAgent = (navigator && navigator.userAgent || '').toLowerCase();
         var vendor = (navigator && navigator.vendor || '').toLowerCase();
-
-        // is current browser chrome?
-        // parameter is optional
-        is.chrome = function(range) {
-            var match = /google inc/.test(vendor) && userAgent.match(/(?:chrome|crios)\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // chrome method does not support 'all' and 'any' interfaces
-        is.chrome.api = ['not'];
-
-        // is current browser firefox?
-        // parameter is optional
-        is.firefox = function(range) {
-            var match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // firefox method does not support 'all' and 'any' interfaces
-        is.firefox.api = ['not'];
-
-        // is current browser edge?
-        // parameter is optional
-        is.edge = function(range) {
-            var match = userAgent.match(/edge\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // edge method does not support 'all' and 'any' interfaces
-        is.edge.api = ['not'];
-
-        // is current browser internet explorer?
-        // parameter is optional
-        is.ie = function(range) {
-            var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // ie method does not support 'all' and 'any' interfaces
-        is.ie.api = ['not'];
-
-        // is current browser opera?
-        // parameter is optional
-        is.opera = function(range) {
-            var match = userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // opera method does not support 'all' and 'any' interfaces
-        is.opera.api = ['not'];
-
-        // is current browser safari?
-        // parameter is optional
-        is.safari = function(range) {
-            var match = userAgent.match(/version\/(\d+).+?safari/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // safari method does not support 'all' and 'any' interfaces
-        is.safari.api = ['not'];
-
-        // is current browser phantomjs?
-        // parameter is optional
-        is.phantom = function(range) {
-            var match = userAgent.match(/phantomjs\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // phantom method does not support 'all' and 'any' interfaces
-        is.phantom.api = ['not'];
-
-        // is current device ios?
-        is.ios = function() {
-            return is.iphone() || is.ipad() || is.ipod();
-        };
-        // ios method does not support 'all' and 'any' interfaces
-        is.ios.api = ['not'];
-
-        // is current device iphone?
-        // parameter is optional
-        is.iphone = function(range) {
-            // original iPhone doesn't have the os portion of the UA
-            var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
-            return !!match && compareVersion(match[1] || 1, range);
-        };
-        // iphone method does not support 'all' and 'any' interfaces
-        is.iphone.api = ['not'];
-
-        // is current device ipad?
-        // parameter is optional
-        is.ipad = function(range) {
-            var match = userAgent.match(/ipad.+?os (\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // ipad method does not support 'all' and 'any' interfaces
-        is.ipad.api = ['not'];
-
-        // is current device ipod?
-        // parameter is optional
-        is.ipod = function(range) {
-            var match = userAgent.match(/ipod.+?os (\d+)/);
-            return !!match && compareVersion(match[1], range);
-        };
-        // ipod method does not support 'all' and 'any' interfaces
-        is.ipod.api = ['not'];
 
         // is current device android?
         is.android = function() {
@@ -719,12 +624,83 @@
         // blackberry method does not support 'all' and 'any' interfaces
         is.blackberry.api = ['not'];
 
+        // is current browser chrome?
+        // parameter is optional
+        is.chrome = function(range) {
+            var match = /google inc/.test(vendor) && userAgent.match(/(?:chrome|crios)\/(\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // chrome method does not support 'all' and 'any' interfaces
+        is.chrome.api = ['not'];
+
         // is current device desktop?
         is.desktop = function() {
             return is.not.mobile() && is.not.tablet();
         };
         // desktop method does not support 'all' and 'any' interfaces
         is.desktop.api = ['not'];
+
+        // is current browser edge?
+        // parameter is optional
+        is.edge = function(range) {
+            var match = userAgent.match(/edge\/(\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // edge method does not support 'all' and 'any' interfaces
+        is.edge.api = ['not'];
+
+        // is current browser firefox?
+        // parameter is optional
+        is.firefox = function(range) {
+            var match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // firefox method does not support 'all' and 'any' interfaces
+        is.firefox.api = ['not'];
+
+        // is current browser internet explorer?
+        // parameter is optional
+        is.ie = function(range) {
+            var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // ie method does not support 'all' and 'any' interfaces
+        is.ie.api = ['not'];
+
+        // is current device ios?
+        is.ios = function() {
+            return is.iphone() || is.ipad() || is.ipod();
+        };
+        // ios method does not support 'all' and 'any' interfaces
+        is.ios.api = ['not'];
+
+        // is current device ipad?
+        // parameter is optional
+        is.ipad = function(range) {
+            var match = userAgent.match(/ipad.+?os (\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // ipad method does not support 'all' and 'any' interfaces
+        is.ipad.api = ['not'];
+
+        // is current device iphone?
+        // parameter is optional
+        is.iphone = function(range) {
+            // original iPhone doesn't have the os portion of the UA
+            var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
+            return !!match && compareVersion(match[1] || 1, range);
+        };
+        // iphone method does not support 'all' and 'any' interfaces
+        is.iphone.api = ['not'];
+
+        // is current device ipod?
+        // parameter is optional
+        is.ipod = function(range) {
+            var match = userAgent.match(/ipod.+?os (\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // ipod method does not support 'all' and 'any' interfaces
+        is.ipod.api = ['not'];
 
         // is current operating system linux?
         is.linux = function() {
@@ -739,6 +715,66 @@
         };
         // mac method does not support 'all' and 'any' interfaces
         is.mac.api = ['not'];
+
+        // is current device mobile?
+        is.mobile = function() {
+            return is.iphone() || is.ipod() || is.androidPhone() || is.blackberry() || is.windowsPhone();
+        };
+        // mobile method does not support 'all' and 'any' interfaces
+        is.mobile.api = ['not'];
+
+        // is current state offline?
+        is.offline = not(is.online);
+        // offline method does not support 'all' and 'any' interfaces
+        is.offline.api = ['not'];
+
+        // is current state online?
+        is.online = function() {
+            return navigator.onLine;
+        };
+        // online method does not support 'all' and 'any' interfaces
+        is.online.api = ['not'];
+
+        // is current browser opera?
+        // parameter is optional
+        is.opera = function(range) {
+            var match = userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // opera method does not support 'all' and 'any' interfaces
+        is.opera.api = ['not'];
+
+        // is current browser phantomjs?
+        // parameter is optional
+        is.phantom = function(range) {
+            var match = userAgent.match(/phantomjs\/(\d+)/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // phantom method does not support 'all' and 'any' interfaces
+        is.phantom.api = ['not'];
+
+        // is current browser safari?
+        // parameter is optional
+        is.safari = function(range) {
+            var match = userAgent.match(/version\/(\d+).+?safari/);
+            return !!match && compareVersion(match[1], range);
+        };
+        // safari method does not support 'all' and 'any' interfaces
+        is.safari.api = ['not'];
+
+        // is current device tablet?
+        is.tablet = function() {
+            return is.ipad() || is.androidTablet() || is.windowsTablet();
+        };
+        // tablet method does not support 'all' and 'any' interfaces
+        is.tablet.api = ['not'];
+
+        // is current device supports touch?
+        is.touchDevice = function() {
+            return 'ontouchstart' in freeSelf ||'DocumentTouch' in freeSelf && document instanceof DocumentTouch;
+        };
+        // touchDevice method does not support 'all' and 'any' interfaces
+        is.touchDevice.api = ['not'];
 
         // is current operating system windows?
         is.windows = function() {
@@ -760,39 +796,6 @@
         };
         // windowsTablet method does not support 'all' and 'any' interfaces
         is.windowsTablet.api = ['not'];
-
-        // is current device mobile?
-        is.mobile = function() {
-            return is.iphone() || is.ipod() || is.androidPhone() || is.blackberry() || is.windowsPhone();
-        };
-        // mobile method does not support 'all' and 'any' interfaces
-        is.mobile.api = ['not'];
-
-        // is current device tablet?
-        is.tablet = function() {
-            return is.ipad() || is.androidTablet() || is.windowsTablet();
-        };
-        // tablet method does not support 'all' and 'any' interfaces
-        is.tablet.api = ['not'];
-
-        // is current state online?
-        is.online = function() {
-            return navigator.onLine;
-        };
-        // online method does not support 'all' and 'any' interfaces
-        is.online.api = ['not'];
-
-        // is current state offline?
-        is.offline = not(is.online);
-        // offline method does not support 'all' and 'any' interfaces
-        is.offline.api = ['not'];
-
-        // is current device supports touch?
-        is.touchDevice = function() {
-            return 'ontouchstart' in freeSelf ||'DocumentTouch' in freeSelf && document instanceof DocumentTouch;
-        };
-        // touchDevice method does not support 'all' and 'any' interfaces
-        is.touchDevice.api = ['not'];
     }
 
     // Object checks
@@ -820,11 +823,6 @@
     };
     // propertyDefined method does not support 'all' and 'any' interfaces
     is.propertyDefined.api = ['not'];
-
-    // is a given object a DOM node?
-    is.domNode = function(object) {
-        return is.object(object) && object.nodeType > 0;
-    };
 
     // Array checks
     /* -------------------------------------------------------------------------- */
@@ -887,15 +885,6 @@
     // Intentionally added after setInterfaces function
     /* -------------------------------------------------------------------------- */
 
-    // set optional regexes to methods
-    is.setRegexp = function(regexp, regexpName) {
-        for (var r in regexes) {
-            if (hasOwnProperty.call(regexes, r) && (regexpName === r)) {
-                regexes[r] = regexp;
-            }
-        }
-    };
-
     // change namespace of library to prevent name collisions
     // var preferredName = is.setNamespace();
     // preferredName.odd(3);
@@ -903,6 +892,15 @@
     is.setNamespace = function() {
         root.is = previousIs;
         return this;
+    };
+
+    // set optional regexes to methods
+    is.setRegexp = function(regexp, name) {
+        for (var r in regexes) {
+            if (hasOwnProperty.call(regexes, r) && (name === r)) {
+                regexes[r] = regexp;
+            }
+        }
     };
 
     return is;
