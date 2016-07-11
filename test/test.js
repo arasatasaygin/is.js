@@ -171,6 +171,18 @@
         });
         checkApi('sameType', ['not']);
 
+        describe('is.set', function() {
+            it('should return true if passed parameter type is set', function() {
+                var set = new Set(['test']);
+                expect(is.set(set)).to.be.true;
+            });
+            it('should return false if passed parameter type is not set', function() {
+                var notSet = ['test'];
+                expect(is.set(notSet)).to.be.false;
+            });
+        });
+        checkApi('set');
+
         describe('is.char', function() {
             it('should return true if passed parameter type is char', function() {
                 expect(is.char('t')).to.be.true;
