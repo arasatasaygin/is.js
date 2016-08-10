@@ -6,7 +6,7 @@ node_js:
   - "6"
 cache:
   directories:
-    - node_modules
+    - $HOME/.npm
 git:
   depth: 10
 branches:
