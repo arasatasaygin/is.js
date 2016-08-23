@@ -590,7 +590,7 @@
     // is current runtime node.js?
     // parameter is optional
     is.node = function(range) {
-        if (Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]'){
+        if (toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]'){
           var match = process.version.match(/(v)(\d+)/);
           return !!match && compareVersion(match[2], range);
         }else{
