@@ -168,8 +168,7 @@
 
     // is a given value object?
     is.object = function(value) {
-        var type = typeof value;
-        return type === 'function' || type === 'object' && !!value;
+        return Object(value) === value;
     };
 
     // is a given value RegExp?
