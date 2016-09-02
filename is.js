@@ -416,7 +416,7 @@
         }
         string = string.replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
         var length = string.length - 1;
-        for (var i = 0, half = (length / 2) << 0; i <= half; i++) {
+        for (var i = 0, half = Math.floor(length / 2); i <= half; i++) {
             if (string.charAt(i) !== string.charAt(length - i)) {
                 return false;
             }
