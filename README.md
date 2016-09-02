@@ -1554,9 +1554,9 @@ is.not.inArray(4, [1, 2, 3]);
 => true
 ```
 
-is.sorted(value:array)
+is.sorted(value:array, sign:string)
 ----------------------
-####Checks if the given array is sorted.
+####Checks if the given array is sorted. Sign is optional parameter.
 interfaces: not, all, any
 
 ```javascript
@@ -1566,8 +1566,26 @@ is.sorted([1, 2, 3]);
 is.sorted([1, 2, 4, 3]);
 => false
 
+is.sorted([1, 1, 2, 2], '>=');
+=> true
+
+is.sorted([1, 2, 3, 4], '>');
+=> true
+
+is.sorted([4, 3, 3, 1], '<=');
+=> true
+
+is.sorted([4, 3, 2, 1], '<');
+=> true
+
+is.sorted([1, 2, 3, 3], '>');
+=> false
+
 is.not.sorted([5, 4, 3]);
 => true
+
+is.not.sorted([5, 4, 3], '<');
+=> false
 
 is.all.sorted([1, 2], [3, 4]);
 => true
