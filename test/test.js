@@ -399,6 +399,7 @@
             });
             it('should return false if given number is not infinite', function() {
                 expect(is.infinite(1)).to.be.false;
+                expect(is.infinite(NaN)).to.be.false;
             });
         });
         checkApi('infinite');
