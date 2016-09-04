@@ -277,11 +277,13 @@
 
     // is a given number finite?
     is.finite = isFinite || function(n) {
-        return n !== Infinity && n !== -Infinity && is.not.nan(n);
+        return is.not.infinite(n) && is.not.nan(n);
     };
 
     // is a given number infinite?
-    is.infinite = not(is.finite);
+    is.infinite = function(n) {
+        return n === Infinity || n === -Infinity;
+    };
 
     // is a given number integer?
     is.integer = function(n) {
