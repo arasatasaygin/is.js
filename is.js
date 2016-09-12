@@ -1,5 +1,5 @@
 /*!
- * is.js 0.8.0
+ * is.js 0.9.0
  * Author: Aras Atasaygin
  */
 
