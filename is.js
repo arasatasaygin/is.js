@@ -201,10 +201,10 @@
         return value === void 0;
     };
 
-    // is a given object window?
+    // is a given value window?
     // setInterval method is only available for window object
-    is.windowObject = function(object) {
-        return typeof object === 'object' && 'setInterval' in object;
+    is.windowObject = function(value) {
+        return !!value && typeof value === 'object' && 'setInterval' in value;
     };
 
     // Presence checks
