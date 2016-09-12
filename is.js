@@ -108,7 +108,7 @@
     // is a given value Arguments?
     is.arguments = function(value) {    // fallback check is for IE
         return toString.call(value) === '[object Arguments]' ||
-            (!!value && typeof value === 'object' && 'callee' in value);
+            (value != null && typeof value === 'object' && 'callee' in value);
     };
 
     // is a given value Array?
@@ -204,7 +204,7 @@
     // is a given value window?
     // setInterval method is only available for window object
     is.windowObject = function(value) {
-        return !!value && typeof value === 'object' && 'setInterval' in value;
+        return value != null && typeof value === 'object' && 'setInterval' in value;
     };
 
     // Presence checks
@@ -628,8 +628,8 @@
         // is current browser chrome?
         // parameter is optional
         is.chrome = function(range) {
-            var match = /google inc/.test(vendor) && userAgent.match(/(?:chrome|crios)\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
+            var match = /google inc/.test(vendor) ? userAgent.match(/(?:chrome|crios)\/(\d+)/) : null;
+            return match !== null && compareVersion(match[1], range);
         };
         // chrome method does not support 'all' and 'any' interfaces
         is.chrome.api = ['not'];
@@ -645,7 +645,7 @@
         // parameter is optional
         is.edge = function(range) {
             var match = userAgent.match(/edge\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // edge method does not support 'all' and 'any' interfaces
         is.edge.api = ['not'];
@@ -654,7 +654,7 @@
         // parameter is optional
         is.firefox = function(range) {
             var match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // firefox method does not support 'all' and 'any' interfaces
         is.firefox.api = ['not'];
@@ -663,7 +663,7 @@
         // parameter is optional
         is.ie = function(range) {
             var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // ie method does not support 'all' and 'any' interfaces
         is.ie.api = ['not'];
@@ -679,7 +679,7 @@
         // parameter is optional
         is.ipad = function(range) {
             var match = userAgent.match(/ipad.+?os (\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // ipad method does not support 'all' and 'any' interfaces
         is.ipad.api = ['not'];
@@ -689,7 +689,7 @@
         is.iphone = function(range) {
             // original iPhone doesn't have the os portion of the UA
             var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
-            return !!match && compareVersion(match[1] || 1, range);
+            return match !== null && compareVersion(match[1] || 1, range);
         };
         // iphone method does not support 'all' and 'any' interfaces
         is.iphone.api = ['not'];
@@ -698,7 +698,7 @@
         // parameter is optional
         is.ipod = function(range) {
             var match = userAgent.match(/ipod.+?os (\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // ipod method does not support 'all' and 'any' interfaces
         is.ipod.api = ['not'];
@@ -740,7 +740,7 @@
         // parameter is optional
         is.opera = function(range) {
             var match = userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // opera method does not support 'all' and 'any' interfaces
         is.opera.api = ['not'];
@@ -749,7 +749,7 @@
         // parameter is optional
         is.phantom = function(range) {
             var match = userAgent.match(/phantomjs\/(\d+)/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // phantom method does not support 'all' and 'any' interfaces
         is.phantom.api = ['not'];
@@ -758,7 +758,7 @@
         // parameter is optional
         is.safari = function(range) {
             var match = userAgent.match(/version\/(\d+).+?safari/);
-            return !!match && compareVersion(match[1], range);
+            return match !== null && compareVersion(match[1], range);
         };
         // safari method does not support 'all' and 'any' interfaces
         is.safari.api = ['not'];
