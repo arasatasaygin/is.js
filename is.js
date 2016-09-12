@@ -586,218 +586,215 @@
     var thisGlobal = is.windowObject(typeof this == 'object' && this) && this;
     var root = freeGlobal || freeSelf || thisGlobal || Function('return this')();
 
+    var document = freeSelf && freeSelf.document;
     var previousIs = root.is;
 
-    // check if library is used as a Node.js module
-    if (freeSelf) {
+    // store navigator properties to use later
+    var navigator = freeSelf && freeSelf.navigator;
+    var appVersion = (navigator && navigator.appVersion || '').toLowerCase();
+    var userAgent = (navigator && navigator.userAgent || '').toLowerCase();
+    var vendor = (navigator && navigator.vendor || '').toLowerCase();
 
-        // store navigator properties to use later
-        var navigator = freeSelf.navigator;
-        var appVersion = (navigator && navigator.appVersion || '').toLowerCase();
-        var userAgent = (navigator && navigator.userAgent || '').toLowerCase();
-        var vendor = (navigator && navigator.vendor || '').toLowerCase();
+    // is current device android?
+    is.android = function() {
+        return /android/.test(userAgent);
+    };
+    // android method does not support 'all' and 'any' interfaces
+    is.android.api = ['not'];
 
-        // is current device android?
-        is.android = function() {
-            return /android/.test(userAgent);
-        };
-        // android method does not support 'all' and 'any' interfaces
-        is.android.api = ['not'];
+    // is current device android phone?
+    is.androidPhone = function() {
+        return /android/.test(userAgent) && /mobile/.test(userAgent);
+    };
+    // androidPhone method does not support 'all' and 'any' interfaces
+    is.androidPhone.api = ['not'];
 
-        // is current device android phone?
-        is.androidPhone = function() {
-            return /android/.test(userAgent) && /mobile/.test(userAgent);
-        };
-        // androidPhone method does not support 'all' and 'any' interfaces
-        is.androidPhone.api = ['not'];
+    // is current device android tablet?
+    is.androidTablet = function() {
+        return /android/.test(userAgent) && !/mobile/.test(userAgent);
+    };
+    // androidTablet method does not support 'all' and 'any' interfaces
+    is.androidTablet.api = ['not'];
 
-        // is current device android tablet?
-        is.androidTablet = function() {
-            return /android/.test(userAgent) && !/mobile/.test(userAgent);
-        };
-        // androidTablet method does not support 'all' and 'any' interfaces
-        is.androidTablet.api = ['not'];
+    // is current device blackberry?
+    is.blackberry = function() {
+        return /blackberry/.test(userAgent) || /bb10/.test(userAgent);
+    };
+    // blackberry method does not support 'all' and 'any' interfaces
+    is.blackberry.api = ['not'];
 
-        // is current device blackberry?
-        is.blackberry = function() {
-            return /blackberry/.test(userAgent) || /bb10/.test(userAgent);
-        };
-        // blackberry method does not support 'all' and 'any' interfaces
-        is.blackberry.api = ['not'];
+    // is current browser chrome?
+    // parameter is optional
+    is.chrome = function(range) {
+        var match = /google inc/.test(vendor) ? userAgent.match(/(?:chrome|crios)\/(\d+)/) : null;
+        return match !== null && compareVersion(match[1], range);
+    };
+    // chrome method does not support 'all' and 'any' interfaces
+    is.chrome.api = ['not'];
 
-        // is current browser chrome?
-        // parameter is optional
-        is.chrome = function(range) {
-            var match = /google inc/.test(vendor) ? userAgent.match(/(?:chrome|crios)\/(\d+)/) : null;
-            return match !== null && compareVersion(match[1], range);
-        };
-        // chrome method does not support 'all' and 'any' interfaces
-        is.chrome.api = ['not'];
+    // is current device desktop?
+    is.desktop = function() {
+        return is.not.mobile() && is.not.tablet();
+    };
+    // desktop method does not support 'all' and 'any' interfaces
+    is.desktop.api = ['not'];
 
-        // is current device desktop?
-        is.desktop = function() {
-            return is.not.mobile() && is.not.tablet();
-        };
-        // desktop method does not support 'all' and 'any' interfaces
-        is.desktop.api = ['not'];
+    // is current browser edge?
+    // parameter is optional
+    is.edge = function(range) {
+        var match = userAgent.match(/edge\/(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // edge method does not support 'all' and 'any' interfaces
+    is.edge.api = ['not'];
 
-        // is current browser edge?
-        // parameter is optional
-        is.edge = function(range) {
-            var match = userAgent.match(/edge\/(\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // edge method does not support 'all' and 'any' interfaces
-        is.edge.api = ['not'];
+    // is current browser firefox?
+    // parameter is optional
+    is.firefox = function(range) {
+        var match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // firefox method does not support 'all' and 'any' interfaces
+    is.firefox.api = ['not'];
 
-        // is current browser firefox?
-        // parameter is optional
-        is.firefox = function(range) {
-            var match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // firefox method does not support 'all' and 'any' interfaces
-        is.firefox.api = ['not'];
+    // is current browser internet explorer?
+    // parameter is optional
+    is.ie = function(range) {
+        var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // ie method does not support 'all' and 'any' interfaces
+    is.ie.api = ['not'];
 
-        // is current browser internet explorer?
-        // parameter is optional
-        is.ie = function(range) {
-            var match = userAgent.match(/(?:msie |trident.+?; rv:)(\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // ie method does not support 'all' and 'any' interfaces
-        is.ie.api = ['not'];
+    // is current device ios?
+    is.ios = function() {
+        return is.iphone() || is.ipad() || is.ipod();
+    };
+    // ios method does not support 'all' and 'any' interfaces
+    is.ios.api = ['not'];
 
-        // is current device ios?
-        is.ios = function() {
-            return is.iphone() || is.ipad() || is.ipod();
-        };
-        // ios method does not support 'all' and 'any' interfaces
-        is.ios.api = ['not'];
+    // is current device ipad?
+    // parameter is optional
+    is.ipad = function(range) {
+        var match = userAgent.match(/ipad.+?os (\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // ipad method does not support 'all' and 'any' interfaces
+    is.ipad.api = ['not'];
 
-        // is current device ipad?
-        // parameter is optional
-        is.ipad = function(range) {
-            var match = userAgent.match(/ipad.+?os (\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // ipad method does not support 'all' and 'any' interfaces
-        is.ipad.api = ['not'];
+    // is current device iphone?
+    // parameter is optional
+    is.iphone = function(range) {
+        // original iPhone doesn't have the os portion of the UA
+        var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
+        return match !== null && compareVersion(match[1] || 1, range);
+    };
+    // iphone method does not support 'all' and 'any' interfaces
+    is.iphone.api = ['not'];
 
-        // is current device iphone?
-        // parameter is optional
-        is.iphone = function(range) {
-            // original iPhone doesn't have the os portion of the UA
-            var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
-            return match !== null && compareVersion(match[1] || 1, range);
-        };
-        // iphone method does not support 'all' and 'any' interfaces
-        is.iphone.api = ['not'];
+    // is current device ipod?
+    // parameter is optional
+    is.ipod = function(range) {
+        var match = userAgent.match(/ipod.+?os (\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // ipod method does not support 'all' and 'any' interfaces
+    is.ipod.api = ['not'];
 
-        // is current device ipod?
-        // parameter is optional
-        is.ipod = function(range) {
-            var match = userAgent.match(/ipod.+?os (\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // ipod method does not support 'all' and 'any' interfaces
-        is.ipod.api = ['not'];
+    // is current operating system linux?
+    is.linux = function() {
+        return /linux/.test(appVersion);
+    };
+    // linux method does not support 'all' and 'any' interfaces
+    is.linux.api = ['not'];
 
-        // is current operating system linux?
-        is.linux = function() {
-            return /linux/.test(appVersion);
-        };
-        // linux method does not support 'all' and 'any' interfaces
-        is.linux.api = ['not'];
+    // is current operating system mac?
+    is.mac = function() {
+        return /mac/.test(appVersion);
+    };
+    // mac method does not support 'all' and 'any' interfaces
+    is.mac.api = ['not'];
 
-        // is current operating system mac?
-        is.mac = function() {
-            return /mac/.test(appVersion);
-        };
-        // mac method does not support 'all' and 'any' interfaces
-        is.mac.api = ['not'];
+    // is current device mobile?
+    is.mobile = function() {
+        return is.iphone() || is.ipod() || is.androidPhone() || is.blackberry() || is.windowsPhone();
+    };
+    // mobile method does not support 'all' and 'any' interfaces
+    is.mobile.api = ['not'];
 
-        // is current device mobile?
-        is.mobile = function() {
-            return is.iphone() || is.ipod() || is.androidPhone() || is.blackberry() || is.windowsPhone();
-        };
-        // mobile method does not support 'all' and 'any' interfaces
-        is.mobile.api = ['not'];
+    // is current state offline?
+    is.offline = not(is.online);
+    // offline method does not support 'all' and 'any' interfaces
+    is.offline.api = ['not'];
 
-        // is current state offline?
-        is.offline = not(is.online);
-        // offline method does not support 'all' and 'any' interfaces
-        is.offline.api = ['not'];
+    // is current state online?
+    is.online = function() {
+        return !navigator || navigator.onLine === true;
+    };
+    // online method does not support 'all' and 'any' interfaces
+    is.online.api = ['not'];
 
-        // is current state online?
-        is.online = function() {
-            return navigator.onLine;
-        };
-        // online method does not support 'all' and 'any' interfaces
-        is.online.api = ['not'];
+    // is current browser opera?
+    // parameter is optional
+    is.opera = function(range) {
+        var match = userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // opera method does not support 'all' and 'any' interfaces
+    is.opera.api = ['not'];
 
-        // is current browser opera?
-        // parameter is optional
-        is.opera = function(range) {
-            var match = userAgent.match(/(?:^opera.+?version|opr)\/(\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // opera method does not support 'all' and 'any' interfaces
-        is.opera.api = ['not'];
+    // is current browser phantomjs?
+    // parameter is optional
+    is.phantom = function(range) {
+        var match = userAgent.match(/phantomjs\/(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // phantom method does not support 'all' and 'any' interfaces
+    is.phantom.api = ['not'];
 
-        // is current browser phantomjs?
-        // parameter is optional
-        is.phantom = function(range) {
-            var match = userAgent.match(/phantomjs\/(\d+)/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // phantom method does not support 'all' and 'any' interfaces
-        is.phantom.api = ['not'];
+    // is current browser safari?
+    // parameter is optional
+    is.safari = function(range) {
+        var match = userAgent.match(/version\/(\d+).+?safari/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // safari method does not support 'all' and 'any' interfaces
+    is.safari.api = ['not'];
 
-        // is current browser safari?
-        // parameter is optional
-        is.safari = function(range) {
-            var match = userAgent.match(/version\/(\d+).+?safari/);
-            return match !== null && compareVersion(match[1], range);
-        };
-        // safari method does not support 'all' and 'any' interfaces
-        is.safari.api = ['not'];
+    // is current device tablet?
+    is.tablet = function() {
+        return is.ipad() || is.androidTablet() || is.windowsTablet();
+    };
+    // tablet method does not support 'all' and 'any' interfaces
+    is.tablet.api = ['not'];
 
-        // is current device tablet?
-        is.tablet = function() {
-            return is.ipad() || is.androidTablet() || is.windowsTablet();
-        };
-        // tablet method does not support 'all' and 'any' interfaces
-        is.tablet.api = ['not'];
+    // is current device supports touch?
+    is.touchDevice = function() {
+      return !!document && 'ontouchstart' in freeSelf ||'DocumentTouch' in freeSelf && document instanceof DocumentTouch;
+    };
+    // touchDevice method does not support 'all' and 'any' interfaces
+    is.touchDevice.api = ['not'];
 
-        // is current device supports touch?
-        is.touchDevice = function() {
-            return 'ontouchstart' in freeSelf ||'DocumentTouch' in freeSelf && document instanceof DocumentTouch;
-        };
-        // touchDevice method does not support 'all' and 'any' interfaces
-        is.touchDevice.api = ['not'];
+    // is current operating system windows?
+    is.windows = function() {
+        return /win/.test(appVersion);
+    };
+    // windows method does not support 'all' and 'any' interfaces
+    is.windows.api = ['not'];
 
-        // is current operating system windows?
-        is.windows = function() {
-            return /win/.test(appVersion);
-        };
-        // windows method does not support 'all' and 'any' interfaces
-        is.windows.api = ['not'];
+    // is current device windows phone?
+    is.windowsPhone = function() {
+        return is.windows() && /phone/.test(userAgent);
+    };
+    // windowsPhone method does not support 'all' and 'any' interfaces
+    is.windowsPhone.api = ['not'];
 
-        // is current device windows phone?
-        is.windowsPhone = function() {
-            return is.windows() && /phone/.test(userAgent);
-        };
-        // windowsPhone method does not support 'all' and 'any' interfaces
-        is.windowsPhone.api = ['not'];
-
-        // is current device windows tablet?
-        is.windowsTablet = function() {
-            return is.windows() && is.not.windowsPhone() && /touch/.test(userAgent);
-        };
-        // windowsTablet method does not support 'all' and 'any' interfaces
-        is.windowsTablet.api = ['not'];
-    }
+    // is current device windows tablet?
+    is.windowsTablet = function() {
+        return is.windows() && is.not.windowsPhone() && /touch/.test(userAgent);
+    };
+    // windowsTablet method does not support 'all' and 'any' interfaces
+    is.windowsTablet.api = ['not'];
 
     // Object checks
     /* -------------------------------------------------------------------------- */

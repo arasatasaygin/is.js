@@ -1,7 +1,9 @@
 ;(function(root) {    // eslint-disable-line no-extra-semi
     var _ = root._ || require('lodash'),
+        document = root.document,
         expect = _.get(root, 'chai.expect') || require('chai').expect,
-        is = root.is || require('../is');
+        is = root.is || require('../is'),
+        window = root.window;
 
     function checkApi(name, list) {
         list || (list = ['all', 'any', 'not']);
@@ -994,7 +996,7 @@
 
         describe('is.windowObject', function() {
             it('should return true if given object is window object', function() {
-                expect(is.windowObject(window)).to.be.true;
+                expect(is.windowObject(window)).to.be[!!window];
             });
             it('should return false if given object is not window object', function() {
                 expect(is.windowObject({})).to.be.false;
@@ -1004,8 +1006,8 @@
 
         describe('is.domNode', function() {
             it('should return true if given object is a DOM node', function() {
-                var obj = document.createElement('div');
-                expect(is.domNode(obj)).to.be.true;
+                var obj = document && document.createElement('div');
+                expect(is.domNode(obj)).to.be[!!document];
             });
             it('should return false if given object is not a DOM node', function() {
                 expect(is.domNode({})).to.be.false;
