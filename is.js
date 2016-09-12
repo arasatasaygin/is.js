@@ -770,7 +770,8 @@
 
     // is current device supports touch?
     is.touchDevice = function() {
-      return !!document && 'ontouchstart' in freeSelf ||'DocumentTouch' in freeSelf && document instanceof DocumentTouch;
+        return !!document && ('ontouchstart' in freeSelf ||
+            ('DocumentTouch' in freeSelf && document instanceof DocumentTouch));
     };
     // touchDevice method does not support 'all' and 'any' interfaces
     is.touchDevice.api = ['not'];
