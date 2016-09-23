@@ -685,8 +685,9 @@
     // is current device iphone?
     // parameter is optional
     is.iphone = function(range) {
-        // original iPhone doesn't have the os portion of the UA
-        var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
+        // avoid false positive for Facebook in-app browser on ipad;
+        // original iphone doesn't have the OS portion of the UA
+        var match = is.ipad() ? null : userAgent.match(/iphone(?:.+?os (\d+))?/);
         return match !== null && compareVersion(match[1] || 1, range);
     };
     // iphone method does not support 'all' and 'any' interfaces
