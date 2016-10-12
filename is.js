@@ -37,9 +37,9 @@
     is.any = {};
 
     // cache some methods to call later on
-    var __toString = Object.prototype.toString;
-    var __slice = Array.prototype.slice;
-    var __hasOwnProperty = Object.prototype.hasOwnProperty;
+    var _toString = Object.prototype.toString;
+    var _slice = Array.prototype.slice;
+    var _hasOwnProperty = Object.prototype.hasOwnProperty;
 
     // helper function which reverses the sense of predicate result
     function not(func) {
