@@ -356,7 +356,7 @@
 
     // create regexp checks methods from 'regexes' object
     for (var regexp in regexes) {
-        if (regexes._hasOwnProperty(regexp)) {
+        if (regexes.hasOwnProperty(regexp)) {
             regexpCheck(regexp, regexes);
         }
     }
