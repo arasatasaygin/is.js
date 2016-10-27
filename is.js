@@ -627,7 +627,7 @@
     // parameter is optional
     is.chrome = function(range) {
         var match = /google inc/.test(vendor) ? userAgent.match(/(?:chrome|crios)\/(\d+)/) : null;
-        return match !== null && compareVersion(match[1], range);
+        return match !== null && is.not.opera() && compareVersion(match[1], range);
     };
     // chrome method does not support 'all' and 'any' interfaces
     is.chrome.api = ['not'];
