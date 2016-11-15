@@ -29,7 +29,7 @@
 
     // define 'is' object and current version
     var is = {};
-    is.VERSION = '0.8.0';
+    is.VERSION = '0.9.0';
 
     // define interfaces
     is.not = {};
