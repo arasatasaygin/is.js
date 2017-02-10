@@ -164,7 +164,7 @@
 
         describe('is.map', function() {
             it('should return true if passed parameter type is map', function() {
-                var ctx = window || global;
+                var ctx = (typeof window === 'undefined') ? global : window;
                 // check for Map support first
                 if ('Map' in ctx) {
                     var map = new ctx.Map();
