@@ -176,6 +176,10 @@
         return toString.call(value) === '[object RegExp]';
     };
 
+    is.map = function(value) {
+        return toString.call(value) === '[object Map]';
+    }
+
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value, other) {

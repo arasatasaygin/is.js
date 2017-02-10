@@ -162,6 +162,25 @@
         });
         checkApi('regexp');
 
+        describe('is.map', function() {
+            it('should return true if passed parameter type is map', function() {
+                var ctx = window || global;
+                // check for Map support first
+                if ('Map' in ctx) {
+                    var map = new ctx.Map();
+                    expect(is.map(map)).to.be.true;
+                } else {
+                    // no Map support - noop
+                    expect(true).to.be.true;
+                }
+            });
+            it('should return false if passed parameter type is not map', function() {
+                var notMap = 'test';
+                expect(is.map(notMap)).to.be.false;
+            });
+        });
+        checkApi('map');
+
         describe('is.sameType', function() {
             it('should return true if passed parameter types are same', function() {
                 expect(is.sameType(1, 2)).to.be.true;
