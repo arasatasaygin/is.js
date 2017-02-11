@@ -176,9 +176,14 @@
         return toString.call(value) === '[object RegExp]';
     };
 
+    // is a given value a Map?
     is.map = function(value) {
-        return toString.call(value) === '[object Map]';
-    }
+        // checking stringified constructor in case toString() yields '[object Object]'
+        // instead of '[object Map]'
+        var mapRegex = /^function\s{1,}Map\(\)/;
+        var constructorStr = (value.constructor) ? value.constructor.toString() : '';
+        return mapRegex.test(constructorStr)
+    };
 
     // are given values same type?
     // prevent NaN, Number same type check
