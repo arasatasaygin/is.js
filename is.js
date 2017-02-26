@@ -148,7 +148,7 @@
 
     // is given value a pure JSON object?
     is.json = function(value) {
-        return toString.call(value) === '[object Object]';
+        return toString.call(value) === '[object Object]' && 'stringify' in value;
     };
 
     // is a given value NaN?
