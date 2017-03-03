@@ -82,7 +82,7 @@
         '<=': function(a, b) { return a <= b; },
         '>': function(a, b) { return a > b; },
         '>=': function(a, b) { return a >= b; }
-    }
+    };
 
     // helper function which compares a version to a range
     function compareVersion(version, range) {
@@ -427,7 +427,7 @@
     };
 
     // is a given value space?
-    // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
+    // horizontal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space = function(value) {
         if (is.not.char(value)) {
             return false;

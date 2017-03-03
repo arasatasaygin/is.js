@@ -7,5 +7,8 @@ module.exports = {
     },
     globals: {
         DocumentTouch: false
+    },
+    rules: {
+        indent: ['error', 4]
     }
 };
