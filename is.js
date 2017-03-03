@@ -350,7 +350,7 @@
 
     function regexpCheck(regexp, regexes) {
         is[regexp] = function(value) {
-            return regexes[regexp].test(value);
+            return is.existy(value) && regexes[regexp].test(value);
         };
     }
 

@@ -415,6 +415,9 @@
             it('should return false if given value is not url', function() {
                 expect(is.url(1)).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.url(undefined)).to.be.false;
+            });
         });
         checkApi('url');
 
@@ -424,6 +427,9 @@
             });
             it('should return false if given value is not email', function() {
                 expect(is.email('test@test')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.email(undefined)).to.be.false;
             });
         });
         checkApi('email');
@@ -435,6 +441,9 @@
             it('should return false if given value is not credit card', function() {
                 expect(is.creditCard(123)).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.creditCard(undefined)).to.be.false;
+            });
         });
         checkApi('creditCard');
 
@@ -445,6 +454,9 @@
             it('should return false if given value is not alpha numeric', function() {
                 expect(is.alphaNumeric('*?')).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.affirmative(undefined)).to.be.false;
+            });
         });
         checkApi('alphaNumeric');
 
@@ -454,6 +466,9 @@
             });
             it('should return false if given value is not time string', function() {
                 expect(is.timeString('12:12:90')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.timeString(undefined)).to.be.false;
             });
         });
         checkApi('timeString');
@@ -467,6 +482,9 @@
                 expect(is.dateString('1')).to.be.false;
                 expect(is.dateString('10/21-2012')).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.dateString(undefined)).to.be.false;
+            });
         });
         checkApi('dateString');
 
@@ -476,6 +494,9 @@
             });
             it('should return false if given value is not US zip code', function() {
                 expect(is.usZipCode('1')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.usZipCode(undefined)).to.be.false;
             });
         });
         checkApi('usZipCode');
@@ -490,6 +511,9 @@
             it('should return false if given value is not Canada postal code', function() {
                 expect(is.caPostalCode('1')).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.caPostalCode(undefined)).to.be.false;
+            });
         });
         checkApi('caPostalCode');
 
@@ -499,6 +523,9 @@
             });
             it('should return false if given value is not UK post code', function() {
                 expect(is.ukPostCode('1')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.ukPostCode(undefined)).to.be.false;
             });
         });
         checkApi('ukPostCode');
@@ -510,6 +537,9 @@
             it('should return false if given value is not nanpPhone', function() {
                 expect(is.nanpPhone('1')).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.nanpPhone(undefined)).to.be.false;
+            });
         });
         checkApi('nanpPhone');
 
@@ -519,6 +549,9 @@
             });
             it('should return false if given value is not eppPhone', function() {
                 expect(is.eppPhone('1')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.eppPhone(undefined)).to.be.false;
             });
         });
         checkApi('eppPhone');
@@ -531,6 +564,9 @@
             it('should return false if given value is not socialSecurityNumber', function() {
                 expect(is.socialSecurityNumber('1')).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.socialSecurityNumber(undefined)).to.be.false;
+            });
         });
         checkApi('socialSecurityNumber');
 
@@ -540,6 +576,9 @@
             });
             it('should return false if given value is not affirmative', function() {
                 expect(is.affirmative('no')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.affirmative(undefined)).to.be.false;
             });
         });
         checkApi('affirmative');
@@ -552,6 +591,9 @@
             it('should return false if given value is not hexadecimal', function() {
                 expect(is.hexadecimal(0.287)).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                expect(is.hexadecimal(undefined)).to.be.false;
+            });
         });
         checkApi('hexadecimal');
 
@@ -561,6 +603,9 @@
             });
             it('should return false if given value is not hexColor', function() {
                 expect(is.hexColor(0.287)).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.hexColor(undefined)).to.be.false;
             });
         });
         checkApi('hexColor');
@@ -572,6 +617,9 @@
             it('should return false if given value is not a valid IP address', function() {
                     expect(is.ip('985.12.3.4')).to.be.false;
             });
+            it('should return false if the given value is undefined', function() {
+                    expect(is.ip(undefined)).to.be.false;
+            });
         });
         checkApi('ip');
 
@@ -582,6 +630,9 @@
               it('should return false if given value is not a valid IPv4 address', function() {
                       expect(is.ipv4('985.12.3.4')).to.be.false;
               });
+              it('should return false if the given value is undefined', function() {
+                      expect(is.ipv4(undefined)).to.be.false;
+              });
         });
         checkApi('ipv4');
 
@@ -590,7 +641,10 @@
                     expect(is.ipv6('2001:DB8:0:0:1::1')).to.be.true;
             });
             it('should return false if given value is not a valid IPv6 address', function() {
-                    expect(is.ip('985.12.3.4')).to.be.false;
+                    expect(is.ipv6('985.12.3.4')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                    expect(is.ipv6(undefined)).to.be.false;
             });
         });
         checkApi('ipv6');
