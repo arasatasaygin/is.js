@@ -1,0 +1,25 @@
+# EditorConfig helps developers define and maintain consistent coding styles between different editors and IDEs.
+# See http://editorconfig.org for details.
+
+# This is the top-most .editorconfig file; do not search in parent directories.
+root = true
+
+# All files.
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Markdown.
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+# Configuration.
+[*.{json,yml}]
+indent_style = space
+indent_size = 2

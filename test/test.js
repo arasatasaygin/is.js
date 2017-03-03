@@ -178,7 +178,7 @@
                 expect(is.char('t')).to.be.true;
             });
             it('should return false if passed parameter type is not a char', function() {
-              expect(is.char('test')).to.be.false;
+                expect(is.char('test')).to.be.false;
             });
         });
         checkApi('char');
@@ -312,8 +312,8 @@
             it('should return false if given number is not integer', function() {
                 expect(is.odd(2.5)).to.be.false;
             });
-       });
-       checkApi('odd');
+        });
+        checkApi('odd');
 
         describe('is.positive', function() {
             it('should return true if given number is positive', function() {
@@ -612,39 +612,39 @@
 
         describe('is.ip', function() {
             it('should return true if given value is a valid IP address', function() {
-                    expect(is.ip('2001:DB8:0:0:1::1')).to.be.true;
+                expect(is.ip('2001:DB8:0:0:1::1')).to.be.true;
             });
             it('should return false if given value is not a valid IP address', function() {
-                    expect(is.ip('985.12.3.4')).to.be.false;
+                expect(is.ip('985.12.3.4')).to.be.false;
             });
             it('should return false if the given value is undefined', function() {
-                    expect(is.ip(undefined)).to.be.false;
+                expect(is.ip(undefined)).to.be.false;
             });
         });
         checkApi('ip');
 
         describe('is.ipv4', function() {
-              it('should return true if given value is a valid IPv4 address', function() {
-                      expect(is.ipv4('198.12.3.142')).to.be.true;
-              });
-              it('should return false if given value is not a valid IPv4 address', function() {
-                      expect(is.ipv4('985.12.3.4')).to.be.false;
-              });
-              it('should return false if the given value is undefined', function() {
-                      expect(is.ipv4(undefined)).to.be.false;
-              });
+            it('should return true if given value is a valid IPv4 address', function() {
+                expect(is.ipv4('198.12.3.142')).to.be.true;
+            });
+            it('should return false if given value is not a valid IPv4 address', function() {
+                expect(is.ipv4('985.12.3.4')).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.ipv4(undefined)).to.be.false;
+            });
         });
         checkApi('ipv4');
 
         describe('is.ipv6', function() {
             it('should return true if given value is a valid IPv6 address', function() {
-                    expect(is.ipv6('2001:DB8:0:0:1::1')).to.be.true;
+                expect(is.ipv6('2001:DB8:0:0:1::1')).to.be.true;
             });
             it('should return false if given value is not a valid IPv6 address', function() {
-                    expect(is.ipv6('985.12.3.4')).to.be.false;
+                expect(is.ipv6('985.12.3.4')).to.be.false;
             });
             it('should return false if the given value is undefined', function() {
-                    expect(is.ipv6(undefined)).to.be.false;
+                expect(is.ipv6(undefined)).to.be.false;
             });
         });
         checkApi('ipv6');
