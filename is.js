@@ -180,8 +180,8 @@
     is.map = function(value) {
         // checking stringified constructor in case toString() yields '[object Object]'
         // instead of '[object Map]'
-        var mapRegex = /^function\s{1,}Map\(\)/;
-        var constructorStr = (value.constructor) ? value.constructor.toString() : '';
+        var mapRegex = /^function\s+Map\b/;
+        var constructorStr = (value.constructor) ? value.constructor + '' : '';
         return mapRegex.test(constructorStr)
     };
 

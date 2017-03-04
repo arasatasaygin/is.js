@@ -3,7 +3,8 @@
         document = root.document,
         expect = _.get(root, 'chai.expect') || require('chai').expect,
         is = root.is || require('../is'),
-        window = root.window;
+        window = root.window,
+        ctx = (typeof window === 'undefined') ? global : window;
 
     function checkApi(name, list) {
         list || (list = ['all', 'any', 'not']);
@@ -164,7 +165,6 @@
 
         describe('is.map', function() {
             it('should return true if passed parameter type is map', function() {
-                var ctx = (typeof window === 'undefined') ? global : window;
                 // check for Map support first
                 if ('Map' in ctx) {
                     var map = new ctx.Map();
