@@ -275,7 +275,7 @@
                 return true;
             }
 
-            if (length !== Object.keys(other)) {
+            if (length !== Object.keys(other).length) {
                 return false;
             }
 
@@ -287,7 +287,6 @@
             }
             return true;
         }
-
 
         return false;
     };
