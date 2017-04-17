@@ -1600,7 +1600,7 @@ is.all.sorted([[1, 2], [5, 4]]);
 
 Environment checks
 ==================
-####Environment checks are not available as node module.
+#### Environment checks are not available as node module.
 
 is.ie(range:number|string)
 -------------------
