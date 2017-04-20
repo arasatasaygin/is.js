@@ -152,7 +152,7 @@
     };
 
     // is a given value NaN?
-    is.nan = function(value) {    // NaN is number :) Also it is the only value which does not equal itself
+    is.nan = Number.isNaN || function(value) {    // NaN is number :) Also it is the only value which does not equal itself
         return value !== value;
     };
 
