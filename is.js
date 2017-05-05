@@ -191,6 +191,11 @@
     // sameType method does not support 'all' and 'any' interfaces
     is.sameType.api = ['not'];
 
+    // is a given value Set?
+    is.set = function(value) {
+        return toString.call(value) === '[object Set]';
+    };
+
     // is a given value String?
     is.string = function(value) {
         return toString.call(value) === '[object String]';
