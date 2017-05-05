@@ -588,6 +588,19 @@
 
     var document = freeSelf && freeSelf.document;
     var previousIs = root.is;
+  
+    // is current runtime node.js?
+    // parameter is optional
+    is.node = function(range) {
+        if (toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]'){
+          var match = process.version.match(/(v)(\d+)/);
+          return !!match && compareVersion(match[2], range);
+        }else{
+          return false;
+        };
+    };
+    // node method does not support 'all' and 'any' interfaces
+    is.node.api = ['not'];
 
     // store navigator properties to use later
     var navigator = freeSelf && freeSelf.navigator;
