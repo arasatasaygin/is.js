@@ -1,5 +1,5 @@
 /*!
- * is.js 0.9.0
+ * is.js 0.9.1
  * Author: Aras Atasaygin
  */
 
@@ -117,12 +117,12 @@
     };
 
     // is a given value Boolean?
-    is.boolean = function(value) {
+    is["boolean"] = function(value) {
         return value === true || value === false || toString.call(value) === '[object Boolean]';
     };
 
     // is a given value Char?
-    is.char = function(value) {
+    is["char"] = function(value) {
         return is.string(value) && value.length === 1;
     };
 
@@ -262,7 +262,7 @@
         if (is.all.string(value, other) || is.all.regexp(value, other)) {
             return '' + value === '' + other;
         }
-        if (is.all.boolean(value, other)) {
+        if (is.all["boolean"](value, other)) {
             return value === other;
         }
         return false;
@@ -429,7 +429,7 @@
     // is a given value space?
     // horizontal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space = function(value) {
-        if (is.not.char(value)) {
+        if (is.not["char"](value)) {
             return false;
         }
         var charCode = value.charCodeAt(0);
