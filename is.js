@@ -163,7 +163,7 @@
 
     // is a given value number?
     is.number = function(value) {
-        return is.not.nan(value) && toString.call(value) === '[object Number]';
+        return is.not.nan(value) && is.not.infinite(value) && toString.call(value) === '[object Number]';
     };
 
     // is a given value object?
@@ -276,8 +276,8 @@
     };
 
     // is a given number finite?
-    is.finite = isFinite || function(n) {
-        return is.not.infinite(n) && is.not.nan(n);
+    is.finite = Number.isFinite || function(n) {
+        return is.number(n);
     };
 
     // is a given number infinite?

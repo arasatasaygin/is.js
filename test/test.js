@@ -122,9 +122,16 @@
                 var notNumber = 'test';
                 expect(is.number(notNumber)).to.be.false;
             });
+            it('should return false if passed parameter type is a numeric string', function() {
+                var numericString = '1';
+                expect(is.number(numericString)).to.be.false;
+            });
             it('should return false if passed parameter is NaN', function() {
                 expect(is.number(NaN)).to.be.false;
-            })
+            });
+            it('should return false if passed parameter is Infinity', function() {
+                expect(is.number(Infinity)).to.be.false;
+            });
         });
         checkApi('number');
 
