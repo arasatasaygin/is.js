@@ -37,14 +37,14 @@
     is.any = {};
 
     // cache some methods to call later on
-    var toString = Object.prototype.toString;
-    var slice = Array.prototype.slice;
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    var _toString = Object.prototype.toString;
+    var _slice = Array.prototype.slice;
+    var _hasOwnProperty = Object.prototype.hasOwnProperty;
 
     // helper function which reverses the sense of predicate result
     function not(func) {
         return function() {
-            return !func.apply(null, slice.call(arguments));
+            return !func.apply(null, _slice.call(arguments));
         };
     }
 
@@ -94,7 +94,7 @@
 
     // helper function which extracts params from arguments
     function getParams(args) {
-        var params = slice.call(args);
+        var params = _slice.call(args);
         var length = params.length;
         if (length === 1 && is.array(params[0])) {    // support array
             params = params[0];
@@ -107,18 +107,18 @@
 
     // is a given value Arguments?
     is.arguments = function(value) {    // fallback check is for IE
-        return toString.call(value) === '[object Arguments]' ||
+        return _toString.call(value) === '[object Arguments]' ||
             (value != null && typeof value === 'object' && 'callee' in value);
     };
 
     // is a given value Array?
     is.array = Array.isArray || function(value) {    // check native isArray first
-        return toString.call(value) === '[object Array]';
+        return _toString.call(value) === '[object Array]';
     };
 
     // is a given value Boolean?
     is.boolean = function(value) {
-        return value === true || value === false || toString.call(value) === '[object Boolean]';
+        return value === true || value === false || _toString.call(value) === '[object Boolean]';
     };
 
     // is a given value Char?
@@ -128,7 +128,7 @@
 
     // is a given value Date Object?
     is.date = function(value) {
-        return toString.call(value) === '[object Date]';
+        return _toString.call(value) === '[object Date]';
     };
 
     // is a given object a DOM node?
@@ -138,17 +138,17 @@
 
     // is a given value Error object?
     is.error = function(value) {
-        return toString.call(value) === '[object Error]';
+        return _toString.call(value) === '[object Error]';
     };
 
     // is a given value function?
     is['function'] = function(value) {    // fallback check is for IE
-        return toString.call(value) === '[object Function]' || typeof value === 'function';
+        return _toString.call(value) === '[object Function]' || typeof value === 'function';
     };
 
     // is given value a pure JSON object?
     is.json = function(value) {
-        return toString.call(value) === '[object Object]';
+        return _toString.call(value) === '[object Object]';
     };
 
     // is a given value NaN?
@@ -163,7 +163,7 @@
 
     // is a given value number?
     is.number = function(value) {
-        return is.not.nan(value) && toString.call(value) === '[object Number]';
+        return is.not.nan(value) && _toString.call(value) === '[object Number]';
     };
 
     // is a given value object?
@@ -173,14 +173,14 @@
 
     // is a given value RegExp?
     is.regexp = function(value) {
-        return toString.call(value) === '[object RegExp]';
+        return _toString.call(value) === '[object RegExp]';
     };
 
     // are given values same type?
     // prevent NaN, Number same type check
     is.sameType = function(value, other) {
-        var tag = toString.call(value);
-        if (tag !== toString.call(other)) {
+        var tag = _toString.call(value);
+        if (tag !== _toString.call(other)) {
             return false;
         }
         if (tag === '[object Number]') {
@@ -193,7 +193,7 @@
 
     // is a given value String?
     is.string = function(value) {
-        return toString.call(value) === '[object String]';
+        return _toString.call(value) === '[object String]';
     };
 
     // is a given value undefined?
@@ -808,7 +808,7 @@
         }
         var n = 0;
         for (var property in object) {
-            if (hasOwnProperty.call(object, property) && ++n > count) {
+            if (_hasOwnProperty.call(object, property) && ++n > count) {
                 return false;
             }
         }
@@ -863,7 +863,7 @@
     function setInterfaces() {
         var options = is;
         for (var option in options) {
-            if (hasOwnProperty.call(options, option) && is['function'](options[option])) {
+            if (_hasOwnProperty.call(options, option) && is['function'](options[option])) {
                 var interfaces = options[option].api || ['not', 'all', 'any'];
                 for (var i = 0; i < interfaces.length; i++) {
                     if (interfaces[i] === 'not') {
@@ -897,7 +897,7 @@
     // set optional regexes to methods
     is.setRegexp = function(regexp, name) {
         for (var r in regexes) {
-            if (hasOwnProperty.call(regexes, r) && (name === r)) {
+            if (_hasOwnProperty.call(regexes, r) && (name === r)) {
                 regexes[r] = regexp;
             }
         }
