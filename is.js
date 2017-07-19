@@ -297,7 +297,7 @@
 
     // is a given number odd?
     is.odd = function(n) {
-        return is.number(n) && n % 2 === 1;
+        return is.number(n) && (n % 2 === 1 || n % 2 === -1);
     };
 
     // is a given number positive?

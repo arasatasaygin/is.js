@@ -306,6 +306,9 @@
             it('should return true if given number is odd', function() {
                 expect(is.odd(3)).to.be.true;
             });
+            it('should return true if given number is negative odd', function() {
+                expect(is.odd(-3)).to.be.true;
+            });
             it('should return false if given number is not odd', function() {
                 expect(is.odd(2)).to.be.false;
             });
