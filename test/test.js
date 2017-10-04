@@ -1176,4 +1176,17 @@
         });
         checkApi('inArray', ['not']);
     });
+
+    describe('is.thenable', function() {
+        it('should return true if passed parameter type is Promise', function() {
+            var promise = Promise.resolve(true); // eslint-disable-line no-undef
+            expect(is.thenable(promise)).to.be.true;
+        });
+        it('should return false if passed parameter type is not Promise', function() {
+            var notPromise = 'test';
+            expect(is.thenable(notPromise)).to.be.false;
+        });
+    });
+    checkApi('thenable');
+
 }(this));

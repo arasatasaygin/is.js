@@ -856,6 +856,11 @@
         return true;
     };
 
+    // is a given value thenable (like Promise)?
+    is.thenable = function(value) {
+        return is.object(value) && typeof value.then === 'function';
+    };
+
     // API
     // Set 'not', 'all' and 'any' interfaces to methods based on their api property
     /* -------------------------------------------------------------------------- */
