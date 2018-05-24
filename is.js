@@ -744,6 +744,15 @@
     // opera method does not support 'all' and 'any' interfaces
     is.opera.api = ['not'];
 
+    // is current browser opera mini?
+    // parameter is optional
+    is.operaMini = function(range) {
+        var match = userAgent.match(/opera mini\/(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // operaMini method does not support 'all' and 'any' interfaces
+    is.operaMini.api = ['not'];
+
     // is current browser phantomjs?
     // parameter is optional
     is.phantom = function(range) {
