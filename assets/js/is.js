@@ -29,7 +29,7 @@
 
     // define 'is' object and current version
     var is = {};
-    is.VERSION = '0.8.0';
+    is.VERSION = '0.9.0';
 
     // define interfaces
     is.not = {};
@@ -82,7 +82,7 @@
         '<=': function(a, b) { return a <= b; },
         '>': function(a, b) { return a > b; },
         '>=': function(a, b) { return a >= b; }
-    }
+    };
 
     // helper function which compares a version to a range
     function compareVersion(version, range) {
@@ -297,7 +297,7 @@
 
     // is a given number odd?
     is.odd = function(n) {
-        return is.number(n) && n % 2 === 1;
+        return is.number(n) && (n % 2 === 1 || n % 2 === -1);
     };
 
     // is a given number positive?
@@ -350,7 +350,7 @@
 
     function regexpCheck(regexp, regexes) {
         is[regexp] = function(value) {
-            return regexes[regexp].test(value);
+            return is.existy(value) && regexes[regexp].test(value);
         };
     }
 
@@ -427,7 +427,7 @@
     };
 
     // is a given value space?
-    // horizantal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
+    // horizontal tab: 9, line feed: 10, vertical tab: 11, form feed: 12, carriage return: 13, space: 32
     is.space = function(value) {
         if (is.not.char(value)) {
             return false;
@@ -627,7 +627,7 @@
     // parameter is optional
     is.chrome = function(range) {
         var match = /google inc/.test(vendor) ? userAgent.match(/(?:chrome|crios)\/(\d+)/) : null;
-        return match !== null && compareVersion(match[1], range);
+        return match !== null && is.not.opera() && compareVersion(match[1], range);
     };
     // chrome method does not support 'all' and 'any' interfaces
     is.chrome.api = ['not'];
@@ -685,8 +685,9 @@
     // is current device iphone?
     // parameter is optional
     is.iphone = function(range) {
-        // original iPhone doesn't have the os portion of the UA
-        var match = userAgent.match(/iphone(?:.+?os (\d+))?/);
+        // avoid false positive for Facebook in-app browser on ipad;
+        // original iphone doesn't have the OS portion of the UA
+        var match = is.ipad() ? null : userAgent.match(/iphone(?:.+?os (\d+))?/);
         return match !== null && compareVersion(match[1] || 1, range);
     };
     // iphone method does not support 'all' and 'any' interfaces
@@ -742,6 +743,15 @@
     };
     // opera method does not support 'all' and 'any' interfaces
     is.opera.api = ['not'];
+
+    // is current browser opera mini?
+    // parameter is optional
+    is.operaMini = function(range) {
+        var match = userAgent.match(/opera mini\/(\d+)/);
+        return match !== null && compareVersion(match[1], range);
+    };
+    // operaMini method does not support 'all' and 'any' interfaces
+    is.operaMini.api = ['not'];
 
     // is current browser phantomjs?
     // parameter is optional
@@ -823,6 +833,11 @@
     // propertyDefined method does not support 'all' and 'any' interfaces
     is.propertyDefined.api = ['not'];
 
+    // is a given value thenable (like Promise)?
+    is.thenable = function(value) {
+        return is.object(value) && typeof value.then === 'function';
+    };
+
     // Array checks
     /* -------------------------------------------------------------------------- */
 
@@ -854,6 +869,7 @@
         }
         return true;
     };
+
 
     // API
     // Set 'not', 'all' and 'any' interfaces to methods based on their api property
