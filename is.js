@@ -591,7 +591,7 @@
 
     // store navigator properties to use later
     var navigator = freeSelf && freeSelf.navigator;
-    var appVersion = (navigator && navigator.appVersion || '').toLowerCase();
+    var platform = (navigator && navigator.platform || '').toLowerCase();
     var userAgent = (navigator && navigator.userAgent || '').toLowerCase();
     var vendor = (navigator && navigator.vendor || '').toLowerCase();
 
@@ -704,14 +704,14 @@
 
     // is current operating system linux?
     is.linux = function() {
-        return /linux/.test(appVersion);
+        return /linux/.test(platform) && is.not.android();
     };
     // linux method does not support 'all' and 'any' interfaces
     is.linux.api = ['not'];
 
     // is current operating system mac?
     is.mac = function() {
-        return /mac/.test(appVersion);
+        return /mac/.test(platform);
     };
     // mac method does not support 'all' and 'any' interfaces
     is.mac.api = ['not'];
@@ -788,7 +788,7 @@
 
     // is current operating system windows?
     is.windows = function() {
-        return /win/.test(appVersion);
+        return /win/.test(platform);
     };
     // windows method does not support 'all' and 'any' interfaces
     is.windows.api = ['not'];
