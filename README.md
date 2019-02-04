@@ -19,6 +19,13 @@ Bower:
 bower install is_js
 ```
 
+Import:
+```javascript
+import is from 'is_js';
+/* or */
+const is = require('is_js');
+```
+
 Build:
 ```
 npm run build
