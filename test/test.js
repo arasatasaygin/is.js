@@ -3,7 +3,8 @@
         document = root.document,
         expect = _.get(root, 'chai.expect') || require('chai').expect,
         is = root.is || require('../is'),
-        window = root.window;
+        window = root.window,
+        ctx = (typeof window === 'undefined') ? global : window;
 
     function checkApi(name, list) {
         list || (list = ['all', 'any', 'not']);
@@ -161,6 +162,24 @@
             });
         });
         checkApi('regexp');
+
+        describe('is.map', function() {
+            it('should return true if passed parameter type is map', function() {
+                // check for Map support first
+                if ('Map' in ctx) {
+                    var map = new ctx.Map();
+                    expect(is.map(map)).to.be.true;
+                } else {
+                    // no Map support - noop
+                    expect(true).to.be.true;
+                }
+            });
+            it('should return false if passed parameter type is not map', function() {
+                var notMap = 'test';
+                expect(is.map(notMap)).to.be.false;
+            });
+        });
+        checkApi('map');
 
         describe('is.sameType', function() {
             it('should return true if passed parameter types are same', function() {
