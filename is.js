@@ -152,8 +152,8 @@
     };
 
     // is a given value NaN?
-    is.nan = function(value) {    // NaN is number :) Also it is the only value which does not equal itself
-        return value !== value;
+    is.nan = function(value) {
+        return Number.isNaN(value);
     };
 
     // is a given value null?
@@ -163,7 +163,7 @@
 
     // is a given value number?
     is.number = function(value) {
-        return is.not.nan(value) && toString.call(value) === '[object Number]';
+        return Number.isFinite(value);
     };
 
     // is a given value object?
@@ -287,7 +287,7 @@
 
     // is a given number integer?
     is.integer = function(n) {
-        return is.number(n) && n % 1 === 0;
+        return Number.isInteger(n);
     };
 
     // is a given number negative?
