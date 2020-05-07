@@ -125,6 +125,13 @@
             it('should return false if passed parameter is NaN', function() {
                 expect(is.number(NaN)).to.be.false;
             })
+            it('should return false if passed parameter is Infinity', function(){
+               expect(is.number(Infinity)).to.be.false;
+            })
+            it('should return false if passed parameter is -Infinity', function(){
+               expect(is.number(-Infinity)).to.be.false;
+            })
+
         });
         checkApi('number');
 
