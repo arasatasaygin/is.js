@@ -765,7 +765,7 @@
     // is current browser safari?
     // parameter is optional
     is.safari = function(range) {
-        var match = userAgent.match(/version\/(\d+).+?safari/);
+        var match = userAgent.match(/version\/(\d+)((?!chrome).)+?safari/);
         return match !== null && compareVersion(match[1], range);
     };
     // safari method does not support 'all' and 'any' interfaces
