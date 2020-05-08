@@ -265,6 +265,29 @@
         if (is.all.boolean(value, other)) {
             return value === other;
         }
+        // check object
+        if (is.all.object(value, other)) {
+            var keys = Object.keys(value),
+                length = keys.length,
+                key;
+
+            if (is.empty(value) && is.empty(other)) {
+                return true;
+            }
+
+            if (length !== Object.keys(other).length) {
+                return false;
+            }
+
+            while(length--) {
+                key = keys[length];
+                if (is.not.propertyDefined(other, key)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         return false;
     };
     // equal method does not support 'all' and 'any' interfaces

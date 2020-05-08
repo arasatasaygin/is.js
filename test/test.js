@@ -286,6 +286,30 @@
             it('should return false if given two boolean are not same', function() {
                 expect(is.equal(false, true)).to.be.false;
             });
+            it('should return true if given two object are empty', function() {
+                expect(is.equal({},{})).to.be.true;
+            });
+            it('should return false if given two object are not same number of property', function() {
+                var obj1 = {
+                    test: 'test',
+                    is: 'is'
+                };
+                var obj2 = {
+                    is: 'is'
+                };
+                expect(is.equal(obj1, obj2)).to.be.false;
+            });
+            it('should return true if given two object are the same number of the same properties', function() {
+                var obj3 = {
+                    test: 'test',
+                    is: 'is'
+                };
+                var obj4 = {
+                    test: true,
+                    is: 4
+                };
+                expect(is.equal(obj3, obj4)).to.be.true;
+            });
         });
         checkApi('equal', ['not']);
 
