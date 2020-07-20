@@ -525,6 +525,22 @@
         });
         checkApi('usZipCode');
 
+        describe('is.frPostalCode', function() {
+            it('should return true if given value is France postal code', function() {
+                expect(is.frPostalCode('59000')).to.be.true;
+            });
+            it('should return false if given value is not France postal code', function() {
+                expect(is.frPostalCode('1')).to.be.false;
+            });
+            it('should return false if the given value is null', function() {
+                expect(is.frPostalCode(null)).to.be.false;
+            });
+            it('should return false if the given value is undefined', function() {
+                expect(is.frPostalCode(undefined)).to.be.false;
+            });
+        });
+        checkApi('frPostalCode');
+
         describe('is.caPostalCode', function() {
             it('should return true if given value is Canada postal code', function() {
                 expect(is.caPostalCode('L8V3Y1')).to.be.true;
