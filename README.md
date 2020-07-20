@@ -847,6 +847,32 @@ is.all.ukPostCode(['B184BJ', '123']);
 => false
 ```
 
+is.frPostalCode(value:any)
+--------------------------
+#### Checks if the given value matches France postal code regexp.
+interfaces: not, all, any
+
+```javascript
+is.frPostalCode('59000');
+=> true
+
+is.frPostalCode('123');
+=> false
+
+is.not.frPostalCode('123');
+=> true
+
+is.all.frPostalCode('59000', '123');
+=> false
+
+is.any.frPostalCode('L8V3Y1', '59000');
+=> true
+
+// 'all' and 'any' interfaces can also take array parameter
+is.all.frPostalCode(['59000', '123'])
+=> false
+```
+
 is.nanpPhone(value:any)
 -----------------------
 #### Checks if the given value matches North American numbering plan phone regexp.
