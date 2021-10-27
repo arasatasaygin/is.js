@@ -642,7 +642,7 @@
     // is current browser edge?
     // parameter is optional
     is.edge = function(range) {
-        var match = userAgent.match(/edge\/(\d+)/);
+        var match = userAgent.match(/edg(e|a|ios)?\/(\d+)/);
         return match !== null && compareVersion(match[1], range);
     };
     // edge method does not support 'all' and 'any' interfaces
